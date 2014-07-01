@@ -70,7 +70,8 @@ grails.project.dependency.resolution = {
 
         compile ":build-test-data:2.0.9"
 
-        compile:":twitter-bootstrap:3.2.0"
+        compile ":twitter-bootstrap:3.2.0"
+		compile ":platform-core:1.0.0"
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.7.4"
         //compile ":less-asset-pipeline:1.7.0"
