@@ -4,27 +4,53 @@ import org.grails.databinding.BindingFormat
 
 class Membresia {
 
-	//Solia ser el producto
-	String servicio 
 	
+	Servicio servicio 
+	
+	/**
+	* El tipo de esta membresia SEMANAL,MENSUAL,ANUAL etc
+	**/
+	String tipo
+
+	String status
+
+	/** 
+	*	Fecha de inicio de la membresia
+	*/
 	@BindingFormat('dd/MM/yyyy')
 	Date inscripcion
 
+	/** 
+	*	Fecha en la que se debe renovar la membresia
+	*/
 	@BindingFormat('dd/MM/yyyy')
-	Date proximoPago
+	Date renovacion
+
+	/**
+	* Si la membresia se renueva en forma automatica al terminar (Trantandose de todos los tipos excepto la variable)
+	**/
+	Boolean renovacionAutomatico=true
+
+	/**
+	* Si la el cargo de la membresia se debe 
+	**/
+	Boolean cargoAutomatico=true
 	
-	String tipo
+	/** 
+	*	Fecha para el proximo pago
+	*/
+	@BindingFormat('dd/MM/yyyy')
+	Date proximoCargo
 
-	String renovacion
-
-	Date suspencion
-
-	String motivoDeSuspencion
-	  
-	String diaDePago
+	String formaDePago
 	
 	Boolean especial	//Pendiente de analisis
+	BigDecimal precioBruto=0
+	BigDecimal descuento=0
+	BigDecimal precioNeto=0
 
+	Date suspencion
+	String motivoDeSuspencion
 	
 	Date dateCreated
 	Date lastUpdated
@@ -33,8 +59,9 @@ class Membresia {
 
 
     static constraints = {
-    	tipo inList:['MENSUAL','TRIMESTRAL']
-    	renovacion inList:['MANUAL','AUTIMATICA']
+    	tipo inList:['SEMANAL','MENSUAL','TRIMESTRAL','SEMESTRAL','ANUAL','VARIABLE']
+    	status inList:['ACTIVA','SUSPENDIDA','CANCELADA']
+    	renovacion inList:['MANUAL','AUTOMATICA']
     	suspencion nullable:true
     	motivoDeSuspencion nullable:true
     }
@@ -42,7 +69,7 @@ class Membresia {
 
     static mapping = {
     	inscripcion type:'date'
-    	proximoPago type:'date'
+    	
     }
 
 }

@@ -10,8 +10,6 @@ navigation={
 			membresia(controller:'membresia',action:'index')
 			medioDeContacto(controller:'medioDeContacto',action:'index')
 			instructor(controller:'instructor',action:'index')
-			
-			
 			producto(controller:'producto',action:'index')
 			tipoDeProducto(controller:'tipoDeProducto',action:'index')
 			tipoDeVenta(controller:'tipoDeVenta',action:'index')

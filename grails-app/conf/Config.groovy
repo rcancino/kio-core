@@ -114,6 +114,8 @@ log4j.main = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+		   
+	info 'grails.app.services.com.luxsoft.kyo'
 }
 
 grails.plugins.twitterbootstrap.fixtaglib = true

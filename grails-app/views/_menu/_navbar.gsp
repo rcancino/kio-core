@@ -7,28 +7,48 @@
 				<span class="icon-bar"></span>
 			</button>
 			<g:link controller="home" action="index" class="navbar-brand">
-				<span class="glyphicon glyphicon-home"></span> KIO
+				<span class="glyphicon glyphicon-home"></span> KYO
 			</g:link>
 		</div>
 <%--		<sec:ifLoggedIn>--%>
 		<div class="collapse navbar-collapse" id="mainMenu">
-			<nav:menu class="nav navbar-nav" scope="user/" />
-			<%--<ul class="nav navbar-nav">
-				<li><g:link controller="home" action="catalogos">Catalogos</g:link></li>
-				<li><g:link controller="home" action="operaciones">Operaciones</g:link></li>
-				<li><g:link controller="home" action="procesos">Procesos</g:link></li>
-				<li><g:link controller="home" action="reportes">Reportes</g:link></li>
-				
-			</ul>
-			--%><ul class="nav navbar-nav navbar-right">
+			
+			<%-- Catalogos --%>
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+	          		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Catálogos <span class="caret"></span></a>
+				      <nav:menu class="dropdown-menu" scope="user/catalogos" /> 
+	        	</li>
+        	</ul>
+
+        	<%-- Operaciones --%>
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+	          		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	          			Operaciones <span class="caret"></span></a>
+				      <nav:menu class="dropdown-menu" scope="user/operaciones" /> 
+	        	</li>
+        	</ul>
+
+        	<%-- Procesos --%>
+			<ul class="nav navbar-nav">
+				<li>
+				    <g:link controller='home' action='procesos'>
+				    	<span class="glyphicon glyphicon-tasks"></span> Procesos
+				 	</g:link>
+	        	</li>
+        	</ul>
+
+			%{-- <nav:menu class="nav navbar-nav" scope="user/" /> --}%
+			<ul class="nav navbar-nav navbar-right">
 <%--				<g:render template="/_menu/user"/>--%>
 				<form class="navbar-form navbar-left" role="search">
   					<div class="form-group">
-    					<input type="text" class="form-control" placeholder="Buscar">
+    					<input type="text" class="form-control input-sm" placeholder="Buscar">
   					</div>
-  					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+  					<button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search"></span></button>
 				</form>
-				<buttn class="btn btn-default navbar-btn">
+				<buttn class="btn btn-default navbar-btn btn-sm">
 					Configuración <span class="glyphicon glyphicon-cog"></span>
 				</button>
 			</ul>

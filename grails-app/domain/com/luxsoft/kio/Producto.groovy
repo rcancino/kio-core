@@ -7,19 +7,26 @@ class Producto {
 
 	String clave
 	String descripcion
-
+    String descripcion2
 	Boolean inventariable
-
 	TipoDeProducto tipo
+
+    String unidad
+
+    BigDecimal precioBruto
+    BigDecimal descuento
+    BigDecimal precioNeto
 
 	Date dateCreated
 	Date lastUpdated
 
 
     static constraints = {
-    	clave unique:true
+    	clave unique:true,maxSize:40
     	descripcion blank:false
     	inventariable()
+        descripcion2 nullabel:true
+        unidad blan:false,maxSize:15
     }
 
     String toString(){

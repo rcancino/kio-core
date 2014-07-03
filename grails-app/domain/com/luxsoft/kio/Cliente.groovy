@@ -10,8 +10,10 @@ class Cliente {
 	String nombre
 	String rfc
 	Direccion direccion
+	String emailCfdi
 
 	TipoDeCliente tipo
+	Long origen
 
 	Date dateCreated
 	Date lastUpdated
@@ -22,10 +24,13 @@ class Cliente {
 
     static constraints = {
     	direccion nullable:true
+		nombre unique:true
+		origen nullable:true
+		emailCfdi nullable:true
     }
 
     static mapping = {
-		nombre unique:true
+		
 	}
 
 	 String toString(){

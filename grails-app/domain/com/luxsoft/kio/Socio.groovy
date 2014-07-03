@@ -14,12 +14,12 @@ class Socio {
 	String apellidoPaterno
 	String apellidoMaterno
 	String nombres
-	String sexo
+	
+	String sexo='M'
 	
 	@BindingFormat('dd/MM/yyyy')
 	Date fechaDeNacimiento
-
-	String estadoCivil
+	String estadoCivil='NA'
 	Boolean hijos
 	String telefonoCasa
 	String telefonoTrabajo
@@ -29,10 +29,10 @@ class Socio {
 	//Clasificacion
 	MedioDeContacto medioDeContacto
 	TipoDeSocio tipoDeSocio
-	String areaDeInteres
+	String areaDeInteres='AMBOS'
 	Instructor instructor
 
-	Membresia membresia
+	
 
 	//Redes sociales
 	String twitter
@@ -41,20 +41,23 @@ class Socio {
 	String skype
 	byte[] foto
 
-	
+	Boolean activo='true'
+	String origen
 
 	Date dateCreated
 	Date lastUpdated
 
-	static hasOne = [membresia: Membresia]
+	
+	static hasMany = [membresias: Membresia]
 
 	
     static constraints = {
     	
     	sexo inList:['M','F']
-    	estadoCivil inList:['SOLTERO','CASADO','EN RELACION']
+    	estadoCivil inList:['SOLTERO','CASADO','EN RELACION','NA']
     	areaDeInteres inList:['PESAS','CLASES','AMBOS']
-
+    	fechaDeNacimiento nullable:true
+    	medioDeContacto nullable:true
     	telefonoTrabajo nullable:true
     	telefonoCasa nullable:true
     	celular nullable:true
@@ -66,11 +69,18 @@ class Socio {
 		skype nullable:true ,maxSize:100
 
 		instructor nullable:true
+		origen nullable:true
+		activo()
+
+		foto nullable:true
+		hijos nullable:true
+		
 
     }
 
     static mapping = {
     	fechaDeNacimiento type:'date'
+    	membresias cascade: "all-delete-orphan"
     }
 
     String toString(){
