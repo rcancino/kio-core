@@ -73,7 +73,7 @@ environments {
             }
 
             dataSource_importacion{
-              url = 'jdbc:mysql://10.10.6.101/gasoc'
+              url = 'jdbc:mysql://10.10.6.1/gasoc'
             }
 
     }
