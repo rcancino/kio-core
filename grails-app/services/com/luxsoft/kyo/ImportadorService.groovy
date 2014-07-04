@@ -83,8 +83,9 @@ class ImportadorService {
 				log.info "Importando socio:${row.APELLIDOP} ${row.APELLIDOM} ${row.NOMBRES}  clie:(${row.CLIENTE_ID})"+row
 				try{
 					def cliente=Cliente.findByOrigen(row.CLIENTE_ID)
-					assert cliente,'No existe el cliente: '+row.CLIENTE_ID
-					found=new Socio(
+					//assert cliente,'No existe el cliente: '+row.CLIENTE_ID
+					if(cliente){
+						found=new Socio(
 						origen:row.SOCIO,
 						apellidoPaterno:row.APELLIDOP,
 						apellidoMaterno:row.APELLIDOM,
@@ -95,8 +96,10 @@ class ImportadorService {
 						tipoDeSocio:tipo,
 						cliente:cliente
 						)
-					found.save(failOnError:true)
-					importados++
+						found.save(failOnError:true)
+						importados++
+					}
+					
 				}catch(Exception th){
 					log.error "Error importando ${row.APELLIDOP} (${row.SOCIO}) Messge:"+ExceptionUtils.getRootCauseMessage(th)
 				}
