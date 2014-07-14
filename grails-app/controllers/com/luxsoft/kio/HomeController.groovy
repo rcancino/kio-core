@@ -6,11 +6,5 @@ class HomeController {
 
     def index() { }
 	
-	def catalogos(){}
 	
-	def operaciones(){}
-	
-	def procesos(){}
-	
-	def reportes(){}
 }

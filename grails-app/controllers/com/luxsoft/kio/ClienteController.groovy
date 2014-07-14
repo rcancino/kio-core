@@ -9,7 +9,7 @@ class ClienteController {
 	def importadorService
 	
 	def index(Long max){
-		params.max = Math.min(max ?: 15, 100)
+		params.max = Math.min(max ?: 25, 100)
 		params.sort=params.sort?:'nombre'
 		params.order='asc'
 		[clienteInstanceList:Cliente.list(params),clienteInstanceCount:Cliente.count()]

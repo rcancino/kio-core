@@ -19,5 +19,14 @@ body{
 }
 
 .form-group {
-    margin-bottom: 1px;
+    margin-bottom: 5px;
+}
+
+.toolbar-panel{
+    
+    /*margin-bottom: 10px;*/
+    padding-bottom: 5px;
+    padding-top: 2px;
+    /*padding-left: 2px;*/
+
 }
