@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'medioDeContacto.label', default: 'MedioDeContacto')}" />
-		<title><g:message code="default.create.label" args="[entityName]" /></title>
-	</head>
-	<body>
-		<a href="#create-medioDeContacto" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
-		<div id="create-medioDeContacto" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<g:hasErrors bean="${medioDeContactoInstance}">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="layout" content="catalogos_create"/>
+	<title>Medio nuevo</title>
+</head>
+<body>
+
+	<content tag="header">
+		<h3>Nuevo medio de contacto</h3>
+	</content>
+	<content tag="form">
+		<g:hasErrors bean="${medioDeContactoInstance}">
 			<ul class="errors" role="alert">
 				<g:eachError bean="${medioDeContactoInstance}" var="error">
 				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 				</g:eachError>
 			</ul>
-			</g:hasErrors>
-			<g:form url="[resource:medioDeContactoInstance, action:'save']" >
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-				</fieldset>
-			</g:form>
-		</div>
-	</body>
+		</g:hasErrors>
+		
+		<g:form class="form-horizontal" action="save" >
+			
+			<fieldset>
+				<legend>Alta de medio de contacto</legend>
+				<f:with bean="${medioDeContactoInstance}">
+					<f:field property="clave" input-required="required" input-class="form-control" cols="col-sm-5" input-autofocus="autofocus"/>
+					<f:field property="descripcion" input-required="required" input-class="form-control" cols="col-sm-5"/>
+				</f:with>
+				
+			</fieldset>
+			
+			<div class="form-group">
+				<div class="buttons col-md-offset-2 col-md-2">
+					<g:submitButton name="Salvar" class="btn btn-primary " />
+						
+				</div>
+			</div>
+			
+		</g:form>
+		
+	</content>
+	
+</body>
 </html>
