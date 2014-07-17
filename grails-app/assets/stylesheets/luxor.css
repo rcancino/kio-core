@@ -30,3 +30,7 @@ body{
     /*padding-left: 2px;*/
 
 }
+
+.uppercase-field {
+  text-transform: uppercase;
+}

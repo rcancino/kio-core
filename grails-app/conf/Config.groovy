@@ -115,7 +115,24 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 		   
-	info 'grails.app.services.com.luxsoft.kyo'
+	
+
+    environments{
+        
+        development{
+            debug 'grails.app.services.com.luxsoft.kyo'
+            info 'grails.app.controllers.com.luxsoft.kio'
+
+            
+        }
+        
+        produccion{
+            error 'grails.app.services'
+            error 'grails.app.controllers'
+            
+        }
+        
+    }
 }
 
 grails.plugins.twitterbootstrap.fixtaglib = true

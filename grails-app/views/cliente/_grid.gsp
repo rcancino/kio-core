@@ -5,6 +5,7 @@
 			<g:sortableColumn property="nombre" title="Nombre"/>
 			<th>RFC</th>
 			<th>Tipo</th>
+			<th>Status</th>
 			<g:sortableColumn property="direccion.colonia" title="Colonia"/>
 			<th>Modificado</th>
 		</tr>
@@ -20,6 +21,7 @@
 				<td>${fieldValue(bean:row,field:"nombre")}</td>
 				<td>${fieldValue(bean:row,field:"rfc")}</td>
 				<td>${fieldValue(bean:row,field:"tipo")}</td>
+				<td>${fieldValue(bean:row,field:"status")}</td>
 				<td>${fieldValue(bean:row.direccion,field:"colonia")}</td>
 				<td><g:formatDate date="${row.lastUpdated}" format="dd/MM/yyyy hh:mm"/></td>
 			</tr>

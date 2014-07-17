@@ -7,7 +7,6 @@ navigation={
 			socio(controller:'socio',action:'index')
 			tipoDeCliente(controller:'tipoDeCliente',action:'index')
 			cliente(controller:'cliente',action:'index')
-			membresia(controller:'membresia',action:'index')
 			medioDeContacto(controller:'medioDeContacto',action:'index')
 			instructor(controller:'instructor',action:'index')
 			producto(controller:'producto',action:'index')
@@ -16,8 +15,13 @@ navigation={
 		
 		}
 		operaciones(){
+			ventas(controller:'venta',action:'index')
 		}
 		procesos(){
+			cfdi(controller:'cfdi',action:'index')
+		}
+		reportes(){
+			
 		}
 		configuracion(){
 		}

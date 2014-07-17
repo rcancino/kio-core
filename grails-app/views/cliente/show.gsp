@@ -9,7 +9,7 @@
 <body>
 
 	<content tag="header">
-		<h3>Tipo de Venta</h3>
+		<h3>Cliente (${clienteInstance.id})</h3>
 	</content>
 	
 	<content tag="beanId">${clienteInstance.id}</content>
@@ -26,7 +26,7 @@
 		<form class="form-horizontal"  >
 			
 			<fieldset disabled="disabled">
-				<legend>Tipo de Venta</legend>
+				<legend>Cliente</legend>
 				<f:with bean="${clienteInstance}">
 					<f:field property="nombre" input-required="required" input-class="form-control" cols="col-sm-5" input-autofocus="autofocus"/>
 					<f:field property="rfc" input-required="required" input-class="form-control" cols="col-sm-5"/>

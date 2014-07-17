@@ -36,7 +36,7 @@
             	</div><!-- End .col-md-2 side bar -->
             	
             	<div class="col-md-10">
-            		<div class="row">
+            		<div class="">
             			<g:pageProperty name="page.form"/>
             		</div>
             		

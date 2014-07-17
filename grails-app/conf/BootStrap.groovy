@@ -19,12 +19,12 @@ class BootStrap {
     	TipoDeSocio.findOrSaveWhere(clave:'AMA DE CASA',descripcion:'Señoras amas de casa')
 
     	Instructor.findOrSaveWhere(apellidoPaterno:'RAMOS',apellidoMaterno:'GOMEZ',nombres:'FULANO',nivel:'A')
-        /*
+        
         Cliente.findOrSaveWhere(nombre:'MOSTRADOR'
             ,rfc:'XAXX010101000'
             ,tipo:TipoDeCliente.findOrSaveWhere(clave:'MOSTRADOR',descripcion:'Cliente mostrador no requiere iva desgosado')
             )
-        */
+        
         TipoDeVenta.findOrSaveWhere(clave:'MOSTRADOR',descripcion:'Venta publico en general')
 
     	

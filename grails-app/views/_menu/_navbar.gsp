@@ -48,7 +48,7 @@
   					</div>
   					<button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search"></span></button>
 				</form>
-				<buttn class="btn btn-default navbar-btn btn-sm">
+				<button class="btn btn-default navbar-btn btn-sm">
 					Configuración <span class="glyphicon glyphicon-cog"></span>
 				</button>
 			</ul>

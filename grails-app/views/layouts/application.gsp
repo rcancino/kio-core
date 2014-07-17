@@ -22,6 +22,7 @@
         
         <g:render template="/_menu/footer"/>
         
-        <r:layoutResources />
+        
+        
     </body>
 </html>

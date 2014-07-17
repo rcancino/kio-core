@@ -46,10 +46,13 @@ class Membresia {
 	
 	Boolean especial	//Pendiente de analisis
 	BigDecimal precioBruto=0
+	
 	BigDecimal descuento=0
+	
 	BigDecimal precioNeto=0
 
 	Date suspencion
+	
 	String motivoDeSuspencion
 	
 	Date dateCreated

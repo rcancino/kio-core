@@ -14,19 +14,22 @@ class Cliente {
 
 	TipoDeCliente tipo
 	Long origen
+	String status='ACTIVO'
 
 	Date dateCreated
 	Date lastUpdated
 
 	static embedded = ['direccion']
 
-	static hasMany = [socios: Socio]
+	//static hasMany = [socios: Socio]
 
     static constraints = {
     	direccion nullable:true
 		nombre unique:true
 		origen nullable:true
 		emailCfdi nullable:true
+		status inList:['ACTIVO','SUSPENDIDO','CANCELADO']
+		rfc blank:false,minSize:12,maxSize:13
     }
 
     static mapping = {

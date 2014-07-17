@@ -1,7 +1,7 @@
 <%@page expressionCodec="none" %>
 
 <div class="form-group ">
-	<label class="col-sm-2 control-label" for="${property}">${label}</label>
+	<label class="${colsLabel?:'col-sm-2' } control-label" for="${property}">${label}</label>
 	<div class="${cols?:'col-sm-10' }">
 		 ${widget}
 		

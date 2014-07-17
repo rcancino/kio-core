@@ -3,7 +3,7 @@ package com.luxsoft.kio
 import grails.validation.Validateable;
 
 
-@Validateable
+@Validateable(nullable=true)
 class Direccion implements Serializable{
 	
 	String calle

@@ -7,9 +7,9 @@ import org.grails.databinding.BindingFormat
 //@ToString(includes='nombre',includeNames=true,includePackage=false)
 //@EqualsAndHashCode(includes='apellidoPaterno,apellidoMaterno,nombres')
 class Socio {
-
+	
 	Cliente cliente
-
+	
 	//Datos personales
 	String apellidoPaterno
 	String apellidoMaterno
@@ -42,6 +42,8 @@ class Socio {
 	byte[] foto
 
 	Boolean activo='true'
+	String status='ACTIVO'
+	Boolean corporativo=false
 	String origen
 
 	Date dateCreated
@@ -56,6 +58,7 @@ class Socio {
     	sexo inList:['M','F']
     	estadoCivil inList:['SOLTERO','CASADO','EN RELACION','NA']
     	areaDeInteres inList:['PESAS','CLASES','AMBOS']
+    	status inList:['ACTIVO','SUSPENDIDO','CANCELADO']
     	fechaDeNacimiento nullable:true
     	medioDeContacto nullable:true
     	telefonoTrabajo nullable:true
@@ -84,7 +87,21 @@ class Socio {
     }
 
     String toString(){
-    	return "$apellidoPaterno $apellidoMaterno $nombres ($id)"
+    	return "$apellidoPaterno $apellidoMaterno $nombres "
+    }
+
+    def beforeUpdate() {
+    	capitalizarNombre()
+    }
+
+    def beforeInsert() {
+    	capitalizarNombre()
+    }
+
+    private capitalizarNombre(){
+    	apellidoPaterno=apellidoPaterno.toUpperCase()
+    	apellidoMaterno=apellidoMaterno.toUpperCase()
+    	nombres=nombres.toUpperCase()
     }
 
 }
