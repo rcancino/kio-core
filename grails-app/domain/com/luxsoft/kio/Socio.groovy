@@ -64,7 +64,7 @@ class Socio {
     	telefonoTrabajo nullable:true
     	telefonoCasa nullable:true
     	celular nullable:true
-    	email nullable:true,email:true
+    	email nullable:true
 
     	twitter nullable:true ,maxSize:100
 		faceBook nullable:true ,maxSize:100
