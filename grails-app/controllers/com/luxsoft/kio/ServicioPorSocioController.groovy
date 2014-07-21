@@ -13,9 +13,13 @@ class ServicioPorSocioController {
 
 
 class ServicioCmd {
-	Long socio
+	
+	
+	Long servicio
+	BigDecimal precio
+	BigDecimal descuento
 	
 	String toString(){
-		return "$socio"
+		return "$servicio $precio $descuento"
 	}
 }

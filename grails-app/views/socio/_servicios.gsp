@@ -32,7 +32,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="servicioField">Servicio</label>
 				<div class="col-sm-10">
-					<g:hiddenField id="servicio" name="servicioId"/>
+					<g:hiddenField id="producto.id" name="producto.id"/>
 					<input id="servicioField" type="text" class="form-control" required="required" autocomplete="off">
 				</div>
 			</div>
@@ -69,12 +69,13 @@ $(document).ready(function(){
 		minLength:3,
 		select:function(e,ui){
 			console.log('Producto seleccionado: '+ui.item.value);
+			$("#producto.id").val(ui.item.id);
 			$("#precioBruto").autoNumeric('set', ui.item.precioBruto);
 			$("#descuento").autoNumeric('set', ui.item.descuento);
 		}
 	});
 
-	$(".moneda-field").autoNumeric({wEmpty:'zero',mRound:'B',aSign: '$'});
+	$(".moneda-field").autoNumeric({wEmpty:'zero',mRound:'B',aSign: ''});
 	$("input[data-porcentaje]").autoNumeric({altDec: '%', vMax: '99.99'});
 
 	$('#servicioForm').submit(function(e){

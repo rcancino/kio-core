@@ -20,7 +20,8 @@ dataSource_importacion{
 	driverClassName = 'com.mysql.jdbc.Driver'
 	username = 'root'
 	password = 'sys'
-	url = 'jdbc:mysql://localhost/gasoc'
+	//url = 'jdbc:mysql://localhost/gasoc'
+	url = 'jdbc:mysql://10.10.6.1/gasoc'
 	dbCreate = ''
 	readOnly=true
 	pooled = false
