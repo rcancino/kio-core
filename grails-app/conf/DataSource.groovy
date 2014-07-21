@@ -20,8 +20,8 @@ dataSource_importacion{
 	driverClassName = 'com.mysql.jdbc.Driver'
 	username = 'root'
 	password = 'sys'
-	//url = 'jdbc:mysql://localhost/gasoc'
-	url = 'jdbc:mysql://10.10.6.1/gasoc'
+	url = 'jdbc:mysql://localhost/gasoc'
+	//url = 'jdbc:mysql://10.10.6.1/gasoc'
 	dbCreate = ''
 	readOnly=true
 	pooled = false
@@ -35,7 +35,26 @@ environments {
     development {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+            //url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+			dbCreate="create"
+			url="jdbc:mysql://localhost/kyo?autoReconnect=true"
+			driverClassName = "com.mysql.jdbc.Driver"
+			dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+			username = "root"
+			password = "sys"
+			properties {
+				maxActive = 2
+				maxIdle = 2
+				minIdle = 1
+				initialSize = 1
+				minEvictableIdleTimeMillis=1800000
+				timeBetweenEvictionRunsMillis=1800000
+				numTestsPerEvictionRun=3
+				testOnBorrow=true
+				testWhileIdle=true
+				testOnReturn=true
+				maxWait = 10000
+			}
         }
     }
     test {

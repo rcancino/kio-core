@@ -13,7 +13,8 @@
 			<tbody>
 				<g:each in="${socioInstanceList?.servicios}" var="row">
 				<tr>
-					
+					<td> <g:fieldValue bean="row" field="servicio.clave"/></td>
+					<td> <g:fieldValue bean="row" field="servicio.descripcion"/></td>
 				</tr>
 				</g:each>
 			</tbody>
@@ -28,11 +29,11 @@
 	<formset>
 		<legend>Alta de servicio</legend>
 		<form id="servicioForm" class="form-horizontal" >
-			<g:hiddenField id="socio" name="socio" value="${socioInstance.id}"/>
+			<g:hiddenField id="socio" name="socio.id" value="${socioInstance.id}"/>
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="servicioField">Servicio</label>
 				<div class="col-sm-10">
-					<g:hiddenField id="producto.id" name="producto.id"/>
+					<g:hiddenField id="producto" name="producto.id"/>
 					<input id="servicioField" type="text" class="form-control" required="required" autocomplete="off">
 				</div>
 			</div>
@@ -69,7 +70,7 @@ $(document).ready(function(){
 		minLength:3,
 		select:function(e,ui){
 			console.log('Producto seleccionado: '+ui.item.value);
-			$("#producto.id").val(ui.item.id);
+			$("#producto").val(ui.item.id);
 			$("#precioBruto").autoNumeric('set', ui.item.precioBruto);
 			$("#descuento").autoNumeric('set', ui.item.descuento);
 		}

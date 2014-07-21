@@ -31,23 +31,23 @@ class ProductoController {
 	
 	def getProductosAsJSON() {
 		
-				def term=params.term.trim()+'%'
-				def query=Producto.where{
-					 clave=~term || descripcion=~term
-				 }
-				def list=query.list(max:15, sort:"descripcion")
-				//println 'Buscando productos JSON: '+list.size()+' params: '+params.term
-				list=list.collect{ c->
-					def descripcion="$c.descripcion ($c.clave)"
-					[id:c.id,
-					label:descripcion,
-					value:descripcion,
-					precioBruto:c.precioBruto,
-					descuento:c.descuento,
-					precioNeto:c.precioNeto
-					]
-				}
-				def res=list as JSON
-				render res
+		def term='%'+params.term.trim()+'%'
+		def query=Producto.where{
+			clave=~term || descripcion=~term
+		}
+		def list=query.list(max:30, sort:"descripcion")
+		//println 'Buscando productos JSON: '+list.size()+' params: '+params.term
+		list=list.collect{ c->
+			def descripcion="$c.descripcion ($c.clave)"
+			[id:c.id,
+				label:descripcion,
+				value:descripcion,
+				precioBruto:c.precioBruto,
+				descuento:c.descuento,
+				precioNeto:c.precioNeto
+			]
+		}
+		def res=list as JSON
+		render res
 			}
 }

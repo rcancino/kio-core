@@ -119,7 +119,7 @@ class ImportadorService {
 		def servicio=TipoDeProducto.findOrSaveWhere(clave:'SERVICIO',descripcion:'Serivicio generico') 
 		def articulo=TipoDeProducto.findOrSaveWhere(clave:'GENERAL',descripcion:'Articulo de caracter general') 
 		def importados=0
-		def res=db.eachRow("select s.* from SX_PRODUCTOS s "){row->
+		def res=db.eachRow("select s.* from SX_PRODUCTOS s where s.linea_id!=13"){row->
 			def found=Producto.findByClave(row.CLAVE)
 			if(!found){
 				def producto=new Producto(

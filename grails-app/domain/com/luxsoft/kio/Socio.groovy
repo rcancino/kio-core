@@ -25,6 +25,8 @@ class Socio {
 	String telefonoTrabajo
 	String celular
 	String email
+	String email2
+	String cfdiEmail
 
 	//Clasificacion
 	MedioDeContacto medioDeContacto
@@ -65,6 +67,8 @@ class Socio {
     	telefonoCasa nullable:true
     	celular nullable:true
     	email nullable:true
+    	email2 nullable:true
+    	cfdiEmail nullable:true
 
     	twitter nullable:true ,maxSize:100
 		faceBook nullable:true ,maxSize:100
@@ -83,7 +87,7 @@ class Socio {
 
     static mapping = {
     	fechaDeNacimiento type:'date'
-    	membresias cascade: "all-delete-orphan"
+    	servicios cascade: "all-delete-orphan"
     }
 
     String toString(){

@@ -3,11 +3,13 @@ package com.luxsoft.kio
 import org.grails.databinding.BindingFormat
 import org.joda.time.LocalDate
 import org.jadira.usertype.dateandtime.joda.*
+import groovy.transform.EqualsAndHashCode
 
+@EqualsAndHashCode(includes='servicio')
 class ServicioPorSocio {
 
 	
-	Servicio servicio 
+	Producto servicio 
 
 	/** 
 	*	Fecha de inicio de la membresia
@@ -19,7 +21,7 @@ class ServicioPorSocio {
 	*	Fecha para el proximo pago
 	*/
 	//@BindingFormat('dd/MM/yyyy')
-	LocalDate proximoCargo
+	Date proximoCargo
 	
 	BigDecimal precioBruto=0
 	
@@ -27,26 +29,29 @@ class ServicioPorSocio {
 	
 	BigDecimal precioNeto=0
 
-	Date suspencion
+	Date suspension
 	
-	String motivoDeSuspencion
+	String motivoDeSuspension
 	
 	Date dateCreated
+
 	Date lastUpdated
 
 	static belongsTo = [socio: Socio]
 
 
     static constraints = {
-    	suspencion nullable:true
-    	motivoDeSuspencion nullable:true
+    	suspension nullable:true
+    	motivoDeSuspension nullable:true
     	proximoCargo nullable:true
     }
 
 
     static mapping = {
-    	inscripcion type:'date'
-		proximoCargo type:PersistentLocalDate
+    	
+    	proxmoPago type:'date'
+		//proximoCargo type:PersistentLocalDate
+		proximoCargo type:'date'
     	
     }
 
