@@ -39,6 +39,15 @@
 	        	</li>
         	</ul>
 
+        	<%-- Consultas --%>
+			<ul class="nav navbar-nav">
+				<li>
+				    <g:link controller='home' action='consultas'>
+				    	<span class="glyphicon glyphicon-tasks"></span> Consultas
+				 	</g:link>
+	        	</li>
+        	</ul>
+
 			%{-- <nav:menu class="nav navbar-nav" scope="user/" /> --}%
 			<ul class="nav navbar-nav navbar-right">
 <%--				<g:render template="/_menu/user"/>--%>

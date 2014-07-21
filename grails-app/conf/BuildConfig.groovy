@@ -51,6 +51,7 @@ grails.project.dependency.resolution = {
         runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+        compile "org.jadira.usertype:usertype.jodatime:1.9"
     }
 
     plugins {
@@ -74,6 +75,7 @@ grails.project.dependency.resolution = {
 		compile ":platform-core:1.0.0"
         compile ":fields:1.3"
         //runtime ':console:1.3'
+        compile ":joda-time:1.5"
         
 
         // Uncomment these to enable additional asset-pipeline capabilities

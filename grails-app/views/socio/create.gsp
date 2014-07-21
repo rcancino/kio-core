@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="layout" content="catalogos_create"/>
-	<asset:javascript src="jquery-ui/autocomplete.js"/>
 	<asset:stylesheet src="jquery-ui.css"/>
+	<asset:javascript src="jquery-ui/autocomplete.js"/>
 	<title>Socio nuevo</title>
 </head>
 <body>

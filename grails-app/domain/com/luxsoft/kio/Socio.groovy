@@ -50,7 +50,7 @@ class Socio {
 	Date lastUpdated
 
 	
-	static hasMany = [membresias: Membresia]
+	static hasMany = [servicios: ServicioPorSocio]
 
 	
     static constraints = {

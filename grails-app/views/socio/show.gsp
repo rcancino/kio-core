@@ -4,6 +4,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Socios</title>
+	<asset:stylesheet src="datatables/dataTables.css"/>
+	<asset:javascript src="datatables/dataTables.js"/>
+	<asset:stylesheet src="jquery-ui.css"/>
+	<asset:javascript src="jquery-ui/autocomplete.js"/>
+	<asset:javascript src="forms/autoNumeric.js"/>
 </head>
 <body>
 	<div class="container">
@@ -23,8 +28,8 @@
 								<ul class="nav nav-tabs " role="tablist">
 								  <li class="active"><a href="#generales" role="tab" data-toggle="tab">Generales</a></li>
 								  <li><a href="#profile" role="tab" data-toggle="tab">Perfil</a></li>
-								  <li><a href="#membresia" role="tab" data-toggle="tab">Membresia</a></li>
-								  <li><a href="#settings" role="tab" data-toggle="tab">Settings</a></li>
+								  <li><a href="#servicios" role="tab" data-toggle="tab">Servicios</a></li>
+								  <li><a href="#otros" role="tab" data-toggle="tab">Otros</a></li>
 								</ul>
 							</div>
 						</div>
@@ -37,8 +42,8 @@
 								  	
 								  </div>
 								  <div class="tab-pane" id="profile"><g:render template="perfil"/></div>
-								  <div class="tab-pane" id="membresia">...</div>
-								  <div class="tab-pane" id="settings">...</div>
+								  <div class="tab-pane" id="servicios"><g:render template="servicios"/></div>
+								  <div class="tab-pane" id="otros">...</div>
 								</div>
 							</div>
 						</div>
