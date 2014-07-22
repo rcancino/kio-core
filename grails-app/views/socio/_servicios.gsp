@@ -5,16 +5,31 @@
 				<tr>
 					<th>Clave</th>
 					<th>Descripción</th>
+					<th>Precio</th>
+					<th>Desc</th>
+					<th>Neto</th>
 					<th>Próximo pago</th>
 					<th>Suspensión</th>
 					<th>Eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
-				<g:each in="${socioInstanceList?.servicios}" var="row">
+				<g:each in="${socioInstance.servicios}" var="row">
 				<tr>
-					<td> <g:fieldValue bean="row" field="servicio.clave"/></td>
-					<td> <g:fieldValue bean="row" field="servicio.descripcion"/></td>
+					<td>
+						<g:link controller="servicioPorSocio" action="edit" id="${row.id}" >${row.servicio.clave}</g:link>
+					</td>
+					<td>${row.servicio.descripcion } </td>
+					<td><g:formatNumber number="${row.precioBruto}" type="currency"/></td>
+					<td><g:formatNumber number="${row.descuento}" type="percent"/></td>
+					<td><g:formatNumber number="${row.precioNeto}" type="currency"/></td>
+					<td><g:formatDate date="${row.proximoCargo}" format='dd/MM/yyyy'/> </td>
+					<td><g:formatDate date="${row.suspension}" format='dd/MM/yyyy'/> </td>
+					<td>
+						<g:link controller="servicioPorSocio" action="delete" id="${row.id}" onclick="return confirm('Eliminar servicio');">
+							<span class="glyphicon glyphicon-trash"></span>
+						</g:link>
+					</td>
 				</tr>
 				</g:each>
 			</tbody>
@@ -24,26 +39,26 @@
 	</div>
 </div> <!-- end .row 1 -->
 
-<div class="row">
-<div class="col-md-8">
+
+<div class="col-md-12">
 	<formset>
 		<legend>Alta de servicio</legend>
 		<form id="servicioForm" class="form-horizontal" >
 			<g:hiddenField id="socio" name="socio.id" value="${socioInstance.id}"/>
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="servicioField">Servicio</label>
-				<div class="col-sm-10">
+				<div class="col-sm-8">
 					<g:hiddenField id="producto" name="producto.id"/>
 					<input id="servicioField" type="text" class="form-control" required="required" autocomplete="off">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="percioBruto" class="col-sm-2 control-label ">Precio</label>
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<input name="precioBruto" id="precioBruto" type="text" class="form-control moneda-field" required="required" autocomplete="off">
 				</div>
 				<label for="descuento" class="col-sm-2 control-label">Descuento</label>
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<input name="descuento" id="descuento" type="text" class="form-control" data-porcentaje="true" autocomplete="off">
 				</div>
 			</div>

@@ -33,18 +33,20 @@ class ClienteController {
 
 	def getClientesJSON() {
 
-		def term=params.term.trim()+'%'
+		def term='%'+params.term.trim()+'%'
 		def query=Cliente.where{
 		 	nombre=~term 
 		 }
-		def list=query.list(max:15, sort:"nombre")
+		def list=query.list(max:30, sort:"nombre")
 		//println 'Buscando clientes JSON: '+list.size()+' params: '+params.term
 		list=list.collect{ c->
 			def nombre="$c.nombre"
+			def direccion=c.direccion as JSON
 			[id:c.id,
 			label:nombre,
 			value:nombre,
-			rfc:c.rfc
+			rfc:c.rfc,
+			direccion:direccion
 			]
 		}
 		def res=list as JSON

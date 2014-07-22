@@ -9,28 +9,30 @@ class Venta {
 
 	Cliente cliente
 
+	Socio socio
+
 	@BindingFormat('dd/MM/yyyy')
 	Date fecha
 
 	TipoDeVenta tipo
 
-	Currency moneda
+	Currency moneda //=MonedaUtils.PESOS
 
 	String status
 
 	List partidas
 
-	BigDecimal importeBruto
+	BigDecimal importeBruto=0.0
 
-	BigDecimal descuento
+	BigDecimal descuento=0.0
 
-	BigDecimal importeNeto
+	BigDecimal importeNeto=0.0
 
-	BigDecimal impuesto
+	BigDecimal impuesto=0.0
 
-	BigDecimal impuestoTasa
+	BigDecimal impuestoTasa=0.16
 
-	BigDecimal total
+	BigDecimal total=0
 
 	Date dateCreated
 	Date lastUpdated

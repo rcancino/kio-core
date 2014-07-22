@@ -9,9 +9,7 @@ class ServicioPorSocioController {
 	def servicioPorSocioService
 	
 	def agregarServicioREST(Socio socio,Producto producto){
-		println "Socio $socio ($socio.id)"
-		println 'Agregando servicio...'+producto
-		println 'Params: '+params
+		log.debug "Agregando  $producto a $socio"
 		if(socio!=null){
 			def precioBruto=producto.precioBruto
 			def precioNeto=producto.precioNeto
@@ -24,17 +22,20 @@ class ServicioPorSocioController {
 		}
 	}
 	
+	def delete(ServicioPorSocio servicio){
+		log.debug "Eliminando servicio $servicio"
+		assert servicio,'No existe el servicio'
+		def socio=servicioPorSocioService.delete(servicio)
+		flash.message="Servicio eliminado "
+		redirect controller:'socio',action:'show',params:[id:socio.id,tab:'servicio']
+	}
+	
 }
 
 
 class ServicioCmd {
 	
-	
-	Long servicio
-	BigDecimal precio
+	BigDecimal precioBruto
 	BigDecimal descuento
 	
-	String toString(){
-		return "$servicio $precio $descuento"
-	}
 }

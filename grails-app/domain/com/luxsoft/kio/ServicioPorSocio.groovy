@@ -55,5 +55,9 @@ class ServicioPorSocio {
     	
     }
 
+    String toString(){
+    	return "$servicio ($socio.nombre)"
+    }
+
 }
 
