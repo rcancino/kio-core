@@ -3,8 +3,8 @@
 		<tr>
 			<g:sortableColumn property="id" title="Id"/>
 			<g:sortableColumn property="apellidoPaterno" title="Nombre"/>
-			<th>Tipo</th>
 			<th>Cliente</th>
+			<th>Tipo</th>
 			<th>Area</th>
 			<th>Tel Casa</th>
 			<th>Cell</th>
@@ -22,7 +22,7 @@
 				<td>${row.toString()}</td>
 				<td>
 					<g:link controller="cliente" action="show" id="${row.cliente.id}">
-						${fieldValue(bean:row,field:"cliente.id")}
+						${fieldValue(bean:row,field:"cliente.rfc")}
 					</g:link>
 				</td>
 				<td>${fieldValue(bean:row,field:"tipoDeSocio.clave")}</td>

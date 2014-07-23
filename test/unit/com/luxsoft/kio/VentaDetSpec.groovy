@@ -9,7 +9,7 @@ import grails.buildtestdata.mixin.Build
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(VentaDet)
-@Build(VentaDet)
+@Build([VentaDet,Producto])
 class VentaDetSpec extends Specification {
 
     def setup() {
@@ -32,9 +32,7 @@ class VentaDetSpec extends Specification {
     	where:
     	propiedad|valor
     	
-    	'clave'|'item'
-    	'descripcion'|'element'
-    	'unidad'|'pza'
+    	'producto'|'item'
     	'cantidad'|0.0
     	'precioUnitario'|0.0
     	'importeBruto'|0.0
@@ -46,7 +44,8 @@ class VentaDetSpec extends Specification {
 
     void "VnetaDet debe tener un ToString adecuado"(){
     	given:'Una partida de veneta'
-    	def partida=VentaDet.buildWithoutSave(clave:'SERV1',descripcion:'Servicio de prueba')
+        def producto=Producto.build(clave:'SERV1',descripcion:'Servicio de prueba')
+    	def partida=VentaDet.buildWithoutSave(producto:producto)
     	expect: 'El String adecuado para representar el preoducto'
     	partida.toString()=='SERV1 (Servicio de prueba)'
     }

@@ -12,72 +12,50 @@
 </head>
 <body>
 	<div class="container">
+	
 
 		<div class="row">
-			
-			
-			<g:form action="create" class="form-horizontal">
-				<div class="col-md-8">
-				<fieldset>
-					<legend>Nuevo pedido</legend>
-				
-					<div class="form-group">
-						<label for="clienteField" class="col-sm-2 control-label">Cliente</label>
-						<div class="col-sm-8">
-							<g:hiddenField id="clienteId" name="cliente.id" />
-							<input class="form-control" 
-							id="clienteField" name="cliente" type="text" 
-							placeholder="Seleccione un cliente" autofocus="on" autocomplete="off">
+			<div class="col-sm-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						Generacion de pedido nuevo
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+								<fieldset>
+									<g:render template="form"/>
+								</fieldset>
+							</div>
 						</div>
 					</div>
-					<f:with bean="${ventaInstance}">
-						<f:field property="fecha" input-class="form-control" />
-						<f:field property="tipo" input-class="form-control" />
-						<f:field property="moneda" input-class="form-control" input-disabled="true"/>
-					</f:with>
-				</fieldset>
-				</div>
+						
+					<div class="panel-footer">
+  						<div class="btn-group">
+  							
+  							<g:link class="btn btn-default btn-sm" action="index" params="[tipo:'PEDIDO']">
+  								Cancelar
+  							</g:link>
 
-				<div class="col-md-4 well">
-					<fieldset>
-						<legend>Total</legend>
-						<f:with bean="${ventaInstance}">
-							<f:field property="importeBruto" input-class="form-control" input-type="text" 
-							input-cols="col-sm-8" input-colsLabel="col-sm-4" label="Importe"/>
-							<f:field property="descuento" input-class="form-control" input-type="text"/>
-							<f:field property="importeNeto" input-class="form-control" input-disabled="true"/>
-							<f:field property="impuestoTasa" input-class="form-control" input-disabled="true"/>
-							<f:field property="impuesto" input-class="form-control" input-disabled="true"/>
-							<f:field property="total" input-class="form-control" input-disabled="true"/>
-						</f:with>
-					</fieldset>
-				</div>
+  							<button class="btn btn-default btn-sm">
+  								<span class="glyphicon glyphicon-floppy-saved"></span> Salvar
+  							</button>
+  							
+  							<button class="btn btn-default btn-sm">
+  								<span class="glyphicon glyphicon-plus"></span> Agregar partida
+  							</button>
+  							
+  						</div>
+					</div><!-- end .panel-footer -->
 
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-4">
-	      				<button type="submit" class="btn btn-default">Salvar</button>
-	    			</div>
 				</div>
-			</g:form>
-			
-			
+			</div>
 		</div>
+			
 		
 	</div><!-- end .container -->
-	<script type="text/javascript">
-		$(document).ready(function(){
-			
-			$("#clienteField").autocomplete({
-				source:'/kio-core/cliente/getClientesJSON',
-				minLength:3,
-				select:function(e,ui){
-					console.log('Cliente seleccionado: '+ui.item.value);
-					$("#clienteId").val(ui.item.id);
-					
-				}
-			});
 
-		});
-	</script>
+
+
 </body>
 </html>

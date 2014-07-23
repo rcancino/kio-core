@@ -3,31 +3,34 @@ package com.luxsoft.kio
 import org.grails.databinding.BindingFormat
 import groovy.transform.EqualsAndHashCode
 
-@EqualsAndHashCode(includes='clave,unidad')
+@EqualsAndHashCode(includes='producto')
 class VentaDet {
 
-	String clave
-	String descripcion
-	String unidad
+	Producto producto
+
+    ServicioPorSocio servicioPorSocio
 	
-	BigDecimal cantidad
-	BigDecimal precioUnitario
-	BigDecimal importeBruto
-	BigDecimal descuento
-	BigDecimal descuentoTasa
-	BigDecimal importeNeto
+	BigDecimal cantidad=0
+
+	BigDecimal precioUnitario=0
+
+	BigDecimal importeBruto=0
+
+	BigDecimal descuento=0
+
+	BigDecimal descuentoTasa=0
+
+	BigDecimal importeNeto=0
 
 	String comentario
 
 	Date dateCreated
+
 	Date lastUpdated
 
 	static belongsTo = [venta: Venta]
 
     static constraints = {
-    	clave()
-    	descripcion()
-    	unidad()
     	cantidad(scale:4)
     	precioUnitario(scale:4)
     	importeBruto(scale:4)
@@ -35,10 +38,11 @@ class VentaDet {
     	descuentoTasa(scale:6)
     	importeNeto(scale:4)
     	comentario nullable:true
+        servicioPorSocio nullable:true
     }
 
     String toString(){
-    	"$clave ($descripcion)"
+    	"${producto}  ${cantidad}  ${precioUnitario}"
     }
 
     def actualizarImportes(){

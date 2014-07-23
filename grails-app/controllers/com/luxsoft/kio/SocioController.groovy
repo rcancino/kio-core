@@ -1,5 +1,7 @@
 package com.luxsoft.kio
 
+import grails.converters.JSON
+
 class SocioController {
     static scaffold = true
 	
@@ -20,9 +22,13 @@ class SocioController {
 	}
 	
 	def search(){
-		def found=Cliente.find{origen==1L}
-		log.debug 'Cliente encontrado: '+found
-		redirect action:'index'
+		def s='%'+params.term?:'%'
+		s+='%'
+
+		def query=Socio.where{apellidoPaterno=~s || apellidoMaterno=~s || nombres=~s}
+		def list=query.list(max:20,sort:'apellidoPaterno')
+		log.info 'Search result: '+list+ '  search params: '+s
+		render view:'index',model:[socioInstanceList:list,socioInstanceCount:query.count()]
 	}
 
 	def save(Socio socioInstance,boolean mostrador){
@@ -34,6 +40,27 @@ class SocioController {
 		}
 		socioInstance=socioService.salvarSocio(socioInstance)
 		render view:'show',model:[socioInstance:socioInstance]
+	}
+
+	def getSociosJSON() {
+
+		def term='%'+params.term.trim()+'%'
+		def query=Socio.where{
+		 	apellidoPaterno=~term || apellidoMaterno=~term || nombres=~term
+		 }
+		def list=query.list(max:30, sort:"apellidoPaterno")
+		
+		list=list.collect{ c->
+			def nombre=c.toString()
+			[id:c.id,
+			label:nombre,
+			value:nombre,
+			cliente:[id:c.cliente.id,nombre:c.cliente.nombre]
+			]
+		}
+		def res=list as JSON
+		
+		render res
 	}
 
 	

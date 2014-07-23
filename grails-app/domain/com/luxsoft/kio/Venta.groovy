@@ -9,7 +9,7 @@ class Venta {
 
 	Cliente cliente
 
-	Socio socio
+	
 
 	@BindingFormat('dd/MM/yyyy')
 	Date fecha

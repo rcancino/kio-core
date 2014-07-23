@@ -2,7 +2,12 @@
 	<thead>
 		<tr>
 			<g:sortableColumn property="id" title="Id"/>
-			<th>Modificado</th>
+			<th>Cliente</th>
+			<th>Rfc</th>
+			<th>Status</th>
+			<th>Tipo</th>
+			<th>Fecha</th>
+			<th>Total</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -13,7 +18,12 @@
 						${fieldValue(bean:row,field:"id")}
 					</g:link>
 				</td>
-				<td><g:formatDate date="${row.lastUpdated}"/></td>
+				<td>${fieldValue(bean:row,field:"cliente.nombre")}</td>
+				<td>${fieldValue(bean:row,field:"cliente.rfc")}</td>
+				<td>${fieldValue(bean:row,field:"status")}</td>
+				<td>${fieldValue(bean:row,field:"tipo")}</td>
+				<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
+				<td><g:formatNumber number="${row.total}" type="currency"/></td>
 			</tr>
 		</g:each>
 	</tbody>
