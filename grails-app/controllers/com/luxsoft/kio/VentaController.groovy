@@ -44,7 +44,8 @@ class VentaController {
     	venta=ventaService.salvar(venta)
     	flash.message="Venta $venta.id generada"
     	//render view:'show',model:[id:venta.id]
-        respond venta,[view:'show',model:[ventaInstance:venta]]
+        //respond venta,[view:'show',model:[ventaInstance:venta]]
+        redirect action:'index'
         
     }
 
