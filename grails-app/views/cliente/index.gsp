@@ -28,7 +28,7 @@
 			<div class="form-group">
 				<div class="input-group ">
 					<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-					<input type="text" class="form-control" placeholder="Buscar" autofocus="autofocus">
+					<input name="term" type="text" class="form-control" placeholder="Buscar" autofocus="autofocus">
 				</div>
 				
 			</div>

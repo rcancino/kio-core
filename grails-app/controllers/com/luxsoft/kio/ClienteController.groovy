@@ -22,10 +22,12 @@ class ClienteController {
     }
 	
 	def search(){
-		def s=params.term?:'%'
+		println params
+		def s='%'+params.term?:'%'
 		s+='%'
+		println 'Buscando por: '+s
 		def query=Cliente.where{nombre=~s}
-		render view:'index',model:[clienteInstanceList:query.list(max:20,sort:'nombre'),clienteInstanceCount:query.count()]
+		render view:'index',model:[clienteInstanceList:query.list(max:30,sort:'nombre'),clienteInstanceCount:0]
 		
 	}
 
