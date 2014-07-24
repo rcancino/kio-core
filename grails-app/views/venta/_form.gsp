@@ -134,10 +134,21 @@
 
 		var actualizarTotales=function(){
 			console.log('Actualizando totales.....');
+			
+			var totalImporteNeto=0;
+			var total=0;
 			var elements=$('[data-importe-neto]').each(function(index,element){
 				var importeNeto=$(this).attr("value");
-				console.log('Sumando: '+importeNeto);
+				if(typeof importeNeto ==='number'){
+					
+				}
+				importeNeto*=100;
+				totalImporteNeto+=importeNeto;
+				
 			});
+			console.log('Importe Neto: '+totalImporteNeto);
+			total=totalImporteNeto*
+			$("#importeNeto").val(totalImporteNeto/100);
 		};
 
 		var controller={
