@@ -3,7 +3,7 @@
 <div class="form-group">
 	<label for="calle" class="col-sm-2 control-label">Calle</label>
 	<div class="col-sm-10">
-			<input name="${prefix?prefix+'.direccion.':''}calle" 
+			<input name="${prefix?prefix+'.direccion.':''}calle" value="${row?.calle}"
 			type="text" class="form-control" placeholder="Calle">
 	</div>
 </div>
