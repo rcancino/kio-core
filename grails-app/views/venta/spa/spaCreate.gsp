@@ -59,10 +59,11 @@
 
 				</div>
 			</div>
-		</div>
-
+		</div> <!-- .end row -->
+		
+		<div class="row">
 			<!-- Agregar partida form -->
-			<div id="partidaNuevaDialog" class="modal fade" tabindex="-1">
+			<div id="partidaNuevaDialog" class="modal fade" >
 				<div class="modal-dialog">
 					<div class="modal-content">
 						
@@ -81,8 +82,9 @@
 									
 								<div class="form-group ">
 									<label for="producto" class="control-label col-sm-2" autofocus="true">Producto</label>
-									<div class="col-sm-10">
-										<input type="text" id="producto" class="form-control" autocomplete="off"
+									<div class="col-sm-10 ui-front">
+										<input type="text" id="producto" class="form-control" autocomplet-producto
+											autocomplete="off"
 											required ng-model="partidaNueva.producto">
 									</div>
 								</div>
@@ -119,7 +121,7 @@
 					</div>
 				</div>
 			</div>
-			
+		</div><!-- end .row 2 -->
 		
 	</div><!-- end .container -->
 	

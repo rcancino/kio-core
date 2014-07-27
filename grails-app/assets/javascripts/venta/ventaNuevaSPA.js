@@ -48,6 +48,17 @@ module.controller('MainCtrl', ['$scope','ventaModel', function($scope,ventaModel
 	$scope.addPartida=function(partida){
 		console.log('Agregando nueva partida:'+partida);
 	};
+	
+	$scope.addProducto=function(producto){
+		console.log('Agregando producto: '+producto);
+	};
+
+	$scope.setProducto=function(producto){
+		if(typeof $scope.partidaNueva!=='undefined'){
+			$scope.partidaNueva.producto=producto;
+			console.log('Agregando producto: '+producto);
+		}
+	};
 
 	var localizarServicios= function(){
 		ventaModel.getServiciosPorCliente($scope.venta.cliente);

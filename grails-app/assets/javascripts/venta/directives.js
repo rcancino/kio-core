@@ -39,6 +39,49 @@ module.directive('autoComplete',function(){
 	};
 });
 
+module.directive('autocompletProducto',function(){
+	
+	var linker=function(scope,elem,attr,ctrl){
+				elem.autocomplete({
+					source:'/kio-core/producto/getProductosAsJSON',
+                	minLength: 2,
+                	select:function(e,ui){
+						console.log('Producto seleccionado: '+ui.item.value);
+						scope.setProducto(ui.item);
+						scope.$apply();
+					}
+				});
+		};
+	var controller=function($scope){
+		//console.log('Directiva operando...'+$scope.ventaNueva.cliente);
+	};
+
+	return{
+		restrict:'A',
+		controller:controller,
+		link:linker
+	};
+});
+/*
+module.directive('autocompletProducto', ['', function(){
+	// Runs during compile
+	var linker=function(scope,elem,attr,ctrl){
+				elem.autocomplete({
+					source:'/kio-core/socio/getSociosJSON',
+                	minLength: 2,
+                	select:function(e,ui){
+						console.log('Producto seleccionado: '+ui.item.value);
+						//scope.setCliente(ui.item.cliente);
+						//scope.$apply();
+					}
+				});
+		};
+	return {
+		link: linker
+	};
+}]);
+*/
+
 //Directive para presentar las partidas
 /*
 module.directive('ventasDetGrid', ['', function(){
