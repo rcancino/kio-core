@@ -46,9 +46,9 @@ module.directive('autocompletProducto',function(){
 					source:'/kio-core/producto/getProductosAsJSON',
                 	minLength: 2,
                 	select:function(e,ui){
-						console.log('Producto seleccionado: '+ui.item.value);
-						scope.setProducto(ui.item);
-						scope.$apply();
+						//console.log('Producto seleccionado: '+ui.item.value);
+						//scope.setProducto(ui.item);
+						//scope.$apply();
 					}
 				});
 		};
