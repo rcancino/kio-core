@@ -40,17 +40,11 @@
 				 
 				<f:field property="cliente.emailCfdi" 
 					input-required="required" input-class="form-control cliente-form" cols="col-sm-4"/>
-					
-					
-				<%-- 
-				<fieldset class="cliente-form">
-					
-				</fieldset>
-				--%>
 				
 		</f:with>
 		
 </fieldset>
+
 
 
 

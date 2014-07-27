@@ -84,6 +84,7 @@
 						<th>Importe</th>
 						<th>Descuento</th>
 						<th>Sub Total</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -96,6 +97,7 @@
 						<td>{{row.importeBruto | currency: "$"}}</td>
 						<td>{{row.descuento}}</td>
 						<td>{{row.importeNeto}}</td>
+						<td><a href="" ng-click="removePartida(row)"><span class="glyphicon glyphicon-trash"></span></a></td>
 					</tr>
 				</tbody>
 			</table>

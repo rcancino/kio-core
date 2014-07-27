@@ -60,6 +60,13 @@ module.controller('MainCtrl', ['$scope','ventaModel', function($scope,ventaModel
 		ventaModel.actualizarTotales();
 
 	});
+
+	$scope.removePartida=function(partida){
+		console.log('Eliminando partida');
+		var index=$scope.partidas.indexOf(partida);
+		console.log('Eliminando index: '+index);
+		$scope.partidas.splice(index,1);
+	}
 	
 	$scope.salvar=function(venta){
 		console.log('Salvando venta: '+venta);
