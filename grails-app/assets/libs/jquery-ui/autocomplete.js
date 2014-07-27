@@ -14,12 +14,7 @@ $(function(){
 	});
 });
 */
-$(document).ready(function(){
-	$("#autoCompleteCliente").autocomplete({
-		source:'/kio-core/cliente/getClientesJSON',
-		minLength:2
-	});
-});
+
 
 /* Inicialización en español para la extensión 'UI date picker' para jQuery. */
 /* Traducido por Vester (xvester@gmail.com). */

@@ -1,6 +1,8 @@
 package com.luxsoft.kio
 
 import grails.transaction.Transactional
+import org.springframework.beans.BeanUtils
+
 
 @Transactional
 class SocioService {
@@ -24,6 +26,21 @@ class SocioService {
     	socio=socio.save failOnError:true
     	return socio
     }
+    /*
+    Cliente createCliente(Socio socio){
+        if(cliente==null){
+            def target=new Direccion()
+            BeanUtils.copyProperties(socio.direccion,target)
+            cliente=new Cliente(
+                nombre:"$apellidoPaterno $apellidoMaterno $nombres ",
+                rfc:"'XAXX010101000'",
+                direccion:target,
+                tipo:TipoDeCliente.findByClave('MOSTRADOR')
+
+            )
+        }
+    }
+    */
 }
 
 

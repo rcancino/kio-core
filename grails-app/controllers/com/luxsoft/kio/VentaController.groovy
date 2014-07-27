@@ -19,8 +19,9 @@ class VentaController {
     }
 
     def create(){
+        
     	def ventaInstance=new Venta(fecha:new Date())
-    	[ventaInstance:ventaInstance]
+    	render view:'spa/spaCreate' ,model:[ventaInstance:ventaInstance]
 		
     }
 	
@@ -77,6 +78,22 @@ class VentaController {
                 ,importeBruto:it.precioNeto)
         }
         render template:"partidasGrid",model:[partidas:res]
+    }
+
+    def productosPorCliente(Long id){
+        log.info 'Localizando servicios para cliente: '+id
+        def list=ServicioPorSocio.findAll("from ServicioPorSocio s where s.socio.cliente.id=?",[id])
+        def res=list.collect{
+            [servicioPorSocio:it.id
+            ,producto:it.servicio.id
+            ,clave:it.servicio.clave
+            ,descripcion:it.servicio.descripcion
+            ,unidad:it.servicio.unidad
+            ,cantidad:1.0
+            ,precioUnitario:it.servicio.precioBruto
+            ,importeBruto:it.precioNeto]
+        }
+        render res as JSON
     }
 
     

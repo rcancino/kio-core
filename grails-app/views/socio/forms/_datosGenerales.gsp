@@ -2,8 +2,11 @@
 <div class="page-header">
 
 <fieldset>
+
 <f:with bean="${socioInstance}">
-	<f:field property="apellidoPaterno" input-class="form-control uppercase-field" input-autocomplete="off" input-autofocus="autofocus"/>
+	<f:field property="apellidoPaterno" 
+	input-class="form-control uppercase-field" 
+	input-autocomplete="off" input-autofocus="autofocus"/>
 	<f:field property="apellidoMaterno" input-class="form-control uppercase-field" input-autocomplete="off" />
 	<f:field property="nombres" input-class="form-control uppercase-field" input-autocomplete="off" />
 	<f:field property="tipoDeSocio" input-class="form-control"/>
@@ -20,10 +23,5 @@
 	%{-- <f:field property="corporativo" input-class="form-control"/> --}%
 </f:with>
 </fieldset>
-
+<g:render template="/_common/direccionForm" model="[prefix:'socio']"/>
 </div>
-<asset:script>
-	
-	
-	
-</asset:script>

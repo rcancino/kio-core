@@ -48,6 +48,8 @@ class Socio {
 	Boolean corporativo=false
 	String origen
 
+	Direccion direccion
+
 	Date dateCreated
 	Date lastUpdated
 
@@ -81,9 +83,12 @@ class Socio {
 
 		foto nullable:true
 		hijos nullable:true
+		direccion nullable:true
 		
 
     }
+
+    static embedded = ['direccion']
 
     static mapping = {
     	fechaDeNacimiento type:'date'
@@ -107,5 +112,7 @@ class Socio {
     	apellidoMaterno=apellidoMaterno.toUpperCase()
     	nombres=nombres.toUpperCase()
     }
+
+    
 
 }
