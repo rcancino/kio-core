@@ -76,7 +76,9 @@ module.controller('MainCtrl', ['$scope','ventaModel', function($scope,ventaModel
 
 	$scope.agregarPartida=function(partida){
 		console.log('Agregando partida: '+partida);
+		partida.importeBruto=partida.cantidad*partida.precioBruto;
 		$scope.partidas.push(partida);
+		$scope.$apply();
 	};
 
 	$scope.removePartida=function(partida){

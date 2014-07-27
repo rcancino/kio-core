@@ -112,7 +112,7 @@
 							</div>
 
 							<div class="modal-footer">
-								<button class="btn btn-default" ng-click="test()">Test</button>
+								
 								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 			        			<button  ng-click="agregarPartida(partidaNueva)" 
 			        				class="btn btn-primary"  data-dismiss="modal" ng-disabled="partidaForm.$invalid">Salvar</button>
