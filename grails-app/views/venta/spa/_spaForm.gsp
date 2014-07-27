@@ -93,7 +93,7 @@
 						<td>{{row.descripcion}}</td>
 						<td>{{row.unidad}}</td>
 						<td>{{row.cantidad}}</td>
-						<td>{{row.precio}}</td>
+						<td>{{row.precioBruto}}</td>
 						<td>{{row.importeBruto | currency: "$"}}</td>
 						<td>{{row.descuento}}</td>
 						<td>{{row.importeNeto}}</td>

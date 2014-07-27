@@ -55,8 +55,10 @@ module.controller('MainCtrl', ['$scope','ventaModel', function($scope,ventaModel
 
 	$scope.setProducto=function(producto){
 		if(typeof $scope.partidaNueva!=='undefined'){
-			$scope.partidaNueva.producto=producto;
-			console.log('Agregando producto: '+producto);
+			$scope.partidaNueva.clave=producto.clave;
+			$scope.partidaNueva.descripcion=producto.descripcion;
+			$scope.partidaNueva.precioBruto=producto.precioBruto
+			console.log('Agregando producto: '+producto.clave);
 		}
 	};
 
@@ -74,6 +76,7 @@ module.controller('MainCtrl', ['$scope','ventaModel', function($scope,ventaModel
 
 	$scope.agregarPartida=function(partida){
 		console.log('Agregando partida: '+partida);
+		$scope.partidas.push(partida);
 	};
 
 	$scope.removePartida=function(partida){

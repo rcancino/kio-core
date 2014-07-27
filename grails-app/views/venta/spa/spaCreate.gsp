@@ -98,14 +98,14 @@
 								<div class="form-group">
 									<label for="precio" class="control-label col-sm-2">Precio</label>
 									<div class="col-sm-10">
-										<input type="number" id="producto" class="form-control" autocomplete="off"
-											required ng-model="partidaNueva.precio">
+										<input type="number" id="precioBruto" class="form-control" autocomplete="off"
+											required ng-model="partidaNueva.precioBruto">
 									</div>
 								</div>
 								<div class="form-group {{'has-error'}}">
 									<label for="descuento" class="control-label col-sm-2">Descuento</label>
 									<div class="col-sm-10">
-										<input type="number" id="producto" class="form-control" autocomplete="off"
+										<input type="number" id="descuento" class="form-control" autocomplete="off"
 											ng-model="partidaNueva.descuento">
 									</div>
 								</div>

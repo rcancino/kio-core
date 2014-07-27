@@ -47,7 +47,7 @@ module.directive('autocompletProducto',function(){
                 	minLength: 2,
                 	select:function(e,ui){
 						//console.log('Producto seleccionado: '+ui.item.value);
-						//scope.setProducto(ui.item);
+						scope.setProducto(ui.item);
 						//scope.$apply();
 					}
 				});

@@ -42,6 +42,8 @@ class ProductoController {
 			[id:c.id,
 				label:descripcion,
 				value:descripcion,
+				clave:c.clave,
+				descripcion:c.descripcion,
 				precioBruto:c.precioBruto,
 				descuento:c.descuento,
 				precioNeto:c.precioNeto
