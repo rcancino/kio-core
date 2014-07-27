@@ -72,6 +72,10 @@ module.controller('MainCtrl', ['$scope','ventaModel', function($scope,ventaModel
 
 	});
 
+	$scope.agregarPartida=function(partida){
+		console.log('Agregando partida: '+partida);
+	};
+
 	$scope.removePartida=function(partida){
 		console.log('Eliminando partida');
 		var index=$scope.partidas.indexOf(partida);
@@ -83,6 +87,9 @@ module.controller('MainCtrl', ['$scope','ventaModel', function($scope,ventaModel
 		console.log('Salvando venta: '+venta);
 	};
 
+	$scope.test=function(){
+		console.log('Probando boton desde test');
+	};
 
 
 }]);

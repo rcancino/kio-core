@@ -61,7 +61,7 @@
 			</div>
 		</div> <!-- .end row -->
 		
-		<div class="row">
+		<div class="row" ng-controller="MainCtrl">
 			<!-- Agregar partida form -->
 			<div id="partidaNuevaDialog" class="modal fade" >
 				<div class="modal-dialog">
@@ -76,7 +76,7 @@
 						</div><!-- end .modal-header -->
 						
 						<form name="partidaForm" novalidate class="form-horizontal" 
-							ng-submit="agregarPartida(partidaNueva)">
+							>
 						
 							<div class="modal-body ">
 									
@@ -112,8 +112,10 @@
 							</div>
 
 							<div class="modal-footer">
+								<button class="btn btn-default" ng-click="test()">Test</button>
 								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-			        			<button type="submit" class="btn btn-primary" ng-disabled="partidaForm.$invalid">Salvar</button>
+			        			<button  ng-click="agregarPartida(partidaNueva)" 
+			        				class="btn btn-primary"  data-dismiss="modal" ng-disabled="partidaForm.$invalid">Salvar</button>
 							</div>
 
 						</form><!-- end .form-->
