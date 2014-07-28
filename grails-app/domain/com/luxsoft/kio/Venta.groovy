@@ -1,6 +1,7 @@
 package com.luxsoft.kio
 
 import org.grails.databinding.BindingFormat
+import com.luxsoft.cfdi.Cfdi
 import groovy.transform.EqualsAndHashCode
 
 //@EqualsAndHashCode(includes='apellidoPaterno,apellidoMaterno,nombres')
@@ -17,6 +18,8 @@ class Venta {
 	TipoDeVenta tipo
 
 	Currency moneda //=MonedaUtils.PESOS
+	
+	String formaDePago='NO DEFINIDO'
 
 	String status
 
@@ -33,6 +36,8 @@ class Venta {
 	BigDecimal impuestoTasa=0.16
 
 	BigDecimal total=0
+	
+	Cfdi cfdi
 
 	Date dateCreated
 	Date lastUpdated
@@ -51,6 +56,8 @@ class Venta {
     	impuestoTasa(scale:6)
     	impuesto(scale:4)
     	total(scale:4)
+		formaDePago(nullable:false,maxSize:30)
+		cfdi nullable:true
     	
     }
 

@@ -41,7 +41,7 @@
   								<span class="glyphicon glyphicon-floppy-saved"></span> Salvar
   							</button>
   							
-  							<button class="btn btn-default btn-sm">
+  							<button id="addPartidaBtn" class="btn btn-default btn-sm">
   								<span class="glyphicon glyphicon-plus"></span> Agregar partida
   							</button>
   							
@@ -55,7 +55,17 @@
 		
 	</div><!-- end .container -->
 
-
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#addPartidaBtn").click(function(event){
+				console.log('Agregando partidas');
+				var rows=$("#partidasTable > tbody > tr").length
+				var r=$("#partidasTable >tbody >tr").append("<tr></tr>");
+				r.append("<td>CLAVE</td>");
+				//$("#partidasTable").append('<tr><td>CLAVE</td><td>DESCRIPCION</td><td>UNIDAD</td><td>CANTIDAD</td><td>PRECIO</td><td>IMPORTE</td><td>DESCUENTO</td><td>SUBTOTAL</td></tr>');
+			});
+		});
+	</script>
 
 </body>
 </html>

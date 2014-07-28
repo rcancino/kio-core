@@ -52,6 +52,16 @@ grails.project.dependency.resolution = {
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
         compile "org.jadira.usertype:usertype.jodatime:1.9"
+
+        compile 'org.apache.xmlbeans:xmlbeans:2.4.0'
+        compile 'axis:axis:1.4'
+        compile 'org.apache.commons:commons-compress:1.1'
+        compile 'net.glxn:qrgen:1.2'
+        compile 'org.bouncycastle:bcprov-jdk14:1.45'
+        //compile 'cfdi:cfdi:3.2'
+        //compile 'com.edicom.ediwinws:cfdiClient:1.0'
+        //compile 'nomina:nomina:1.0'
+        
     }
 
     plugins {
@@ -76,7 +86,10 @@ grails.project.dependency.resolution = {
         compile ":fields:1.3"
         //runtime ':console:1.3'
         compile ":joda-time:1.5"
-        
+
+		runtime ':console:1.3'
+		//compile ":jasper:1.8.0"
+		runtime ":jasper:1.8.0"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.7.4"

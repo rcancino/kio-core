@@ -1,3 +1,37 @@
 // Place your Spring DSL code here
+import com.luxsoft.cfdi.CfdiCadenaBuilder
+import com.luxsoft.cfdi.CfdiSellador
+import com.luxsoft.cfdi.CfdiTimbrador
+
+import grails.util.Environment
+
 beans = {
+	
+	switch(Environment.current){
+		/*
+		case Environment.PRODUCTION:
+			cfdiTimbrador(CfdiTimbrador){
+				timbradoDePrueba=false
+			}
+			break
+		case Environment.DEVELOPMENT:
+			cfdiTimbrador(CfdiTimbrador){
+				timbradoDePrueba=true
+			}
+			break
+		case Environment.TEST:
+			cfdiTimbrador(CfdiTimbrador){
+			timbradoDePrueba=true
+		}
+		*/
+	}
+	
+	cfdiCadenaBuilder(CfdiCadenaBuilder){
+		
+	}
+
+	cfdiSellador(CfdiSellador){
+		cadenaBuilder=ref("cfdiCadenaBuilder")
+	}
+	cfdiTimbrador(CfdiTimbrador){}
 }

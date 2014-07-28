@@ -115,22 +115,9 @@
 		     
 		 });
 
-		$("#totalField").click(function(e){
-			actualizarTotales();
+		
 
-		});
-
-
-		var cargarGrid=function(productos){
-				var tbody=$('tbody');
-				tbody.empty();
-				for(var i=0;i<productos.length;i++){
-					var producto=productos[i];
-					var row=tbody.append('<tr><td>'+producto.servicio.clave+'</td></tr>');
-					
-					
-				}
-		};
+		
 
 		var actualizarTotales=function(){
 			console.log('Actualizando totales.....');

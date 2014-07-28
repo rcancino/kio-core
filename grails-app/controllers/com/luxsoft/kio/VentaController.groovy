@@ -18,12 +18,13 @@ class VentaController {
 		[ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count(params)]
     }
 
+    /*
     def create(){
         
     	def ventaInstance=new Venta(fecha:new Date())
     	render view:'spa/spaCreate' ,model:[ventaInstance:ventaInstance]
 		
-    }
+    }*/
 	
 	
 

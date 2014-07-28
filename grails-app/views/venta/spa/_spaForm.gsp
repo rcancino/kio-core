@@ -93,10 +93,10 @@
 						<td>{{row.descripcion}}</td>
 						<td>{{row.unidad}}</td>
 						<td>{{row.cantidad}}</td>
-						<td>{{row.precioBruto}}</td>
+						<td>{{row.precioBruto | currency: "$"}}</td>
 						<td>{{row.importeBruto | currency: "$"}}</td>
-						<td>{{row.descuento}}</td>
-						<td>{{row.importeNeto}}</td>
+						<td>{{row.descuento }}</td>
+						<td>{{row.importeNeto | currency: "$"}}</td>
 						<td><a href="" ng-click="removePartida(row)"><span class="glyphicon glyphicon-trash"></span></a></td>
 					</tr>
 				</tbody>

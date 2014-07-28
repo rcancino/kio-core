@@ -121,7 +121,9 @@ log4j.main = {
         
         development{
             debug 'grails.app.services.com.luxsoft.kyo'
+			debug 'grails.app.services.com.luxsoft.cfdi'
             info 'grails.app.controllers.com.luxsoft.kio'
+			debug 'com.luxsoft.cfdi'
 
             
         }
@@ -129,6 +131,8 @@ log4j.main = {
         produccion{
             error 'grails.app.services'
             error 'grails.app.controllers'
+			error 'grails.app.services.com.luxsoft.kyo'
+			error 'grails.app.services.com.luxsoft.cfdi'
             
         }
         
@@ -154,3 +158,6 @@ grails.gorm.default.mapping = {
 	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentYears, class: org.joda.time.Years
 }
 */
+
+
+luxsoft.cfdi.serie.venta='FACTURA'

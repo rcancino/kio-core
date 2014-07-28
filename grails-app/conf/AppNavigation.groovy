@@ -18,6 +18,7 @@ navigation={
 			ventas(controller:'venta',action:'index')
 			caja(controller:'caja',action:'index')
 			cxc(controller:'cxc',action:'index')
+			cfdi(controller:'cfdi',action:'index')
 		}
 		procesos(){
 			cfdi(controller:'cfdi',action:'index')

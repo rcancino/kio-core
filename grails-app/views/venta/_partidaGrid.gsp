@@ -1,19 +1,4 @@
-<table id="partidasTable" class="table table-striped table-bordered table-condensed">
-	<thead>
-		<tr>
-			<th>Producto</th>
-			<th>Descripcion</th>
-			<th>Unidad</th>
-			<th>Cantidad</th>
-			<th>Precio</th>
-			<th>Importe</th>
-			<th>Descuento</th>
-			<th>Sub Total</th>
-		</tr>
-	</thead>
-	<tbody>
 
-		<g:each in="${partidas}" var="row" status="i">
 			<g:hiddenField name="partidas[${i}].servicioPorSocio.id" value="${row?.servicioPorSocio?.id}"/>
 			<g:hiddenField name="partidas[${i}].producto.id" value="${row?.producto?.id}"/>
 			<tr>
@@ -43,6 +28,4 @@
 					<g:formatNumber number="${row.importeNeto}" type="currency"/>
 				</td>
 			</tr>
-		</g:each>
-	</tbody>
-</table>
+		
