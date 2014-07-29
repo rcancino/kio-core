@@ -18,13 +18,14 @@ class VentaController {
 		[ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count(params)]
     }
 
-    /*
+    
     def create(){
         
     	def ventaInstance=new Venta(fecha:new Date())
-    	render view:'spa/spaCreate' ,model:[ventaInstance:ventaInstance]
+    	//render view:'spa/spaCreate' ,model:[ventaInstance:ventaInstance]
+        [ventaInstance:ventaInstance]
 		
-    }*/
+    }
 	
 	
 
@@ -49,6 +50,18 @@ class VentaController {
         //respond venta,[view:'show',model:[ventaInstance:venta]]
         redirect action:'index'
         
+    }
+
+    def edit(Long id){
+        log.info 'Editando venta:'
+        Venta ventaInstance=Venta.get(id)
+        [ventaInstance:ventaInstance]
+    }
+
+    def update(Long id){
+        log.info 'Editando venta:'
+        def ventaInstane=Venta.get(id)
+        [ventaInstance:ventaInstance]
     }
 
     def getServiciosJSON(Long clienteId) {
@@ -95,6 +108,12 @@ class VentaController {
             ,importeBruto:it.precioNeto]
         }
         render res as JSON
+    }
+
+    def delete(Venta venta){
+        ventaService.eliminar(venta)
+        flash.message="Venta eliminada ${venta.id}"
+        redirect action:'index'
     }
 
     

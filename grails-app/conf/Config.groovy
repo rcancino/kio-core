@@ -120,6 +120,7 @@ log4j.main = {
     environments{
         
         development{
+            info 'grails.app.controllers.com.luxsoft.kyo'
             debug 'grails.app.services.com.luxsoft.kyo'
 			debug 'grails.app.services.com.luxsoft.cfdi'
             info 'grails.app.controllers.com.luxsoft.kio'

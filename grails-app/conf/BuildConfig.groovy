@@ -88,8 +88,8 @@ grails.project.dependency.resolution = {
         compile ":joda-time:1.5"
 
 		runtime ':console:1.3'
-		//compile ":jasper:1.8.0"
-		runtime ":jasper:1.8.0"
+		compile ":jasper:1.8.0"
+		//runtime ":jasper:1.8.0"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.7.4"

@@ -41,6 +41,15 @@
 								<span class="glyphicon glyphicon-remove-circle"></span> Cancelar
 							</g:link>
 							
+							<g:jasperReport
+									controller="cfdi"
+									action="imprimir"
+									jasper="CFDI" 
+									format="PDF" 
+									name="Imprimir CFDI">
+									<g:hiddenField name="id" value="${cfdiInstance.id}"/>
+							</g:jasperReport>
+							
   						</div>
 						
 					</div>

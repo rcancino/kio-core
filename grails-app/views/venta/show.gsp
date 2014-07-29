@@ -4,10 +4,6 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Venta</title>
-	%{-- <asset:stylesheet src="datatables/dataTables.css"/>
-	<asset:javascript src="datatables/dataTables.js"/> --}%
-	<asset:stylesheet src="jquery-ui.css"/>
-	<asset:javascript src="jquery-ui/autocomplete.js"/>
 	<asset:javascript src="forms/autoNumeric.js"/>
 </head>
 <body>
@@ -27,7 +23,7 @@
 							<div class="col-md-12">
 								<fieldset >
 									
-									<g:render template="form"/>
+									<g:render template="showForm"/>
 								</fieldset>
 							</div>
 							
@@ -35,8 +31,13 @@
   					</div>
   					<div class="panel-footer">
   						<div class="btn-group">
-  							<button class="btn btn-default btn-sm">Editar</button>
-  							<button class="btn btn-default btn-sm">Eliminar</button>
+  							<g:link class="btn btn-default btn-sm" action="edit" id="${ventaInstance.id}">
+  								<span class="glyphicon glyphicon-pencil"></span> Editar
+  							</g:link>
+  							<g:link class="btn btn-default btn-sm" action="delete" id="${ventaInstance.id}"
+  								onclick="return confirm('Eliminar venta');">
+  								<span class="glyphicon glyphicon-trash"></span> Eliminar
+  							</g:link>
   							<g:link class="btn btn-default btn-sm" action="create">
   								<span class="glyphicon glyphicon-floppy-saved"></span> Nueva
   							</g:link>

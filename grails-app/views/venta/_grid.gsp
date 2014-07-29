@@ -7,6 +7,9 @@
 			<th>Status</th>
 			<th>Tipo</th>
 			<th>Fecha</th>
+			
+			<th>Importe</th>
+			<th>Impuesto</th>
 			<th>Total</th>
 		</tr>
 	</thead>
@@ -23,6 +26,8 @@
 				<td>${fieldValue(bean:row,field:"status")}</td>
 				<td>${fieldValue(bean:row,field:"tipo")}</td>
 				<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
+				<td><g:formatNumber number="${row.importeNeto}" type="currency"/></td>
+				<td><g:formatNumber number="${row.impuesto}" type="currency"/></td>
 				<td><g:formatNumber number="${row.total}" type="currency"/></td>
 			</tr>
 		</g:each>

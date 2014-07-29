@@ -55,9 +55,9 @@
 				cols="col-sm-6" colsLabel="col-sm-4" label="Descuento"/>
 				<f:field property="importeNeto" input-class="form-control" input-type="text" 
 				cols="col-sm-6" colsLabel="col-sm-4" label="Sub Total"/>
-				<f:field property="impuestoTasa" input-class="form-control" input-type="text" 
+				<f:field property="impuesto" input-class="form-control" input-type="text" 
 				cols="col-sm-6" colsLabel="col-sm-4" label="IVA"/>
-				<f:field property="total" input-class="form-control" input-type="text" input-id="totalField"
+				<f:field property="total" input-class="form-control" input-type="text" input-id="total"
 				cols="col-sm-6" colsLabel="col-sm-4" label="Total"
 				/>
 				
@@ -114,15 +114,11 @@
 		$("#fecha").datepicker({
 		     
 		 });
-
-		
-
-		
-
 		var actualizarTotales=function(){
 			console.log('Actualizando totales.....');
 			
 			var totalImporteNeto=0;
+			var iva=0;
 			var total=0;
 			var elements=$('[data-importe-neto]').each(function(index,element){
 				var importeNeto=$(this).attr("value");
@@ -134,8 +130,11 @@
 				
 			});
 			console.log('Importe Neto: '+totalImporteNeto);
-			total=totalImporteNeto*
+			iva=totalImporteNeto*.16
 			$("#importeNeto").val(totalImporteNeto/100);
+			$("#impuesto").val((iva)/100);
+			$("#total").val((totalImporteNeto+iva)/100);
+
 		};
 
 		var controller={
@@ -153,7 +152,8 @@
 						};
 						*/
 						//cargarGrid(data);
-						$("#gridPanel").html(data)
+						$("#gridPanel").html(data);
+						actualizarTotales();
 
 					}
 				});

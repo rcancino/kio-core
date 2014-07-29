@@ -142,6 +142,8 @@ class CfdiService {
 		log.debug 'ComprobanteDocument generado y validado: '+document
 		cfdi.save(failOnError:true)
 		cfdi=cfdiTimbrador.timbrar(cfdi,empresa)
+		venta.status='FACTURADA'
+		venta.cfdi=cfdi
 		log.debug 'Documento timbrado: '+cfdi
 		return cfdi
 		

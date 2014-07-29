@@ -9,6 +9,7 @@ class VentaService {
     def salvar(Venta venta) {
     	
     	try {
+			venta.actualizarImportes()
     		venta.save failOnError:true
     	}
     	catch(Exception e) {
@@ -16,6 +17,32 @@ class VentaService {
     		log.error 'Error al salvar venta '+msg,e
     		throw new VentaException(message:msg,venta:venta)
     	}
+    }
+
+    def eliminar(Venta venta){
+        if(venta.cfdi){
+            throw new VentaException(message:'Venta ya facturada imposible eliminar')
+        }
+        try {
+            venta.delete flush:true
+
+        }
+        catch(Exception e) {
+            String msg=ExceptionUtils.getRootCauseMessage(e)
+            log.error 'Error al eliminar venta '+msg,e
+            throw new VentaException(message:msg,venta:venta)
+        }
+        
+        
+    }
+
+    def eliminarPartida(VentaDet det){
+        def venta=det.venta
+        venta.removeFromPartidas(det)
+        venta.actualizarImportes()
+        venta.save failOnError:true
+        //println 'Partida eliminada venta: '+venta?.id
+        return venta
     }
 
     def mandarFacturar(Venta venta){
@@ -31,6 +58,8 @@ class VentaService {
                 )
         }
     }
+
+
 }
 
 class VentaException extends RuntimeException{
