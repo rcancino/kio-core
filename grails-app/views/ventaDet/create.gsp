@@ -35,7 +35,7 @@
 								</ul>
 							</div>
 						</g:hasErrors>
-						<g:render template="editForm"/>
+						<g:render template="createForm"/>
 					</div>
 						
 					<div class="panel-footer">
@@ -45,9 +45,7 @@
   								<span class="glyphicon glyphicon-hand-left"></span> Regresar
   							</g:link>
   							
-  							<g:link class="btn btn-danger btn-sm" action="delete" id="${ventaDetInstance.id}" >
-  								<span class="glyphicon glyphicon-trash"></span> Eliminar
-  							</g:link>
+  							
   							
   							
   						</div>

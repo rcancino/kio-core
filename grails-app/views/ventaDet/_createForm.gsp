@@ -1,19 +1,18 @@
 <div class="col-md-6">
 <fieldset>
 	<legend> Producto / Servicio</legend>
-	<g:form action="update" id="${ventaDetInstance.id}" class="form-horizontal">
-		<g:hiddenField name="version" value="${ventaDetInstance?.version}"/>
-
-		<g:hiddenField name="servicioPorSocio.id" value="${ventaDetInstance?.servicioPorSocio?.id}"/>
-
+	<g:form action="save" class="form-horizontal">	
+	
+		<g:hiddenField name="ventaId" value="${ventaInstance.id}"/>
+		
 		<div class="form-group">
 			<label for="producto" class="col-sm-2 control-label">Producto</label>
 			<div class="col-sm-10">
-				<g:hiddenField id="productoId" name="producto.id" 
-					value="${ventaDetInstance?.producto?.id}"/>
+				<g:hiddenField id="productoId" name="producto.id" />
 				<input id="producto" class="form-control" 
-					name="producto.descripcion" value="${ventaDetInstance?.producto?.descripcion}"
-					type="text"  autofocus="on" autocomplete="off">
+					name="producto.descripcion"
+					type="text"  autofocus="on" 
+					autocomplete="off">
 			</div>
 		</div>
 		
@@ -21,7 +20,7 @@
 			<label for="cantidad" class="col-sm-2 control-label">Cantidad</label>
 			<div class="col-sm-4">
 				<input id="cantidad" class="form-control" 
-					name="cantidad" value="${ventaDetInstance?.cantidad}"
+					name="cantidad"
 					type="text"  autocomplete="off">
 			</div>
 		</div>
@@ -30,7 +29,7 @@
 			<label for="precioUnitario" class="col-sm-2 control-label ">Precio</label>
 			<div class="col-sm-4">
 				<input id="precioUnitario" class="form-control data-moneda" 
-					name="precioUnitario" value="${ventaDetInstance?.precioUnitario}"
+					name="precioUnitario"  autocomplete="off"
 					disabled>
 			</div>
 		</div>
@@ -39,23 +38,23 @@
 			<label for="descuentoTasa" class="col-sm-2 control-label">Descuento</label>
 			<div class="col-sm-4">
 				<input id="descuentoTasa" class="form-control" 
-					name="descuentoTasa" value="${ventaDetInstance?.descuentoTasa}"
+					name="descuentoTasa"  autocomplete="off"
 					disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="importeNeto" class="col-sm-2 control-label">Importe</label>
+			<label for="importeNeto" class="col-sm-2 control-label">Neto</label>
 			<div class="col-sm-4">
 				<input id="importeNeto" class="form-control data-moneda" 
-					name="importeNeto" value="${ventaDetInstance?.importeNeto}"
+					name="importeNeto"  autocomplete="off"
 					disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-2">
-				<g:submitButton name="Actualizar" class="btn btn-primary " />
+				<g:submitButton name="Salvar" class="btn btn-primary " />
 			</div>
 		</div>
 	
@@ -71,6 +70,7 @@
             minLength: 2,
             select:function(e,ui){
 				console.log('Producto seleccionado: '+ui.item.value);
+				$("#productoId").val(ui.item.id);
 				$("#precioUnitario").val(ui.item.precioBruto);
 				$("#precioUnitario").autoNumeric('set', ui.item.precioBruto);
 				$("#importeNeto").autoNumeric('set', ui.item.precioNeto);

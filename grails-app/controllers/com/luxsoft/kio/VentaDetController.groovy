@@ -13,6 +13,11 @@ class VentaDetController {
     	[ventaInstance:det.venta,ventaDetInstance:det]
     }
 	
+	def save(Long ventaId,VentaDet det){
+		//def ventaInstance=Venta.get(ventaId)
+		def ventaInstance=ventaService.agregarPartida(ventaId,det)
+		redirect controller:'venta',action:'edit',id:ventaInstance.id
+	}
 
     def update(VentaDet det){
     	log.info 'Actualizando partida de venta: '+det.precioUnitario

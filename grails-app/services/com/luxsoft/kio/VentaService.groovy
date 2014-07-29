@@ -36,6 +36,26 @@ class VentaService {
         
     }
 
+    def agregarPartida(Long ventaId,VentaDet det){
+        def venta=Venta.get(ventaId)
+        def prod=det.producto
+        det.precioUnitario=prod.precioNeto
+        det.importeBruto=prod.precioNeto*det.cantidad
+        det.descuento=0
+        det.descuentoTasa=0
+        det.importeNeto=det.importeBruto
+        venta.addToPartidas(det)
+        venta.importeBruto=venta.partidas.sum 0.0,{it.importeBruto}
+        
+        venta.descuento=venta.partidas.sum 0.0,{it.descuento}
+        venta.importeNeto=venta.partidas.sum 0.0,{it.importeNeto}
+        venta.impuesto=venta.importeNeto*0.16
+        venta.total=venta.importeNeto+venta.impuesto
+        //venta.actualizarImportes()
+        //venta.save failOnError:true
+        return venta
+    }
+
     def eliminarPartida(VentaDet det){
         def venta=det.venta
         venta.removeFromPartidas(det)
