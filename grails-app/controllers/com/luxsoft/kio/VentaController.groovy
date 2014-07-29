@@ -45,10 +45,9 @@ class VentaController {
     	}
     	println 'Salvando venta:'+venta.errors
     	venta=ventaService.salvar(venta)
-    	flash.message="Venta $venta.id generada"
-    	//render view:'show',model:[id:venta.id]
-        //respond venta,[view:'show',model:[ventaInstance:venta]]
-        redirect action:'index'
+    	//flash.message="Venta $venta.id generada"
+        //redirect action:'index'
+        redirect action:'edit',params:[id:venta.id]
         
     }
 
@@ -94,9 +93,9 @@ class VentaController {
         render template:"partidasGrid",model:[partidas:res]
     }
 
-    def productosPorCliente(Long id){
-        log.info 'Localizando servicios para cliente: '+id
-        def list=ServicioPorSocio.findAll("from ServicioPorSocio s where s.socio.cliente.id=?",[id])
+    def productosPorCliente(Long clienteId){
+        log.info 'Localizando servicios para cliente: '+clienteId
+        def list=ServicioPorSocio.findAll("from ServicioPorSocio s where s.socio.cliente.id=?",[clienteId])
         def res=list.collect{
             [servicioPorSocio:it.id
             ,producto:it.servicio.id
@@ -104,8 +103,8 @@ class VentaController {
             ,descripcion:it.servicio.descripcion
             ,unidad:it.servicio.unidad
             ,cantidad:1.0
-            ,precioUnitario:it.servicio.precioBruto
-            ,importeBruto:it.precioNeto]
+            ,precio:it.servicio.precioNeto
+            ,importe:it.servicio.precioNeto]
         }
         render res as JSON
     }

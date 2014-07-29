@@ -2,7 +2,7 @@
 <fieldset>
 	<legend> Producto / Servicio</legend>
 	<g:form action="update" id="${ventaDetInstance.id}" class="form-horizontal">
-		<g:hiddenField name="version" value="${ventaDetInstance.version}"/>
+		<g:hiddenField name="version" value="${ventaDetInstance?.version}"/>
 
 		<g:hiddenField name="servicioPorSocio.id" value="${ventaDetInstance?.servicioPorSocio?.id}"/>
 

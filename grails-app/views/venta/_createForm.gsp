@@ -76,8 +76,7 @@
 
 	<div class="form-group">
 		<div class="col-sm-offset-8 col-sm-4">
-
-			<g:submitButton name="Salvar" class="btn btn-primary " />
+			<g:submitButton name="Siguiente" class="btn btn-primary " />
 			
 		</div>
 	</div>
@@ -86,6 +85,8 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+
+		
 		/*
 		$("#clienteField").autocomplete({
 			source:'/kio-core/cliente/getClientesJSON',
@@ -114,6 +115,7 @@
 		$("#fecha").datepicker({
 		     
 		 });
+
 		var actualizarTotales=function(){
 			console.log('Actualizando totales.....');
 			
@@ -131,6 +133,7 @@
 			});
 			console.log('Importe Neto: '+totalImporteNeto);
 			iva=totalImporteNeto*.16
+			$("#importeBruto").val(totalImporteNeto/100);
 			$("#importeNeto").val(totalImporteNeto/100);
 			$("#impuesto").val((iva)/100);
 			$("#total").val((totalImporteNeto+iva)/100);
@@ -143,18 +146,19 @@
 				console.log('Paso 2 Agregar los servicio para el cliente: '+cliente.id);
 				$.ajax({
 					url:'<g:createLink controller="venta" action="crearPartidasPorServiciosDeCliente"/>',
+					//url:'<g:createLink controller="venta" action="productosPorCliente"/>',
 					data:{'clienteId':cliente.id},
 					success:function(data,textStatus,jqXHR){
 						//console.log("Partidas recividas: "+data);
-						/*
+						
 						for (var i = data.length - 1; i >= 0; i--) {
-							console.log(data[i]);
+							//console.log(data[i]);
 						};
-						*/
+						
 						//cargarGrid(data);
 						$("#gridPanel").html(data);
 						actualizarTotales();
-
+						//addRow(['Producto '+counter]);
 					}
 				});
 			},

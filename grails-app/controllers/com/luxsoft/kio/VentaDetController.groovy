@@ -4,10 +4,15 @@ class VentaDetController {
     //static scaffold = true
 
     def ventaService
+	
+	def create(Venta ventaInstance){
+		[ventaInstance:ventaInstance,ventaDetInstance:new VentaDet()]
+	}
 
     def edit(VentaDet det){
     	[ventaInstance:det.venta,ventaDetInstance:det]
     }
+	
 
     def update(VentaDet det){
     	log.info 'Actualizando partida de venta: '+det.precioUnitario

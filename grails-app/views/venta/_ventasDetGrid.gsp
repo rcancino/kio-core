@@ -1,6 +1,7 @@
 <table id="partidasTable" class="table table-striped table-bordered table-condensed">
 	<thead>
 		<tr>
+			<th>Socio</th>
 			<th>Producto</th>
 			<th>Descripcion</th>
 			<th>Unidad</th>
@@ -18,6 +19,9 @@
 			<g:hiddenField name="partidas[${i}].servicioPorSocio.id" value="${row?.servicioPorSocio?.id}"/>
 			<g:hiddenField name="partidas[${i}].producto.id" value="${row?.producto?.id}"/>
 			<tr>
+				<td>
+					<g:link controller="ventaDet" action="edit" id="${row.id}">${row?.servicioPorSocio?.socio?.id}</g:link>
+				</td>
 				<td>
 					<g:link controller="ventaDet" action="edit" id="${row.id}">${row.producto.clave}</g:link>
 				</td>

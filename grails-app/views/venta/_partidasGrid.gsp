@@ -9,14 +9,16 @@
 			<th>Importe</th>
 			<th>Descuento</th>
 			<th>Sub Total</th>
+			<th>Eliminar</th>
 		</tr>
 	</thead>
 	<tbody>
 
 		<g:each in="${partidas}" var="row" status="i">
-			<g:hiddenField name="partidas[${i}].servicioPorSocio.id" value="${row?.servicioPorSocio?.id}"/>
-			<g:hiddenField name="partidas[${i}].producto.id" value="${row?.producto?.id}"/>
+			
 			<tr>
+				<g:hiddenField name="partidas[${i}].servicioPorSocio.id" value="${row?.servicioPorSocio?.id}"/>
+				<g:hiddenField name="partidas[${i}].producto.id" value="${row?.producto?.id}"/>
 				<td>
 					
 					${row.producto.clave}
@@ -42,7 +44,20 @@
 					<g:hiddenField name="partidas[${i}].importeNeto" data-importe-neto="neto" value="${row?.importeNeto}"/>
 					<g:formatNumber number="${row.importeNeto}" type="currency"/>
 				</td>
+				<td>
+					<a href="#" class="deleteRow">
+						<span class="glyphicon glyphicon-trash"></span>
+					</a>
+				</td>
 			</tr>
 		</g:each>
 	</tbody>
 </table>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".deleteRow").click(function(event){
+		alert("Eliminando fila: ");
+		$(this).closest('tr').remove();
+	});
+});
+</script>

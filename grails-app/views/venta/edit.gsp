@@ -18,7 +18,7 @@
 			<div class="col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						Generacion de pedido nuevo
+						Pedido ${ventaInstance.id}
 					</div>
 					<div class="panel-body">
 						<div class="row">
@@ -38,7 +38,7 @@
 					<div class="panel-footer">
   						<div class="btn-group">
   							
-  							<g:link class="btn btn-default btn-sm" action="index" params="[tipo:'PEDIDO']">
+  							%{-- <g:link class="btn btn-default btn-sm" action="index" params="[tipo:'PEDIDO']">
   								Eliminar
   							</g:link>
 
@@ -48,7 +48,7 @@
   							
   							<button id="addPartidaBtn" class="btn btn-default btn-sm">
   								<span class="glyphicon glyphicon-plus"></span> Agregar partida
-  							</button>
+  							</button> --}%
   							
   						</div>
 					</div><!-- end .panel-footer -->

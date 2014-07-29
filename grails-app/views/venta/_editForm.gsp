@@ -65,9 +65,19 @@
 	</div>
 
 	<div class="form-group">
-		<div class="col-sm-offset-8 col-sm-4">
+		<div class="col-sm-offset-6 col-sm-6">
+			<g:link action="create" class="btn btn-default">
+				<span class="glyphicon glyphicon-floppy-saved"></span> Nueva
+			</g:link>
 			<g:link action="index" class="btn btn-default"> Cancelar</g:link>
-			<g:submitButton name="Actualizar" class="btn btn-primary " />
+
+			<g:link controller="ventaDet" action="create" class="btn btn-primary" id="${ventaInstance.id}">
+				<span class="glyphicon glyphicon-shopping-cart"></span> Agregar 
+			</g:link>
+			
+			
+			
+			<g:submitButton name="Actualizar" class="btn btn-success " />
 			
 		</div>
 	</div>

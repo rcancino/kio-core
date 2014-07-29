@@ -9,7 +9,7 @@ class VentaService {
     def salvar(Venta venta) {
     	
     	try {
-			venta.actualizarImportes()
+			//venta.actualizarImportes()
     		venta.save failOnError:true
     	}
     	catch(Exception e) {

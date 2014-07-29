@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Nueva venta</title>
-	%{-- <asset:stylesheet src="datatables/dataTables.css"/>
-	<asset:javascript src="datatables/dataTables.js"/> --}%
+	<asset:stylesheet src="datatables/dataTables.css"/>
+	<asset:javascript src="datatables/dataTables.js"/> 
 	<asset:stylesheet src="jquery-ui.css"/>
 	<asset:javascript src="jquery-ui/autocomplete.js"/>
 	<asset:javascript src="forms/autoNumeric.js"/>
@@ -24,7 +24,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<fieldset>
-									<g:render template="form"/>
+									<g:render template="createForm"/>
 								</fieldset>
 							</div>
 						</div>
@@ -37,13 +37,15 @@
   								Cancelar
   							</g:link>
 
+  							
+
   							<button class="btn btn-default btn-sm">
   								<span class="glyphicon glyphicon-floppy-saved"></span> Salvar
   							</button>
   							
-  							<button id="addPartidaBtn" class="btn btn-default btn-sm">
+  							%{-- <button id="addPartidaBtn" class="btn btn-default btn-sm">
   								<span class="glyphicon glyphicon-plus"></span> Agregar partida
-  							</button>
+  							</button> --}%
   							
   						</div>
 					</div><!-- end .panel-footer -->
@@ -57,13 +59,13 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("#addPartidaBtn").click(function(event){
-				console.log('Agregando partidas');
-				var rows=$("#partidasTable > tbody > tr").length
-				var r=$("#partidasTable >tbody >tr").append("<tr></tr>");
-				r.append("<td>CLAVE</td>");
-				//$("#partidasTable").append('<tr><td>CLAVE</td><td>DESCRIPCION</td><td>UNIDAD</td><td>CANTIDAD</td><td>PRECIO</td><td>IMPORTE</td><td>DESCUENTO</td><td>SUBTOTAL</td></tr>');
-			});
+			// $("#addPartidaBtn").click(function(event){
+			// 	console.log('Agregando partidas');
+			// 	var rows=$("#partidasTable > tbody > tr").length
+			// 	var r=$("#partidasTable >tbody >tr").append("<tr></tr>");
+			// 	r.append("<td>CLAVE</td>");
+				
+			// });
 		});
 	</script>
 
