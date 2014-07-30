@@ -12,8 +12,7 @@ class VentaController {
     	params.max = Math.min(max ?: 20, 100)
 		params.sort=params.sort?:'dateCreated'
 		params.order='desc'
-		def tipo=params.tipo?:'%'
-		def query=Venta.where{tipo.clave=~tipo}
+		def query=Venta.where{status!='VENTA'}
 		
 		[ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count(params)]
     }
@@ -26,6 +25,11 @@ class VentaController {
         [ventaInstance:ventaInstance]
 		
     }
+	
+	def mandarFacturar(Venta ventaInstance){
+		ventaService.mandarFacturar(ventaInstance)
+		redirect action:'index'
+	}
 	
 	
 
