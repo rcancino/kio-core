@@ -1,15 +1,18 @@
 package com.luxsoft.kio
 
 import grails.transaction.Transactional
+
 import org.apache.commons.lang.exception.ExceptionUtils
+
+import com.luxsoft.cfdi.MonedaUtils;
 
 @Transactional
 class VentaService {
 
     def salvar(Venta venta) {
-    	
     	try {
-			//venta.actualizarImportes()
+            registrarPagoMembresia(venta)
+			actualizarTotales(venta)
     		venta.save failOnError:true
     	}
     	catch(Exception e) {
@@ -36,22 +39,22 @@ class VentaService {
         
     }
 
+    def salvarPartida(VentaDet det){
+        actualizarPartida(det)
+        actualizarTotales(det.venta)
+        det.save failOnError:true
+        return det
+    }
+
     def agregarPartida(Long ventaId,VentaDet det){
         def venta=Venta.get(ventaId)
         def prod=det.producto
-        det.precioUnitario=prod.precioNeto
-        det.importeBruto=prod.precioNeto*det.cantidad
-        det.descuento=0
-        det.descuentoTasa=0
-        det.importeNeto=det.importeBruto
-        venta.addToPartidas(det)
-        venta.importeBruto=venta.partidas.sum 0.0,{it.importeBruto}
         
-        venta.descuento=venta.partidas.sum 0.0,{it.descuento}
-        venta.importeNeto=venta.partidas.sum 0.0,{it.importeNeto}
-        venta.impuesto=venta.importeNeto*0.16
-        venta.total=venta.importeNeto+venta.impuesto
-        //venta.actualizarImportes()
+		det.precio=prod.precioNeto
+        det.importe=det.precio*det.cantidad
+        det.subTotal=det.importe
+        venta.addToPartidas(det)
+		actualizarTotales(venta)
         //venta.save failOnError:true
         return venta
     }
@@ -59,7 +62,7 @@ class VentaService {
     def eliminarPartida(VentaDet det){
         def venta=det.venta
         venta.removeFromPartidas(det)
-        venta.actualizarImportes()
+        actualizarTotales(venta)
         venta.save failOnError:true
         //println 'Partida eliminada venta: '+venta?.id
         return venta
@@ -77,6 +80,40 @@ class VentaService {
                 venta:venta
                 )
         }
+    }
+	
+	def registrarPagoMembresia(Venta venta){
+		println 'Buscando socios y servicios asociados con el cliente: '+venta.cliente
+		if(!venta.partidas){
+			println '******* Buscando socios y servicios asociados con el cliente: '+venta.cliente
+			def socios=Socio.findAll{cliente==venta.cliente}
+			socios.each{socio ->
+				socio.servicios.each{
+					def det=new VentaDet(it)
+					det.cantidad=1
+					det.actualizarImportes()
+					det.impuesto=MonedaUtils.calcularImpuesto(det.importe)
+					venta.addToPartidas(det)
+				}
+			}
+		}
+		return this
+	}
+	
+	def actualizarTotales(Venta venta){
+		venta.importe=venta.partidas.sum 0.0 ,{it.importe}
+		venta.descuento=venta.partidas.sum 0.0,{it.descuento}
+		venta.subTotal=venta.partidas.sum 0.0,{it.subTotal}
+		venta.impuesto=venta.partidas.sum 0.0,{it.impuesto}
+		venta.total=venta.subTotal+venta.impuesto
+	}
+
+    def actualizarPartida(VentaDet det){
+        def prod=det.producto
+        det.precio=prod.precioNeto
+        det.importe=det.precio*det.cantidad
+        det.subTotal=det.importe
+        det.impuesto=MonedaUtils.calcularImpuesto(det.importe)
     }
 
 

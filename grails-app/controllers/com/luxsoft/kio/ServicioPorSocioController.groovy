@@ -17,13 +17,13 @@ class ServicioPorSocioController {
 			serv.inscripcion=new Date()
 			serv=servicioPorSocioService.agregarServicio(socio,serv)
 			
-			def res=serv as JSON
-			render res
+			//def res=serv as JSON
+			render template:'/socio/serviciosGrid',model:[servicios:Socio.get(socio.id).servicios]
 		}
 	}
 	
 	def delete(ServicioPorSocio servicio){
-		log.debug "Eliminando servicio $servicio"
+		log.debug "Eliminando servicio"
 		assert servicio,'No existe el servicio'
 		def socio=servicioPorSocioService.delete(servicio)
 		flash.message="Servicio eliminado "

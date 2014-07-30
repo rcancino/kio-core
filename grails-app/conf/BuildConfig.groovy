@@ -89,6 +89,7 @@ grails.project.dependency.resolution = {
 
 		runtime ':console:1.3'
 		compile ":jasper:1.8.0"
+        compile ":standalone:1.2.3"
 		//runtime ":jasper:1.8.0"
 
         // Uncomment these to enable additional asset-pipeline capabilities

@@ -10,17 +10,12 @@ class VentaDet {
 
     ServicioPorSocio servicioPorSocio
 	
-	BigDecimal cantidad=0
-
-	BigDecimal precioUnitario=0
-
-	BigDecimal importeBruto=0
-
-	BigDecimal descuento=0
-
-	BigDecimal descuentoTasa=0
-
-	BigDecimal importeNeto=0
+	BigDecimal cantidad=0.0
+	BigDecimal precio=0.0
+	BigDecimal importe=0.0
+	BigDecimal descuento=0.0
+	BigDecimal subTotal=0.0
+    BigDecimal impuesto=0.0
 
 	String comentario
 
@@ -32,22 +27,34 @@ class VentaDet {
 
     static constraints = {
     	cantidad(scale:4)
-    	precioUnitario(scale:4)
-    	importeBruto(scale:4)
+    	precio(scale:4)
+    	importe(scale:4)
     	descuento(scale:4)
-    	descuentoTasa(scale:6)
-    	importeNeto(scale:4)
+    	subTotal(scale:4)
     	comentario nullable:true
         servicioPorSocio nullable:true
     }
 
+    VentaDet(){}
+
+    VentaDet(Producto producto){
+        precio=producto.precioNeto
+    }
+
+    VentaDet(ServicioPorSocio s){
+        servicioPorSocio=s
+        producto=s.servicio
+        precio=s.precioNeto
+        descuento=s.descuento
+    }
+
     String toString(){
-    	"${producto}  ${cantidad}  ${precioUnitario}"
+    	"${producto}  ${cantidad}  ${precio}"
     }
 
     def actualizarImportes(){
-    	importeBruto=cantidad*precioUnitario
-    	importeNeto=importeBruto-(cantidad*precioUnitario*descuentoTasa)
+    	importe=cantidad*precio
+    	subTotal=importe-descuento
     	return this
     }
 }

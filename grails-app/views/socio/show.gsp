@@ -4,11 +4,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Socios</title>
-	<asset:stylesheet src="datatables/dataTables.css"/>
-	<asset:javascript src="datatables/dataTables.js"/>
 	<asset:stylesheet src="jquery-ui.css"/>
 	<asset:javascript src="jquery-ui/autocomplete.js"/>
 	<asset:javascript src="forms/autoNumeric.js"/>
+	<asser:javascript src="holder/holder.js"/>
 </head>
 <body>
 	<div class="container">

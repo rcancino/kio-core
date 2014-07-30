@@ -1,184 +1,43 @@
-<div class="col-md-6">
-	<div class="panel-header"><h2>Generales</h2></div>
-	<form class="form-horizontal" role="form">
-		
+<div class="col-md-12">
+	<g:form name="generalesForm" class="form-horizontal" action="update">
+		<f:with bean="${socioInstance}">
+			<f:field property="apellidoPaterno" 
+			input-class="form-control uppercase-field" 
+			input-autocomplete="off" input-autofocus="autofocus"/>
+			<f:field property="apellidoMaterno" input-class="form-control uppercase-field" input-autocomplete="off" />
+			<f:field property="nombres" input-class="form-control uppercase-field" input-autocomplete="off" />
+			<f:field property="tipoDeSocio" input-class="form-control"/>
+			<f:field property="medioDeContacto" input-class="form-control"/>
+			<f:field property="sexo" input-class="form-control"/>
+			<f:field property="fechaDeNacimiento" input-class="form-control" label="F. Nacimiento"/>
+			<f:field property="telefonoCasa" input-class="form-control"/>
+			<f:field property="telefonoTrabajo" input-class="form-control"/>
+			<f:field property="celular" input-class="form-control"/>
+			<f:field property="email" input-class="form-control"/>
+			<f:field property="email2" input-class="form-control"/>
+			<f:field property="cfdiEmail" input-class="form-control"/>
+			<f:field property="areaDeInteres" input-class="form-control"/>
+			%{-- <f:field property="corporativo" input-class="form-control"/> --}%
+		</f:with>
+		</fieldset>
+		<g:render template="/_common/direccionForm" model="[prefix:'socio']"/>
 		<div class="form-group">
-			<label class="col-sm-4 control-label">Apellido paterno</label>
-			<div class="col-sm-8">
-      			<p class="form-control-static">${socioInstance.apellidoPaterno}</p>
-    		</div>
+			<div class="col-sm-offset-8 col-sm-4">
+				<g:submitButton name="Actualizar" class="btn btn-primary " />
+			</div>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-4 control-label">Apellido materno</label>
-			<div class="col-sm-8">
-	      		<p class="form-control-static">${socioInstance.apellidoMaterno}</p>
-	    	</div>
-		</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Nombres</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance.nombres}</p>
-    	</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Sexo</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance.sexo}</p>
-    	</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Fecha nacimiento</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.fechaDeNacimiento?:'Pendiente'}</p>
-    	</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Estado civil</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.estadoCivil}</p>
-    	</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Hijos</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.hijos?:'0'}</p>
-    	</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Telefono casa</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.telefonoCasa?:'Pendiente'}</p>
-    	</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Telefono trabajo</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.telefonoTrabajo?:'Pendiente'}</p>
-    	</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Celular</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.celular?:'Pendiente'}</p>
-    	</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">email</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.email?:'Pendiente'}</p>
-    	</div>
-	</div>
-		
-
-	</form>
+	</g:form>
 </div>
+<%--
 <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img src="http://lorempixel.com/g/300/300/people" alt="...">
+      %{-- <img src="http://lorempixel.com/g/300/300/people" alt="..."> --}%
+      %{-- <img src="holder.js/200x300"> --}%
+      <img src="http://placehold.it/300x300">
       <div class="caption">
         <h3>${socioInstance.nombres}</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi delectus reiciendis aut quibusdam placeat perferendis, nobis expedita nam nesciunt eos dolor. Recusandae quod atque ipsam, quasi excepturi magnam dignissimos nostrum.
-        </p>
-        <p>
-        	<a href="#" class="btn btn-primary" role="button">Button</a> 
-        	<a href="#" class="btn btn-default" role="button">Button</a>
-        </p>
+        
       </div>
     </div>
-  </div>
-
-%{-- 
-
-<form class="form-horizontal" role="form">
-	
-	<fieldset>
-	<legend> </legend>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Apellido paterno</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance.apellidoPaterno}</p>
-    	</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Apellido materno</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance.apellidoMaterno}</p>
-    	</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Nombres</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance.nombres}</p>
-    	</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Sexo</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance.sexo}</p>
-    	</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Fecha nacimiento</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.fechaDeNacimiento?:'Pendiente'}</p>
-    	</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Estado civil</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.estadoCivil}</p>
-    	</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Hijos</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.hijos?:'0'}</p>
-    	</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Telefono casa</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.telefonoCasa?:'Pendiente'}</p>
-    	</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Telefono trabajo</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.telefonoTrabajo?:'Pendiente'}</p>
-    	</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Celular</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.celular?:'Pendiente'}</p>
-    	</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">email</label>
-		<div class="col-sm-8">
-      		<p class="form-control-static">${socioInstance?.email?:'Pendiente'}</p>
-    	</div>
-	</div>
-
-
-	</fieldset>
-
-</form>
- --}%
+ </div>
+--%>

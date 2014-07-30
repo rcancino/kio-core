@@ -45,7 +45,9 @@
   								<span class="glyphicon glyphicon-hand-left"></span> Regresar
   							</g:link>
   							
-  							
+  							<button id="next" class="btn btn-success btn-sm">
+								<span class="glyphicon glyphicon-ok"></span> Salvar
+							</button>
   							
   							
   						</div>

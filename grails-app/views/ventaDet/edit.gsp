@@ -48,7 +48,9 @@
   							<g:link class="btn btn-danger btn-sm" action="delete" id="${ventaDetInstance.id}" >
   								<span class="glyphicon glyphicon-trash"></span> Eliminar
   							</g:link>
-  							
+  							<button id="next" class="btn btn-success btn-sm">
+								<span class="glyphicon glyphicon-ok"></span> Salvar
+							</button>
   							
   						</div>
 					</div><!-- end .panel-footer -->

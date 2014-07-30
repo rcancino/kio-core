@@ -19,7 +19,7 @@ class MonedaUtils {
 	
 	
 	public static final BigDecimal calcularImpuesto(BigDecimal importe){
-		return importe.multiply(IVA);
+		return importe.multiply(IVA).setScale(2, RoundingMode.HALF_EVEN);
 	}
 	
 	

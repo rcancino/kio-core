@@ -4,7 +4,7 @@ import org.grails.databinding.BindingFormat
 import grails.converters.JSON
 
 class VentaController {
-    static scaffold = true
+    //static scaffold = true
 
     def ventaService
 
@@ -30,29 +30,30 @@ class VentaController {
 	
 
     def save(Venta venta){
-    	//log.info 'Salvando venta: '+params
+    	
         venta.moneda=MonedaUtils.PESOS
         venta.status='PEDIDO'
         log.info 'Venta: '+venta
-        log.info 'Partidas:'+venta.partidas
         //redirect action:'create'
         
     	//def venta=cmd.toVenta()
     	venta.validate()
     	if(venta.hasErrors()){
+            log.info "Has Errores2:" +venta.hasErrors()
     		flash.message="Errores de validacion al intentar salvar la venta"
     		render view:'create',model:[ventaInstance:venta]
+            return
     	}
-    	println 'Salvando venta:'+venta.errors
     	venta=ventaService.salvar(venta)
     	//flash.message="Venta $venta.id generada"
         //redirect action:'index'
         redirect action:'edit',params:[id:venta.id]
         
+        
     }
 
     def edit(Long id){
-        log.info 'Editando venta:'
+        
         Venta ventaInstance=Venta.get(id)
         [ventaInstance:ventaInstance]
     }

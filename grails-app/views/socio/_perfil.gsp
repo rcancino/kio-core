@@ -59,8 +59,5 @@
 				<p class="form-control-static">${socioInstance.skype?:'@'}</p>
 			</div>
 		</div>
-
-
-
 	</form>	
 </div>

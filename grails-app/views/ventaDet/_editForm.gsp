@@ -1,63 +1,75 @@
-<div class="col-md-6">
+<div class="col-md-10">
 <fieldset>
-	<legend> Producto / Servicio</legend>
-	<g:form action="update" id="${ventaDetInstance.id}" class="form-horizontal">
-		<g:hiddenField name="version" value="${ventaDetInstance?.version}"/>
-
-		<g:hiddenField name="servicioPorSocio.id" value="${ventaDetInstance?.servicioPorSocio?.id}"/>
-
+	<legend> <small id="productoLabel">${ventaDetInstance?.producto}</small></legend>
+	<g:form name="ventaDetForm" action="update" class="form-horizontal">	
+		
+		
+		<g:hiddenField name="venta.id" value="${ventaInstance.id}"/>
+		<g:hiddenField name="ventaDet.version" value="${ventaDetInstance.version}"/>
+		<g:hiddenField name="id" value="${ventaDetInstance.id}"/>
+		
+		<div class="form-group">
+			<label for="socio" class="col-sm-2 control-label">Socio</label>
+			<div class="col-sm-10">
+				<g:select class="form-control"  
+						name="socio" 
+						value="${socio}"
+						from="${socios}" 
+						optionKey="id" 
+						noSelection="[null:'Seleccione una socio']"/>
+			</div>
+		</div>
+		
 		<div class="form-group">
 			<label for="producto" class="col-sm-2 control-label">Producto</label>
 			<div class="col-sm-10">
-				<g:hiddenField id="productoId" name="producto.id" 
-					value="${ventaDetInstance?.producto?.id}"/>
+				
+				<g:hiddenField id="productoId" name="producto.id" autocomplete="off" value="${ventaDetInstance.producto.id}"/>
 				<input id="producto" class="form-control" 
-					name="producto.descripcion" value="${ventaDetInstance?.producto?.descripcion}"
-					type="text"  autofocus="on" autocomplete="off">
+					name="producto.descripcion" placeholder="Seleccione otro producto"
+					type="text"  autofocus="on" 
+					autocomplete="off">
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="cantidad" class="col-sm-2 control-label">Cantidad</label>
 			<div class="col-sm-4">
-				<input id="cantidad" class="form-control" 
-					name="cantidad" value="${ventaDetInstance?.cantidad}"
+				<input id="cantidad" class="form-control"
+					value="${ventaDetInstance?.cantidad}" 
+					name="cantidad"
 					type="text"  autocomplete="off">
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="precioUnitario" class="col-sm-2 control-label ">Precio</label>
+			<label for="precio" class="col-sm-2 control-label ">Precio</label>
 			<div class="col-sm-4">
-				<input id="precioUnitario" class="form-control data-moneda" 
-					name="precioUnitario" value="${ventaDetInstance?.precioUnitario}"
-					disabled>
+				<input id="precio" class="form-control data-moneda" 
+					name="precio"  value="${ventaDetInstance?.precio }"
+					autocomplete="off" disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="descuentoTasa" class="col-sm-2 control-label">Descuento</label>
 			<div class="col-sm-4">
-				<input id="descuentoTasa" class="form-control" 
-					name="descuentoTasa" value="${ventaDetInstance?.descuentoTasa}"
-					disabled>
+				<input id="descuento" class="form-control data-moneda" 
+					name="descuento"  value="${ventaDetInstance?.descuento }"
+					autocomplete="off" disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="importeNeto" class="col-sm-2 control-label">Importe</label>
+			<label for="importeNeto" class="col-sm-2 control-label">Neto</label>
 			<div class="col-sm-4">
-				<input id="importeNeto" class="form-control data-moneda" 
-					name="importeNeto" value="${ventaDetInstance?.importeNeto}"
-					disabled>
+				<input id="subTotal" class="form-control data-moneda" 
+					name="subTotal"  value="${ventaDetInstance?.producto?.precioNeto }"
+					autocomplete="off" disabled>
 			</div>
 		</div>
 
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-2">
-				<g:submitButton name="Actualizar" class="btn btn-primary " />
-			</div>
-		</div>
+
 	
 	</g:form>
 </fieldset>
@@ -71,14 +83,39 @@
             minLength: 2,
             select:function(e,ui){
 				console.log('Producto seleccionado: '+ui.item.value);
-				$("#precioUnitario").val(ui.item.precioBruto);
-				$("#precioUnitario").autoNumeric('set', ui.item.precioBruto);
-				$("#importeNeto").autoNumeric('set', ui.item.precioNeto);
-
-				//console.log('Cliente: '+ui.item.cliente.nombre);
-				//console.log('Scope: '+scope.venta.cliente.nombre);
-						
+				$("#productoId").val(ui.item.id);
+				$("#productoLabel").text(ui.item.descripcion);
+				$("#precio").autoNumeric('set', ui.item.precioNeto);
+				$("#subTotal").autoNumeric('set', ui.item.precioNeto);
+				$("#precio").autoNumeric('set', ui.item.precioBruto);
+				validar();		
 			}
 		});
+		$("#cantidad").on('blur',function(e){
+			validar();
+		});
+
+		
+		var validar=function(){
+			var cantidad= $("#cantidad").val();
+			var producto= $("#productoId").val();
+			var res=( cantidad>0 && producto>0 );
+			console.log('Valido cantidad: '+cantidad);
+			console.log('Valido producto: '+producto);
+			if(res){
+				$("input[type=submit]").removeAttr("disabled");
+				$("#next").removeAttr("disabled");
+			}else{
+				$("input[type=submit]").attr("disabled", "disabled");
+				$("#next").attr("disabled", "disabled");
+			}
+		};
+
+		$("#next").attr("disabled", "disabled");
+		$("#next").click(function(){
+			console.log('Salvar la forma');
+			$("#ventaDetForm").submit();
+		});
+		
 	});
 </script>

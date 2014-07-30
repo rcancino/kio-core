@@ -23,17 +23,15 @@ class Venta {
 
 	String status
 
-	List partidas
+	List partidas=[]
 
-	BigDecimal importeBruto=0.0
+	BigDecimal importe=0.0
 
 	BigDecimal descuento=0.0
 
-	BigDecimal importeNeto=0.0
+	BigDecimal subTotal=0.0
 
 	BigDecimal impuesto=0.0
-
-	BigDecimal impuestoTasa=0.16
 
 	BigDecimal total=0
 	
@@ -50,10 +48,9 @@ class Venta {
     	tipo()
     	moneda()
     	status inList:['COTIZACION','PEDIDO','VENTA','FACTURADA','CANCELADA']
-    	importeBruto(scale:4)
+    	importe(scale:4)
     	descuento(scale:4)
-    	importeNeto(scale:4)
-    	impuestoTasa(scale:6)
+    	subTotal(scale:4)
     	impuesto(scale:4)
     	total(scale:4)
 		formaDePago(nullable:false,maxSize:30)
@@ -65,22 +62,6 @@ class Venta {
 		partidas cascade: "all-delete-orphan"
 	}
 	
-	def actualizarImportes(){
-		importeBruto=0
-		descuento=0
-		importeNeto=0
-		impuesto=0
-		total=0
-		partidas.each{
-			it.actualizarImportes()
-			importeBruto+=it.importeBruto
-			descuento+=it.descuento
-			importeNeto+=importeNeto
-
-		}
-		impuesto=importeNeto*impuestoTasa
-		total=importeNeto+impuesto
-		return this
-	}
+	
 	
 }

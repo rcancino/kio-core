@@ -1,5 +1,4 @@
 <g:form action="save" class="form-horizontal">
-	
 	<div class="col-sm-8">
 	<fieldset>
 		<legend>Cliente</legend>
@@ -80,7 +79,6 @@
 			
 		</div>
 	</div>
-
 </g:form>
 
 <script type="text/javascript">

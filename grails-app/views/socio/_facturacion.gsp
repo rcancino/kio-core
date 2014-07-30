@@ -1,32 +1,24 @@
-
-
-
-
+<g:form action="update" id="${socioInstance.id}" class="form-horizontal">
 <fieldset>
-		 
+	<legend>Receptor</legend>
 		<f:with bean="${socioInstance}">
-			
-
 			<div class="form-group">
     			<label for="calle" class="col-sm-2 control-label">Nombre</label>
-    			
     			<div class="col-sm-6">
-    				
       				<g:field id="clienteField" value="${socioInstance?.cliente?.nombre }"
       					name="cliente.nombre" 
       					type="text" class="form-control"  
       					autofocus="autofocus" autocomplete="off"/>
     			</div>
     			
-    			</div>
-    				<div class="col-sm-1">
-      					<input id="clienteId" name="cliente.id" value="${socioInstance?.cliente?.id }"
+    			<div class="col-sm-1">
+      				<input id="clienteId" name="cliente.id" value="${socioInstance?.cliente?.id }"
       						type="text"  
       						disabled class="form-control"/>
-    				</div>
-  				</div>
-    				
+    			</div>
   			</div>
+    				
+  			
 				
 				<f:field  property="cliente.rfc" 
 					input-id="rfcField" 
@@ -44,8 +36,12 @@
 		</f:with>
 		
 </fieldset>
+<g:render template="/_common/direccionForm" model="[prefix:'cliente']"/>
 
-
+		<div class="form-group col-sm-offset-2 col-sm-4">
+			<button id="copiar" class="btn btn-default">Copiar del socio</button>
+		</div>
+</g:form>
 
 
 <script>

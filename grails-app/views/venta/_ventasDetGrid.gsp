@@ -15,9 +15,7 @@
 	</thead>
 	<tbody>
 
-		<g:each in="${partidas}" var="row" status="i">
-			<g:hiddenField name="partidas[${i}].servicioPorSocio.id" value="${row?.servicioPorSocio?.id}"/>
-			<g:hiddenField name="partidas[${i}].producto.id" value="${row?.producto?.id}"/>
+		<g:each in="${ventaInstance.partidas}" var="row" status="i">
 			<tr>
 				<td>
 					<g:link controller="ventaDet" action="edit" id="${row.id}">${row?.servicioPorSocio?.socio?.id}</g:link>
@@ -27,27 +25,21 @@
 				</td>
 				<td>${row.producto.descripcion}</td>
 				<td>${row.producto.unidad}</td>
-				<td>
-					<g:hiddenField name="partidas[${i}].cantidad" value="${row?.cantidad}"/>
-					${row.cantidad}
-				</td>
+				<td>${row.cantidad}</td>
 				<td >
-					<g:hiddenField name="partidas[${i}].precioUnitario" value="${row?.precioUnitario}"/>
-					<g:formatNumber number="${row.precioUnitario}" type="currency"/>
+					<g:formatNumber number="${row.precio}" type="currency"/>
 				</td>
 				<td>
-					<g:hiddenField name="partidas[${i}].importeBruto" value="${row?.importeBruto}"/>
-					<g:formatNumber number="${row.importeBruto}" type="currency"/>
+					<g:formatNumber number="${row.importe}" type="currency"/>
 				</td>
 				<td>
-					<g:formatNumber number="${row.descuentoTasa}" type="percent"/>
+					<g:formatNumber number="${row.descuento}" type="percent"/>
 				</td>
 				<td>
-					<g:hiddenField name="partidas[${i}].importeNeto" data-importe-neto="neto" value="${row?.importeNeto}"/>
-					<g:formatNumber number="${row.importeNeto}" type="currency"/>
+					<g:formatNumber number="${row.subTotal}" type="currency"/>
 				</td>
 				<td>
-					<g:link controller="ventaDet" action="delete" id="${row.id}">
+					<g:link controller="ventaDet" action="delete" id="${row.id}" onclick="return confirm('Eliminar producto');">
 						<span class="glyphicon glyphicon-trash"></span>
 					</g:link>
 				</td>
