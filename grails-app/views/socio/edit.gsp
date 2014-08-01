@@ -55,7 +55,7 @@
 					 		<g:render template="perfilForm" />
 					 	</div>
 					 	<div class="tab-pane" id="membresia">
-					 		%{-- <g:render template="datosDeFacturacionForm" /> --}%
+					 		<g:render template="membresia" />
 					 	</div>
 					</div>
 

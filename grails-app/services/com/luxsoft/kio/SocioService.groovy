@@ -8,9 +8,9 @@ import org.springframework.beans.BeanUtils
 class SocioService {
 
     def salvarSocio(Socio socio) {
-    	println 'Salvando socio: '+socio
-        println 'Socio de cliente: '+socio.cliente.id
-
+    	println 'Socio: '+socio
+        println 'Membresia de cliente: '+socio.membresia.id
+        
     	socio.validate()
     	if(socio.hasErrors()){
     		throw new SocioError(message:'Errores de validacion en socio',socio:socio)

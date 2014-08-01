@@ -31,6 +31,9 @@ class SocioController {
 			
 			socioInstance.perfil=new SocioPerfil(tipoDeSocio:TipoDeSocio.first())
 		}
+		if(socioInstance.membresia==null){
+			socioInstance.membresia=new SocioMembresia()
+		}
 
 		socioInstance.validate()
 		if(socioInstance.hasErrors()){
@@ -45,12 +48,14 @@ class SocioController {
 
 	def edit(Socio socioInstance){
 		flash.message="Editando socio"
+
 		render view:'edit',model:[socioInstance:socioInstance]
 	}
 	def update(Socio socioInstance){
 		//def socio=Socio.get(id);
 		//bindData(socio, params)
 		//println 'Actualizando socio: '+socioInstance.medioDeContacto
+		println 'Actualizando socio: '+socioInstance.membresia.socio
 		socioInstance.validate()
 		if(socioInstance.hasErrors()){
 			log.debug 'Erores de validacion: '+socioInstance.errors
@@ -75,7 +80,7 @@ class SocioController {
 	}
 	
 	def search(){
-		def s='%'+params.term?:'%'
+		def s=params.term?:'%'
 		s+='%'
 
 		def query=Socio.where{apellidoPaterno=~s || apellidoMaterno=~s || nombres=~s}

@@ -23,10 +23,6 @@ class SocioMembresia {
 
     String comentario
 
-    Date dateCreated
-
-    Date lastUpdated
-
     static belongsTo = [socio: Socio]
 
     static constraints = {
