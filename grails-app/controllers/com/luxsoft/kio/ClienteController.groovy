@@ -43,12 +43,22 @@ class ClienteController {
 		//println 'Buscando clientes JSON: '+list.size()+' params: '+params.term
 		list=list.collect{ c->
 			def nombre="$c.nombre"
-			def direccion=c.direccion as JSON
+			def direccion=[calle:c.direccion?.calle?:'']
+			direccion.numeroInterior=c.direccion?.numeroInterior?:''
+			direccion.numeroExterior=c.direccion?.numeroExterior?:''
+			direccion.colonia=c.direccion?.colonia?:''
+
+			def jsonDir=direccion as JSON
+			println 'Direccion: '+jsonDir
+			
 			[id:c.id,
 			label:nombre,
 			value:nombre,
+			nombre:nombre,
 			rfc:c.rfc,
-			direccion:direccion
+			//direccion:jsonDir,
+			emailCfdi:c.emailCfdi,
+			direccion:jsonDir
 			]
 		}
 		def res=list as JSON

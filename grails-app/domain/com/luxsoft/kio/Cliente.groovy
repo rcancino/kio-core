@@ -40,4 +40,16 @@ class Cliente {
     	return "$nombre"
     }
 
+    def beforeUpdate() {
+    	capitalizarNombre()
+    }
+
+    def beforeInsert() {
+    	capitalizarNombre()
+    }
+
+     private capitalizarNombre(){
+    	nombre=nombre.toUpperCase()
+    }
+
 }

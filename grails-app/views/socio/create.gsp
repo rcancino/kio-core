@@ -14,41 +14,56 @@
 		<h3>Nuevo  socio</h3>
 	</content>
 	<content tag="form">
+		
+		<div class="row">
+			
+		
 		<g:hasErrors bean="${socioInstance}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="${socioInstance}" var="error">
-				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-				</g:eachError>
-			</ul>
+			<div class="alert alert-danger">
+				<g:renderErrors bean="${socioInstance}" as="list" />
+			</div>
 		</g:hasErrors>
 		
 		<g:form class="form-horizontal" action="save" >
 			
 			<fieldset>
-<%--				<legend>Alta de socio</legend>--%>
-				<f:with bean="${socioInstance}">
-				
-				<ul class="nav nav-tabs" role="tablist">
-		  			<li class="active"><a href="#generales" role="tab" data-toggle="tab">Generales</a></li>
-					<li><a href="#cliente" role="tab" data-toggle="tab">Facturación</a></li>
-					<li><a href="#perfil" role="tab" data-toggle="tab">Perfil</a></li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="generales">
-						<div class="row">
-							<div class="col-sm-12">
-								<g:render template="forms/datosGenerales"/>
-							</div>
+
+			<f:with bean="${socioInstance}">
+				<f:field property="apellidoPaterno" input-required input-autocomplete="off"
+				input-class="form-control uppercase-field" cols="col-md-8"/>
+				<f:field property="apellidoMaterno" input-required input-autocomplete="off"
+				input-class="form-control uppercase-field" cols="col-md-8"/>
+				<f:field property="nombres" input-required input-autocomplete="off"
+				input-class="form-control uppercase-field" cols="col-md-8"/>
+				<f:field property="sexo" input-required input-class="form-control" cols="col-md-5"/>
+				<g:render template="/_common/direccionForm" />
+				<fieldset>
+					<legend>Teléfonos y Correos</legend>
+					<f:field property="telefonoCasa" input-class="form-control" label="Casa" cols="col-md-6"/>
+					<f:field property="telefonoTrabajo" input-class="form-control" label="Trabajo" cols="col-md-6"/>
+					<f:field property="email" input-class="form-control " cols="col-md-6"/>
+					<f:field property="email2" input-class="form-control " cols="col-md-6"/>
+				</fieldset>
+				<fieldset>
+					<legend>Datos para facturación</legend>
+					<div class="form-group">
+						<label for="cliente" class="col-sm-2 control-label">Cliente</label>
+						<g:hiddenField id="clienteId" name="cliente.id" />
+						<div class="col-sm-6">
+							<input id="cliente" name="cliente.nombre"  
+							autocomplete="off" type="text" class="form-control" 
+							placeholder="Seleccionar cliente"
+							disabled>
+
 						</div>
-						
+						<input id="seleccionarCliente" type="checkbox" name="clienteExistente" autocomplete="off" > Seleccionar
 					</div>
-					<div class="tab-pane" id="perfil">Perfil de socio</div>
-					<div class="tab-pane" id="cliente">
-						<g:render template="forms/datosFacturacion"/>
-					</div>
-				</div>
-				</f:with>
+					<f:field property="cfdiEmail" input-class="form-control " cols="col-md-6"/>
+				</fieldset>
 				
+					
+			</f:with>
+			
 			</fieldset>
 			
 			<div class="form-group">
@@ -58,7 +73,30 @@
 			</div>
 			
 		</g:form>
-		
+
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#seleccionarCliente').on('change', function() {
+
+				  	if ($(this).is(':checked') == true){
+				  	    $('#cliente')
+				  	    .prop('disabled', false)
+				  	    .attr('required','required');
+				  	    
+				  	     console.log('checked');
+				  	} else {
+				  	    $('#cliente')
+				  	    .val(null)
+				  	    .prop('disabled', true)
+				  	    .removeAttr('required','required');
+				  	     console.log('unchecked');
+				  	     $('#clienteId')
+				  	    .val(null);
+				  	}
+				});
+			});
+		</script>
 	</content>
 
 </body>

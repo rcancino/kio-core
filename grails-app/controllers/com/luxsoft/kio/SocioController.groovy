@@ -3,7 +3,8 @@ package com.luxsoft.kio
 import grails.converters.JSON
 
 class SocioController {
-    static scaffold = true
+    
+    //static scaffold = true
 	
 	def importadorService
 	def socioService
@@ -14,6 +15,58 @@ class SocioController {
 		params.order='asc'
 		
 		[socioInstanceList:Socio.list(params),socioInstanceCount:Socio.count()]
+	}
+
+	def create(){
+		[socioInstance:new Socio()]
+	}
+	def save(Socio socioInstance){
+		
+		if(socioInstance.cliente==null){
+			log.info 'Generando cliente con nuevo socio'
+			def cliente=Cliente.findByNombre('MOSTRADOR')
+			socioInstance.cliente=cliente
+		}
+		if(socioInstance.perfil==null){
+			
+			socioInstance.perfil=new SocioPerfil(tipoDeSocio:TipoDeSocio.first())
+		}
+
+		socioInstance.validate()
+		if(socioInstance.hasErrors()){
+			log.info 'Errores de validacion'
+			flash.message="Errores de validación"
+			render view:'create',model:[socioInstance:socioInstance]
+			return
+		}
+		socioInstance=socioService.salvarSocio(socioInstance)
+		render view:'edit',model:[socioInstance:socioInstance]
+	}
+
+	def edit(Socio socioInstance){
+		flash.message="Editando socio"
+		render view:'edit',model:[socioInstance:socioInstance]
+	}
+	def update(Socio socioInstance){
+		//def socio=Socio.get(id);
+		//bindData(socio, params)
+		//println 'Actualizando socio: '+socioInstance.medioDeContacto
+		socioInstance.validate()
+		if(socioInstance.hasErrors()){
+			log.debug 'Erores de validacion: '+socioInstance.errors
+			flash.message="Errores de validacion en el socio"
+			render view:'edit/edit',model:[socioInstance:socioInstance]
+			return 
+		}
+		socioInstance=socioService.salvarSocio(socioInstance)
+		flash.message="Socio modificado $socioInstance.id"
+		render view:'edit',model:[socioInstance:socioInstance]
+	}
+
+	def delete(Socio socioInstance){
+		socioService.delete(socioInstance)
+		flash.messge="Socio eliminado: "+socioInstance.id
+		redirect action:'index'
 	}
 	
 	def importar(){
@@ -31,19 +84,33 @@ class SocioController {
 		render view:'index',model:[socioInstanceList:list,socioInstanceCount:query.count()]
 	}
 
-	def save(Socio socioInstance,boolean mostrador){
-		log.info 'Salvando socio:'+socioInstance+ ' Mostrador: '+mostrador
-		/*
-		if(mostrador){
-			def cliente=Cliente.findByRfc('XAXX010101000')
-
-			assert cliente,'Debe estar dado de alta  el cliente mostrador'
-			socioInstance.cliente=cliente
+	def cargarFoto(SocioFotoCmd cmd){
+		if(cmd.hasErrors()){
+			log.info 'Errores al cargar la imagen'
+			redirect action:'edit',id:cmd.socioId,fragment:'perfil'
+			return
 		}
-		*/
-		socioInstance=socioService.salvarSocio(socioInstance)
-		render view:'show',model:[socioInstance:socioInstance]
+		def socio=Socio.findById(cmd.socioId)
+		if(socio.foto==null)
+			socio.foto=new SocioFoto()
+		socio.foto.imagen=cmd.foto	
+		socio=socioService.actualizarFoto(socio)
+		//redirect action:'edit',model:[socioInstance:socio],fragment:'#perfil'
+		render view:'edit',model:[socioInstance:socio]
 	}
+
+	def renderFoto(Long id){
+		def socio=Socio.get(id)
+		if(socio?.foto){
+			response.setContentLength(socio.foto.imagen.size())
+        	response.outputStream.write(socio.foto.imagen)
+		}else{
+			response.sendError(404)
+			//render "holder.js/200x200'"
+		}
+	}
+
+	
 
 	def getSociosJSON() {
 
@@ -65,7 +132,17 @@ class SocioController {
 		
 		render res
 	}
+	
+	
+}
 
+class SocioFotoCmd{
 	
-	
+	Long socioId
+	byte[] foto
+
+	static constraints = {
+    	importFrom SocioPerfil, include: ["foto"]
+	}
+
 }

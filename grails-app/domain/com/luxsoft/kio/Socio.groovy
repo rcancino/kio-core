@@ -2,97 +2,64 @@ package com.luxsoft.kio
 
 //import groovy.transform.ToString
 import groovy.transform.EqualsAndHashCode
-import org.grails.databinding.BindingFormat
+
 
 //@ToString(includes='nombre',includeNames=true,includePackage=false)
-//@EqualsAndHashCode(includes='apellidoPaterno,apellidoMaterno,nombres')
+@EqualsAndHashCode(includes='apellidoPaterno,apellidoMaterno,nombres')
 class Socio {
-	
-	Cliente cliente
 	
 	//Datos personales
 	String apellidoPaterno
+
 	String apellidoMaterno
+
 	String nombres
 	
-	String sexo='M'
-	
-	@BindingFormat('dd/MM/yyyy')
-	Date fechaDeNacimiento
-	String estadoCivil='NA'
-	Boolean hijos
+	String sexo
+
 	String telefonoCasa
+
 	String telefonoTrabajo
+
 	String celular
+
 	String email
+
 	String email2
-	String cfdiEmail
 
-	//Clasificacion
-	MedioDeContacto medioDeContacto
-	TipoDeSocio tipoDeSocio
-	String areaDeInteres='AMBOS'
-	Instructor instructor
-
-	
-
-	//Redes sociales
-	String twitter
-	String faceBook
-	String whatsApp
-	String skype
-	byte[] foto
-
-	Boolean activo='true'
-	String status='ACTIVO'
-	Boolean corporativo=false
-	String origen
-
+	//Datos de facturacion
+	Cliente cliente
 	Direccion direccion
-
+	String cfdiEmail
+	
+	String origen
 	Date dateCreated
 	Date lastUpdated
 
 	
-	static hasMany = [servicios: ServicioPorSocio]
-
-	
     static constraints = {
-    	
-    	sexo inList:['M','F']
-    	estadoCivil inList:['SOLTERO','CASADO','EN RELACION','NA']
-    	areaDeInteres inList:['PESAS','CLASES','AMBOS']
-    	status inList:['ACTIVO','SUSPENDIDO','CANCELADO']
-    	fechaDeNacimiento nullable:true
-    	medioDeContacto nullable:true
-    	telefonoTrabajo nullable:true
-    	telefonoCasa nullable:true
-    	celular nullable:true
-    	email nullable:true
-    	email2 nullable:true
-    	cfdiEmail nullable:true
-
-    	twitter nullable:true ,maxSize:100
-		faceBook nullable:true ,maxSize:100
-		whatsApp nullable:true ,maxSize:100
-		skype nullable:true ,maxSize:100
-
-		instructor nullable:true
-		origen nullable:true
-		activo()
-
-		foto nullable:true
-		hijos nullable:true
+    	apellidoPaterno(unique:['apellidoMaterno','nombres'])
+    	sexo inList:['MASCULINO','FEMENINO']
+    	telefonoCasa nullable:true,maxSize:30
+    	telefonoTrabajo nullable:true,maxSize:30
+    	celular nullable:true,maxSize:30
+    	email nullable:true,maxSize:50
+    	email2 nullable:true,maxSize:50
+    	cfdiEmail nullable:true,maxSize:50
 		direccion nullable:true
-		
-
+		origen nullable:true
+        perfil unique:true
+        foto nullable:true
     }
+
+    
+
+    static hasOne = [perfil: SocioPerfil,foto:SocioFoto]
 
     static embedded = ['direccion']
 
     static mapping = {
-    	fechaDeNacimiento type:'date'
-    	servicios cascade: "all-delete-orphan"
+    	 foto lazy: true
     }
 
     String toString(){

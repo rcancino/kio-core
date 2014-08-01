@@ -83,9 +83,9 @@ class VentaService {
     }
 	
 	def registrarPagoMembresia(Venta venta){
-		println 'Buscando socios y servicios asociados con el cliente: '+venta.cliente
+		
 		if(!venta.partidas){
-			println '******* Buscando socios y servicios asociados con el cliente: '+venta.cliente
+			
 			def socios=Socio.findAll{cliente==venta.cliente}
 			socios.each{socio ->
 				socio.servicios.each{

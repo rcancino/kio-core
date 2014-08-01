@@ -17,14 +17,14 @@ class Direccion implements Serializable{
 
 	
     static constraints = {
-		calle(size:1..200)
+		calle(nullable:true,size:1..200)
 		numeroInterior(size:1..50,nullable:true)
 		numeroExterior(size:1..50,nullable:true)
 		colonia(nullable:true)
 		municipio(nullable:true)
-		codigoPostal()
-		estado()
-		pais(size:1..100)
+		codigoPostal(nullable:true)
+		estado(nullable:true)
+		pais(nullable:true,size:1..100)
     }
 	
 	String toString(){

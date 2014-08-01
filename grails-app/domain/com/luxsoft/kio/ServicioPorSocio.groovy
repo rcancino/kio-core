@@ -37,7 +37,7 @@ class ServicioPorSocio {
 
 	Date lastUpdated
 
-	static belongsTo = [socio: Socio]
+	//static belongsTo = [socio: Socio]
 
 
     static constraints = {
@@ -56,7 +56,7 @@ class ServicioPorSocio {
     }
 
     String toString(){
-    	return "$servicio ($socio.nombre)"
+    	return "{$servicio} (${socio})"
     }
 
 }

@@ -123,7 +123,7 @@ log4j.main = {
             info 'grails.app.controllers.com.luxsoft.kyo'
             debug 'grails.app.services.com.luxsoft.kyo'
 			debug 'grails.app.services.com.luxsoft.cfdi'
-            info 'grails.app.controllers.com.luxsoft.kio'
+            debug 'grails.app.controllers.com.luxsoft.kio'
 			debug 'com.luxsoft.cfdi'
 
             

@@ -9,22 +9,38 @@ class SocioService {
 
     def salvarSocio(Socio socio) {
     	log.info 'Salvando socio: '+socio
+
     	socio.validate()
     	if(socio.hasErrors()){
     		throw new SocioError(message:'Errores de validacion en socio',socio:socio)
     	}
-
-    	if(socio.cliente.id==null){
-    		def cliente=socio.cliente
-    		log.debug 'Cliente nuevo al dar de alta socio: '+cliente
-    		cliente.validate()
-    		if(cliente.hasErrors()){
-    			throw new SocioError(message:'Errores en los datos de facturacion',socio:socio)
-    		}
-    		cliente.save flush:true
-    	}
+        def cliente=socio.cliente
+        
+        if(cliente.nombre=='MOSTRADOR'){
+            def target=new Direccion()
+            
+            def nvoCliente=new Cliente(
+                nombre:"$socio.nombres $socio.apellidoPaterno $socio.apellidoMaterno",
+                rfc:cliente.rfc,
+                tipo:TipoDeCliente.findByClave('PARTICULAR'),
+                direccion:new Direccion()
+                )
+            BeanUtils.copyProperties(socio.direccion,nvoCliente.direccion)
+            nvoCliente.save failOnError:true
+            socio.cliente=nvoCliente
+        }
+    	
     	socio=socio.save failOnError:true
     	return socio
+    }
+
+    def actualizarFoto(Socio socio){
+        socio.save()
+        return socio
+    }
+
+    def delete(Socio socio){
+        socio.delete flush:true
     }
     /*
     Cliente createCliente(Socio socio){

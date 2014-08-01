@@ -25,7 +25,7 @@
 			<fieldset>
 				<legend>Cliente nuevo</legend>
 				<f:with bean="${clienteInstance}">
-					<f:field property="nombre" input-required="required" input-class="form-control" cols="col-sm-5" input-autofocus="autofocus"/>
+					<f:field property="nombre" input-required="required" input-class="form-control uppercase-field" cols="col-sm-5" input-autofocus="autofocus"/>
 					<f:field property="rfc" input-required="required" input-class="form-control" cols="col-sm-5"/>
 					<f:field property="tipo" input-required="required" input-class="form-control" cols="col-sm-5"/>
 					<f:field property="emailCfdi" input-required="required" input-class="form-control" cols="col-sm-5"/>

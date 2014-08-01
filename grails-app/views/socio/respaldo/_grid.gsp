@@ -25,8 +25,8 @@
 						${fieldValue(bean:row,field:"cliente.rfc")}
 					</g:link>
 				</td>
-				<td><%--${fieldValue(bean:row,field:"perfil.tipoDeSocio.clave")}</td>--%>
-				<td><%--${fieldValue(bean:row,field:"perfil.areaDeInteres")}</td>--%>
+				<td>${fieldValue(bean:row,field:"tipoDeSocio.clave")}</td>
+				<td>${fieldValue(bean:row,field:"areaDeInteres")}</td>
 				<td>${fieldValue(bean:row,field:"telefonoCasa")}</td>
 				<td>${fieldValue(bean:row,field:"celular")}</td>
 				<td><g:formatDate date="${row.lastUpdated}"/></td>

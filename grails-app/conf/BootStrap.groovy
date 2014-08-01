@@ -8,25 +8,25 @@ class BootStrap {
 		environments {
 			development {
 				TipoDeCliente.findOrSaveWhere(clave:'PARTICULAR',descripcion:'Particular')
-				TipoDeCliente.findOrSaveWhere(clave:'EMPRESA_NIVEL1',descripcion:'Empresa nivel 1')
+				TipoDeCliente.findOrSaveWhere(clave:'EMPRESARIAL',descripcion:'Empresa')
 				
 		
 				MedioDeContacto.findOrSaveWhere(clave:'NO_DEFINIDO',descripcion:'Sin definir')
-				MedioDeContacto.findOrSaveWhere(clave:'PER01',descripcion:'Periodico Reforma')
-				MedioDeContacto.findOrSaveWhere(clave:'PROMO01',descripcion:'Promocion especial verano 2014')
-				MedioDeContacto.findOrSaveWhere(clave:'EXPO01',descripcion:'Promocion expo fitness WTC')
+				MedioDeContacto.findOrSaveWhere(clave:'PEDIODICO',descripcion:'Anuncio en periodico')
+				MedioDeContacto.findOrSaveWhere(clave:'RECOMENDACION',descripcion:'Recomandado por una amistad/familiar')
+				MedioDeContacto.findOrSaveWhere(clave:'WEB',descripcion:'Página web')
+				
 		
 				TipoDeSocio.findOrSaveWhere(clave:'GENERAL',descripcion:'Pendiente de asignar')
 				TipoDeSocio.findOrSaveWhere(clave:'PROFESIONISTA',descripcion:'Profesionista')
 				TipoDeSocio.findOrSaveWhere(clave:'AMA DE CASA',descripcion:'Señoras amas de casa')
+				TipoDeSocio.findOrSaveWhere(clave:'ESTUDIANTE',descripcion:'Estudiante')
 		
-				Instructor.findOrSaveWhere(apellidoPaterno:'RAMOS',apellidoMaterno:'GOMEZ',nombres:'FULANO',nivel:'A')
 				
 				Cliente.findOrSaveWhere(nombre:'MOSTRADOR'
 					,rfc:'XAXX010101000'
 					,tipo:TipoDeCliente.findOrSaveWhere(clave:'MOSTRADOR',descripcion:'Cliente mostrador no requiere iva desgosado')
 					)
-				//Socio.findOrSaveWhere()
 				TipoDeVenta.findOrSaveWhere(clave:'MOSTRADOR',descripcion:'Venta publico en general')
 				
 			}
