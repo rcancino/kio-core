@@ -83,7 +83,7 @@ class VentaService {
     }
 	
 	def registrarPagoMembresia(Venta venta){
-		
+		/*
 		if(!venta.partidas){
 			
 			def socios=Socio.findAll{cliente==venta.cliente}
@@ -97,6 +97,7 @@ class VentaService {
 				}
 			}
 		}
+		*/
 		return this
 	}
 	

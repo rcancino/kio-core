@@ -51,7 +51,7 @@ grails.project.dependency.resolution = {
         runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
-        compile "org.jadira.usertype:usertype.jodatime:1.9"
+        compile "org.jadira.usertype:usertype.jodatime:2.0"
 
         compile 'org.apache.xmlbeans:xmlbeans:2.4.0'
         compile 'axis:axis:1.4'

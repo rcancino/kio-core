@@ -4,6 +4,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 
 import grails.transaction.Transactional
 import grails.transaction.NotTransactional
+import org.joda.time.LocalDate
 import groovy.sql.Sql
 
 import com.luxsoft.kio.*
@@ -21,7 +22,7 @@ class ImportadorService {
 		def db = new Sql(dataSource_importacion)
 		def tipo
 		def importados=0
-		def res=db.eachRow("select * from SX_CLIENTES"){row->
+		def res=db.eachRow("select * from SX_CLIENTES order by modificado desc"){row->
 			//log.info 'Importando: '+row
 			def found=Cliente.findByOrigen(row.CLIENTE_ID.toLong())
 			if(!found){
@@ -79,6 +80,7 @@ class ImportadorService {
 		def res=db.eachRow("select s.* from SX_SOCIOS2 s "){row->
 			//log.info 'Importando: '+row
 			def found=Socio.findByOrigen(row.SOCIO)
+			def tipoDeSocio=TipoDeSocio.first()
 			if(!found){
 				log.info "Importando socio:${row.APELLIDOP} ${row.APELLIDOM} ${row.NOMBRES}  clie:(${row.CLIENTE_ID})"+row
 				try{
@@ -94,7 +96,10 @@ class ImportadorService {
 						telefonoTrabajo:row.TELEFONO2,
 						activo:row.VIGENTE,
 						tipoDeSocio:tipo,
-						cliente:cliente
+						cliente:cliente,
+						perfil:new SocioPerfil(tipoDeSocio:tipoDeSocio),
+						membresia:new SocioMembresia(),
+						sexo:'MASCULINO'
 						)
 						found.save(failOnError:true)
 						importados++

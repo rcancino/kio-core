@@ -65,7 +65,8 @@
 			     %{--  <img src="holder.js/200x200"> --}%
 			      %{-- <img src="http://placehold.it/300x300"> --}%
 			    <g:if test="${socioInstance.foto}">
-			    	<img src="${createLink(controller:'socio',action:'renderFoto',id:socioInstance.id)}"/>
+			    	<img src="${createLink(controller:'socio',action:'renderFoto',id:socioInstance.id)}" 
+			    	width="350" height="400"/>
 			  	</g:if>
 			    <g:else>
 			    	<img src="holder.js/350x300">

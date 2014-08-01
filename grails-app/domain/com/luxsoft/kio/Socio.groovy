@@ -49,12 +49,13 @@ class Socio {
 		direccion nullable:true
 		origen nullable:true
         perfil unique:true
+        membresia unique:true
         foto nullable:true
     }
 
     
 
-    static hasOne = [perfil: SocioPerfil,foto:SocioFoto]
+    static hasOne = [perfil: SocioPerfil,foto:SocioFoto,membresia:SocioMembresia]
 
     static embedded = ['direccion']
 
