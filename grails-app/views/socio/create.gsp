@@ -95,6 +95,29 @@
 				  	    .val(null);
 				  	}
 				});
+				$("[name='cliente.nombre']").autocomplete({
+					source:'/kio-core/cliente/getClientesJSON',
+					minLength:3,
+					select:function(e,ui){
+						console.log('Cliente seleccionado: '+ui.item.value);
+						$("[name='cliente.id']").val(ui.item.id);
+						$("[name='cliente.nombre']").val(ui.item.nombre);
+						//copiarDireccion(ui.item.direccion);
+					}
+				});
+
+				// var copiarDireccion=function(direccion){
+				// 	console.log('Copiando datos de direcci')
+				// 	$("[name='direccion.calle']").val(direccion.calle);
+				//   	$("[name='direccion.numeroExterior']").val(direccion.numeroExterior);
+				//   	$("[name='direccion.numeroInterior']").val(direccion.numeroInterior);
+				//   	$("[name='direccion.colonia']").val(direccion.colonia);
+				//   	$("[name='direccion.delegacion']").val(direccion.delegacion);
+				//   	$("[name='direccion.municipio']").val(direccion.municipio);
+				//   	$("[name='direccion.estado']").val(direccion.estado);
+				//   	$("[name='direccion.pais']").val(direccion.pais);
+				//   	$("[name='direccion.codigoPostal']").val(direccion.codigoPostal);
+				// };
 			});
 		</script>
 	</content>

@@ -8,13 +8,15 @@ import org.springframework.beans.BeanUtils
 class SocioService {
 
     def salvarSocio(Socio socio) {
-    	log.info 'Salvando socio: '+socio
+    	println 'Salvando socio: '+socio
+        println 'Socio de cliente: '+socio.cliente.id
 
     	socio.validate()
     	if(socio.hasErrors()){
     		throw new SocioError(message:'Errores de validacion en socio',socio:socio)
     	}
         def cliente=socio.cliente
+        
         
         if(cliente.nombre=='MOSTRADOR'){
             def target=new Direccion()

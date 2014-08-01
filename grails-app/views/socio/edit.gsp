@@ -92,7 +92,7 @@
 			       			<div class="form-group">
 			       				<g:hiddenField name="socioId" value="${socioInstance.id}"/>
 			       				<label for="fotoFile">Imagen </label>
-			       				<input type="file" id="fotoFile" name="foto">
+			       				<input type="file" id="fotoFile" name="foto" accept=".gif,.jpg,.jpeg,.png">
 			       				<p class="help-block">Seleccione una imagen del sistema operativo.</p>
 			       			</div>
 			       		</div>
@@ -148,8 +148,8 @@
 			minLength:3,
 			select:function(e,ui){
 				console.log('Cliente seleccionado: '+ui.item.value);
-				$("[name='cliente.nombre']").val(ui.item.id);
-				$("[name='cliente.id']").val(ui.item.nombre);
+				$("[name='cliente.id']").val(ui.item.id);
+				$("[name='cliente.nombre']").val(ui.item.nombre);
 				copiarDireccion(ui.item.direccion);
 			}
 		});
