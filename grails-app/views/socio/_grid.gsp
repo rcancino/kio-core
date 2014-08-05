@@ -1,14 +1,12 @@
 <table class="table table-striped table-bordered table-condensed">
 	<thead>
 		<tr>
-			<g:sortableColumn property="id" title="Id"/>
+			<g:sortableColumn property="id" title="Número"/>
 			<g:sortableColumn property="apellidoPaterno" title="Nombre"/>
-			<th>Cliente</th>
-			<th>Tipo</th>
+			<th>Servicio</th>
+			<th>Vencimiento</th>
+			<th>Corporativo</th>
 			<th>Area</th>
-			<th>Tel Casa</th>
-			<th>Cell</th>
-			<th>Modificado</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,15 +19,14 @@
 				</td>
 				<td>${row.toString()}</td>
 				<td>
-					<g:link controller="cliente" action="show" id="${row.cliente.id}">
-						${fieldValue(bean:row,field:"cliente.rfc")}
+					<g:link controller="producto" action="show" id="${row.membresia?.servicio?.id}">
+						${fieldValue(bean:row,field:"membresia.servicio")}
 					</g:link>
 				</td>
-				<td>${fieldValue(bean:row,field:"perfil.tipoDeSocio.clave")}</td>
+				<td>${fieldValue(bean:row,field:"membresia.proximoPago")}</td>
+				<td>${fieldValue(bean:row,field:"perfil.tipoDeCorporativo")}</td>
 				<td>${fieldValue(bean:row,field:"perfil.areaDeInteres")}</td>
-				<td>${fieldValue(bean:row,field:"telefonoCasa")}</td>
-				<td>${fieldValue(bean:row,field:"celular")}</td>
-				<td><g:formatDate date="${row.lastUpdated}"/></td>
+				
 			</tr>
 		</g:each>
 	</tbody>

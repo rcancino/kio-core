@@ -27,7 +27,10 @@ class SocioController {
 		 	
 		 	def cliente=new Cliente(params.cliente)
 		 	cliente.emailCfdi=socioInstance.cfdiEmail
-		 	log.info 'Generando cliente '+cliente.getProperties()
+		 	if(!cliente.rfc){
+		 		cliente.rfc='XAXX010101000'
+		 	}
+		 	//log.info 'Generando cliente '+cliente.getProperties()
 		// 	def cliente=Cliente.findByNombre('MOSTRADOR')
 			socioInstance.cliente=cliente
 		}

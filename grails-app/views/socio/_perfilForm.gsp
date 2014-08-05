@@ -8,6 +8,10 @@
 				input-class="form-control"
 				input-type="text"
 				colsLabel="col-md-4" cols="col-md-8"/>
+
+			<f:field property="perfil.tipoDeCorporativo" 
+				input-class="form-control"
+				colsLabel="col-md-4" cols="col-md-8" label="Corporativo"/>
 			
 			<f:field property="perfil.estadoCivil" 
 				input-class="form-control"
@@ -31,6 +35,10 @@
 				colsLabel="col-md-4" cols="col-md-8"/>
 
 			<f:field property="perfil.instructor" 
+				input-class="form-control"
+				colsLabel="col-md-4" cols="col-md-8"/>
+
+			<f:field property="perfil.peso" 
 				input-class="form-control"
 				colsLabel="col-md-4" cols="col-md-8"/>
 

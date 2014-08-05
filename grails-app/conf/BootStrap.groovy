@@ -1,5 +1,5 @@
 import com.luxsoft.kio.*
-
+import com.luxsoft.cfdi.*
 
 class BootStrap {
 
@@ -21,6 +21,9 @@ class BootStrap {
 				TipoDeSocio.findOrSaveWhere(clave:'PROFESIONISTA',descripcion:'Profesionista')
 				TipoDeSocio.findOrSaveWhere(clave:'AMA DE CASA',descripcion:'Señoras amas de casa')
 				TipoDeSocio.findOrSaveWhere(clave:'ESTUDIANTE',descripcion:'Estudiante')
+
+				TipoDeCorporativo.findOrSaveWhere(clave:'MAZDA',descripcion:'Mazda')
+				TipoDeProducto.findOrSaveWhere(clave:'MEMBRESIA',descripcion:'Membresias de acceso')
 		
 				
 				Cliente.findOrSaveWhere(nombre:'MOSTRADOR'
@@ -28,6 +31,14 @@ class BootStrap {
 					,tipo:TipoDeCliente.findOrSaveWhere(clave:'MOSTRADOR',descripcion:'Cliente mostrador no requiere iva desgosado')
 					)
 				TipoDeVenta.findOrSaveWhere(clave:'MOSTRADOR',descripcion:'Venta publico en general')
+
+				def folioSocio=CfdiFolio.findWhere(serie:'SOCIOS')
+				
+				if(folioSocio==null){
+					folioSocio=new CfdiFolio(serie:'SOCIOS',folio:5000)
+					folioSocio.save()
+				}
+
 				
 			}
 			

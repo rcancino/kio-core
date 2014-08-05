@@ -4,6 +4,7 @@ navigation={
 		
 		catalogos(controller:'home'){
 			tipoDeSocio(controller:'tipoDeSocio',action:'index')
+			tipoDeCorporativo(controller:'tipoDeCorporativo',action:'index',titleText:'Corporativos')
 			socio(controller:'socio',action:'index')
 			tipoDeCliente(controller:'tipoDeCliente',action:'index')
 			cliente(controller:'cliente',action:'index')

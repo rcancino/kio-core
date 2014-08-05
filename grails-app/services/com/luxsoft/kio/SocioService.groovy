@@ -8,7 +8,7 @@ import com.luxsoft.cfdi.CfdiFolio
 class SocioService {
 
     def salvarSocio(Socio socio) {
-
+        
     	socio.validate()
     	if(socio.hasErrors()){
     		throw new SocioError(message:'Errores de validacion en socio',socio:socio)

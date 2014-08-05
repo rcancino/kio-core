@@ -12,4 +12,16 @@ class TipoDeProducto {
     String toString(){
     	"$clave"
     }
+
+    def beforeUpdate() {
+    	capitalizarNombre()
+    }
+
+    def beforeInsert() {
+    	capitalizar()
+    }
+
+    private capitalizar(){
+    	clave=clave.toUpperCase()
+    }
 }

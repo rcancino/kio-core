@@ -11,13 +11,17 @@ class SocioPerfil {
 
 	String estadoCivil='NA'
 
-	Boolean hijos
+	int hijos=0
 
 	TipoDeSocio tipoDeSocio
+
+	TipoDeCorporativo tipoDeCorporativo
 
 	MedioDeContacto medioDeContacto
 
 	String areaDeInteres='AMBOS'
+
+	BigDecimal peso
 
 	Instructor instructor
 
@@ -47,6 +51,8 @@ class SocioPerfil {
 		whatsApp nullable:true ,maxSize:100
 		skype nullable:true ,maxSize:100
 		//foto nullable:true,maxSize:(1024 * 1024)
+		tipoDeCorporativo nullable:true
+		peso nullable:true
 
     }
 

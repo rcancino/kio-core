@@ -70,7 +70,10 @@
 						</div>
 						<input id="seleccionarCliente" type="checkbox" name="clienteExistente" autocomplete="off" > Seleccionar
 					</div>
-					<f:field property="cliente.rfc" input-class="form-control " cols="col-md-6"/>
+					<f:field property="cliente.rfc" input-class="form-control " 
+						cols="col-md-6" 
+						default="XAXX010101000" 
+						required="required" />
 					<f:field property="cfdiEmail" input-class="form-control " cols="col-md-6"/>
 					
 					</fieldset>
