@@ -8,7 +8,7 @@ class VentaDet {
 
 	Producto producto
 
-    ServicioPorSocio servicioPorSocio
+    Socio socio
 	
 	BigDecimal cantidad=0.0
 	BigDecimal precio=0.0
@@ -32,21 +32,17 @@ class VentaDet {
     	descuento(scale:4)
     	subTotal(scale:4)
     	comentario nullable:true
-        servicioPorSocio nullable:true
+        socio nullable:true
     }
 
     VentaDet(){}
 
     VentaDet(Producto producto){
+        producto=producto
         precio=producto.precioNeto
     }
 
-    VentaDet(ServicioPorSocio s){
-        servicioPorSocio=s
-        producto=s.servicio
-        precio=s.precioNeto
-        descuento=s.descuento
-    }
+    
 
     String toString(){
     	"${producto}  ${cantidad}  ${precio}"

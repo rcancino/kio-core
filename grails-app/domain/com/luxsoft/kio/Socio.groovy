@@ -34,7 +34,7 @@ class Socio {
 	
 	String origen
 
-    Integer numeroDeSocio
+    String numeroDeSocio
 
 	Date dateCreated
 	Date lastUpdated

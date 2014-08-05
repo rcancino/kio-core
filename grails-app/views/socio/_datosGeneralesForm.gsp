@@ -10,6 +10,8 @@
 			<f:field property="nombres" input-required input-autocomplete="off"
 			input-class="form-control uppercase-field" colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="sexo" input-required input-class="form-control" colsLabel="col-md-4" cols="col-md-8"/>
+			<f:field property="numeroDeSocio" input-required input-class="form-control" colsLabel="col-md-4" cols="col-md-8"
+			input-readonly="readonly"/>
 			
 		</div>
 		<div class="col-md-6">

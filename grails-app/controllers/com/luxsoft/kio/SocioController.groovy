@@ -21,8 +21,7 @@ class SocioController {
 		[socioInstance:new Socio()]
 	}
 	def save(Socio socioInstance){
-		println 'Socio: '+socioInstance
-		//println 'Cliente: '+cliente
+		
 		if(socioInstance.cliente==null){
 		 	
 		 	def cliente=new Cliente(params.cliente)
@@ -30,8 +29,7 @@ class SocioController {
 		 	if(!cliente.rfc){
 		 		cliente.rfc='XAXX010101000'
 		 	}
-		 	//log.info 'Generando cliente '+cliente.getProperties()
-		// 	def cliente=Cliente.findByNombre('MOSTRADOR')
+		 	
 			socioInstance.cliente=cliente
 		}
 		if(socioInstance.perfil==null){

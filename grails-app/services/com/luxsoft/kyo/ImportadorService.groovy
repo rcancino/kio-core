@@ -100,7 +100,7 @@ class ImportadorService {
 						perfil:new SocioPerfil(tipoDeSocio:tipoDeSocio),
 						membresia:new SocioMembresia(),
 						sexo:'MASCULINO',
-						numeroDeSocio:row.SOCIO_ID
+						numeroDeSocio:row.SOCIO
 						)
 						found.save(failOnError:true)
 						importados++

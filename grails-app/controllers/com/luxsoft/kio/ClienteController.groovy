@@ -94,6 +94,12 @@ class ClienteController {
 		
 		render res
 	}
+
+	def delete(Cliente clienteInstance){
+		clienteInstance.delete flush:true
+		flash.message="Cliente eliminado $clienteInstance.nombre"
+		redirect action:'index'
+	}
 }
 
 class ClienteException extends RuntimeException{

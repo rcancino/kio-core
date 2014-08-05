@@ -83,21 +83,28 @@ class VentaService {
     }
 	
 	def registrarPagoMembresia(Venta venta){
-		/*
+		
 		if(!venta.partidas){
 			
 			def socios=Socio.findAll{cliente==venta.cliente}
 			socios.each{socio ->
-				socio.servicios.each{
-					def det=new VentaDet(it)
-					det.cantidad=1
-					det.actualizarImportes()
-					det.impuesto=MonedaUtils.calcularImpuesto(det.importe)
-					venta.addToPartidas(det)
-				}
+                def s=socio.membresia.servicio
+                if(s){
+
+                    def det=new VentaDet()
+                    det.socio=socio
+                    det.producto=s
+                    det.precio=s.precioNeto
+                    det.cantidad=1
+                    det.actualizarImportes()
+                    det.impuesto=MonedaUtils.calcularImpuesto(det.importe)
+                    log.debug 'Agregando membresia : '+det.producto
+                    venta.addToPartidas(det)
+                }
+				
 			}
 		}
-		*/
+		
 		return this
 	}
 	

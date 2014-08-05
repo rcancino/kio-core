@@ -40,6 +40,8 @@ grails.project.dependency.resolution = {
         mavenLocal()
         grailsCentral()
         mavenCentral()
+
+        mavenRepo 'http://repo.spring.io/milestone'
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -84,13 +86,14 @@ grails.project.dependency.resolution = {
         compile ":twitter-bootstrap:3.2.0"
 		compile ":platform-core:1.0.0"
         compile ":fields:1.3"
-        //runtime ':console:1.3'
+        runtime ':console:1.3'
         compile ":joda-time:1.5"
 
 		runtime ':console:1.3'
 		compile ":jasper:1.8.0"
         compile ":standalone:1.2.3"
-		//runtime ":jasper:1.8.0"
+		
+        //compile ":spring-security-core:2.0-RC4"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.7.4"

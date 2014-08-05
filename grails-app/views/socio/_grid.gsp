@@ -1,7 +1,7 @@
 <table class="table table-striped table-bordered table-condensed">
 	<thead>
 		<tr>
-			<g:sortableColumn property="id" title="Número"/>
+			<g:sortableColumn property="id" title="No Socio"/>
 			<g:sortableColumn property="apellidoPaterno" title="Nombre"/>
 			<th>Servicio</th>
 			<th>Vencimiento</th>

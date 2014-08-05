@@ -3,11 +3,9 @@
 		<tr>
 			<g:sortableColumn property="id" title="Id"/>
 			<g:sortableColumn property="nombre" title="Nombre"/>
+			<th>Dirección</th>
 			<th>RFC</th>
-			<th>Tipo</th>
-			
-			<g:sortableColumn property="direccion.colonia" title="Colonia"/>
-			<th>Modificado</th>
+			<th>Email</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -19,10 +17,11 @@
 					</g:link>
 				</td>
 				<td>${fieldValue(bean:row,field:"nombre")}</td>
+				<td>${fieldValue(bean:row,field:"direccion")}</td>
 				<td>${fieldValue(bean:row,field:"rfc")}</td>
-				<td>${fieldValue(bean:row,field:"tipo")}</td>
-				<td>${fieldValue(bean:row.direccion,field:"colonia")}</td>
-				<td><g:formatDate date="${row.lastUpdated}" format="dd/MM/yyyy hh:mm"/></td>
+				<td>${fieldValue(bean:row,field:"emailCfdi")}</td>
+				
+				
 			</tr>
 		</g:each>
 	</tbody>

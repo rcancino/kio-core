@@ -18,7 +18,7 @@
 		<g:each in="${ventaInstance.partidas}" var="row" status="i">
 			<tr>
 				<td>
-					<g:link controller="ventaDet" action="edit" id="${row.id}">${row?.servicioPorSocio?.socio?.id}</g:link>
+					<g:link controller="ventaDet" action="edit" id="${row.id}">${row?.socio?.id}</g:link>
 				</td>
 				<td>
 					<g:link controller="ventaDet" action="edit" id="${row.id}">${row.producto.clave}</g:link>

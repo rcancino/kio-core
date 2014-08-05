@@ -6,7 +6,8 @@ class VentaDetController {
     def ventaService
 	
 	def create(Venta ventaInstance){
-		[ventaInstance:ventaInstance,ventaDetInstance:new VentaDet(cantidad:1)]
+        def socios=Socio.findAll{cliente==ventaInstance.cliente}
+		[ventaInstance:ventaInstance,ventaDetInstance:new VentaDet(cantidad:1),socios:socios]
 	}
 
     def edit(VentaDet det){

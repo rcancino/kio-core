@@ -3,6 +3,7 @@ package com.luxsoft.kio
 import grails.transaction.Transactional
 import org.springframework.beans.BeanUtils
 import com.luxsoft.cfdi.CfdiFolio
+import org.apache.commons.lang.StringUtils
 
 @Transactional
 class SocioService {
@@ -48,7 +49,7 @@ class SocioService {
             folio=new CfdiFolio(serie:'SOCIOS',folio:0)
             folio.save flush:true
         }
-        socio.numeroDeSocio=folio.next()
+        socio.numeroDeSocio=StringUtils.leftPad(folio.next().toString(),6,'0')
     	socio=socio.save failOnError:true
         
     	return socio
