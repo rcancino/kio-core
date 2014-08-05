@@ -22,7 +22,7 @@ class ImportadorService {
 		def db = new Sql(dataSource_importacion)
 		def tipo
 		def importados=0
-		def res=db.eachRow("select * from SX_CLIENTES order by modificado desc"){row->
+		def res=db.eachRow("select * from sx_clientes order by modificado desc"){row->
 			//log.info 'Importando: '+row
 			def found=Cliente.findByOrigen(row.CLIENTE_ID.toLong())
 			if(!found){
@@ -77,7 +77,7 @@ class ImportadorService {
 		assert tipo,'Debe existir el tipo de Socio General'
 		
 		def importados=0
-		def res=db.eachRow("select s.* from SX_SOCIOS2 s "){row->
+		def res=db.eachRow("select s.* from sx_socios2 s "){row->
 			//log.info 'Importando: '+row
 			def found=Socio.findByOrigen(row.SOCIO)
 			def tipoDeSocio=TipoDeSocio.first()
@@ -125,7 +125,7 @@ class ImportadorService {
 		def servicio=TipoDeProducto.findOrSaveWhere(clave:'SERVICIO',descripcion:'Serivicio generico') 
 		def articulo=TipoDeProducto.findOrSaveWhere(clave:'GENERAL',descripcion:'Articulo de caracter general') 
 		def importados=0
-		def res=db.eachRow("select s.* from SX_PRODUCTOS s where s.linea_id!=13"){row->
+		def res=db.eachRow("select s.* from sx_productos s where s.linea_id!=13"){row->
 			def found=Producto.findByClave(row.CLAVE)
 			if(!found){
 				def producto=new Producto(
