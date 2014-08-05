@@ -51,10 +51,11 @@ input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
 * Angular forms styles
 */
 form .ng-invalid.ng-dirty {
-	background-color: lightpink; 
+	border: 1px solid #b92c28;
+    background-color: #fff3f3;
 }
 form .ng-valid.ng-dirty {
-	background-color: lightgreen; 
+	 border:1px solid green;
 }
 span.summary.ng-invalid {
 	color: red; font-weight: bold; 

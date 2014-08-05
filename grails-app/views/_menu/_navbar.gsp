@@ -32,10 +32,11 @@
 				    	<span class="glyphicon glyphicon-cog"></span> Procesos
 				 	</g:link>
 	        	</li>
-	        	<li>
-				    <g:link controller='home' action='consultas'>
-				    	<span class="glyphicon glyphicon-dashboard"></span> Consultas
-				 	</g:link>
+	        	
+	        	<li class="dropdown">
+	          		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	          			<span class="glyphicon glyphicon-dashboard"></span> Consultas <span class="caret"></span>
+				      <nav:menu class="dropdown-menu" scope="user/consultas" /> 
 	        	</li>
 
         	</ul>

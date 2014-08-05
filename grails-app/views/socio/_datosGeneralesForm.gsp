@@ -15,6 +15,7 @@
 		<div class="col-md-6">
 			<f:field property="telefonoCasa" input-class="form-control"  colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="telefonoTrabajo" input-class="form-control" colsLabel="col-md-4" cols="col-md-8"/>
+			<f:field property="celular" input-class="form-control" colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="email" input-class="form-control "  colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="email2" input-class="form-control " colsLabel="col-md-4" cols="col-md-8"/>
 		</div>

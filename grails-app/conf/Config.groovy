@@ -122,6 +122,7 @@ log4j.main = {
         development{
             info 'grails.app.controllers.com.luxsoft.kyo'
             debug 'grails.app.services.com.luxsoft.kyo'
+            debug 'grails.app.services.com.luxsoft.kio'
 			debug 'grails.app.services.com.luxsoft.cfdi'
             debug 'grails.app.controllers.com.luxsoft.kio'
 			debug 'com.luxsoft.cfdi'
@@ -162,3 +163,7 @@ grails.gorm.default.mapping = {
 
 
 luxsoft.cfdi.serie.venta='FACTURA'
+
+grails.databinding.dateFormats = ['dd/MM/yyyy','MMddyyyy', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss'Z'"]
+jodatime.format.html5 = false
+//jodatime.format.org.joda.time.LocalDate='dd/MM/yyyy'

@@ -21,14 +21,17 @@ class SocioController {
 		[socioInstance:new Socio()]
 	}
 	def save(Socio socioInstance){
-		
+		println 'Socio: '+socioInstance
+		//println 'Cliente: '+cliente
 		if(socioInstance.cliente==null){
-			log.info 'Generando cliente con nuevo socio'
-			def cliente=Cliente.findByNombre('MOSTRADOR')
+		 	
+		 	def cliente=new Cliente(params.cliente)
+		 	cliente.emailCfdi=socioInstance.cfdiEmail
+		 	log.info 'Generando cliente '+cliente.getProperties()
+		// 	def cliente=Cliente.findByNombre('MOSTRADOR')
 			socioInstance.cliente=cliente
 		}
 		if(socioInstance.perfil==null){
-			
 			socioInstance.perfil=new SocioPerfil(tipoDeSocio:TipoDeSocio.first())
 		}
 		if(socioInstance.membresia==null){
@@ -52,10 +55,7 @@ class SocioController {
 		render view:'edit',model:[socioInstance:socioInstance]
 	}
 	def update(Socio socioInstance){
-		//def socio=Socio.get(id);
-		//bindData(socio, params)
-		//println 'Actualizando socio: '+socioInstance.medioDeContacto
-		println 'Actualizando socio: '+socioInstance.membresia.socio
+		
 		socioInstance.validate()
 		if(socioInstance.hasErrors()){
 			log.debug 'Erores de validacion: '+socioInstance.errors
@@ -136,6 +136,10 @@ class SocioController {
 		def res=list as JSON
 		
 		render res
+	}
+
+	def spa(){
+		render view:'spa/create'
 	}
 	
 	

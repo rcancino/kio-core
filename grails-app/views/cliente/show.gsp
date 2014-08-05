@@ -26,27 +26,17 @@
 		<form class="form-horizontal"  >
 			
 			<fieldset disabled="disabled">
-				<legend>Cliente</legend>
+				
 				<f:with bean="${clienteInstance}">
 					<f:field property="nombre" input-required="required" input-class="form-control" cols="col-sm-5" input-autofocus="autofocus"/>
 					<f:field property="rfc" input-required="required" input-class="form-control" cols="col-sm-5"/>
 					<f:field property="tipo" input-required="required" input-class="form-control" cols="col-sm-5"/>
 					<f:field property="emailCfdi" input-required="required" input-class="form-control" cols="col-sm-5"/>
-					<f:field property="direccion" >
-						<fieldset class="">
-    						<legend>Dirección</legend>
-    						<f:field property="direccion.calle" input-class="form-control" cols="col-sm-5"/>
-    						<f:field property="direccion.numeroExterior" input-class="form-control" cols="col-sm-5"/>
-    						<f:field property="direccion.numeroInterior" input-class="form-control" cols="col-sm-5"/>
-						</fieldset>
-					</f:field>
 				</f:with>
-				
+				<g:render template="direccion"/>
 			</fieldset>
 			
-			<div class="form-group">
-
-			</div>
+			
 			
 		</form>
 		

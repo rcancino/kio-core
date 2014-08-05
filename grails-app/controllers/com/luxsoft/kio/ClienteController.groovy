@@ -1,7 +1,9 @@
 package com.luxsoft.kio
 
 import grails.converters.JSON
+import grails.transaction.Transactional
 
+@Transactional
 class ClienteController {
     
 	static scaffold = true
@@ -10,10 +12,37 @@ class ClienteController {
 	
 	def index(Long max){
 		params.max = Math.min(max ?: 25, 100)
-		params.sort=params.sort?:'nombre'
-		params.order='asc'
+		params.sort=params.sort?:'lastUpdated'
+		params.order='desc'
 		[clienteInstanceList:Cliente.list(params),clienteInstanceCount:Cliente.count()]
 	}
+
+	def spa(){
+		render view:'spa/create'
+	}
+
+	def update(Cliente clienteInstance){
+		clienteInstance.validate()
+		if(clienteInstance.hasErrors()){
+			render view:'create',model:[clienteInstance:clienteInstance]
+			return
+		}
+		clienteInstance.save failOnError:true
+		flash.message="Cliente actualizado: "+clienteInstance.id
+		redirect action:'index'
+	}
+
+	/*
+	def save(Cliente clienteInstance){
+		println 'Salvando cliente nuevo';
+		println 'Cliente: '+clienteInstance.direccion+ "  tipo: "+clienteInstance.tipo
+		def stipo=clienteInstance.tipo
+		def tipo=TipoDeCliente.first()
+		println 'Tipo de cliente: '+tipo
+		clienteInstance.tipo=tipo
+		clienteInstance.validate()
+		println 'Errores: '+clienteInstance.errors
+	}*/
 	
 	
     def importar(){
@@ -65,6 +94,9 @@ class ClienteController {
 		
 		render res
 	}
+}
 
-
+class ClienteException extends RuntimeException{
+	String message
+	Cliente cliente
 }

@@ -9,12 +9,12 @@ class Cliente {
 
 	String nombre
 	String rfc
-	Direccion direccion
 	String emailCfdi
-
 	TipoDeCliente tipo
+
+	Direccion direccion
 	Long origen
-	String status='ACTIVO'
+	
 
 	Date dateCreated
 	Date lastUpdated
@@ -28,7 +28,6 @@ class Cliente {
 		nombre unique:true
 		origen nullable:true
 		emailCfdi nullable:true
-		status inList:['ACTIVO','SUSPENDIDO','CANCELADO']
 		rfc blank:false,minSize:12,maxSize:13
     }
 

@@ -26,6 +26,9 @@ navigation={
 		reportes(){
 			
 		}
+		consultas(){
+			membresias(controller:'socioMembresia',action:'index')
+		}
 		configuracion(){
 		}
 		info(view:'info')

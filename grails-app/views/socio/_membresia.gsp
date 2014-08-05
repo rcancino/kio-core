@@ -6,8 +6,8 @@
 
 		<div class="col-md-6">
 			<f:field property="membresia.alta" 
-				input-class="form-control"
-				
+				input-class="form-control fechaField"
+				input-type="text"
 				colsLabel="col-md-4" cols="col-md-8"/>
 
 			<f:field property="membresia.proximoPago" 
@@ -18,12 +18,21 @@
 
 			<f:field property="membresia.servicio" colsLabel="col-md-4" cols="col-md-8">
 				
-				<g:select id="membresiaServicio" name='cliente.membresia.servicio.id' value="${person?.type?.id}"
+				%{-- <g:select id="membresiaServicio" name='cliente.membresia.servicio.id' 
+					value="${socioInstance.membresia?.servicio?.id}"
 				    class="form-control" 
 				    noSelection="${['null':'Seleccione el producto']}"
 				    value="${membresia?.servicio?.id}"
-				    from='${com.luxsoft.kio.Producto.findAll{tipo.clave=='MEMBRESIA'}}'
-				    optionKey="id" ></g:select>
+				    from='${}'
+				    optionKey="id" ></g:select> --}%
+
+				<g:select class="form-control"  
+					name="membresia.servicio" 
+					value="${socioInstance.membresia?.servicio?.id}"
+					from="${com.luxsoft.kio.Producto.findAll{tipo.clave=='MEMBRESIA'}}" 
+					optionKey="id" 
+					optionValue="descripcion"
+					/>
 			</f:field>
 
 			<f:field property="membresia.comentario" 

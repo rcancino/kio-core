@@ -16,7 +16,7 @@
 			<tr>
 				<td>
 					<g:link action="edit" id="${row.id}">
-						${fieldValue(bean:row,field:"id")}
+						${fieldValue(bean:row,field:"numeroDeSocio")}
 					</g:link>
 				</td>
 				<td>${row.toString()}</td>
@@ -25,8 +25,8 @@
 						${fieldValue(bean:row,field:"cliente.rfc")}
 					</g:link>
 				</td>
-				<td><%--${fieldValue(bean:row,field:"perfil.tipoDeSocio.clave")}</td>--%>
-				<td><%--${fieldValue(bean:row,field:"perfil.areaDeInteres")}</td>--%>
+				<td>${fieldValue(bean:row,field:"perfil.tipoDeSocio.clave")}</td>
+				<td>${fieldValue(bean:row,field:"perfil.areaDeInteres")}</td>
 				<td>${fieldValue(bean:row,field:"telefonoCasa")}</td>
 				<td>${fieldValue(bean:row,field:"celular")}</td>
 				<td><g:formatDate date="${row.lastUpdated}"/></td>

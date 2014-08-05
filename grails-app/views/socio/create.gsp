@@ -16,17 +16,25 @@
 	<content tag="form">
 		
 		<div class="row">
-			
 		
-		<g:hasErrors bean="${socioInstance}">
-			<div class="alert alert-danger">
-				<g:renderErrors bean="${socioInstance}" as="list" />
-			</div>
-		</g:hasErrors>
 		
+		<ul class="nav nav-tabs ">
+			<li class="active"><a href="#generales" role="tab" data-toggle="tab">Generales</a></li>
+			<li><a href="#facturacion" role="tab" data-toggle="tab">Facturación</a></li>
+		</ul>
+		<br/>
 		<g:form class="form-horizontal" action="save" >
 			
-			<fieldset>
+			<g:hasErrors bean="${socioInstance}">
+				<div class="alert alert-danger">
+					<g:renderErrors bean="${socioInstance}" as="list" />
+				</div>
+			</g:hasErrors>
+			
+			<div class="tab-content">
+			
+				<div class="tab-pane active" id="generales">
+					 <fieldset>
 
 			<f:with bean="${socioInstance}">
 				<f:field property="apellidoPaterno" input-required input-autocomplete="off"
@@ -41,14 +49,18 @@
 					<legend>Teléfonos y Correos</legend>
 					<f:field property="telefonoCasa" input-class="form-control" label="Casa" cols="col-md-6"/>
 					<f:field property="telefonoTrabajo" input-class="form-control" label="Trabajo" cols="col-md-6"/>
+					<f:field property="celular" input-class="form-control" label="Celular" cols="col-md-6"/>
 					<f:field property="email" input-class="form-control " cols="col-md-6"/>
 					<f:field property="email2" input-class="form-control " cols="col-md-6"/>
 				</fieldset>
-				<fieldset>
-					<legend>Datos para facturación</legend>
+			</f:with>
+				</div>
+				<div class="tab-pane" id="facturacion">
+					 <fieldset>
+					
 					<div class="form-group">
-						<label for="cliente" class="col-sm-2 control-label">Cliente</label>
-						<g:hiddenField id="clienteId" name="cliente.id" />
+						<label for="cliente" class="col-sm-2 control-label">Cliente existente</label>
+						<g:hiddenField id="clienteId" name="socio.cliente.id" />
 						<div class="col-sm-6">
 							<input id="cliente" name="cliente.nombre"  
 							autocomplete="off" type="text" class="form-control" 
@@ -58,11 +70,16 @@
 						</div>
 						<input id="seleccionarCliente" type="checkbox" name="clienteExistente" autocomplete="off" > Seleccionar
 					</div>
+					<f:field property="cliente.rfc" input-class="form-control " cols="col-md-6"/>
 					<f:field property="cfdiEmail" input-class="form-control " cols="col-md-6"/>
-				</fieldset>
-				
 					
-			</f:with>
+					</fieldset>
+					<g:render template="domicilioFiscal"/>
+				</div>
+					
+			</div>
+			
+			
 			
 			</fieldset>
 			

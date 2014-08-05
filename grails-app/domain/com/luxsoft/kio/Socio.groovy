@@ -33,6 +33,9 @@ class Socio {
 	String cfdiEmail
 	
 	String origen
+
+    Integer numeroDeSocio
+
 	Date dateCreated
 	Date lastUpdated
 
@@ -51,6 +54,7 @@ class Socio {
         perfil unique:true
         membresia unique:true
         foto nullable:true
+        numeroDeSocio nullable:true
     }
 
     
