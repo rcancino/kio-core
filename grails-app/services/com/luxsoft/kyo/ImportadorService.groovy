@@ -6,6 +6,7 @@ import grails.transaction.Transactional
 import grails.transaction.NotTransactional
 import org.joda.time.LocalDate
 import groovy.sql.Sql
+import org.springframework.beans.BeanUtils
 
 import com.luxsoft.kio.*
 
@@ -51,7 +52,7 @@ class ImportadorService {
 					,estado:row.ESTADO?:''
 					,codigoPostal:row.CP?:''
 					)
-				//cliente.direccion=direccion
+				cliente.direccion=direccion
 				try{
 					found=cliente.save(failOnError:true)
 					importados++
@@ -102,11 +103,17 @@ class ImportadorService {
 						sexo:'MASCULINO',
 						numeroDeSocio:row.SOCIO
 						)
+						if(found.toString().trim().equals(cliente.nombre.trim())){
+							def dir=new Direccion()
+							BeanUtils.copyProperties(cliente.direccion,dir)
+							found.direccion=dir
+						}
 						found.save(failOnError:true)
 						importados++
 					}
 					
 				}catch(Exception th){
+					th
 					log.error "Error importando ${row.APELLIDOP} (${row.SOCIO}) Messge:"+ExceptionUtils.getRootCauseMessage(th)
 				}
 				

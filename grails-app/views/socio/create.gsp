@@ -37,22 +37,68 @@
 					 <fieldset>
 
 			<f:with bean="${socioInstance}">
-				<f:field property="apellidoPaterno" input-required input-autocomplete="off"
-				input-class="form-control uppercase-field" cols="col-md-8"/>
-				<f:field property="apellidoMaterno" input-required input-autocomplete="off"
-				input-class="form-control uppercase-field" cols="col-md-8"/>
-				<f:field property="nombres" input-required input-autocomplete="off"
-				input-class="form-control uppercase-field" cols="col-md-8"/>
-				<f:field property="sexo" input-required input-class="form-control" cols="col-md-5"/>
+
+				<div class="col-md-6">
+					<f:field property="apellidoPaterno" 
+						input-required input-autocomplete="off"
+						input-class="form-control uppercase-field" 
+						colsLabel="col-sm-4" cols="col-sm-8"/>
+					<f:field property="apellidoMaterno" input-required input-autocomplete="off"
+						input-class="form-control uppercase-field" 
+						colsLabel="col-sm-4" cols="col-sm-8"/>	
+					
+				</div>
+				<div class="col-md-6">
+					<f:field property="nombres" input-required input-autocomplete="off"
+						input-class="form-control uppercase-field" 
+						colsLabel="col-sm-4" cols="col-sm-8"/>
+					<f:field property="sexo" input-required input-class="form-control" 
+					colsLabel="col-sm-4" cols="col-sm-8"/>
+				</div>
+				
+				
+				
 				<g:render template="/_common/direccionForm" />
 				<fieldset>
 					<legend>Teléfonos y Correos</legend>
-					<f:field property="telefonoCasa" input-class="form-control" label="Casa" cols="col-md-6"/>
-					<f:field property="telefonoTrabajo" input-class="form-control" label="Trabajo" cols="col-md-6"/>
-					<f:field property="celular" input-class="form-control" label="Celular" cols="col-md-6"/>
-					<f:field property="email" input-class="form-control " cols="col-md-6"/>
-					<f:field property="email2" input-class="form-control " cols="col-md-6"/>
+					<div class="col-md-6">
+						<f:field property="telefonoCasa" input-class="form-control" label="Casa" colsLabel="col-sm-4" cols="col-sm-8"/>
+						<f:field property="celular" input-class="form-control" label="Celular" colsLabel="col-sm-4" cols="col-sm-8"/>
+					</div>
+					<div class="col-md-6">
+						<f:field property="telefonoTrabajo" input-class="form-control" label="Trabajo" colsLabel="col-sm-4" cols="col-sm-8"/>
+						<f:field property="email" input-class="form-control " colsLabel="col-sm-4" cols="col-sm-8"/>
+						<f:field property="email2" input-class="form-control " colsLabel="col-sm-4" cols="col-sm-8"/>
+					</div>
 				</fieldset>
+				
+				<fieldset>
+					<div class="col-md-6">
+						<legend>Perfil</legend>
+						<f:field property="perfil.tipoDeSocio" 
+						input-class="form-control"
+						input-type="text"
+						colsLabel="col-md-4" cols="col-md-8"/>
+
+					<f:field property="perfil.tipoDeCorporativo" 
+						input-class="form-control"
+						colsLabel="col-md-4" cols="col-md-8" label="Corporativo"/>
+					</div>
+					
+					<div class="col-md-6">
+						<legend>Membresía</legend>
+						<g:select class="form-control"  
+							name="membresia.servicio" 
+							value="${socioInstance.membresia?.servicio?.id}"
+							from="${com.luxsoft.kio.Producto.findAll{tipo.clave=='MEMBRESIA'}}" 
+							noSelection="${['null':'Seleccione una membresia']}"
+							optionKey="id" 
+							optionValue="descripcion"
+							/>
+					</div>
+					
+				</fieldset>
+
 			</f:with>
 				</div>
 				<div class="tab-pane" id="facturacion">
@@ -71,10 +117,16 @@
 						<input id="seleccionarCliente" type="checkbox" name="clienteExistente" autocomplete="off" > Seleccionar
 					</div>
 					<f:field property="cliente.rfc" input-class="form-control " 
-						cols="col-md-6" 
+						cols="col-md-4" 
 						default="XAXX010101000" 
 						required="required" />
-					<f:field property="cfdiEmail" input-class="form-control " cols="col-md-6"/>
+					<f:field property="cfdiEmail" input-class="form-control " cols="col-md-4"/>
+					<div class="form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<button  id="copiarDireccionDelSocio" class="btn btn-default">Copiar domicilio</button>
+						</div>
+						
+					</div>
 					
 					</fieldset>
 					<g:render template="domicilioFiscal"/>
@@ -126,18 +178,28 @@
 					}
 				});
 
-				// var copiarDireccion=function(direccion){
-				// 	console.log('Copiando datos de direcci')
-				// 	$("[name='direccion.calle']").val(direccion.calle);
-				//   	$("[name='direccion.numeroExterior']").val(direccion.numeroExterior);
-				//   	$("[name='direccion.numeroInterior']").val(direccion.numeroInterior);
-				//   	$("[name='direccion.colonia']").val(direccion.colonia);
-				//   	$("[name='direccion.delegacion']").val(direccion.delegacion);
-				//   	$("[name='direccion.municipio']").val(direccion.municipio);
-				//   	$("[name='direccion.estado']").val(direccion.estado);
-				//   	$("[name='direccion.pais']").val(direccion.pais);
-				//   	$("[name='direccion.codigoPostal']").val(direccion.codigoPostal);
-				// };
+				$("#copiarDireccionDelSocio").click(function(event){
+					copiarDireccion();
+					event.preventDefault();
+					
+				});
+
+				var copiarDireccion=function(){
+
+					console.log('Copiando datos de direcci')
+				 	
+				 	$("[name='cliente.direccion.calle']").val($("[name='direccion.calle']").val());
+				   	$("[name='cliente.direccion.numeroExterior']").val($("[name='direccion.numeroExterior']").val());
+				   	$("[name='cliente.direccion.numeroInterior']").val($("[name='direccion.numeroInterior']").val());
+				   	$("[name='cliente.direccion.colonia']").val($("[name='direccion.colonia']").val());
+				   	$("[name='cliente.direccion.delegacion']").val($("[name='direccion.delegacion']").val());
+				   	$("[name='cliente.direccion.municipio']").val($("[name='direccion.municipio']").val());
+				   	$("[name='cliente.direccion.estado']").val($("[name='direccion.estado']").val());
+				   	$("[name='cliente.direccion.pais']").val($("[name='direccion.pais']").val());
+				   	$("[name='cliente.direccion.codigoPostal']").val($("[name='direccion.codigoPostal']").val());
+
+				 };
+
 			});
 		</script>
 	</content>

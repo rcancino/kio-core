@@ -29,6 +29,7 @@ navigation={
 		}
 		consultas(){
 			membresias(controller:'socioMembresia',action:'index')
+			socios()
 		}
 		configuracion(){
 		}

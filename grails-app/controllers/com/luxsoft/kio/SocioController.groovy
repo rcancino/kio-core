@@ -35,9 +35,10 @@ class SocioController {
 		if(socioInstance.perfil==null){
 			socioInstance.perfil=new SocioPerfil(tipoDeSocio:TipoDeSocio.first())
 		}
+		/*
 		if(socioInstance.membresia==null){
 			socioInstance.membresia=new SocioMembresia()
-		}
+		}*/
 
 		socioInstance.validate()
 		if(socioInstance.hasErrors()){

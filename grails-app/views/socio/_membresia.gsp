@@ -5,10 +5,7 @@
 	<div class="row">
 
 		<div class="col-md-6">
-			<f:field property="membresia.alta" 
-				input-class="form-control fechaField"
-				input-type="text"
-				colsLabel="col-md-4" cols="col-md-8"/>
+			
 
 			<f:field property="membresia.proximoPago" 
 				input-autocomplete="off"
@@ -30,6 +27,7 @@
 					name="membresia.servicio" 
 					value="${socioInstance.membresia?.servicio?.id}"
 					from="${com.luxsoft.kio.Producto.findAll{tipo.clave=='MEMBRESIA'}}" 
+					noSelection="${['null':'Seleccione una membresia']}"
 					optionKey="id" 
 					optionValue="descripcion"
 					/>

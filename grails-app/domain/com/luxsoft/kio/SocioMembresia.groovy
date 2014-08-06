@@ -8,9 +8,6 @@ import org.joda.time.LocalDate
 class SocioMembresia {
 
     Socio socio
-    
-    //LocalDate alta=LocalDate.now()
-    Date alta=new Date()
 
     LocalDate ultimoPago
 
@@ -36,7 +33,7 @@ class SocioMembresia {
     
     static mapping = {
     	//servicios cascade: "all-delete-orphan"
-        alta type:'date'
+        
     }
 
     String toString(){

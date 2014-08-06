@@ -14,8 +14,8 @@ class SocioService {
     	if(socio.hasErrors()){
     		throw new SocioError(message:'Errores de validacion en socio',socio:socio)
     	}
+        log.debug 'Direccion de socio: '+socio.direccion
         def cliente=socio.cliente
-        
         
         if(!cliente.id){
             cliente.nombre="$socio.nombres $socio.apellidoPaterno $socio.apellidoMaterno"
@@ -26,17 +26,7 @@ class SocioService {
                 throw new ClienteException(message:'Errores de validacion en alta de cliente',cliente:cliente)
 
             }
-            /*
-            def target=new Direccion()
             
-            def nvoCliente=new Cliente(
-                nombre:"$socio.nombres $socio.apellidoPaterno $socio.apellidoMaterno",
-                rfc:cliente.rfc,
-                tipo:TipoDeCliente.findByClave('PARTICULAR'),
-                direccion:new Direccion()
-                )
-            BeanUtils.copyProperties(socio.direccion,nvoCliente.direccion)
-            */
             cliente.save flush:true
             socio.cliente=cliente
         }

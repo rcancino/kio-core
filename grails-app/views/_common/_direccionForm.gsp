@@ -38,9 +38,9 @@
 	<div class="col-sm-4">
 			<input name="${prefix?prefix+'.direccion.':''}direccion.estado" type="text" class="form-control"  placeholder="Estado">
 	</div>
-	<label for="calle" class="col-sm-2 control-label">País</label>
+	<label for="pais" class="col-sm-2 control-label">País</label>
 	<div class="col-sm-4">
-			<input name="${prefix?prefix+'.direccion.':''}direccion.calle" type="text" class="form-control" placeholder="pais">
+			<input name="${prefix?prefix+'.direccion.':''}direccion.pais" type="text" class="form-control" placeholder="pais">
 	</div>
 </div>
 
