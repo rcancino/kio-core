@@ -37,7 +37,9 @@
 					 <fieldset>
 
 			<f:with bean="${socioInstance}">
-
+				<div class="row">
+					
+				
 				<div class="col-md-6">
 					<f:field property="apellidoPaterno" 
 						input-required input-autocomplete="off"
@@ -55,7 +57,7 @@
 					<f:field property="sexo" input-required input-class="form-control" 
 					colsLabel="col-sm-4" cols="col-sm-8"/>
 				</div>
-				
+				</div>
 				
 				
 				<g:render template="/_common/direccionForm" />
@@ -83,6 +85,11 @@
 					<f:field property="perfil.tipoDeCorporativo" 
 						input-class="form-control"
 						colsLabel="col-md-4" cols="col-md-8" label="Corporativo"/>
+
+					<f:field property="perfil.medioDeContacto" 
+						input-class="form-control"
+						colsLabel="col-md-4" cols="col-md-8"/>
+
 					</div>
 					
 					<div class="col-md-6">

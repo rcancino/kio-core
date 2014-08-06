@@ -92,9 +92,9 @@ environments {
               
             }
 
-            dataSource_importacion{
-              url = 'jdbc:mysql://10.10.6.1/gasoc'
-            }
+            // dataSource_importacion{
+            //   url = 'jdbc:mysql://10.10.6.1/gasoc'
+            // }
 
     }
 }
