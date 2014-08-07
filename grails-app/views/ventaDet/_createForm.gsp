@@ -53,7 +53,7 @@
 			<div class="col-sm-4">
 				<input id="descuento" class="form-control data-moneda" 
 					name="descuento"  value="${ventaDetInstance?.descuento }"
-					autocomplete="off" disabled>
+					autocomplete="off" >
 			</div>
 		</div>
 
@@ -74,7 +74,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".data-moneda").autoNumeric({wEmpty:'zero',mRound:'B',aSign: '$'});
+		$(".data-moneda").autoNumeric({wEmpty:'zero'});
 		$("#producto").autocomplete({
 			source:'/kio-core/producto/getProductosAsJSON',
             minLength: 2,

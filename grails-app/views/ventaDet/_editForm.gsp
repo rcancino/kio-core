@@ -46,7 +46,7 @@
 			<label for="precio" class="col-sm-2 control-label ">Precio</label>
 			<div class="col-sm-4">
 				<input id="precio" class="form-control data-moneda" 
-					name="precio"  value="${ventaDetInstance?.precio }"
+					name="precio"  value="${ventaDetInstance?.precioConIva }"
 					autocomplete="off" disabled>
 			</div>
 		</div>
@@ -56,18 +56,18 @@
 			<div class="col-sm-4">
 				<input id="descuento" class="form-control data-moneda" 
 					name="descuento"  value="${ventaDetInstance?.descuento }"
-					autocomplete="off" disabled>
+					autocomplete="off">
 			</div>
 		</div>
 
-		<div class="form-group">
+		%{-- <div class="form-group">
 			<label for="importeNeto" class="col-sm-2 control-label">Neto</label>
 			<div class="col-sm-4">
 				<input id="subTotal" class="form-control data-moneda" 
 					name="subTotal"  value="${ventaDetInstance?.producto?.precioNeto }"
 					autocomplete="off" disabled>
 			</div>
-		</div>
+		</div> --}%
 
 
 	
@@ -77,7 +77,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".data-moneda").autoNumeric({wEmpty:'zero',mRound:'B',aSign: '$'});
+		$(".data-moneda").autoNumeric({wEmpty:'zero'});
 		$("#producto").autocomplete({
 			source:'/kio-core/producto/getProductosAsJSON',
             minLength: 2,

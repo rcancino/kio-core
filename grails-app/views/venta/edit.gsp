@@ -58,12 +58,37 @@
 	</div>		
 	<div class=" col-md-4">
 		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-offset-2 col-sm-4 control-label">SubTotal</label>
+				<div class=" col-sm-6 ">
+					<input value="${formatNumber(number:ventaInstance.importeConIva,type:'currency')}" 
+					class="form-control text-right" disabled/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-offset-2 col-sm-4 control-label">Descuento</label>
+				<div class=" col-sm-6 ">
+					<input value="${formatNumber(number:ventaInstance.descuentoConIva,type:'currency')}" 
+					class="form-control text-right" disabled/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-offset-2 col-sm-4 control-label">Total</label>
+				<div class=" col-sm-6 ">
+					<input value="${formatNumber(number:ventaInstance.total,type:'currency')}" 
+					class="form-control text-right" disabled/>
+				</div>
+			</div>
+		</form>
+
+		%{-- <form class="form-horizontal">
 			
 		
 		<fieldset disabled>
 		<f:with bean="${ventaInstance}">
-			<f:field property="importe" 
-				input-class="form-control money-data text-right" input-type="text" cols="col-sm-6" colsLabel="col-sm-4" />
+			<f:field property="subTotalConIva" 
+				input-class="form-control money-data text-right" 
+				input-type="text" cols="col-sm-6" colsLabel="col-sm-4" />
 			<f:field property="descuento" input-class="form-control money-data text-right" input-type="text" 
 			cols="col-sm-6" colsLabel="col-sm-4" />
 			<f:field property="subTotal" input-class="form-control money-data text-right" input-type="text" 
@@ -75,7 +100,7 @@
 			/>
 		</f:with>	
 		</fieldset>
-		</form>
+		</form> --}%
 	</div>
 	
 		

@@ -45,6 +45,13 @@
 			</div>
 			
 		</g:form>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('.mayusculas').keyup(function(){
+	    			this.value = this.value.toUpperCase();
+				});
+			});
+		</script>
 		
 	</content>
 	

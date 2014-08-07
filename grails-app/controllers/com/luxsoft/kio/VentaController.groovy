@@ -20,7 +20,7 @@ class VentaController {
     
     def create(){
         
-    	def ventaInstance=new Venta(fecha:new Date())
+    	def ventaInstance=new Venta(fecha:new Date(),tipo:TipoDeVenta.first())
     	//render view:'spa/spaCreate' ,model:[ventaInstance:ventaInstance]
         [ventaInstance:ventaInstance]
 		

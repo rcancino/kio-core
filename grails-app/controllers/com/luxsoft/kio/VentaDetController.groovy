@@ -1,17 +1,19 @@
 package com.luxsoft.kio
 
+import com.luxsoft.kio.MonedaUtils
+
 class VentaDetController {
     //static scaffold = true
 
     def ventaService
 	
 	def create(Venta ventaInstance){
-        def socios=Socio.findAll{cliente==ventaInstance.cliente}
+        def socios=Socio.findAll([max:10],{cliente==ventaInstance.cliente})
 		[ventaInstance:ventaInstance,ventaDetInstance:new VentaDet(cantidad:1),socios:socios]
 	}
 
     def edit(VentaDet det){
-        def socios=Socio.findAll([max:10],{cliente:det.venta.cliente})
+        def socios=Socio.findAll([max:10],{cliente==det.venta.cliente})
     	[ventaInstance:det.venta,ventaDetInstance:det,socios:socios]
     }
 	
@@ -23,7 +25,9 @@ class VentaDetController {
 
     def update(VentaDet cmd){
         //println 'Id: '+cmd.id+" Vta: "+cmd.venta?.id+ " "+cmd.cantidad
-        
+        if(cmd.descuento>0){
+            cmd.descuento=MonedaUtils.calcularImporteDelTotal(cmd.descuento)
+        }
     	cmd.validate()
     	if(cmd.hasErrors()){
     		render view:'edit',model:[ventaInstance:cmd.venta,ventaDetInstance:cmd]

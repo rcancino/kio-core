@@ -3,6 +3,7 @@ package com.luxsoft.kio
 import org.grails.databinding.BindingFormat
 import com.luxsoft.cfdi.Cfdi
 import groovy.transform.EqualsAndHashCode
+import com.luxsoft.kio.MonedaUtils
 
 //@EqualsAndHashCode(includes='apellidoPaterno,apellidoMaterno,nombres')
 //@ToString(includes='nombre',includeNames=true,includePackage=false)
@@ -45,16 +46,17 @@ class Venta {
     static constraints = {
     	cliente()
     	fecha()
-    	tipo()
+    	
     	moneda()
     	status inList:['COTIZACION','PEDIDO','VENTA','FACTURADA','CANCELADA']
-    	importe(scale:4)
-    	descuento(scale:4)
-    	subTotal(scale:4)
-    	impuesto(scale:4)
-    	total(scale:4)
+    	importe(scale:2)
+    	descuento(scale:2)
+    	subTotal(scale:2)
+    	impuesto(scale:2)
+    	total(scale:2)
 		formaDePago(nullable:false,maxSize:30)
 		cfdi nullable:true
+		tipo nullable:true
     	
     }
 
@@ -62,6 +64,20 @@ class Venta {
 		partidas cascade: "all-delete-orphan"
 	}
 	
+	static transients = ['importeConIva','descuentoConIva','subTotalConIva']
+
+
+    def getImporteConIva(){
+        return MonedaUtils.calcularTotal(importe)
+    }
+
+    def getDescuentoConIva(){
+        return MonedaUtils.calcularTotal(descuento)
+    }
+
+    def getSubTotalConIva(){
+        return MonedaUtils.calcularTotal(subTotal)
+    }
 	
 	
 }

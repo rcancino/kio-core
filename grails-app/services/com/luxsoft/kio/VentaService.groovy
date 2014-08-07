@@ -4,7 +4,8 @@ import grails.transaction.Transactional
 
 import org.apache.commons.lang.exception.ExceptionUtils
 
-import com.luxsoft.cfdi.MonedaUtils;
+
+import com.luxsoft.kio.MonedaUtils
 
 @Transactional
 class VentaService {
@@ -96,8 +97,8 @@ class VentaService {
                     det.producto=s
                     det.precio=s.precioNeto
                     det.cantidad=1
-                    det.actualizarImportes()
-                    det.impuesto=MonedaUtils.calcularImpuesto(det.importe)
+                    //det.actualizarImportes()
+                    //det.impuesto=MonedaUtils.calcularImpuesto(det.importe)
                     log.debug 'Agregando membresia : '+det.producto
                     venta.addToPartidas(det)
                 }
@@ -108,20 +109,24 @@ class VentaService {
 		return this
 	}
 	
-	def actualizarTotales(Venta venta){
-		venta.importe=venta.partidas.sum 0.0 ,{it.importe}
-		venta.descuento=venta.partidas.sum 0.0,{it.descuento}
-		venta.subTotal=venta.partidas.sum 0.0,{it.subTotal}
-		venta.impuesto=venta.partidas.sum 0.0,{it.impuesto}
-		venta.total=venta.subTotal+venta.impuesto
-	}
+	
 
     def actualizarPartida(VentaDet det){
-        def prod=det.producto
-        det.precio=prod.precioNeto
-        det.importe=det.precio*det.cantidad
+        def precioNeto=det.precio-det.descuento
+        det.importe=precioNeto*det.cantidad
         det.subTotal=det.importe
-        det.impuesto=MonedaUtils.calcularImpuesto(det.importe)
+        //det.impuesto=MonedaUtils.calcularImpuesto(det.importe)
+    }
+
+    def actualizarTotales(Venta venta){
+        venta.partidas.each{
+            actualizarPartida(it)
+        }
+        venta.importe=venta.partidas.sum 0.0 ,{it.precio*it.cantidad}
+        venta.descuento=venta.partidas.sum 0.0,{it.descuento*it.cantidad}
+        venta.subTotal=venta.importe-venta.descuento
+        venta.impuesto=MonedaUtils.calcularImpuesto(venta.subTotal)
+        venta.total=venta.subTotal+venta.impuesto
     }
 
 

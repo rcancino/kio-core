@@ -6,7 +6,7 @@
 	<asset:stylesheet src="jquery-ui.css"/>
 	<asset:javascript src="jquery-ui/autocomplete.js"/>
 	<asset:javascript src="holder/holder.js"/>
-	<title>Socio ${socioInstance.id}</title>
+	<title>Socio ${socioInstance.numeroDeSocio}</title>
 </head>
 <body>
 
@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="well">
-					<h3>${socioInstance} (${socioInstance.id})</h3>
+					<h3>${socioInstance} (${socioInstance.numeroDeSocio})</h3>
 					<g:if test="${flash.message}">
                     	<span class="label label-warning">${flash.message}</span>
                 	</g:if> 
@@ -152,6 +152,10 @@
 				$("[name='cliente.nombre']").val(ui.item.nombre);
 				copiarDireccion(ui.item.direccion);
 			}
+		});
+
+		$('.mayusculas').keyup(function(){
+    		this.value = this.value.toUpperCase();
 		});
 	});
 </script>	

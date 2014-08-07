@@ -20,7 +20,7 @@
 				<td>${row.toString()}</td>
 				<td>
 					<g:link controller="producto" action="show" id="${row.membresia?.servicio?.id}">
-						${fieldValue(bean:row,field:"membresia.servicio")}
+						${fieldValue(bean:row,field:"membresia.servicio.descripcion")}
 					</g:link>
 				</td>
 				<td>${fieldValue(bean:row,field:"membresia.proximoPago")}</td>

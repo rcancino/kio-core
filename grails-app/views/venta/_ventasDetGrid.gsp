@@ -7,15 +7,15 @@
 			<th>Unidad</th>
 			<th>Cantidad</th>
 			<th>Precio</th>
-			<th>Importe</th>
 			<th>Descuento</th>
-			<th>Sub Total</th>
+			
+			<th>Total</th>
 			<th>Eliminar</th>
 		</tr>
 	</thead>
 	<tbody>
 
-		<g:each in="${ventaInstance.partidas}" var="row" status="i">
+		<g:each in="${ventaInstance.partidas}" var="row" status="i"> 
 			<tr>
 				<td>
 					<g:link controller="ventaDet" action="edit" id="${row.id}">${row?.socio?.id}</g:link>
@@ -27,16 +27,17 @@
 				<td>${row.producto.unidad}</td>
 				<td>${row.cantidad}</td>
 				<td >
-					<g:formatNumber number="${row.precio}" type="currency"/>
+					<g:formatNumber number="${row.precioConIva}" type="currency"/>
 				</td>
 				<td>
-					<g:formatNumber number="${row.importe}" type="currency"/>
+					<g:formatNumber number="${row.descuentoConIva}" type="currency"/>
 				</td>
-				<td>
-					<g:formatNumber number="${row.descuento}" type="percent"/>
+				%{-- <td>
+					<g:formatNumber number="${row.importeConIva}" type="currency"/>
 				</td>
+				 --}%
 				<td>
-					<g:formatNumber number="${row.subTotal}" type="currency"/>
+					<g:formatNumber number="${row.subTotalConIva}" type="currency"/>
 				</td>
 				<td>
 					<g:link controller="ventaDet" action="delete" id="${row.id}" onclick="return confirm('Eliminar producto');">

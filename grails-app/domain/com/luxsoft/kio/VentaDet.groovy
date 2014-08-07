@@ -2,6 +2,7 @@ package com.luxsoft.kio
 
 import org.grails.databinding.BindingFormat
 import groovy.transform.EqualsAndHashCode
+import com.luxsoft.kio.MonedaUtils
 
 @EqualsAndHashCode(includes='producto')
 class VentaDet {
@@ -26,14 +27,16 @@ class VentaDet {
 	static belongsTo = [venta: Venta]
 
     static constraints = {
-    	cantidad(scale:4)
-    	precio(scale:4)
-    	importe(scale:4)
-    	descuento(scale:4)
-    	subTotal(scale:4)
+    	cantidad(scale:2)
+    	precio(scale:2)
+    	importe(scale:2)
+    	descuento(scale:2)
+    	subTotal(scale:2)
     	comentario nullable:true
         socio nullable:true
     }
+
+    static transients = ['precioConIva','importeConIva','descuentoConIva']
 
     VentaDet(){}
 
@@ -48,9 +51,23 @@ class VentaDet {
     	"${producto}  ${cantidad}  ${precio}"
     }
 
-    def actualizarImportes(){
-    	importe=cantidad*precio
-    	subTotal=importe-descuento
-    	return this
+    
+
+    def getPrecioConIva(){
+        return MonedaUtils.calcularTotal(precio)
     }
+
+    def getImporteConIva(){
+        return MonedaUtils.calcularTotal(importe)
+    }
+
+    def getDescuentoConIva(){
+        return MonedaUtils.calcularTotal(descuento)
+    }
+
+    def getSubTotalConIva(){
+        return MonedaUtils.calcularTotal(subTotal)
+    }
+
+
 }

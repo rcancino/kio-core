@@ -39,13 +39,19 @@
 			</fieldset>
 			<div class="form-group">
 				<div class="buttons col-md-offset-2 col-md-2">
-					<g:submitButton name="Salvar" class="btn btn-primary " />
+					<g:submitButton name="Actualizar" class="btn btn-primary " />
 						
 				</div>
 			</div>
 			
 		</g:form>
-		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('.mayusculas').keyup(function(){
+	    			this.value = this.value.toUpperCase();
+				});
+			});
+		</script>
 	</content>
 	
 </body>

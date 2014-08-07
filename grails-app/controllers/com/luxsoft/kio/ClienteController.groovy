@@ -64,12 +64,15 @@ class ClienteController {
 
 	def getClientesJSON() {
 
-		def term='%'+params.term.trim()+'%'
-		def query=Cliente.where{
-		 	nombre=~term 
-		 }
-		def list=query.list(max:30, sort:"nombre")
-		//println 'Buscando clientes JSON: '+list.size()+' params: '+params.term
+		// def term='%'+params.term.trim()+'%'
+		// def query=Cliente.where{
+		//  	nombre=~term 
+		//  }
+		// def list=query.list(max:30, sort:"nombre")
+
+		def list=Cliente.findAllByNombreIlike(params.term+"%",[max:10,sort:"nombre",order:"desc"])
+
+		
 		list=list.collect{ c->
 			def nombre="$c.nombre"
 			def direccion=[calle:c.direccion?.calle?:'']
@@ -78,8 +81,9 @@ class ClienteController {
 			direccion.colonia=c.direccion?.colonia?:''
 
 			def jsonDir=direccion as JSON
-			println 'Direccion: '+jsonDir
-			
+			//println 'Direccion: '+jsonDir
+			jsonDir.toString()
+
 			[id:c.id,
 			label:nombre,
 			value:nombre,

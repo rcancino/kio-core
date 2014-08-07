@@ -25,14 +25,17 @@
 				</g:link>
 			</div>
 			<div class="btn-group">
-				<form class="form-inline" action="search" role="search">
+				<g:form class="form-inline" action="search" role="search">
 					<div class="form-group ">
 						<div class="input-group ">
 							<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-							<input name="term" type="text" class="form-control" placeholder="Buscar" autofocus="autofocus">
+							<input name="term" type="text" class="form-control" placeholder="Apellido paterno" 
+							autofocus="autofocus" autocomplete="off">
 						</div>
+						%{-- <input name="term" type="text" class="form-control" placeholder="Apellido materno" 
+							autofocus="autofocus" autocomplete="off"> --}%
 					</div>
-				</form>
+				</g:form>
 			</div>
 	
 		</div>

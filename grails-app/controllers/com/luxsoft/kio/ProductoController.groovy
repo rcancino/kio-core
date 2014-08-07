@@ -38,7 +38,7 @@ class ProductoController {
 		def list=query.list(max:30, sort:"descripcion")
 		//println 'Buscando productos JSON: '+list.size()+' params: '+params.term
 		list=list.collect{ c->
-			def descripcion="$c.descripcion ($c.clave)"
+			def descripcion="$c.descripcion "
 			[id:c.id,
 				label:descripcion,
 				value:descripcion,

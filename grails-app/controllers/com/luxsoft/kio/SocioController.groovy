@@ -67,7 +67,8 @@ class SocioController {
 		}
 		socioInstance=socioService.salvarSocio(socioInstance)
 		flash.message="Socio modificado $socioInstance.id"
-		render view:'edit',model:[socioInstance:socioInstance]
+		//render view:'edit',model:[socioInstance:socioInstance]
+		redirect action:'index'
 	}
 
 	def delete(Socio socioInstance){
@@ -84,10 +85,11 @@ class SocioController {
 	def search(){
 		def s=params.term?:'%'
 		s+='%'
+		def materno=params.materno?:'%'
 
-		def query=Socio.where{apellidoPaterno=~s || apellidoMaterno=~s || nombres=~s}
-		def list=query.list(max:20,sort:'apellidoPaterno')
-		log.info 'Search result: '+list+ '  search params: '+s
+		def query=Socio.where{apellidoPaterno=~s || apellidoMaterno=~s }
+		def list=query.list(max:30,sort:'apellidoPaterno')
+		//log.info 'Search result: '+list+ '  search params: '+s
 		render view:'index',model:[socioInstanceList:list,socioInstanceCount:query.count()]
 	}
 
