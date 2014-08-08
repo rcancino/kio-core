@@ -55,7 +55,7 @@
 							<th>Cliente</th>
 							<th>Rfc</th>
 							<th>Status</th>
-							<th>Tipo</th>
+							
 							<th>Fecha</th>
 							<th>Importe</th>
 							<th>Impuesto</th>
@@ -78,7 +78,6 @@
 								</td>
 								<td>${fieldValue(bean:row,field:"cliente.rfc")}</td>
 								<td>${fieldValue(bean:row,field:"status")}</td>
-								<td>${fieldValue(bean:row,field:"tipo")}</td>
 								<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
 								<td><g:formatNumber number="${row.importe}" type="currency"/></td>
 								<td><g:formatNumber number="${row.impuesto}" type="currency"/></td>
