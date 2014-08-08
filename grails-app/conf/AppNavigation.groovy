@@ -20,6 +20,7 @@ navigation={
 			caja(controller:'caja',action:'index')
 			cxc(controller:'cxc',action:'index')
 			cfdi(controller:'cfdi',action:'index')
+			credencial(controller:'credencial',action:'index')
 		}
 		procesos(){
 			cfdi(controller:'cfdi',action:'index')
@@ -28,8 +29,10 @@ navigation={
 			
 		}
 		consultas(){
-			membresias(controller:'socioMembresia',action:'index')
 			socios()
+			acceso()
+			reportes()
+			
 		}
 		configuracion(){
 		}
