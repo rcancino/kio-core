@@ -66,16 +66,16 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-offset-2 col-sm-4 control-label">Descuento</label>
+				<label class="col-sm-offset-2 col-sm-4 control-label">Impuesto</label>
 				<div class=" col-sm-6 ">
-					<input value="${formatNumber(number:ventaInstance.descuento,type:'currency')}" 
+					<input value="${formatNumber(number:ventaInstance.impuesto,type:'currency')}" 
 					class="form-control text-right" disabled/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-offset-2 col-sm-4 control-label">Total</label>
 				<div class=" col-sm-6 ">
-					<input value="${formatNumber(number:ventaInstance.subTotal,type:'currency')}" 
+					<input value="${formatNumber(number:ventaInstance.total,type:'currency')}" 
 					class="form-control text-right" disabled/>
 				</div>
 			</div>

@@ -48,6 +48,7 @@ class VentaService {
 
     def agregarPartida(Long ventaId,VentaDet det){
         def venta=Venta.get(ventaId)
+        det.precio=det.producto.precioNeto
         venta.addToPartidas(det)
 		actualizarTotales(venta)
         //venta.save failOnError:true
@@ -111,12 +112,13 @@ class VentaService {
         venta.partidas.each{ det ->
             det.actualizarImportes()
         }
-        venta.importe=venta.partidas.sum 0.0 ,{it.importe}
-        venta.descuento=venta.partidas.sum 0.0,{it.descuento}
-        venta.subTotal=venta.partidas.sum 0.0 ,{it.subTotal}
-        venta.subTotal=0.0//MonedaUtils.calcularImporteDelTotal(venta.subTotal)
-        venta.impuesto=0.0
-        venta.total=venta.subTotal
+        venta.total=venta.partidas.sum 0.0 ,{it.subTotal}
+        venta.subTotal=MonedaUtils.calcularImporteDelTotal(venta.total)
+        venta.impuesto=MonedaUtils.calcularImpuesto(venta.subTotal)
+        venta.importe=venta.subTotal
+        venta.descuento=0.0
+        
+        
     }
 
 
