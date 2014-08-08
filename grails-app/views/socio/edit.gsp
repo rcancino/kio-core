@@ -148,9 +148,11 @@
 			minLength:3,
 			select:function(e,ui){
 				console.log('Cliente seleccionado: '+ui.item.value);
-				$("[name='cliente.id']").val(ui.item.id);
+				
 				$("[name='cliente.nombre']").val(ui.item.nombre);
-				copiarDireccion(ui.item.direccion);
+				$("#clienteId").val(ui.item.id);
+				$("[name='cliente.id']").val(ui.item.id);
+				//copiarDireccion(ui.item.direccion);
 			}
 		});
 

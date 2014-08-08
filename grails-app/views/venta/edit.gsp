@@ -61,21 +61,21 @@
 			<div class="form-group">
 				<label class="col-sm-offset-2 col-sm-4 control-label">SubTotal</label>
 				<div class=" col-sm-6 ">
-					<input value="${formatNumber(number:ventaInstance.importeConIva,type:'currency')}" 
+					<input value="${formatNumber(number:ventaInstance.importe,type:'currency')}" 
 					class="form-control text-right" disabled/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-offset-2 col-sm-4 control-label">Descuento</label>
 				<div class=" col-sm-6 ">
-					<input value="${formatNumber(number:ventaInstance.descuentoConIva,type:'currency')}" 
+					<input value="${formatNumber(number:ventaInstance.descuento,type:'currency')}" 
 					class="form-control text-right" disabled/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-offset-2 col-sm-4 control-label">Total</label>
 				<div class=" col-sm-6 ">
-					<input value="${formatNumber(number:ventaInstance.total,type:'currency')}" 
+					<input value="${formatNumber(number:ventaInstance.subTotal,type:'currency')}" 
 					class="form-control text-right" disabled/>
 				</div>
 			</div>

@@ -11,12 +11,17 @@
 		<div class="form-group">
 			<label for="socio" class="col-sm-2 control-label">Socio</label>
 			<div class="col-sm-10">
+				<g:if test="${ventaDetInstance.socio==null}">
 				<g:select class="form-control"  
 						name="socio" 
-						value="${socio}"
+						value="${ventaDetInstance?.socio}"
 						from="${socios}" 
 						optionKey="id" 
 						noSelection="[null:'Seleccione una socio']"/>
+				</g:if>
+				<g:else>
+					 <p class="form-control-static">${ventaDetInstance.socio}</p>
+				</g:else>
 			</div>
 		</div>
 		
@@ -26,8 +31,9 @@
 				
 				<g:hiddenField id="productoId" name="producto.id" autocomplete="off" value="${ventaDetInstance.producto.id}"/>
 				<input id="producto" class="form-control" 
-					name="producto.descripcion" placeholder="Seleccione otro producto"
-					type="text"  autofocus="on" 
+					name="productoDescripcion" placeholder="Seleccione otro producto"
+					type="text" 
+					value="${ventaDetInstance?.producto?.descripcion}" 
 					autocomplete="off">
 			</div>
 		</div>
@@ -38,7 +44,9 @@
 				<input id="cantidad" class="form-control"
 					value="${ventaDetInstance?.cantidad}" 
 					name="cantidad"
-					type="text"  autocomplete="off">
+					autofocus="on" 
+					type="text"  
+					autocomplete="off">
 			</div>
 		</div>
 
@@ -46,7 +54,7 @@
 			<label for="precio" class="col-sm-2 control-label ">Precio</label>
 			<div class="col-sm-4">
 				<input id="precio" class="form-control data-moneda" 
-					name="precio"  value="${ventaDetInstance?.precioConIva }"
+					name="precio"  value="${ventaDetInstance?.precio }"
 					autocomplete="off" disabled>
 			</div>
 		</div>
@@ -54,8 +62,8 @@
 		<div class="form-group">
 			<label for="descuentoTasa" class="col-sm-2 control-label">Descuento</label>
 			<div class="col-sm-4">
-				<input id="descuento" class="form-control data-moneda" 
-					name="descuento"  value="${ventaDetInstance?.descuento }"
+				<input id="descuento" class="form-control porentaje" 
+					name="descuentoTasa"  value="${ventaDetInstance?.descuentoTasa }"
 					autocomplete="off">
 			</div>
 		</div>
@@ -77,7 +85,8 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".data-moneda").autoNumeric({wEmpty:'zero'});
+		$(".data-moneda").autoNumeric('init',{wEmpty:'zero'});
+		$(".porentaje").autoNumeric('init',{vMin:0,vMax:90});
 		$("#producto").autocomplete({
 			source:'/kio-core/producto/getProductosAsJSON',
             minLength: 2,
@@ -115,6 +124,10 @@
 		$("#next").click(function(){
 			console.log('Salvar la forma');
 			$("#ventaDetForm").submit();
+		});
+
+		$("input[type=text]").focus(function(){
+    		this.select();
 		});
 		
 	});

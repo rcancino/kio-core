@@ -7,8 +7,8 @@
 			<th>Unidad</th>
 			<th>Cantidad</th>
 			<th>Precio</th>
+			<th>Importe</th>
 			<th>Descuento</th>
-			
 			<th>Total</th>
 			<th>Eliminar</th>
 		</tr>
@@ -27,17 +27,17 @@
 				<td>${row.producto.unidad}</td>
 				<td>${row.cantidad}</td>
 				<td >
-					<g:formatNumber number="${row.precioConIva}" type="currency"/>
+					<g:formatNumber number="${row.precio}" type="currency"/>
 				</td>
 				<td>
-					<g:formatNumber number="${row.descuentoConIva}" type="currency"/>
+					<g:formatNumber number="${row.importe}" type="currency"/>
 				</td>
-				%{-- <td>
-					<g:formatNumber number="${row.importeConIva}" type="currency"/>
-				</td>
-				 --}%
 				<td>
-					<g:formatNumber number="${row.subTotalConIva}" type="currency"/>
+					<g:formatNumber number="${row.descuento}" type="currency"/>
+				</td>
+				
+				<td>
+					<g:formatNumber number="${row.subTotal}" type="currency"/>
 				</td>
 				<td>
 					<g:link controller="ventaDet" action="delete" id="${row.id}" onclick="return confirm('Eliminar producto');">

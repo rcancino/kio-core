@@ -9,6 +9,7 @@
 				input-disabled="disabled" 
 				input-type="text"
 				colsLabel="col-md-4" cols="col-md-8"/>
+			<g:hiddenField id="clienteId" name="cliente.id" value="${socioInstance.cliente.id}"/>
 			<f:field property="cliente.nombre" 
 				input-required input-autocomplete="off"
 				input-class="form-control uppercase-field" 
@@ -29,7 +30,8 @@
 		</div>
 
 	</div>
-	
+
+	<%--
 	<div class="row">
 		<div class="col-md-12">
 			<fieldset>
@@ -112,7 +114,7 @@
 
 		
 	</div>	
-	
+	--%>
 		
 </f:with>
 

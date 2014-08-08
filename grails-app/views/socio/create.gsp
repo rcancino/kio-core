@@ -126,6 +126,7 @@
 					<f:field property="cliente.rfc" input-class="form-control " 
 						cols="col-md-4" 
 						default="XAXX010101000" 
+						autocomplete="off"
 						required="required" />
 					<f:field property="cfdiEmail" input-class="form-control " cols="col-md-4"/>
 					<div class="form-group">
@@ -162,7 +163,7 @@
 				  	    $('#cliente')
 				  	    .prop('disabled', false)
 				  	    .attr('required','required');
-				  	    
+				  	    $("#domicilioFiscal").attr('disabled',true);
 				  	     console.log('checked');
 				  	} else {
 				  	    $('#cliente')
@@ -172,6 +173,7 @@
 				  	     console.log('unchecked');
 				  	     $('#clienteId')
 				  	    .val(null);
+				  	    $("#domicilioFiscal").removeAttr('disabled');
 				  	}
 				});
 				$("[name='cliente.nombre']").autocomplete({
@@ -181,6 +183,7 @@
 						console.log('Cliente seleccionado: '+ui.item.value);
 						$("[name='cliente.id']").val(ui.item.id);
 						$("[name='cliente.nombre']").val(ui.item.nombre);
+						$("[name='cliente.rfc']").val(ui.item.rfc).attr('disabled');
 						//copiarDireccion(ui.item.direccion);
 					}
 				});

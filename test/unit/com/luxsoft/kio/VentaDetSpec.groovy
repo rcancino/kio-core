@@ -34,14 +34,14 @@ class VentaDetSpec extends Specification {
     	
     	'producto'|'item'
     	'cantidad'|0.0
-    	'precioUnitario'|0.0
-    	'importeBruto'|0.0
+    	'precio'|0.0
+    	'importe'|0.0
+        'descuentoTasa'|0.0
     	'descuento'|0.0
-    	'descuentoTasa'|0.0
-    	'importeNeto'|0.0
+    	'subTotal'|0.0
 
     }
-
+    /*
     void "VnetaDet debe tener un ToString adecuado"(){
     	given:'Una partida de veneta'
         def producto=Producto.build(clave:'SERV1',descripcion:'Servicio de prueba')
@@ -67,21 +67,23 @@ class VentaDetSpec extends Specification {
     	'SERV2'|'SERV2'|'KILO'|'PZA'||false
     		
     }
-
-    void "Calcula el importe neto de #cantidad a un precion unitario de :#precio con descuento de:#descuentoTasa"(){
+    */
+    @Unroll
+    void "El Sub Total de #cantidad productos a  precion  de :#precio con descuento de:#descuentoTasa debe ser #subTotal"(){
     	given:'Una partida de venta'
-    	def partida=VentaDet.buildWithoutSave(cantidad:cantidad,precioUnitario:precio,descuentoTasa:descuentoTasa)
+    	def partida=VentaDet.buildWithoutSave(cantidad:cantidad,precio:precio,descuentoTasa:descuentoTasa)
 
     	expect:
-    	partida.actualizarImportes().importeNeto==(cantidad*precio)-(cantidad*precio*descuentoTasa)
+    	partida.actualizarImportes()
+        .subTotal==subTotal
 
     	where:
-    	cantidad|precio|descuentoTasa
-    	10.00|150.00|0.05
-    	10.00|1750.00|0.03
-    	8.00|160.50|0.13
-
+    	cantidad|precio|descuentoTasa||subTotal
+    	1.00|1300.00|10|1170.00
+        7.00|650.00|10|4095.00
+        3.00|1200.00|10|3240.00
     }
+
     /*
     void "Implementacion de plus()"{}
     */

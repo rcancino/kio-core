@@ -65,19 +65,7 @@ class Venta {
 	}
 	
 	static transients = ['importeConIva','descuentoConIva','subTotalConIva']
-
-
-    def getImporteConIva(){
-        return MonedaUtils.calcularTotal(importe)
-    }
-
-    def getDescuentoConIva(){
-        return MonedaUtils.calcularTotal(descuento)
-    }
-
-    def getSubTotalConIva(){
-        return MonedaUtils.calcularTotal(subTotal)
-    }
+   
 	
 	
 }

@@ -41,7 +41,6 @@ class VentaService {
     }
 
     def salvarPartida(VentaDet det){
-        actualizarPartida(det)
         actualizarTotales(det.venta)
         det.save failOnError:true
         return det
@@ -49,11 +48,6 @@ class VentaService {
 
     def agregarPartida(Long ventaId,VentaDet det){
         def venta=Venta.get(ventaId)
-        def prod=det.producto
-        
-		det.precio=prod.precioNeto
-        det.importe=det.precio*det.cantidad
-        det.subTotal=det.importe
         venta.addToPartidas(det)
 		actualizarTotales(venta)
         //venta.save failOnError:true
@@ -111,22 +105,18 @@ class VentaService {
 	
 	
 
-    def actualizarPartida(VentaDet det){
-        def precioNeto=det.precio-det.descuento
-        det.importe=precioNeto*det.cantidad
-        det.subTotal=det.importe
-        //det.impuesto=MonedaUtils.calcularImpuesto(det.importe)
-    }
+    
 
     def actualizarTotales(Venta venta){
-        venta.partidas.each{
-            actualizarPartida(it)
+        venta.partidas.each{ det ->
+            det.actualizarImportes()
         }
-        venta.importe=venta.partidas.sum 0.0 ,{it.precio*it.cantidad}
-        venta.descuento=venta.partidas.sum 0.0,{it.descuento*it.cantidad}
-        venta.subTotal=venta.importe-venta.descuento
-        venta.impuesto=MonedaUtils.calcularImpuesto(venta.subTotal)
-        venta.total=venta.subTotal+venta.impuesto
+        venta.importe=venta.partidas.sum 0.0 ,{it.importe}
+        venta.descuento=venta.partidas.sum 0.0,{it.descuento}
+        venta.subTotal=venta.partidas.sum 0.0 ,{it.subTotal}
+        venta.subTotal=0.0//MonedaUtils.calcularImporteDelTotal(venta.subTotal)
+        venta.impuesto=0.0
+        venta.total=venta.subTotal
     }
 
 
