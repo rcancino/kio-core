@@ -108,6 +108,7 @@ class ImportadorService {
 							BeanUtils.copyProperties(cliente.direccion,dir)
 							found.direccion=dir
 						}
+						found.capitalizarNombre()
 						found.save(failOnError:true)
 						importados++
 					}
