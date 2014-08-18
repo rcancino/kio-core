@@ -35,7 +35,7 @@ class BootStrap {
 				def folioSocio=CfdiFolio.findWhere(serie:'SOCIOS')
 				
 				if(folioSocio==null){
-					folioSocio=new CfdiFolio(serie:'SOCIOS',folio:5000)
+					folioSocio=new CfdiFolio(serie:'SOCIOS',folio:50000)
 					folioSocio.save()
 				}
 

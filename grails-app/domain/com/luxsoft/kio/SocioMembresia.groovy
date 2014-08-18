@@ -1,7 +1,7 @@
 package com.luxsoft.kio
 
 
-import org.joda.time.LocalDate
+//import org.joda.time.LocalDate
 
 
 
@@ -9,11 +9,11 @@ class SocioMembresia {
 
     Socio socio
 
-    LocalDate ultimoPago
+    Date ultimoPago
 
-    LocalDate proximoPago
+    Date proximoPago
 
-    LocalDate suspender
+    Date suspender
 
     int toleranciaEnDias=5
 
@@ -33,6 +33,9 @@ class SocioMembresia {
     
     static mapping = {
     	//servicios cascade: "all-delete-orphan"
+        ultimoPago type:'date'
+        proximoPago type:'date'
+        suspender type:'date'
         
     }
 

@@ -15,6 +15,8 @@ class Socio {
 
 	String nombres
 	
+	String nombre
+	
 	String sexo
 
 	String telefonoCasa
@@ -68,7 +70,7 @@ class Socio {
     }
 
     String toString(){
-    	return "$apellidoPaterno $apellidoMaterno $nombres "
+    	return "$nombres $apellidoPaterno $apellidoMaterno"
     }
 
     def beforeUpdate() {
@@ -83,6 +85,7 @@ class Socio {
     	apellidoPaterno=apellidoPaterno.toUpperCase()
     	apellidoMaterno=apellidoMaterno.toUpperCase()
     	nombres=nombres.toUpperCase()
+		nombre="$nombres $apellidoPaterno $apellidoMaterno"
     }
 
     

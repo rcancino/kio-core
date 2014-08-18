@@ -61,10 +61,14 @@
 
 					<div class="form-group">
 						<div class="buttons col-md-offset-2 col-md-4">
-							<g:submitButton name="Salvar" class="btn btn-primary " />
+							
 							<g:link class="btn btn-default " action="index" >
-								<span class="glyphicon glyphicon-arrow-left"></span> Cancelar
+								<span class="glyphicon glyphicon-arrow-left"></span> 
+								Catálogo
 							</g:link>
+
+							<g:submitButton name="Salvar" class="btn btn-primary " />
+							
 							
 							<g:link class="btn btn-danger " 
 								action="delete" id="${socioInstance.id}" 

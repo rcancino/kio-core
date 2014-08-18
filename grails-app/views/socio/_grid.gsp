@@ -1,6 +1,7 @@
 <table class="table table-striped table-bordered table-condensed">
 	<thead>
 		<tr>
+			<g:sortableColumn property="id" title="Id"/>
 			<g:sortableColumn property="id" title="No Socio"/>
 			<g:sortableColumn property="apellidoPaterno" title="Nombre"/>
 			<th>Servicio</th>
@@ -12,6 +13,11 @@
 	<tbody>
 		<g:each in="${socioInstanceList}" var="row">
 			<tr>
+				<td>
+					<g:link action="edit" id="${row.id}">
+						${fieldValue(bean:row,field:"id")}
+					</g:link>
+				</td>
 				<td>
 					<g:link action="edit" id="${row.id}">
 						${fieldValue(bean:row,field:"numeroDeSocio")}

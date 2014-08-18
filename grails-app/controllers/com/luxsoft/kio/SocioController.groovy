@@ -22,6 +22,9 @@ class SocioController {
 	}
 	def save(Socio socioInstance){
 		
+		println 'Cliente de socio: '+params.cliente.direccion
+		
+		
 		if(socioInstance.cliente==null){
 		 	
 		 	def cliente=new Cliente(params.cliente)
@@ -32,14 +35,16 @@ class SocioController {
 		 	
 			socioInstance.cliente=cliente
 		}
+		println socioInstance.cliente
+		
 		if(socioInstance.perfil==null){
-			socioInstance.perfil=new SocioPerfil(tipoDeSocio:TipoDeSocio.first())
+			//socioInstance.perfil=new SocioPerfil(tipoDeSocio:TipoDeSocio.first())
 		}
 		/*
 		if(socioInstance.membresia==null){
 			socioInstance.membresia=new SocioMembresia()
 		}*/
-
+		socioInstance.nombre=socioInstance.toString()
 		socioInstance.validate()
 		if(socioInstance.hasErrors()){
 			log.info 'Errores de validacion'
@@ -52,10 +57,11 @@ class SocioController {
 	}
 
 	def edit(Socio socioInstance){
-		flash.message="Editando socio"
+		//flash.message="Editando socio"
 
 		render view:'edit',model:[socioInstance:socioInstance]
 	}
+	
 	def update(Socio socioInstance){
 		
 		socioInstance.validate()
@@ -65,9 +71,16 @@ class SocioController {
 			render view:'edit/edit',model:[socioInstance:socioInstance]
 			return 
 		}
-		socioInstance=socioService.salvarSocio(socioInstance)
-		flash.message="Socio modificado $socioInstance.id"
-		//render view:'edit',model:[socioInstance:socioInstance]
+		socioInstance.membresia.validate()
+		if(socioInstance.membresia.hasErrors()){
+			log.debug 'Erores de validacion de membresia: '+socioInstance.membresia.errors
+			flash.message="Errores en membresia de socio "+socioInstance.membresia.errors
+			render view:'edit/edit',model:[socioInstance:socioInstance]
+			return
+		}
+		
+		socioInstance=socioService.actualizarSocio(socioInstance)
+		flash.message="Socio modificado $socioInstance.nombre"
 		redirect action:'index'
 	}
 
@@ -85,11 +98,8 @@ class SocioController {
 	def search(){
 		def s=params.term?:'%'
 		s+='%'
-		def materno=params.materno?:'%'
-
-		def query=Socio.where{apellidoPaterno=~s || apellidoMaterno=~s }
+		def query=Socio.where{nombre=~s }
 		def list=query.list(max:30,sort:'apellidoPaterno')
-		//log.info 'Search result: '+list+ '  search params: '+s
 		render view:'index',model:[socioInstanceList:list,socioInstanceCount:query.count()]
 	}
 

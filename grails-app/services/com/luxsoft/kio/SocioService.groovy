@@ -1,15 +1,20 @@
 package com.luxsoft.kio
 
 import grails.transaction.Transactional
+
 import org.springframework.beans.BeanUtils
+
 import com.luxsoft.cfdi.CfdiFolio
+
 import org.apache.commons.lang.StringUtils
 
 @Transactional
 class SocioService {
 
     def salvarSocio(Socio socio) {
-        
+        if(socio.id){
+			throw new SocioError(message:'Socio ya registrado')
+		}
     	socio.validate()
     	if(socio.hasErrors()){
     		throw new SocioError(message:'Errores de validacion en socio',socio:socio)
@@ -19,36 +24,37 @@ class SocioService {
         def cliente=socio.cliente
         
         if(!cliente.id){
-            cliente.nombre="$socio.nombres $socio.apellidoPaterno $socio.apellidoMaterno"
+            cliente.nombre=socio.nombre
             cliente.tipo=TipoDeCliente.first()
             if(!cliente.validate(['rfc'])){
                 cliente.rfc='XAXX010101000'
             }
-            cliente.validate()
-            if(cliente.hasErrors()){
-                log.error("Validation errors: "+cliente.errors)
-                throw new ClienteException(message:'Errores de validacion en alta de cliente',cliente:cliente)
-            }
             cliente.save flush:true
-            socio.cliente=cliente
+            //socio.cliente=cliente
         }
-        socio.membresia.validate()
-        if(socio.membresia.hasErrors()){
-            println 'Errores en validacion de membresia: '+socio.membresia.errors
-        }
+        //socio.membresia.validate()
+        
         if(socio.id==null){
             def folio=CfdiFolio.findBySerie('SOCIOS')
             if(folio==null){
-                folio=new CfdiFolio(serie:'SOCIOS',folio:0)
+                folio=new CfdiFolio(serie:'SOCIOS',folio:60000)
                 folio.save flush:true
             }
-            socio.numeroDeSocio=StringUtils.leftPad(folio.next().toString(),5,'0')
+            socio.numeroDeSocio=StringUtils.leftPad(folio.next().toString(),6,'0')
         }
         
     	socio=socio.save failOnError:true
         
     	return socio
     }
+	
+	def actualizarSocio(Socio socio) {
+		
+				
+		socio=socio.save failOnError:true
+		
+		return socio
+	}
 
     def actualizarFoto(Socio socio){
         socio.save()

@@ -29,11 +29,10 @@
 					<div class="form-group ">
 						<div class="input-group ">
 							<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-							<input name="term" type="text" class="form-control" placeholder="Apellido paterno" 
+							<input name="term" type="text" class="form-control" placeholder="" 
 							autofocus="autofocus" autocomplete="off">
 						</div>
-						%{-- <input name="term" type="text" class="form-control" placeholder="Apellido materno" 
-							autofocus="autofocus" autocomplete="off"> --}%
+						
 					</div>
 				</g:form>
 			</div>

@@ -60,7 +60,7 @@
 				</div>
 				
 				
-				<g:render template="/_common/direccionForm" />
+				<g:render template="domicilio" />
 				<fieldset>
 					<legend>Teléfonos y Correos</legend>
 					<div class="col-md-6">
@@ -113,7 +113,7 @@
 					
 					<div class="form-group">
 						<label for="cliente" class="col-sm-2 control-label">Cliente existente</label>
-						<g:hiddenField id="clienteId" name="socio.cliente.id" />
+						<g:hiddenField id="clienteId" name="cliente.id" />
 						<div class="col-sm-6">
 							<input id="cliente" name="cliente.nombre"  
 							autocomplete="off" type="text" class="form-control" 
@@ -163,17 +163,19 @@
 				  	    $('#cliente')
 				  	    .prop('disabled', false)
 				  	    .attr('required','required');
-				  	    $("#domicilioFiscal").attr('disabled',true);
-				  	     console.log('checked');
+
+				  	    $("[name^='cliente.direccion']").prop('disabled', true);
+				  	    $("[name='cliente.rfc']").prop('disabled',true);
+				  	     console.log('Seleccionando cliente existente');
 				  	} else {
 				  	    $('#cliente')
 				  	    .val(null)
 				  	    .prop('disabled', true)
 				  	    .removeAttr('required','required');
-				  	     console.log('unchecked');
-				  	     $('#clienteId')
-				  	    .val(null);
-				  	    $("#domicilioFiscal").removeAttr('disabled');
+				  	    $("[name^='cliente.direccion']").prop('disabled',false);
+				  	    $("[name='cliente.id']").val(null);
+				  	    $("[name='cliente.rfc']").prop('disabled',false);
+				  	    console.log('unchecked');
 				  	}
 				});
 				$("[name='cliente.nombre']").autocomplete({

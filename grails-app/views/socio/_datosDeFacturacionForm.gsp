@@ -24,7 +24,7 @@
 				colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="cfdiEmail" 
 				input-autocomplete="off"
-				input-class="form-control uppercase-field" 
+				input-class="form-control " 
 				colsLabel="col-md-4" cols="col-md-8"
 				/>
 		</div>

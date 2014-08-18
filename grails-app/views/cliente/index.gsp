@@ -29,13 +29,17 @@
 		</div>
 
 		<div class="btn-group">
-			<g:form class="form-inline" action="edit" >
+			<g:form class="form-inline" action="search" >
 				<div class="form-group">
 					<div class="input-group ">
 						<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-						<g:hiddenField id="clienteId" name="id"/>
-						<input id="cliente" name="term" type="text" class="form-control" placeholder="Buscar" 
-						autofocus="autofocus" autocomplete="off">
+						<input id="cliente" 
+							name="term" 
+							type="text" 
+							class="form-control" 
+							placeholder="Buscar" 
+							autofocus="autofocus" 
+							autocomplete="off">
 					</div>
 					
 				</div>
