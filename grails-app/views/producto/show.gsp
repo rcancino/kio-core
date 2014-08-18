@@ -48,7 +48,7 @@
   							<g:link class="btn btn-default btn-sm" action='index'> 
   								<span class="glyphicon glyphicon-arrow-left"> Catálogo
   							</g:link>
-  							<g:link class="btn btn-default btn-sm" action='edit2' id="${productoInstance.id}"> 
+  							<g:link class="btn btn-default btn-sm" action='edit' id="${productoInstance.id}"> 
   								<span class="glyphicon glyphicon-pencil"> Editar
   							</g:link>
   							<g:link class="btn btn-danger btn-sm" action='delete' onclick="return confirm('Seguro que desea eliminar este producto');"> 
