@@ -7,6 +7,7 @@ import spock.lang.Specification
 import spock.lang.Shared
 import spock.lang.Unroll
 import grails.buildtestdata.mixin.Build
+import java.math.RoundingMode
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
@@ -50,12 +51,13 @@ class VentaSpec extends Specification {
     	'tipo'|null
     	'moneda'|moneda
     	'status'|'PEDIDO'
-    	'importeBruto'|0.0
+    	'importe'|0.0
     	'descuento'|0.0
-    	'importeNeto'|0.0
+        'subTotal'|0.0
     	'impuesto'|0.0
     	'impuestoTasa'|0.016
-    	'total'|0.0
+        'total'|0.0
+    	
 
     }
 
@@ -64,27 +66,20 @@ class VentaSpec extends Specification {
     	def venta=Venta.buildWithoutSave(cliente:cliente,moneda:moneda)
     	
     	and:'agregamos n partidas'
-    	def cantidad=10.00
-    	def precio=150.00
-    	def descuentoTasa=0.05
-    	def items=5
-
-    	(0..items).each{
-    		venta.addToPartidas(VentaDet.buildWithoutSave(cantidad:cantidad,precioUnitario:precio,descuentoTasa:descuentoTasa))
-    	}
-    	def totalBruto=items*(cantidad*precio)
-    	def totalDescuento=items*(cantidad*precio*descuentoTasa)
-    	def totalNeto=totalBruto-totalDescuento
+        venta.addToPartidas(VentaDet.buildWithoutSave(importeBruto:100,importeNeto:90,descuento:10))
+        venta.addToPartidas(VentaDet.buildWithoutSave(importeBruto:500,importeNeto:490,descuento:10))
+        venta.addToPartidas(VentaDet.buildWithoutSave(importeBruto:100,importeNeto:90,descuento:10))
 
 
-    	when:'Actualizamos importes'
+    	when:'Al actualizar importes'
     	venta.actualizarImportes()
 
     	
     	then:
-    	venta.importeBruto==totalBruto
-    	venta.descuento==totalDescuento
-    	venta.imporetNeto==totalNeto
+    	venta.importe==700.00
+    	venta.descuento==30.00
+    	venta.total==670.00
+        venta.subTotal==(670.00/1.16).setScale(2,RoundingMode.HALF_EVEN)
 
     }
 }

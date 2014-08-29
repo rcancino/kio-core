@@ -15,6 +15,10 @@ class Producto {
     BigDecimal precioBruto
     BigDecimal descuento
     BigDecimal precioNeto
+	
+	String periodicidad
+	Integer duracion
+	
 
 	Date dateCreated
 	Date lastUpdated
@@ -30,7 +34,8 @@ class Producto {
 		precioBruto()
 		descuento()
 		precioNeto()
-        
+        periodicidad nullable:true, inList:['MENSUAL','TRIMESTRAL','SEMESTRAL','ANUAL','ESPECIAL']
+		duracion nullable:true
     }
 
     String toString(){

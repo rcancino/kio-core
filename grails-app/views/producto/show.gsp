@@ -20,6 +20,9 @@
   					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-12">
+								<g:if test="${flash.message}">
+                    				<span class="label label-warning">${flash.message}</span>
+             					</g:if>
 								<ul class="nav nav-tabs " role="tablist">
 								  <li class="active"><a href="#productoPanel" role="tab" data-toggle="tab">Producto</a></li>
 								  <li><a href="#ventasPanel" role="tab" data-toggle="tab">Ventas</a></li>

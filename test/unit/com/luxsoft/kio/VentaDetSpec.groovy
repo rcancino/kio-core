@@ -35,57 +35,51 @@ class VentaDetSpec extends Specification {
     	'producto'|'item'
     	'cantidad'|0.0
     	'precio'|0.0
-    	'importe'|0.0
+    	'importeBruto'|0.0
+        'descuento'|0.0
         'descuentoTasa'|0.0
-    	'descuento'|0.0
-    	'subTotal'|0.0
+    	'importeNeto'|0.0
+    	
 
     }
-    /*
-    void "VnetaDet debe tener un ToString adecuado"(){
-    	given:'Una partida de veneta'
-        def producto=Producto.build(clave:'SERV1',descripcion:'Servicio de prueba')
-    	def partida=VentaDet.buildWithoutSave(producto:producto)
-    	expect: 'El String adecuado para representar el preoducto'
-    	partida.toString()=='SERV1 (Servicio de prueba)'
-    }
-
+    
     @Unroll
-    void "Equals y hashCode adecuado entre (#xClave1,#xUnidad1) y (#xClave2,#xUnidad2) "(){
-    	given:'Una partida '
-    	def source=VentaDet.buildWithoutSave(clave:xClave1,unidad:xUnidad1)
-    	def target=VentaDet.buildWithoutSave(clave:xClave2,unidad:xUnidad2)
-
-    	expect:
-    	source.equals(target)==res
-
-    	where:
-    	xClave1|xClave2|xUnidad1|xUnidad2||res
-    	'SERV1'|'SERV1'|'PZA'|'PZA'||true
-    	'SERV1'|'SERV2'|'PZA'|'KILO'||false
-    	'SERV2'|'SERV2'|'KILO'|'KILO'||true
-    	'SERV2'|'SERV2'|'KILO'|'PZA'||false
-    		
-    }
-    */
-    @Unroll
-    void "El Sub Total de #cantidad productos a  precion  de :#precio con descuento de:#descuentoTasa debe ser #subTotal"(){
+    void "El Importe neto de #cantidad productos con precio:#precio con  #descuentoTasa% de descuento = #importeNeto"(){
     	given:'Una partida de venta'
     	def partida=VentaDet.buildWithoutSave(cantidad:cantidad,precio:precio,descuentoTasa:descuentoTasa)
 
     	expect:
     	partida.actualizarImportes()
-        .subTotal==subTotal
+        .importeNeto==importeNeto
 
     	where:
-    	cantidad|precio|descuentoTasa||subTotal
+    	cantidad|precio|descuentoTasa||importeNeto
     	1.00|1300.00|10|1170.00
         7.00|650.00|10|4095.00
         3.00|1200.00|10|3240.00
     }
 
-    /*
-    void "Implementacion de plus()"{}
-    */
+    void "El importe neto de una VentaDet cuando se asigna descuento directo"(){
+        given: 'Una VentaDet nueva'
+        def partida=VentaDet.buildWithoutSave(cantidad:10,precio:50,descuentoTasa:0.0)
+
+        when:'Asignamos un descuento de 100'
+        partida.descuento=100
+
+        then:'Al actualisar los importes el importeNeto debe ser 400'
+        partida.actualizarImportes().importeNeto==400.00
+    }
+
+    void "El importe neto sin iva de una VentaDet "(){
+        given: 'Una VentaDet nueva'
+        def partida=VentaDet.buildWithoutSave(cantidad:10,precio:116,descuentoTasa:0.0)
+
+        when:'Actualizamos los importes'
+        partida.actualizarImportes()
+
+        then:'Impuesto debe ser del 16%'
+        partida.importeNetoSinIva==1000.00
+    }
+
 
 }

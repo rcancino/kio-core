@@ -23,7 +23,7 @@
 			<li><a href="#facturacion" role="tab" data-toggle="tab">Facturación</a></li>
 		</ul>
 		<br/>
-		<g:form class="form-horizontal" action="save" >
+		<g:form name="socioForm" class="form-horizontal" action="save" >
 			
 			<g:hasErrors bean="${socioInstance}">
 				<div class="alert alert-danger">
@@ -215,6 +215,34 @@
 				 $('.mayusculas').keyup(function(){
     					this.value = this.value.toUpperCase();
 				 });
+
+				 $("#socioForm").submit(function(e){
+					 var tel1=$("#telefonoCasa").val()!=='';
+					 var tel2=$("#telefonoTrabajo").val()!=='';
+					 var cel=$("#celular").val()!=='';
+					 var valid=tel1||tel2||cel;
+					 console.log('Telefono 1 :'+tel1);
+					 console.log('Telefono 2 :'+tel2);
+					 console.log('Celular    :'+cel);
+					 if(!valid){
+						 e.preventDefault();
+						 alert("Debe registrar por lo menos un teléfono");
+						 return false;
+					 }
+					 return true;
+					 /*
+					 
+					 var res=(!tel1);
+					 if(!res){
+						 
+						 return false;
+					 }
+					 */
+					 
+					 //var res=confirm('Seguro que desea dar de alta?');
+					 //return res;
+				 });
+				 
 
 			});
 		</script>

@@ -142,9 +142,9 @@ class ImportadorService {
 					descripcion2:'Importado',
 					inventariable:row.INVENTARIABLE,
 					tipo:row.INVENTARIABLE?articulo:servicio,
-					precioBruto:row.PRECIOCONTADO,
+					precioBruto:row.PRECIOCONTADO*1.16,
 					descuento:0.0,
-					precioNeto:row.PRECIOCONTADO,
+					precioNeto:row.PRECIOCONTADO*1.16,
 					unidad:row.INVENTARIABLE?'PIEZA':'SERVICIO'
 					)
 				try{

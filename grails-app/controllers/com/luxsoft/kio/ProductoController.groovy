@@ -3,9 +3,12 @@ package com.luxsoft.kio
 import grails.converters.JSON
 
 class ProductoController {
+	
     static scaffold = true
 
     def importadorService
+	
+	def productoService
 	
 	def index(Long max){
 		params.max = Math.min(max ?: 15, 100)
@@ -20,6 +23,27 @@ class ProductoController {
 		importadorService.importarProductos()
 		redirect action:'index'
 	}
+	
+	def edit(Producto productoInstance){
+		render view:'edit2',model:[productoInstance:productoInstance]
+	}
+	
+	
+	def update(Producto productoInstance){
+		
+		productoInstance.validate()
+		if(productoInstance.hasErrors()){
+			flash.message="Errores de validacion"
+			render view:'edit2',model:[productoInstance:productoInstance]
+			return
+		}
+		//productoInstance.save failOnError:true
+		productoInstance=productoService.save(productoInstance)
+		flash.message="Producto actualizado "+productoInstance.id
+		//println 'Salvando: '+productoInstance+' Periodicidad: '+productoInstance.periodicidad
+		redirect action:'show',params:[id:productoInstance.id]
+	}
+	
 	
 	def search(){
 		def s=params.term?:'%'

@@ -37,6 +37,12 @@
 				<p class="form-control-static">${productoInstance.unidad}</p>
 			</div>
 		</div>
+		<div class="form-group">
+			<label class="col-sm-4 control-label">Periodicidad</label>
+			<div class="col-sm-8">
+				<p class="form-control-static">${productoInstance.periodicidad}</p>
+			</div>
+		</div>
 	</form>	
 </div>
 

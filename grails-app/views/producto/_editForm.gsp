@@ -1,5 +1,5 @@
-<form class="form-horizontal" role="form" action="update">
-	<g:hiddenField name="id" value="${productoInstance.id}"/>
+<g:form class="form-horizontal" role="form" action="update" id="${productoInstance.id}">
+	
 	<g:hiddenField name="version" value="${productoInstance.version}"/>
 <f:with bean="${productoInstance}">
 
@@ -8,9 +8,12 @@
 		<f:field property="clave" input-class="form-control"/>
 		<f:field property="descripcion" input-class="form-control"/>
 		<f:field property="descripcion2" input-class="form-control"/>
-		<f:field property="tipo" input-class="form-control"/>
-		<f:field property="inventariable" input-class="form-control"/>
 		<f:field property="unidad" input-class="form-control"/>
+		<f:field property="inventariable" input-class="form-control"/>
+		<f:field property="tipo" input-class="form-control"/>
+		<f:field property="periodicidad" input-class="form-control"/>
+		<f:field property="duracion" input-class="form-control" input-type="text"/>
+		
 </div>
 
 <div class="col-md-6">
@@ -25,4 +28,4 @@
 	</div>
 </div>
 </f:with>
-</form>
+</g:form>

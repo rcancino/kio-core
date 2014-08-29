@@ -15,16 +15,15 @@ class VentaDet {
 
 	BigDecimal precio=0.0
 
-	BigDecimal importe=0.0
+	BigDecimal importeBruto=0.0
+
+    BigDecimal descuento=0.0
 
     BigDecimal descuentoTasa=0.0
 
-	BigDecimal descuento=0.0
+    BigDecimal importeNeto=0.0   
 
-	BigDecimal subTotal=0.0
-
-
-    
+    BigDecimal importeNetoSinIva=0.0
 
 	String comentario
 
@@ -37,25 +36,35 @@ class VentaDet {
     static constraints = {
     	cantidad(scale:2)
     	precio(scale:2)
-    	importe(scale:2)
+    	importeBruto(scale:2)
     	descuento(scale:2)
         descuentoTasa(scale:2,maxSize:90)
-    	subTotal(scale:2)
+    	importeNeto(scale:2)
     	comentario nullable:true
         socio nullable:true
     }
 
-    static transients = []
+    static transients = ['importeNetoSinIva']
 
     def actualizarImportes(){
-        importe=precio*cantidad 
-        descuento=(descuentoTasa/100)*importe
-        subTotal=importe-descuento
+        
+        importeBruto=precio*cantidad 
+
+        if(descuentoTasa){
+            descuento=(descuentoTasa/100)*importeBruto
+        }
+        
+        importeNeto=importeBruto-descuento
+        
         return this
     }
 
     String toString(){
     	"${producto}  ${cantidad}  ${precio}"
+    }
+
+    def getImporteNetoSinIva(){
+        return MonedaUtils.calcularImporteDelTotal(importeNeto)
     }
    
 

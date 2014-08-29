@@ -112,12 +112,9 @@ class VentaService {
         venta.partidas.each{ det ->
             det.actualizarImportes()
         }
-        venta.total=venta.partidas.sum 0.0 ,{it.subTotal}
-        venta.subTotal=MonedaUtils.calcularImporteDelTotal(venta.total)
-        venta.impuesto=MonedaUtils.calcularImpuesto(venta.subTotal)
-        venta.importe=venta.subTotal
-        venta.descuento=0.0
-        
+        //venta.descuento=0.0
+        //venta.total=venta.partidas.sum 0.0 ,{it.subTotal}
+        venta.actualizarImportes()
         
     }
 

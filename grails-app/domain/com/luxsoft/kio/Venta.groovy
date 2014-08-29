@@ -10,9 +10,7 @@ import com.luxsoft.kio.MonedaUtils
 class Venta {
 
 	Cliente cliente
-
 	
-
 	@BindingFormat('dd/MM/yyyy')
 	Date fecha
 
@@ -34,6 +32,8 @@ class Venta {
 
 	BigDecimal impuesto=0.0
 
+	BigDecimal impuestoTasa=16
+
 	BigDecimal total=0
 	
 	Cfdi cfdi
@@ -46,15 +46,14 @@ class Venta {
     static constraints = {
     	cliente()
     	fecha()
-    	
     	moneda()
     	status inList:['COTIZACION','PEDIDO','VENTA','FACTURADA','CANCELADA']
     	importe(scale:2)
     	descuento(scale:2)
     	subTotal(scale:2)
     	impuesto(scale:2)
+    	impuestoTasa(scale:2)
     	total(scale:2)
-		formaDePago(nullable:false,maxSize:30)
 		cfdi nullable:true
 		tipo nullable:true
     	
@@ -64,8 +63,14 @@ class Venta {
 		partidas cascade: "all-delete-orphan"
 	}
 	
-	static transients = ['importeConIva','descuentoConIva','subTotalConIva']
-   
+	def actualizarImportes(){
+		importe=partidas.sum 0.0,{it.importeBruto}
+		descuento=partidas.sum 0.0,{it.descuento}
+		total=partidas.sum 0.0,{it.importeNeto}
+		subTotal=MonedaUtils.calcularImporteDelTotal(total)
+		impuesto=total-subTotal
+		return this
+	}
 	
 	
 }

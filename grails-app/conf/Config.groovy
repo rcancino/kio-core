@@ -95,6 +95,10 @@ environments {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
+    test{
+        grails.plugin.springsecurity.debug.useFilter = false
+        grails.plugin.springsecurity.active = false
+    }
 }
 
 // log4j configuration
