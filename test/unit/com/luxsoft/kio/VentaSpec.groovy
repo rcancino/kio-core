@@ -9,6 +9,7 @@ import spock.lang.Unroll
 import grails.buildtestdata.mixin.Build
 import java.math.RoundingMode
 
+
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
@@ -74,12 +75,30 @@ class VentaSpec extends Specification {
     	when:'Al actualizar importes'
     	venta.actualizarImportes()
 
-    	
     	then:
     	venta.importe==700.00
     	venta.descuento==30.00
-    	venta.total==670.00
         venta.subTotal==(670.00/1.16).setScale(2,RoundingMode.HALF_EVEN)
+        venta.total==670.00
 
     }
+
+    void "El saldo  de una venta es el total- abonos"(){
+        given: 'Una venta'
+        def venta=Venta.buildWithoutSave(cliente:cliente,moneda:moneda,total:5000.00)
+        
+        
+
+        expect :'El saldo debe ser el total de la venta'
+        venta.saldo==venta.total
+    }
+
+    // void "Venta debe implementar Comparable"(){
+    //     given: 'Una venta'
+    //     def venta=Venta.buildWithoutSave(cliente:cliente,moneda:moneda,total:5000.00)
+
+    //     expect: 'la instancia de venta debe implementar Comprable'
+    //     venta instanceof Comparable
+    // }
+
 }

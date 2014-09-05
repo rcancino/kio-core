@@ -51,13 +51,13 @@
 			</div>
 		</div>
 
-		%{-- <div class="form-group">
+		<div class="form-group">
 			<label for="tipo" class="col-sm-2 control-label">Tipo</label>
 			<div class="col-sm-4">
 				<f:input bean="${ventaInstance}" property="tipo" class="form-control" input-readonly="readonly"/>
 			</div>
 
-		</div> --}%
+		</div>
 
 		<div class="form-group">
 			<label for="fecha" class="col-sm-2 control-label">Fecha</label>

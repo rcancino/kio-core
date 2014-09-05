@@ -63,3 +63,9 @@ span.summary.ng-invalid {
 span.summary.ng-valid {
 	color: green; 
 }
+
+#carousel-home {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}

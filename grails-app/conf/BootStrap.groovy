@@ -30,7 +30,8 @@ class BootStrap {
 					,rfc:'XAXX010101000'
 					,tipo:TipoDeCliente.findOrSaveWhere(clave:'MOSTRADOR',descripcion:'Cliente mostrador no requiere iva desgosado')
 					)
-				TipoDeVenta.findOrSaveWhere(clave:'MOSTRADOR',descripcion:'Venta publico en general')
+				TipoDeVenta.findOrSaveWhere(clave:'MEMBRESIA',descripcion:'Venta para el cobro de membresias')
+				TipoDeVenta.findOrSaveWhere(clave:'GENERAL',descripcion:'Venta general de productos y servicios')
 
 				def folioSocio=CfdiFolio.findWhere(serie:'SOCIOS')
 				

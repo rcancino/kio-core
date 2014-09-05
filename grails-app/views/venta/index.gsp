@@ -60,6 +60,7 @@
 							<th>Importe</th>
 							<th>Impuesto</th>
 							<th>Total</th>
+							<th>Cobrar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -79,9 +80,15 @@
 								<td>${fieldValue(bean:row,field:"cliente.rfc")}</td>
 								<td>${fieldValue(bean:row,field:"status")}</td>
 								<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
-								<td><g:formatNumber number="${row.importeNeto}" type="currency"/></td>
+								<td><g:formatNumber number="${row.subTotal}" type="currency"/></td>
 								<td><g:formatNumber number="${row.impuesto}" type="currency"/></td>
 								<td><g:formatNumber number="${row.total}" type="currency"/></td>
+								<td>
+									<g:link action="mandarFacturar" id="${row.id}">
+										<span class="glyphicon glyphicon-shopping-cart"></span>
+									</g:link>
+									
+								</td>
 							</tr>
 						</g:each>
 					</tbody>

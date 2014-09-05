@@ -41,7 +41,8 @@
 			<div class="form-group">
 				<label for="tipo" class="col-sm-2 control-label">Tipo</label>
 				<div class="col-sm-6">
-					<f:input bean="${ventaInstance}" property="tipo" class="form-control"/>
+					%{-- <f:input bean="${ventaInstance}" property="tipo" class="form-control"/> --}%
+					<p class="form-control-static">${ventaInstance.tipo}</p>
 				</div>
 
 			</div>
@@ -49,9 +50,10 @@
 			<div class="form-group">
 				<label for="fecha" class="col-sm-2 control-label">Fecha</label>
 				<div class="col-sm-6">
-					<input id="fecha" name="fecha" type="text"  
+					%{-- <input id="fecha" name="fecha" type="text"  
 						value="${g.formatDate(date:ventaInstance.fecha,format:'dd/MM/yyyy') }"
-						class="form-control" autocomplete="off">
+						class="form-control" autocomplete="off"> --}%
+					<p class="form-control-static">${g.formatDate(date:ventaInstance.fecha,format:'dd/MM/yyyy') }</p>
 				</div>
 			</div>
 		</g:form>
@@ -132,7 +134,7 @@
 		</g:link>
 		
 		<button id="next" class="btn btn-success btn-sm">
-			<span class="glyphicon glyphicon-ok"></span> Actualizar
+			<span class="glyphicon glyphicon-ok"></span> Terminar
 		</button>
 		
 		

@@ -127,6 +127,12 @@
     	$("#cobrar").on('click',function(e){
     		var selected=getSelected();
     		console.log('Seleccionados: '+selected);
+    		if(selected.length===0){
+    			alert("Debe seleccionar al menos una venta");
+    			return;
+    		}else{
+    			//Pendiente de implementar Crear un  dato post 
+    		}
     		//
     	});
 

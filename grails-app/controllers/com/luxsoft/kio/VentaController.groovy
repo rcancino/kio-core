@@ -62,10 +62,11 @@ class VentaController {
         [ventaInstance:ventaInstance]
     }
 
-    def update(Long id){
-        log.info 'Editando venta:'
-        def ventaInstane=Venta.get(id)
-        [ventaInstance:ventaInstance]
+    def update(Venta ventaInstance){
+        log.info 'Actualizando ventas:'
+        flash.message="Venta $ventaInstance.id actualizada"
+        chain action:'index'
+        //[ventaInstance:ventaInstance]
     }
 
     def getServiciosJSON(Long clienteId) {

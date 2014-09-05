@@ -12,7 +12,9 @@ class VentaService {
 
     def salvar(Venta venta) {
     	try {
-            registrarPagoMembresia(venta)
+            if(venta.tipo.clave=='MEMBRESIA'){
+                registrarPagoMembresia(venta)
+            }
 			actualizarTotales(venta)
     		venta.save failOnError:true
     	}

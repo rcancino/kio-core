@@ -30,14 +30,14 @@
 					<g:formatNumber number="${row.precio}" type="currency"/>
 				</td>
 				<td>
-					<g:formatNumber number="${row.importe}" type="currency"/>
+					<g:formatNumber number="${row.importeBruto}" type="currency"/>
 				</td>
 				<td>
 					<g:formatNumber number="${row.descuento}" type="currency"/>
 				</td>
 				
 				<td>
-					<g:formatNumber number="${row.subTotal}" type="currency"/>
+					<g:formatNumber number="${row.importeNeto}" type="currency"/>
 				</td>
 				<td>
 					<g:link controller="ventaDet" action="delete" id="${row.id}" onclick="return confirm('Eliminar producto');">

@@ -3,11 +3,15 @@ package com.luxsoft.kio
 import org.grails.databinding.BindingFormat
 import com.luxsoft.cfdi.Cfdi
 import groovy.transform.EqualsAndHashCode
+import groovy.transform.Sortable
 import com.luxsoft.kio.MonedaUtils
 
 //@EqualsAndHashCode(includes='apellidoPaterno,apellidoMaterno,nombres')
 //@ToString(includes='nombre',includeNames=true,includePackage=false)
+//@Sortable(includes="id")
 class Venta {
+
+	
 
 	Cliente cliente
 	
@@ -35,6 +39,10 @@ class Venta {
 	BigDecimal impuestoTasa=16
 
 	BigDecimal total=0
+
+	BigDecimal saldo
+
+	BigDecimal abonos=0
 	
 	Cfdi cfdi
 
@@ -62,6 +70,9 @@ class Venta {
     static mapping = {
 		partidas cascade: "all-delete-orphan"
 	}
+
+	static transients = ['saldo']
+
 	
 	def actualizarImportes(){
 		importe=partidas.sum 0.0,{it.importeBruto}
@@ -70,6 +81,10 @@ class Venta {
 		subTotal=MonedaUtils.calcularImporteDelTotal(total)
 		impuesto=total-subTotal
 		return this
+	}
+
+	def getSaldo(){
+		return total-abonos
 	}
 	
 	

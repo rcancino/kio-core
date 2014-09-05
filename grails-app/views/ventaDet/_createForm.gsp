@@ -57,14 +57,14 @@
 			</div>
 		</div>
 
-		<div class="form-group">
+		%{-- <div class="form-group">
 			<label for="importeNeto" class="col-sm-2 control-label">Neto</label>
 			<div class="col-sm-4">
 				<input id="subTotal" class="form-control data-moneda" 
 					name="subTotal"  value="${ventaDetInstance?.subTotal }"
 					autocomplete="off" disabled>
 			</div>
-		</div>
+		</div> --}%
 
 
 	
@@ -83,7 +83,7 @@
 				$("#productoId").val(ui.item.id);
 				$("#productoLabel").text(ui.item.descripcion);
 				$("#precio").autoNumeric('set', ui.item.precioNeto);
-				$("#subTotal").autoNumeric('set', ui.item.precioNeto);
+				//$("#subTotal").autoNumeric('set', ui.item.precioNeto);
 				$("#precio").autoNumeric('set', ui.item.precioBruto);
 				validar();		
 			}
