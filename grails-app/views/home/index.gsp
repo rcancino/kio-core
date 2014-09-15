@@ -76,7 +76,7 @@
 					<h2>Socios</h2>
 					<small>Administración de socios</small>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, commodi perspiciatis quae sequi. Dignissimos, et asperiores dolorem magnam suscipit enim laboriosam, optio, ipsum dolores aliquid sequi. Illum harum laboriosam qui obcaecati. Earum dolores commodi molestiae magni reprehenderit vel dignissimos libero ut a dicta. Placeat inventore odit, beatae cum iure dolor?</p>
-					<button class="btn btn-primary">Acceso</button>
+					<button class="btn btn-primary">Socios</button>
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -84,7 +84,7 @@
 					<h2>Ventas</h2>
 					<small>Ventas</small>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, commodi perspiciatis quae sequi. Dignissimos, et asperiores dolorem magnam suscipit enim laboriosam, optio, ipsum dolores aliquid sequi. Illum harum laboriosam qui obcaecati. Earum dolores commodi molestiae magni reprehenderit vel dignissimos libero ut a dicta. Placeat inventore odit, beatae cum iure dolor?</p>
-					<button class="btn btn-primary">Acceso</button>
+					<button class="btn btn-primary">Ventas</button>
 				</div>
 			</div>
 		</div>

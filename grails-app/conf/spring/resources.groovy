@@ -1,4 +1,6 @@
 // Place your Spring DSL code here
+import org.springframework.web.servlet.i18n.FixedLocaleResolver
+
 import com.luxsoft.cfdi.CfdiCadenaBuilder
 import com.luxsoft.cfdi.CfdiSellador
 import com.luxsoft.cfdi.CfdiTimbrador
@@ -34,4 +36,6 @@ beans = {
 		cadenaBuilder=ref("cfdiCadenaBuilder")
 	}
 	cfdiTimbrador(CfdiTimbrador){}
+	
+	localeResolver(FixedLocaleResolver,Locale.US)
 }

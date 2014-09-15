@@ -4,15 +4,22 @@ package com.luxsoft.kio
 
 import spock.lang.*
 
+
 /**
  *
  */
 class CobroIntegrationSpec extends Specification {
 
-	def cliente
+	@Shared
+    def venta
+
+    @Shared
+    def cliente
 
     def setup() {
-    	cliente=Cliente.build(nombre:'TESTER')
+        cliente=Cliente.build(nombre:'Albus Dumbledore')
+        venta=Venta.build(total:5000.00,cliente:cliente)
+        assert Venta.get(venta.id).saldo==5000.00
     }
 
     def cleanup() {
@@ -21,7 +28,7 @@ class CobroIntegrationSpec extends Specification {
     void "Salvar un cobro nuevo"() {
     	given: 'Un cobro nuevo'
 
-    	def cobro=Cobro.buildWithoutSave(cliente:cliente)
+    	def cobro=Cobro.buildWithoutSave(venta:venta,importe:venta.saldo)
 
     	when:'Salvamos el cobro'
     	cobro.save()
@@ -33,35 +40,23 @@ class CobroIntegrationSpec extends Specification {
 
     }
 
-    void "Salvar un cobro con partidas"(){
-    	given: 'Un cobro nuevo'
-    	def cobro=Cobro.buildWithoutSave(cliente:cliente,formaDePago:FormaDePago.EFECTIVO)
-    	
+    @Unroll
+    void "Un saldo de una venta nueva de #total despues de un cobro de #pago debe ser #saldo"(){
+        given: 'Una venta de #importe'
+        def sale=Venta.build(cliente:cliente,total:total)
+        and:'Un cobro de la misma'
+        def cobro=Cobro.build(venta:sale,importe:sale.saldo)
 
-    	when:'Agregamos algunas partidas'
-    	/*
-    	(1..3).each{
-    		def venta=Venta.build(cliente:cliente,total:1000*it)
-    		//cobro.addToPartidas(venta:venta,importe:venta.total,saldo:venta.getSaldo())
-    	}
-    	*/
-    	def venta=Venta.build(cliente:cliente,total:1000)
-    	def venta2=Venta.build(cliente:cliente,total:2000)
-    	CobroDet.build(venta:venta,cobro:cobro)
-    	CobroDet.build(venta:venta2,cobro:cobro)
-    	
-    	then:'El cobro contempla 3 ventas'
-    	cobro.partidas.size()==2
-    	
-    	when:'Salvamos el cobro'
-    	cobro.save()
+        expect: 'El saldo de la venta debe ser '+saldo
+        Venta.get(sale.id).saldo==saldo
 
-    	then: 'El cobro y sus partidas persisten exitosamente en la base de datos'
-    	cobro.errors.errorCount==0
-    	cobro.id
-    	Cobro.get(cobro.id).partidas.size()==2
-    	def found=Cobro.get(cobro.id)
-    	found.partidas.each{ println it}
+        where:
+        total|pago|saldo
+        5000.00|5000.00|0.0
+        10000.00|10000.00|0.0
+        150000.00|100000.00|50000.00
 
     }
+
+   
 }
