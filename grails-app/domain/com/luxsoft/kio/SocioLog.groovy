@@ -2,10 +2,9 @@ package com.luxsoft.kio
 
 class SocioLog {
 
-	Long socioId
-	String nomeroDeSocio
+	Long socio_id
 	String nombre
-	String numeroDeTarjeta
+	String tarjeta
 	Boolean activo
 	Date replicado
 
