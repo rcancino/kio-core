@@ -32,6 +32,29 @@
 	<div class="col-md-8">
 		<g:form name="cobrarForm" action="update" class="form-horizontal" id="${ventaInstance.id}">
 			
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Cliente</label>
+			    <div class="col-sm-8">
+			      <p class="form-control-static">${ventaInstance?.cliente}</p>
+			    </div>
+			 </div>
+
+
+			<f:with bean="${cobroInstance}">
+				<f:field property="formaDePago" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-4" />
+			</f:with>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Venta</label>
+			    <div class="col-sm-3">
+			      <p class="form-control-static">${ventaInstance?.id}</p>
+			    </div>
+			    <label class="col-sm-3 control-label">Fecha</label>
+			    <div class="col-sm-3">
+			      <p class="form-control-static"><g:formatDate date="${ventaInstance?.fecha}" format="dd/MM/yyyy"/></p>
+			    </div>
+			 </div>
+
 		</g:form>
 	</div>		
 	<div class=" col-md-4">
@@ -73,12 +96,21 @@
 		
 
 		<g:if test="${ventaInstance.cfdi==null}">
+			<g:link class="btn btn-default btn-sm" controller="venta"
+				action="cancelar" id="${ventaInstance.id}" 
+				onclick="return confirm('Cancelar la venta y regresarla a pedidos');">
+				<span class="glyphicon glyphicon-remove"></span> Cancelar
+			</g:link>
+		</g:if>
+
+		<g:if test="${ventaInstance.cfdi==null}">
 			<g:link class="btn btn-danger btn-sm" controller="venta"
 				action="delete" id="${ventaInstance.id}" 
-				onclick="return confirm('Eliminar el pedido');">
+				onclick="return confirm('Eliminar la venta');">
 				<span class="glyphicon glyphicon-trash"></span> Eliminar
 			</g:link>
 		</g:if>
+
 		<g:else>
 			<g:link class="btn btn-default btn-sm" 
 				controller="cfdi" action="enviar" id="${ventaInstance.id}" >

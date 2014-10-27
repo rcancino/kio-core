@@ -75,7 +75,20 @@
 								onclick="return confirm('Eliminar el socio');">
 								<span class="glyphicon glyphicon-trash"></span> Eliminar
 							</g:link>
-							
+							<g:if test="${socioInstance.activo}">
+								<g:link class="btn btn-warning " 
+									action="suspender" id="${socioInstance.id}" 
+									onclick="return confirm('Suspender el socio ?');">
+								<span class="glyphicon glyphicon-ban-circle"></span> Suspender
+								</g:link>
+							</g:if>
+							<g:else>
+								<g:link class="btn btn-success " 
+									action="activar" id="${socioInstance.id}" 
+									onclick="return confirm('Activar socio?');">
+								<span class="glyphicon glyphicon-thumbs-up"></span> Activar
+								</g:link>
+							</g:else>
 						</div>
 						
 					</div>

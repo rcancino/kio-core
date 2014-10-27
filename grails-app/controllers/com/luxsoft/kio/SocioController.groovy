@@ -129,6 +129,16 @@ class SocioController {
 		}
 	}
 
+	def activar(Socio socio){
+		socio=socioService.activar(socio, false);
+		redirect action:'edit',params:[id:socio.id]
+	}
+	
+	
+	def suspender(Socio socio){
+		socio=socioService.activar(socio, true);
+		redirect action:'edit',params:[id:socio.id]
+	}
 	
 
 	def getSociosJSON() {

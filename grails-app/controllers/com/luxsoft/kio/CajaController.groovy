@@ -13,6 +13,9 @@ class CajaController {
     }
 
     def cobrar(Venta ventaInstance){
-    	[ventaInstance:ventaInstance]	
+		def cobroInstance=new Cobro(venta:ventaInstance,importe:ventaInstance.total)
+    	[cobroInstance:cobroInstance,ventaInstance:ventaInstance]	
     }
 }
+
+

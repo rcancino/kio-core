@@ -64,21 +64,18 @@ class SocioService {
     def delete(Socio socio){
         socio.delete flush:true
     }
-    /*
-    Cliente createCliente(Socio socio){
-        if(cliente==null){
-            def target=new Direccion()
-            BeanUtils.copyProperties(socio.direccion,target)
-            cliente=new Cliente(
-                nombre:"$apellidoPaterno $apellidoMaterno $nombres ",
-                rfc:"'XAXX010101000'",
-                direccion:target,
-                tipo:TipoDeCliente.findByClave('MOSTRADOR')
-
-            )
-        }
-    }
-    */
+	
+    def Socio activar(Socio socio,boolean valor){
+		socio.activo=valor
+		socio.save()
+		SocioLog log=new SocioLog()
+		log.nombreDeSocio=socio.nombre
+		log.numeroDeSocio=socio.numeroDeSocio
+		log.numeroDeTarjeta=socio.tarjeta
+		log.activo=socio.activo
+		log.save()
+		
+	}
 }
 
 

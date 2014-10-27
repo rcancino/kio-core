@@ -12,7 +12,7 @@
 			<f:field property="sexo" input-required input-class="form-control" colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="numeroDeSocio" input-required input-class="form-control" colsLabel="col-md-4" cols="col-md-8"
 			input-readonly="readonly"/>
-			
+			<f:field property="tarjeta"  input-class="form-control" colsLabel="col-md-4" cols="col-md-8" label="Tarjeta No"/> 
 		</div>
 		<div class="col-md-6">
 			<f:field property="telefonoCasa" input-class="form-control"  colsLabel="col-md-4" cols="col-md-8"/>
@@ -20,6 +20,8 @@
 			<f:field property="celular" input-class="form-control" colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="email" input-class="form-control "  colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="email2" input-class="form-control " colsLabel="col-md-4" cols="col-md-8"/>
+			<f:field property="activo"  input-class="form-control" colsLabel="col-md-4" cols="col-md-8"
+				input-readonly="readonly"/>
 		</div>
 	</div>
 	

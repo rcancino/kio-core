@@ -7,6 +7,8 @@ import groovy.transform.ToString
 class Cobro {
 
 	Venta venta
+	
+	Cliente cliente
 
 	@BindingFormat('dd/MM/yyyy')
 	Date fecha
@@ -25,17 +27,8 @@ class Cobro {
 	
 
     static constraints = {
-
+		
     }
 
-    def afterInsert() {
-    	
-    	def abonos=Cobro.executeQuery("select sum(c.importe) from Cobro c where c.venta=?",[venta]).get(0)
-    	venta.abonos=abonos
-    }
-
-    def afterDelete() {
-    	def abonos=Cobro.executeQuery("select sum(c.importe) from Cobro c where c.venta=?",[venta]).get(0)
-    	venta.abonos=abonos
-    }
+    
 }

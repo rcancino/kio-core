@@ -38,6 +38,10 @@ class Socio {
 
     String numeroDeSocio
 
+    String tarjeta
+
+    Boolean activo=true;
+
 	Date dateCreated
 	Date lastUpdated
 
@@ -57,6 +61,7 @@ class Socio {
         membresia unique:true
         foto nullable:true
         numeroDeSocio nullable:true
+        tarjeta nullable:true,maxSize:50
     }
 
     

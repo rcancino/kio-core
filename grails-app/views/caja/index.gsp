@@ -35,10 +35,13 @@
 			<g:link action="index" class="btn btn-default ">
 				<span class="glyphicon glyphicon-repeat"></span> Refrescar
 			</g:link>
+			
 			<button id="cobrar" class="btn btn-default">
 				<span class="glyphicon glyphicon-usd"></span> Cobrar
 			</button>
-			
+			<g:link action="index" controller="cobro" class="btn btn-default ">
+				<span class="glyphicon glyphicon-th-list"></span> Cobros registrados
+			</g:link>
 		</div><!-- end .row toolbar -->
 
 		<br/>
@@ -63,12 +66,12 @@
 						<g:each in="${ventaInstanceList}" var="row">
 							<tr id="${row.id}">
 								<td >
-									<g:link  action="${row.status=='PEDIDO'?'cobrar':'show'}" id="${row.id}">
+									<g:link  action="${row.status=='VENTA'?'cobrar':'show'}" id="${row.id}">
 										${fieldValue(bean:row,field:"id")}
 									</g:link>
 								</td>
 								<td>
-									<g:link action="${row.status=='PEDIDO'?'cobrar':'show'}" id="${row.id}">
+									<g:link action="${row.status=='VENTA'?'cobrar':'show'}" id="${row.id}">
 										${fieldValue(bean:row,field:"cliente.nombre")}
 									</g:link>
 									
