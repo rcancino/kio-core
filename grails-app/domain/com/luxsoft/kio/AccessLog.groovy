@@ -1,8 +1,8 @@
 package com.luxsoft.kio
 
-class SocioLog {
+class AccessLog {
 
-	Long socio_id
+	Long numero
 	String nombre
 	String tarjeta
 	Boolean activo
@@ -14,4 +14,5 @@ class SocioLog {
     static constraints = {
     	replicado nullable:true
     }
+
 }

@@ -30,7 +30,7 @@ navigation={
 		}
 		consultas(){
 			socios()
-			acceso()
+			acceso(controller:'accessLog',action:'index')
 			reportes()
 			
 		}

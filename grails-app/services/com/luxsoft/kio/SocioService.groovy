@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils
 import com.luxsoft.cfdi.CfdiFolio
 
 import org.apache.commons.lang.StringUtils
+import org.apache.commons.lang.math.NumberUtils;
 
 @Transactional
 class SocioService {
@@ -68,14 +69,26 @@ class SocioService {
     def Socio activar(Socio socio,boolean valor){
 		socio.activo=valor
 		socio.save()
-		SocioLog log=new SocioLog()
-		log.nombreDeSocio=socio.nombre
-		log.numeroDeSocio=socio.numeroDeSocio
-		log.numeroDeTarjeta=socio.tarjeta
-		log.activo=socio.activo
-		log.save()
+		logAccess(socio)
+        return socio
 		
 	}
+
+    
+
+    def AccessLog logAccess(Socio socio){
+        AccessLog log=new AccessLog()
+        log.nombre=socio.nombre
+        log.numero=NumberUtils.toLong(socio.numeroDeSocio)
+        log.tarjeta=socio.tarjeta
+        log.activo=socio.activo
+		if(log.validate()){
+			log.save failOnError:true
+			return log
+		}
+		return null
+        
+    }
 }
 
 

@@ -130,13 +130,13 @@ class SocioController {
 	}
 
 	def activar(Socio socio){
-		socio=socioService.activar(socio, false);
+		socio=socioService.activar(socio, !socio.activo)
 		redirect action:'edit',params:[id:socio.id]
 	}
 	
 	
 	def suspender(Socio socio){
-		socio=socioService.activar(socio, true);
+		socio=socioService.activar(socio, !socio.activo)
 		redirect action:'edit',params:[id:socio.id]
 	}
 	
@@ -164,6 +164,22 @@ class SocioController {
 
 	def spa(){
 		render view:'spa/create'
+	}
+
+	def actualizarTarjeta(Socio socioInstance){
+		log.info 'Actualizando tarjeta socio: '+socioInstance
+		def tarjeta=params.tarjeta
+		def found=Socio.find("from Socio s where s.id!=? and s.tarjeta=?",[socioInstance.id,tarjeta])
+		if(found){
+			flash.message="No se puede asignar tarjeta ya que está asignada a: $found"
+			redirect action:'edit',params:[id:socioInstance.id]
+			return	
+		}
+		socioInstance.tarjeta=params.tarjeta
+		socioInstance.save flush:true
+		socioService.logAccess(socioInstance)
+		flash.message="Tarjeta actualizada"
+		redirect action:'edit',params:[id:socioInstance.id]
 	}
 	
 	

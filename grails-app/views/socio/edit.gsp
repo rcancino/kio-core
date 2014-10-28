@@ -15,7 +15,12 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="well">
-					<h3>${socioInstance} (${socioInstance.numeroDeSocio})</h3>
+					<h3>${socioInstance} (${socioInstance.numeroDeSocio})  ${socioInstance.activo?'Activo':''}
+						<g:if test="${!socioInstance.activo}">
+                    		<span class="label label-danger"><strong>SUSPENDIDO</strong></span>
+                		</g:if> 
+					</h3>
+					
 					<g:if test="${flash.message}">
                     	<span class="label label-warning">${flash.message}</span>
                 	</g:if> 
@@ -60,7 +65,7 @@
 					</div>
 
 					<div class="form-group">
-						<div class="buttons col-md-offset-2 col-md-4">
+						<div class="buttons col-md-offset-2 col-md-6">
 							
 							<g:link class="btn btn-default " action="index" >
 								<span class="glyphicon glyphicon-arrow-left"></span> 
@@ -89,6 +94,7 @@
 								<span class="glyphicon glyphicon-thumbs-up"></span> Activar
 								</g:link>
 							</g:else>
+							
 						</div>
 						
 					</div>
@@ -122,11 +128,13 @@
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
-				
+			
+
+			<g:render template="tarjetaDialog"/>	
 
 			
 		</div>
-
+	
 	</div>
 <script type="text/javascript">
 	$(document).ready(function(){

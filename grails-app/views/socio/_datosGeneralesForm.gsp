@@ -12,7 +12,27 @@
 			<f:field property="sexo" input-required input-class="form-control" colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="numeroDeSocio" input-required input-class="form-control" colsLabel="col-md-4" cols="col-md-8"
 			input-readonly="readonly"/>
-			<f:field property="tarjeta"  input-class="form-control" colsLabel="col-md-4" cols="col-md-8" label="Tarjeta No"/> 
+			<div class="form-group">
+			    <label class="col-sm-4 control-label">Tarjeta</label>
+			    <div class="col-sm-5">
+			      <p class="form-control-static">${socioInstance.tarjeta}</p>
+			    </div>
+			    <div class="col-sm-2">
+			    	<a href="#cambioDeTarjetaForm" data-toggle="modal" class="btn btn-info ">
+						Actualizar
+					</a>
+					
+			    </div>
+			</div>
+
+			%{-- <div class="form-group">
+				<label for="tarjetaField"></label>
+				<a href="#" data-toggle="" class="btn btn-default">
+									<span class="glyphicon glyphicon-thumbs-up"></span> Tarjeta
+				</a>
+			</div> --}%
+			
+			
 		</div>
 		<div class="col-md-6">
 			<f:field property="telefonoCasa" input-class="form-control"  colsLabel="col-md-4" cols="col-md-8"/>
@@ -20,8 +40,7 @@
 			<f:field property="celular" input-class="form-control" colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="email" input-class="form-control "  colsLabel="col-md-4" cols="col-md-8"/>
 			<f:field property="email2" input-class="form-control " colsLabel="col-md-4" cols="col-md-8"/>
-			<f:field property="activo"  input-class="form-control" colsLabel="col-md-4" cols="col-md-8"
-				input-readonly="readonly"/>
+			
 		</div>
 	</div>
 	
