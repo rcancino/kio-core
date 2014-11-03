@@ -71,6 +71,12 @@
 			<f:field property="total" input-class="form-control money-data text-right" input-type="text" input-id="total"
 			cols="col-sm-6" colsLabel="col-sm-4" label="Total"
 			/>
+			<div class="form-group">
+			    <label class="col-sm-4 control-label">Saldo</label>
+			    <div class="col-sm-4">
+			      <p class="form-control-static">${g.formatNumber(number:ventaInstance.getSaldo(),type:'currency')}</p>
+			    </div>
+			</div>
 		</f:with>	
 		</fieldset>
 		</form>

@@ -17,7 +17,7 @@ navigation={
 		}
 		operaciones(){
 			ventas(controller:'venta',action:'index')
-			caja(controller:'caja',action:'index')
+			caja(controller:'cobro',action:'pendientes')
 			cxc(controller:'cxc',action:'index')
 			cfdi(controller:'cfdi',action:'index')
 			credencial(controller:'credencial',action:'index')

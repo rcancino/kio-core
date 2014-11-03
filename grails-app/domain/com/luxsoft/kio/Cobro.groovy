@@ -21,13 +21,17 @@ class Cobro {
 
 	BigDecimal importe
 
+	String referencia
+
 	Date dateCreated
 
 	Date lastUpdated
 	
 
     static constraints = {
-		
+		referencia nullable:true,maxSize:50
+		dateCreated nullable:true
+		lastUpdated nullable:true
     }
 
     

@@ -32,17 +32,7 @@ class ClienteController {
 		redirect action:'index'
 	}
 
-	/*
-	def save(Cliente clienteInstance){
-		println 'Salvando cliente nuevo';
-		println 'Cliente: '+clienteInstance.direccion+ "  tipo: "+clienteInstance.tipo
-		def stipo=clienteInstance.tipo
-		def tipo=TipoDeCliente.first()
-		println 'Tipo de cliente: '+tipo
-		clienteInstance.tipo=tipo
-		clienteInstance.validate()
-		println 'Errores: '+clienteInstance.errors
-	}*/
+	
 	
 	
     def importar(){
@@ -52,7 +42,7 @@ class ClienteController {
 	
 	def search(){
 		println params
-		def s='%'+params.term?:'%'
+		def s='%'+params.nombre?:'%'
 		s+='%'
 		println 'Buscando por: '+s
 		def query=Cliente.where{nombre=~s}
@@ -70,7 +60,7 @@ class ClienteController {
 		//  }
 		// def list=query.list(max:30, sort:"nombre")
 
-		def list=Cliente.findAllByNombreIlike(params.term+"%",[max:10,sort:"nombre",order:"desc"])
+		def list=Cliente.findAllByNombreIlike("%"+params.term+"%",[max:10,sort:"nombre",order:"desc"])
 
 		
 		list=list.collect{ c->
@@ -103,6 +93,21 @@ class ClienteController {
 		clienteInstance.delete flush:true
 		flash.message="Cliente eliminado $clienteInstance.nombre"
 		redirect action:'index'
+	}
+
+	def socios(Cliente clienteInstance){
+		def list=Socio.findAllByCliente(clienteInstance)
+		[clienteInstance:clienteInstance,socioInstanceList:list]
+	}
+
+	def find(Cliente cliente){
+		println 'Buscando cliente:  '+cliente.nombre
+		def data=Cliente.findAll("from Cliente c where c.nombre like upper(?) or c.rfc like upper(?)"
+			,[cliente.nombre,cliente?.rfc],[max:20,sort:'nombre'])
+		//def list=query.list(max:30,sort:'nombre')
+		render view:'index',model:[clienteInstanceList:data,clienteInstanceCount:0]
+
+
 	}
 }
 

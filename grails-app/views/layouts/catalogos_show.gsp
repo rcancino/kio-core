@@ -29,18 +29,26 @@
             	
             	<div class="col-md-2">
             		<div class="list-group">
-						<g:link action="index" class="list-group-item ">
-							<span class="glyphicon glyphicon-list"></span> Catálogo
-						</g:link>
-						<g:link action="create" class="list-group-item ">
-							<span class="glyphicon glyphicon-floppy-saved"></span> Nuevo
-						</g:link>
-						<g:link action="edit" class="list-group-item " id="${g.pageProperty(name:'page.beanId') }">
-							<span class="glyphicon glyphicon-pencil"></span> Editar
-						</g:link>
-						<g:link action="delete" class="list-group-item " id="${g.pageProperty(name:'page.beanId') }">
-							<span class="glyphicon glyphicon-trash"></span> Eliminar
-						</g:link>
+                        <g:if test="${pageProperty(name:'page.tasks')}">
+                            <g:pageProperty name="page.tasks"/>
+                        </g:if>
+                        <g:else> 
+                            <g:link action="index" class="list-group-item ">
+                                <span class="glyphicon glyphicon-list"></span> Catálogo
+                            </g:link>
+                            <g:link action="create" class="list-group-item ">
+                                <span class="glyphicon glyphicon-floppy-saved"></span> Nuevo
+                            </g:link>
+                            <g:link action="edit" class="list-group-item " id="${g.pageProperty(name:'page.beanId') }">
+                                <span class="glyphicon glyphicon-pencil"></span> Editar
+                            </g:link>
+                            <g:link action="delete" class="list-group-item " id="${g.pageProperty(name:'page.beanId') }">
+                                <span class="glyphicon glyphicon-trash"></span> Eliminar
+                            </g:link>
+                        </g:else>  
+                         
+
+						
 					</div>
             	</div><!-- End .col-md-2 side bar -->
             	

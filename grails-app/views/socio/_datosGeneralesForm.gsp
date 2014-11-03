@@ -25,12 +25,7 @@
 			    </div>
 			</div>
 
-			%{-- <div class="form-group">
-				<label for="tarjetaField"></label>
-				<a href="#" data-toggle="" class="btn btn-default">
-									<span class="glyphicon glyphicon-thumbs-up"></span> Tarjeta
-				</a>
-			</div> --}%
+			
 			
 			
 		</div>

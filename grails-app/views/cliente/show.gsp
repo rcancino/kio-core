@@ -9,10 +9,26 @@
 <body>
 
 	<content tag="header">
-		<h3>Cliente (${clienteInstance.id})</h3>
+		<h3>Cliente: ${clienteInstance}</h3>
+	</content>
+	<content tag="beanId">${clienteInstance.id}</content>
+
+	<content tag="tasks">
+		<g:link action="index" class="list-group-item ">
+		    <span class="glyphicon glyphicon-list"></span> Catálogo
+		</g:link>
+		<g:link action="create" class="list-group-item ">
+		    <span class="glyphicon glyphicon-floppy-saved"></span> Nuevo
+		</g:link>
+		<g:link action="edit" class="list-group-item " id="${clienteInstance.id}">
+		    <span class="glyphicon glyphicon-pencil"></span> Editar
+		</g:link>
+		<g:link action="socios" class="list-group-item " id="${clienteInstance.id}">
+		    Socios
+		</g:link>
 	</content>
 	
-	<content tag="beanId">${clienteInstance.id}</content>
+	
 	
 	<content tag="form">
 		<g:hasErrors bean="${clienteInstance}">

@@ -55,7 +55,7 @@ class Venta {
     	cliente()
     	fecha()
     	moneda()
-    	status inList:['COTIZACION','PEDIDO','VENTA','FACTURADA','CANCELADA']
+    	status inList:['COTIZACION','PEDIDO','VENTA','PAGADA','FACTURADA','CANCELADA']
     	importe(scale:2)
     	descuento(scale:2)
     	subTotal(scale:2)

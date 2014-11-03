@@ -1,7 +1,7 @@
 <table class="table table-striped table-bordered table-condensed">
 	<thead>
 		<tr>
-			<g:sortableColumn property="id" title="Id"/>
+			
 			<g:sortableColumn property="nombre" title="Nombre"/>
 			<th>Dirección</th>
 			<th>RFC</th>
@@ -13,10 +13,10 @@
 			<tr>
 				<td>
 					<g:link action="show" id="${row.id}">
-						${fieldValue(bean:row,field:"id")}
+						${fieldValue(bean:row,field:"nombre")}
 					</g:link>
 				</td>
-				<td>${fieldValue(bean:row,field:"nombre")}</td>
+				
 				<td>${fieldValue(bean:row,field:"direccion")}</td>
 				<td>${fieldValue(bean:row,field:"rfc")}</td>
 				<td>${fieldValue(bean:row,field:"emailCfdi")}</td>

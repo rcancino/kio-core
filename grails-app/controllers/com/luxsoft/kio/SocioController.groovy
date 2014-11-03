@@ -10,7 +10,8 @@ class SocioController {
 	def socioService
 	
 	def index(Long max){
-		params.max = Math.min(max ?: 15, 100)
+		println 'index action'
+		params.max = Math.min(max ?: 20, 100)
 		params.sort=params.sort?:'lastUpdated'
 		params.order='desc'
 		
@@ -56,6 +57,11 @@ class SocioController {
 		render view:'edit',model:[socioInstance:socioInstance]
 	}
 
+	def show(Socio socioInstance){
+		//edit(socioInstance)
+		[socioInstance:socioInstance]
+	}
+
 	def edit(Socio socioInstance){
 		//flash.message="Editando socio"
 
@@ -96,11 +102,22 @@ class SocioController {
 	}
 	
 	def search(){
-		def s=params.term?:'%'
+		def s='%'+params.nombre?:'%'
 		s+='%'
 		def query=Socio.where{nombre=~s }
-		def list=query.list(max:30,sort:'apellidoPaterno')
+		def list=query.list(max:30,sort:'nombre')
 		render view:'index',model:[socioInstanceList:list,socioInstanceCount:query.count()]
+	}
+
+	def find(Socio socio){
+
+		log.info 'Busqueda avanzada de socio en base a:'+socio
+		def query=Socio.where{
+			apellidoPaterno==socio.apellidoPaterno || apellidoMaterno==socio.apellidoMaterno || nombres==socio.nombres || numeroDeSocio==socio.numeroDeSocio
+		}
+		def list=query.list(max:30,sort:'nombre')
+		render view:'index',model:[socioInstanceList:list,socioInstanceCount:query.count()]
+
 	}
 
 	def cargarFoto(SocioFotoCmd cmd){
@@ -145,15 +162,17 @@ class SocioController {
 
 		def term='%'+params.term.trim()+'%'
 		def query=Socio.where{
-		 	apellidoPaterno=~term || apellidoMaterno=~term || nombres=~term
+		 	//apellidoPaterno=~term || apellidoMaterno=~term || nombres=~term
+		 	nombre=~term
 		 }
-		def list=query.list(max:30, sort:"apellidoPaterno")
+		def list=query.list(max:30, sort:"nombre")
 		
 		list=list.collect{ c->
 			def nombre=c.toString()
 			[id:c.id,
 			label:nombre,
 			value:nombre,
+			nombre:nombre,
 			cliente:[id:c.cliente.id,nombre:c.cliente.nombre]
 			]
 		}

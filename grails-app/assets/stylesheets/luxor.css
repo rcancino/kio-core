@@ -8,6 +8,7 @@
 * compiled file, but it's generally better to create a new file per style scope.
 *
 *= require bootstrap
+*= require font-awesome
 *= require_self
 */
 body{
@@ -25,9 +26,11 @@ body{
 .toolbar-panel{
     
     /*margin-bottom: 10px;*/
-    padding-bottom: 5px;
-    padding-top: 2px;
+    
     /*padding-left: 2px;*/
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 2px;
 
 }
 
@@ -68,4 +71,15 @@ span.summary.ng-valid {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+}
+
+.grid-panel{
+    padding-top: 5px;
+    
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

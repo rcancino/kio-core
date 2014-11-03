@@ -14,7 +14,7 @@ grails.project.fork = [
     // configure settings for the test-app JVM, uses the daemon by default
     test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
     // configure settings for the run-app JVM
-    run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+    run: [maxMemory: 1024, minMemory: 64, debug: false, maxPerm: 256],
     // configure settings for the run-war JVM
     war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
     // configure settings for the Console UI JVM
@@ -67,40 +67,45 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
+
+        //UPGRADE TO 2.4.4
+        compile ":scaffolding:2.1.2"
+        compile ':cache:1.1.8'
+        compile ":asset-pipeline:1.9.9"
+        runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
+        
+        
+        // plugins for the compile step
+        //compile ":scaffolding:2.1.1"
+        //compile ':cache:1.1.6'
+        //compile ":asset-pipeline:1.8.11"
+        //runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"
+        
+        
         // plugins for the build system only
         //build ":tomcat:7.0.54"
         compile ":jetty:3.0.0"
 
-        // plugins for the compile step
-        compile ":scaffolding:2.1.1"
-        compile ':cache:1.1.6'
-        compile ":asset-pipeline:1.8.11"
-
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"
+        
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
-
         compile ":build-test-data:2.0.9"
-
         compile ":twitter-bootstrap:3.2.0"
+        compile ":font-awesome-resources:4.2.0.0"
 		compile ":platform-core:1.0.0"
         compile ":fields:1.3"
         runtime ':console:1.3'
         compile ":joda-time:1.5"
-
 		runtime ':console:1.3'
 		compile ":jasper:1.8.0"
         compile ":standalone:1.2.3"
-
         compile ":spring-security-core:2.0-RC4"
-		
-        //compile ":spring-security-core:2.0-RC4"
-
+        
         // Uncomment these to enable additional asset-pipeline capabilities
-        //compile ":sass-asset-pipeline:1.7.4"
-        //compile ":less-asset-pipeline:1.7.0"
-        //compile ":coffee-asset-pipeline:1.7.0"
+        //compile ":sass-asset-pipeline:1.9.0"
+        //compile ":less-asset-pipeline:1.10.0"
+        //compile ":coffee-asset-pipeline:1.8.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"
     }
 }

@@ -1,4 +1,41 @@
-<table class="table table-striped table-bordered table-condensed">
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="layout" content="catalogos_show"/>
+	<title>Cliente (${clienteInstance.id})</title>
+</head>
+<body>
+
+	<content tag="header">
+		<h3>Cliente: ${clienteInstance}</h3>
+	</content>
+	<content tag="beanId">${clienteInstance.id}</content>
+
+	<content tag="tasks">
+		<g:link action="index" class="list-group-item ">
+		    <span class="glyphicon glyphicon-list"></span> Catálogo
+		</g:link>
+		<g:link action="create" class="list-group-item ">
+		    <span class="glyphicon glyphicon-floppy-saved"></span> Nuevo
+		</g:link>
+		<g:link action="edit" class="list-group-item " id="${clienteInstance.id}">
+		    <span class="glyphicon glyphicon-pencil"></span> Editar
+		</g:link>
+		
+	</content>
+	
+	
+	
+	<content tag="form">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h3>
+					Membresias asociadas
+				</h3>
+			</div>
+			<table class="table table-striped table-bordered table-condensed">
 	<thead>
 		<tr>
 			<g:sortableColumn property="id" title="No Socio"/>
@@ -39,3 +76,11 @@
 <div class="pagination">
 	<g:paginate total="${socioInstanceCount ?: 0}"/>
 </div>
+		</div>
+		
+		
+		
+	</content>
+	
+</body>
+</html>

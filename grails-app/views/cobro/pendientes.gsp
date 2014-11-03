@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="alert alert-info">
-					<h2>Caja (Pedidos pendientes de facturación)</h2>
+					<h2>Ventas pendientes de cobro</h2>
 					<g:if test="${flash.message}">
 	                    <div class="">
 	                        <span class="label label-warning">${flash.message}</span>
@@ -32,16 +32,14 @@
 						autofocus="autofocus" autocomplete="off">
 				</div>
 			</div>
-			<g:link action="index" class="btn btn-default ">
+			<g:link action="pendientes" class="btn btn-default ">
 				<span class="glyphicon glyphicon-repeat"></span> Refrescar
 			</g:link>
-			
-			<button id="cobrar" class="btn btn-default">
-				<span class="glyphicon glyphicon-usd"></span> Cobrar
-			</button>
-			<g:link action="index" controller="cobro" class="btn btn-default ">
-				<span class="glyphicon glyphicon-th-list"></span> Cobros registrados
+
+			<g:link action="index" class="btn btn-default" params="[tipo:'cobros']">
+				<span class="glyphicon glyphicon-usd"></span> Cobros
 			</g:link>
+			
 		</div><!-- end .row toolbar -->
 
 		<br/>
@@ -61,19 +59,20 @@
 							<th>Importe</th>
 							<th>Impuesto</th>
 							<th>Total</th>
+							<th>Saldo</th>
 						</tr>
 					</thead>
 					<tbody>
 						<g:each in="${ventaInstanceList}" var="row">
 							<tr id="${row.id}">
 								<td >
-									<g:link  action="${row.status=='VENTA'?'cobrar':'show'}" id="${row.id}">
+									<g:link  action="${row.status=='VENTA'?'registrar':'show'}" id="${row.id}">
 										${fieldValue(bean:row,field:"id")}
 									<span class="glyphicon glyphicon-shopping-cart"></span> 
 									</g:link>
 								</td>
 								<td>
-									<g:link action="${row.status=='VENTA'?'cobrar':'show'}" id="${row.id}">
+									<g:link action="${row.status=='VENTA'?'registrar':'show'}" id="${row.id}">
 										${fieldValue(bean:row,field:"cliente.nombre")}
 									</g:link>
 									
@@ -86,6 +85,7 @@
 								<td><g:formatNumber number="${row.importe}" type="currency"/></td>
 								<td><g:formatNumber number="${row.impuesto}" type="currency"/></td>
 								<td><g:formatNumber number="${row.total}" type="currency"/></td>
+								<td><g:formatNumber number="${row.saldo}" type="currency"/></td>
 							</tr>
 						</g:each>
 					</tbody>
@@ -109,17 +109,8 @@
     	var table = $('#cajaTable').DataTable();
 
     	$('#cajaTable tbody').on( 'click', 'tr', function () {
-	        // if ( $(this).hasClass('success') ) {
-	        //     $(this).removeClass('success');
-	        // }
-	        // else {
-	        //     table.$('tr.success').removeClass('success');
-	        //     $(this).addClass('success');
-	        // }
 	        $(this).toggleClass('success');
     	 });
-
-    	//$("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
     	
     	$("#filterField").on('keyup',function(e){
     		var term=$(this).val();
@@ -134,7 +125,7 @@
     		var selected=getSelected();
     		console.log('Seleccionados: '+selected);
     		if(selected.length===0){
-    			alert("Debe seleccionar al menos una venta");
+    			alert("Debe seleccionar la venta a cobrar");
     			return;
     		}else{
     			//Pendiente de implementar Crear un  dato post 
