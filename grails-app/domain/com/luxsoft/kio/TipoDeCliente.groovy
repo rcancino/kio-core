@@ -1,5 +1,7 @@
 package com.luxsoft.kio
+import org.springframework.security.access.annotation.Secured
 
+@Secured(["hasAnyRole('ROLE_ADMINISTRACION')"])
 class TipoDeCliente {
 
 	String clave

@@ -2,7 +2,9 @@ package com.luxsoft.kio
 
 import grails.converters.JSON
 import grails.transaction.Transactional
+import org.springframework.security.access.annotation.Secured
 
+@Secured(["hasAnyRole('ADMINISTRACION','MOSTRADOR')"])
 @Transactional
 class ClienteController {
     
@@ -21,6 +23,7 @@ class ClienteController {
 		render view:'spa/create'
 	}
 
+	@Secured(["hasAnyRole('ADMINISTRACION')"])
 	def update(Cliente clienteInstance){
 		clienteInstance.validate()
 		if(clienteInstance.hasErrors()){
@@ -34,7 +37,7 @@ class ClienteController {
 
 	
 	
-	
+	@Secured(["hasAnyRole('ADMINISTRACION')"])
     def importar(){
     	importadorService.importarClientes()
 		redirect action:'index'
@@ -89,6 +92,7 @@ class ClienteController {
 		render res
 	}
 
+	@Secured(["hasAnyRole('ADMINISTRACION')"])
 	def delete(Cliente clienteInstance){
 		clienteInstance.delete flush:true
 		flash.message="Cliente eliminado $clienteInstance.nombre"

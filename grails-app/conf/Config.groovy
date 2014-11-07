@@ -88,8 +88,8 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
-		grails.plugin.springsecurity.debug.useFilter = false
-		grails.plugin.springsecurity.active = false
+		grails.plugin.springsecurity.debug.useFilter = true
+		grails.plugin.springsecurity.active = true
     }
     production {
         grails.logging.jul.usebridge = false
@@ -173,3 +173,24 @@ luxsoft.cfdi.serie.venta='FACTURA'
 grails.databinding.dateFormats = ['dd/MM/yyyy','MMddyyyy', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss'Z'"]
 jodatime.format.html5 = false
 //jodatime.format.org.joda.time.LocalDate='dd/MM/yyyy'
+
+
+// Added by the Spring Security Core plugin:
+
+
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.luxsoft.sec.Usuario'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.luxsoft.sec.UsuarioRole'
+grails.plugin.springsecurity.authority.className = 'com.luxsoft.sec.Role'
+
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+
+

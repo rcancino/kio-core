@@ -1,12 +1,37 @@
 import com.luxsoft.kio.*
 import com.luxsoft.cfdi.*
+import com.luxsoft.sec.Role
+import com.luxsoft.sec.Usuario
+import com.luxsoft.sec.UsuarioRole
+
 
 class BootStrap {
 
     def init = { servletContext ->
+
+    	def adminRole=Role.findOrSaveWhere(authority:'ROLE_ADMIN')
+		def userRole=Role.findOrSaveWhere(authority:'ROLE_USER')
+		def mostradorRole=Role.findOrSaveWhere(authority:'MOSTRADOR')
+		def cajeroRole=Role.findOrSaveWhere(authority:'CAJERO')
+		def administracionRole=Role.findOrSaveWhere(authority:'ADMINISTRACION')
+		
+
+		
+		def admin=Usuario.findByUsername('admin')
+		if(!admin){
+			admin=new Usuario(username:'admin'
+				,password:'admin'
+				,apellidoPaterno:'admin'
+				,apellidoMaterno:'admin'
+				,nombres:'admin'
+				,nombre:' ADMIN ADMIN').save(flush:true)
+			UsuarioRole.create(admin,userRole,true)
+			UsuarioRole.create(admin,adminRole,true)
+		}
 		
 		environments {
 			development {
+				
 				TipoDeCliente.findOrSaveWhere(clave:'PARTICULAR',descripcion:'Particular')
 				TipoDeCliente.findOrSaveWhere(clave:'EMPRESARIAL',descripcion:'Empresa')
 				
@@ -30,6 +55,7 @@ class BootStrap {
 					,rfc:'XAXX010101000'
 					,tipo:TipoDeCliente.findOrSaveWhere(clave:'MOSTRADOR',descripcion:'Cliente mostrador no requiere iva desgosado')
 					)
+
 				TipoDeVenta.findOrSaveWhere(clave:'MEMBRESIA',descripcion:'Venta para el cobro de membresias')
 				TipoDeVenta.findOrSaveWhere(clave:'GENERAL',descripcion:'Venta general de productos y servicios')
 
@@ -39,7 +65,7 @@ class BootStrap {
 					folioSocio=new CfdiFolio(serie:'SOCIOS',folio:50000)
 					folioSocio.save()
 				}
-
+				
 				
 			}
 			

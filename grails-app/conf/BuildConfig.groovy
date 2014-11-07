@@ -27,6 +27,7 @@ grails.project.dependency.resolution = {
     inherits("global") {
         // specify dependency exclusions here; for example, uncomment this to disable ehcache:
         // excludes 'ehcache'
+        excludes "grails-docs"
     }
     log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
@@ -63,6 +64,9 @@ grails.project.dependency.resolution = {
         //compile 'cfdi:cfdi:3.2'
         //compile 'com.edicom.ediwinws:cfdiClient:1.0'
         //compile 'nomina:nomina:1.0'
+        build('org.grails:grails-docs:2.4.3') {
+            excludes 'itext'
+        }
         
     }
 
@@ -72,14 +76,15 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":asset-pipeline:1.9.9"
-        runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
+        runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"
+        //runtime ":hibernate4:4.3.6.1" // NO SIRVE
         
         
         // plugins for the compile step
         //compile ":scaffolding:2.1.1"
         //compile ':cache:1.1.6'
         //compile ":asset-pipeline:1.8.11"
-        //runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"
+        
         
         
         // plugins for the build system only
@@ -90,17 +95,26 @@ grails.project.dependency.resolution = {
         
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
-        compile ":build-test-data:2.0.9"
-        compile ":twitter-bootstrap:3.2.0"
+        compile ":build-test-data:2.2.2"
+        runtime ":twitter-bootstrap:3.2.0.2"
         compile ":font-awesome-resources:4.2.0.0"
 		compile ":platform-core:1.0.0"
-        compile ":fields:1.3"
-        runtime ':console:1.3'
+        compile ":fields:1.4"
+        
         compile ":joda-time:1.5"
-		runtime ':console:1.3'
-		compile ":jasper:1.8.0"
+		
+		
         compile ":standalone:1.2.3"
+        
+        compile ":jasper:1.10.0"
         compile ":spring-security-core:2.0-RC4"
+        //compile ":spring-security-core:2.0-RC3"
+        
+        compile ":console:1.5.1"
+        
+        
+        
+        
         
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"

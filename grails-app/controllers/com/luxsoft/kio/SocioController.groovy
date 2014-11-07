@@ -1,7 +1,9 @@
 package com.luxsoft.kio
 
 import grails.converters.JSON
+import org.springframework.security.access.annotation.Secured
 
+@Secured(["hasAnyRole('ADMINISTRACION','MOSTRADOR')"])
 class SocioController {
     
     //static scaffold = true

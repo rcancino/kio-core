@@ -1,18 +1,40 @@
+
+import grails.plugin.springsecurity.SpringSecurityUtils
+
+def loggedIn = { -> 
+    springSecurityService.principal instanceof String
+}
+def loggedOut = { -> 
+    !(springSecurityService.principal instanceof String)
+}
+def isAdmin = { -> 
+    SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')
+}
+def isAdministracion = { -> 
+    SpringSecurityUtils.ifAllGranted('ADMINISTRACION')
+}
+def isMostrador ={
+	SpringSecurityUtils.ifAllGranted('MOSTRADOR')	
+}
+def isCajero ={
+	SpringSecurityUtils.ifAllGranted('CAJERO')	
+}
+
 navigation={
 	user{
 		home(action:'index'){}
 		
 		catalogos(controller:'home'){
-			tipoDeSocio(controller:'tipoDeSocio',action:'index')
-			tipoDeCorporativo(controller:'tipoDeCorporativo',action:'index',titleText:'Corporativos')
+			tipoDeSocio(controller:'tipoDeSocio',action:'index',enabled:SpringSecurityUtils.ifAllGranted('ADMINISTRACION'))
+			tipoDeCorporativo(controller:'tipoDeCorporativo',action:'index',titleText:'Corporativos',enabled:SpringSecurityUtils.ifAllGranted('ADMINISTRACION'))
 			socio(controller:'socio',action:'index')
-			tipoDeCliente(controller:'tipoDeCliente',action:'index')
+			tipoDeCliente(controller:'tipoDeCliente',action:'index',enabled:SpringSecurityUtils.ifAllGranted('ADMINISTRACION'))
 			cliente(controller:'cliente',action:'index')
-			medioDeContacto(controller:'medioDeContacto',action:'index')
+			medioDeContacto(controller:'medioDeContacto',action:'index',enabled:SpringSecurityUtils.ifAllGranted('ADMINISTRACION'))
 			instructor(controller:'instructor',action:'index')
 			producto(controller:'producto',action:'index')
-			tipoDeProducto(controller:'tipoDeProducto',action:'index')
-			tipoDeVenta(controller:'tipoDeVenta',action:'index')
+			tipoDeProducto(controller:'tipoDeProducto',action:'index',enabled:SpringSecurityUtils.ifAllGranted('ADMINISTRACION'))
+			tipoDeVenta(controller:'tipoDeVenta',action:'index',enabled:SpringSecurityUtils.ifAllGranted('ADMINISTRACION'))
 		
 		}
 		operaciones(){
@@ -35,6 +57,7 @@ navigation={
 			
 		}
 		configuracion(){
+			usuarios(controller:'usuario',action:'index')
 		}
 		info(view:'info')
 	}
