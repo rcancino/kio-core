@@ -2,7 +2,9 @@ package com.luxsoft.kio
 
 import org.grails.databinding.BindingFormat
 import grails.converters.JSON
+import org.springframework.security.access.annotation.Secured
 
+@Secured(["hasAnyRole('MOSTRADOR')"])
 class VentaController {
     //static scaffold = true
 

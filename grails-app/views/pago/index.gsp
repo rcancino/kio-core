@@ -3,77 +3,82 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="layout" content="pago"/>
-	<title>Caja</title>
+	<title>Pagos</title>
 	<asset:stylesheet src="datatables/dataTables.css"/>
 	<asset:javascript src="datatables/dataTables.js"/> 
 </head>
 <body>
 
 <content tag="header">
-	<h3>Caja - Ventas pendiente de cobro</h3>
-	%{-- <nav:set path="user/operaciones/caja/pagos"/> --}%
+	<h3>Pagos registrados</h3>
+	<nav:set path="user/operaciones/caja/pagos"/>
 </content>
+
 <content tag="operaciones">
 	<li>
 	    <g:link action="create" >
 	        <i class="fa fa-plus"></i> Nuevo
 	    </g:link>
-	    <g:link action="corte" >
-	        <i class="fa fa-bookmark-o"></i> Corte
-	    </g:link>
+	    
 	</li>
 </content>
+<content tag="reportes">
+	<li><g:link controller="reporte" action="pagosPorDia"> Pagos por día</g:link></li>
+</content>
+
 <content tag="document">
-	<table id="cajaTable" class="table table-striped table-bordered table-condensed">
+<div class="">
+	
+	
+	<table id="grid" class="table table-striped table-bordered table-condensed">
+
 		<thead>
 			<tr>
-				<th>Venta</th>
+				<th>Folio</th>
 				<th>Cliente</th>
-				
-				<th>Rfc</th>
-				<th>Status</th>
-				<th>Tipo</th>
 				<th>Fecha</th>
 				<th>Importe</th>
-				<th>Impuesto</th>
-				<th>Total</th>
+				<th>F.P</th>
+				<th>Modificado</th>
 			</tr>
 		</thead>
 		<tbody>
-			<g:each in="${ventaInstanceList}" var="row">
+			<g:each in="${cobroInstanceList}" var="row">
 				<tr id="${row.id}">
 					<td >
-						<g:link  action="${row.status=='VENTA'?'cobrar':'show'}" id="${row.id}">
+						<g:link  action="show" id="${row.id}">
 							${fieldValue(bean:row,field:"id")}
-						<span class="glyphicon glyphicon-shopping-cart"></span> 
 						</g:link>
 					</td>
 					<td>
-						<g:link action="${row.status=='VENTA'?'cobrar':'show'}" id="${row.id}">
+						<g:link  action="show" id="${row.id}">
 							${fieldValue(bean:row,field:"cliente.nombre")}
 						</g:link>
-						
 					</td>
-					
-					<td>${fieldValue(bean:row,field:"cliente.rfc")}</td>
-					<td>${fieldValue(bean:row,field:"status")}</td>
-					<td>${fieldValue(bean:row,field:"tipo")}</td>
 					<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
 					<td><g:formatNumber number="${row.importe}" type="currency"/></td>
-					<td><g:formatNumber number="${row.impuesto}" type="currency"/></td>
-					<td><g:formatNumber number="${row.total}" type="currency"/></td>
+					<td>${row.formaDePago}</td>
+					<td><g:formatDate date="${row.lastUpdated}" format="dd/MM/yyyy HH:mm"/></td>
 				</tr>
 			</g:each>
 		</tbody>
 	</table>
+	<div class="pagination">
+		<g:paginate total="${cobroInstanceCount ?: 0}"/>
+	</div>
+</div>
+</content><!-- End content document -->
+
+<content tag="searchForm">
+	<g:render template="search"/>
+	
 </content>
 
 <content tag="javascript">
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
-			$('#cajaTable').dataTable( {
+			$('#grid').dataTable( {
 	        	"paging":   false,
 	        	"ordering": false,
 	        	"info":     false
@@ -83,19 +88,20 @@
 	    	var table = $('#cajaTable').DataTable();
 	    	
 	    	
-	    	$("#filterField").on('keyup',function(e){
-	    		$('#cajaTable').DataTable().search($(this).val()).draw();
+	    	$("#filtro").on('keyup',function(e){
+	    		var term=$(this).val();
+	    		//console.log('Filtrando para: '+term);
+	    		$('#grid').DataTable().search(
+					$(this).val()
+	    		        
+	    		).draw();
 	    	});
-	    	
 
 		});
 	</script>
-</content>
-
-
-
 	
-
+</content>
+	
 	
 </body>
 </html>

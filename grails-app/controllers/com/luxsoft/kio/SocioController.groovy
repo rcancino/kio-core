@@ -98,6 +98,7 @@ class SocioController {
 		redirect action:'index'
 	}
 	
+	@Secured(["hasAnyRole('ROLE_ADMIN')"])
 	def importar(){
 		importadorService.importarSocios()
 		redirect action:'index'

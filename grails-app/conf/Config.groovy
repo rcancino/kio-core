@@ -97,7 +97,7 @@ environments {
     }
     test{
         grails.plugin.springsecurity.debug.useFilter = false
-        grails.plugin.springsecurity.active = false
+        grails.plugin.springsecurity.active = true
     }
 }
 
@@ -190,7 +190,10 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
+	'/**/favicon.ico':                ['permitAll'],
+    
+    "/console/**": ['ROLE_ADMIN'],
+    "/plugins/console*/**": ['ROLE_ADMIN']
 ]
 
 

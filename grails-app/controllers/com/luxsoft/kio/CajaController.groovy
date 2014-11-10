@@ -4,7 +4,9 @@ package com.luxsoft.kio
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import org.springframework.security.access.annotation.Secured
 
+@Secured(["hasAnyRole('ADMINISTRACION','CAJERO')"])
 @Transactional(readOnly = true)
 class CajaController {
 

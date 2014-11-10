@@ -39,7 +39,12 @@ navigation={
 		}
 		operaciones(){
 			ventas(controller:'venta',action:'index')
-			caja(controller:'cobro',action:'pendientes')
+			caja(controller:'cobro',action:'pendientes'){
+				cobrosPendientes(controller:'caja',action:'index',titleText:'Pendientes de cobrar')
+				pagos(controller:'pago',action:'index',titleText:'Pagos ',data:[icon:'fa fa-pencil fa-fw'])
+				notasDeCredito()
+			}
+			pagos(controller:'pago',action:'index')
 			cxc(controller:'cxc',action:'index')
 			cfdi(controller:'cfdi',action:'index')
 			credencial(controller:'credencial',action:'index')

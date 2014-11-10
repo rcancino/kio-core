@@ -10,10 +10,10 @@ class Pago extends Abono{
 	
 	String referenciaBancaria
 
-	String autorizacionBancaria
+	
 
 
     static constraints = {
-    	formaDePago inList:['EFECTIVO','DEPOSITO','TRANSFERENCIA','TARJETA DE CREDITO','TARJETA DE DEBITO']
+    	formaDePago inList:['EFECTIVO','DEPOSITO','TRANSFERENCIA','CHEQUE','TARJETA_CREDITO','TARJETA_DEBITO','RECURRENTE']
     }
 }

@@ -1,5 +1,8 @@
 package com.luxsoft.kio
 
+import org.springframework.security.access.annotation.Secured
+
+@Secured(["hasAnyRole('ADMINISTRACION','CAJERO')"])
 class CobroController {
 
     def cobroService
