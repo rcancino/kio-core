@@ -30,7 +30,7 @@
 		</div><!-- end .row -->
 		
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
         		<div class="list-group">
         			<g:link action="index" class="list-group-item">
         				<i class="fa fa-tasks fa-fw fa-2x"></i>&nbsp;  Regresar
@@ -38,18 +38,25 @@
         		</div>
 			</div>
 			
-			<div class="col-md-6 ">
-				<g:form class="form-horizontal pull-left center-block" action="create" >
-					
+			<div class="col-md-8">
+				<g:form class="form-horizontal " action="save" name="notaForm" >
+
+					<div class="form-group ${hasErrors(bean:notaDeCreditoInstance,field:'cliente', 'has-error')}">
+						<label for="cliente" class="col-sm-4 control-label">Cliente</label>
+						<div class="col-sm-8">
+							<g:hiddenField id="clienteId" name="cliente.id" value="${notaDeCreditoInstance?.cliente?.id}"/>
+							<input id="cliente" name="cliente.nombre" type="text" class="form-control"
+							  autocomplete="off"
+							  value="${notaDeCreditoInstance?.cliente?.nombre}">
+						</div>
+					</div>
 					<f:with bean="${notaDeCreditoInstance}">
-						<f:field property="cliente" input-class="form-control" />
-						<f:field property="tipoDeNota" input-class="form-control" />
-						<f:field property="importe" input-class="form-control" />
-						
+						<f:field property="tipo" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-4"/>
+						<f:field property="comentario" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-4"/>
 					</f:with>
 					<div class="form-group">
-						<div class="buttons  col-md-offset-4  col-md-8">
-							<g:submitButton name="Generar" class="btn btn-primary btn-lg btn-block" value="Cobrar"/>
+						<div class="buttons  col-md-offset-4  col-md-4">
+							<g:submitButton name="Generar" class="btn btn-primary btn-lg btn-block" value="Aceptar"/>
 							%{-- <button id="cobrarBtn" class="btn btn-primary btn-lg btn-block">Cobrar</button>	 --}%
 						</div>
 					</div>
@@ -67,7 +74,7 @@
 	     
 	 		});
 
-			$('form[name=pagoForm]').submit(function(e){
+			$('form[name=notaForm]').submit(function(e){
 	    		$(this).children('input[type=submit]').attr('disabled', 'disabled');
 	    		console.log("Desablidatndo submit button....");
 	    		//$("#Cobrar").attr('disabled','disabled');
@@ -78,20 +85,33 @@
 	    		return true;
 			});
 
-			$("#tipoDeNota").change(function(){
-				var text = "";
-				   $(this).children("option:selected").each(function() {
-				      text += $( this ).text() ;
-				});
-				if(text==='BONIFICACION'){
-					$("#importe").attr('disabled','disabled');
-					//$("#referencia").attr('required','required');
-				}else{
-					$("#importe").removeAttr('disabled');
-					$("#importe").attr('required','required');
+			$("#cliente").autocomplete({
+				source:'<g:createLink controller="cliente" action="getClientesJSON"/>',
+				minLength:3,
+				select:function(e,ui){
+					console.log('Cliente seleccionado: '+ui.item.value);
+					$("#clienteId").val(ui.item.id);
+					$("#cliente").val(ui.item.cliente.nombre);
+					$("#socioId").val(null);
+					$("#socio").val(null);
 					
 				}
 			});
+
+			// $("#tipoDeNota").change(function(){
+			// 	var text = "";
+			// 	   $(this).children("option:selected").each(function() {
+			// 	      text += $( this ).text() ;
+			// 	});
+			// 	if(text==='BONIFICACION'){
+			// 		$("#importe").attr('disabled','disabled');
+			// 		//$("#referencia").attr('required','required');
+			// 	}else{
+			// 		$("#importe").removeAttr('disabled');
+			// 		$("#importe").attr('required','required');
+					
+			// 	}
+			// });
 
 		});
 	</script>	

@@ -23,30 +23,32 @@ class NotaDeCreditoController {
     }
 
     def create() {
-        respond new NotaDeCredito(params)
+        [notaDeCreditoInstance:new AltaDeNotaCommand()]
     }
 
     @Transactional
-    def save(NotaDeCredito notaDeCreditoInstance) {
+    def save(AltaDeNotaCommand command) {
+        
         if (notaDeCreditoInstance == null) {
             notFound()
             return
         }
-
+        notaDeCreditoInstance.
         if (notaDeCreditoInstance.hasErrors()) {
+            flash.message="Errores de validacion"
             respond notaDeCreditoInstance.errors, view:'create'
             return
         }
 
-        notaDeCreditoInstance.save flush:true
+        // notaDeCreditoInstance.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'notaDeCredito.label', default: 'NotaDeCredito'), notaDeCreditoInstance.id])
-                redirect notaDeCreditoInstance
-            }
-            '*' { respond notaDeCreditoInstance, [status: CREATED] }
-        }
+        // request.withFormat {
+        //     form multipartForm {
+        //         flash.message = message(code: 'default.created.message', args: [message(code: 'notaDeCredito.label', default: 'NotaDeCredito'), notaDeCreditoInstance.id])
+        //         redirect notaDeCreditoInstance
+        //     }
+        //     '*' { respond notaDeCreditoInstance, [status: CREATED] }
+        // }
     }
 
     def edit(NotaDeCredito notaDeCreditoInstance) {
@@ -76,25 +78,6 @@ class NotaDeCreditoController {
         }
     }
 
-    @Transactional
-    def delete(NotaDeCredito notaDeCreditoInstance) {
-
-        if (notaDeCreditoInstance == null) {
-            notFound()
-            return
-        }
-
-        notaDeCreditoInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'NotaDeCredito.label', default: 'NotaDeCredito'), notaDeCreditoInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
     protected void notFound() {
         request.withFormat {
             form multipartForm {
@@ -104,4 +87,21 @@ class NotaDeCreditoController {
             '*'{ render status: NOT_FOUND }
         }
     }
+}
+
+@Validateable
+class AltaDeNotaCommand{
+    Cliente cliente 
+    String tipo
+    String comentario
+
+    static constraints = {
+        importFrom NotaDeCredito
+
+    }
+
+    String toString(){
+        return "$cliente $tipo"
+    }
+
 }
