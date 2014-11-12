@@ -51,8 +51,11 @@
 						<f:field property="apellidoPaterno" input-class="form-control uppercase-field "/>
 						<f:field property="apellidoMaterno" input-class="form-control uppercase-field"/>
 						<f:field property="nombres" input-class="form-control uppercase-field" input-autocomplete="on"/>
-						<f:field property="password" input-class="form-control" input-type="password" input-autocomplete="on"/>
-						<f:field property="confirmPassword" input-class="form-control" label="Confirmar" input-type="password"  input-autocomplete="on"/>
+						<f:field property="email" input-class="form-control" input-autocomplete="on"/>
+						<f:field property="password" input-class="form-control" input-type="password" 
+							input-autocomplete="off"/>
+						<f:field property="confirmPassword" input-class="form-control" label="Confirmar" 
+							input-type="password"  input-autocomplete="off"/>
 						<f:field property="enabled" input-class="form-control" label="Activo"/>
 					</f:with>
 

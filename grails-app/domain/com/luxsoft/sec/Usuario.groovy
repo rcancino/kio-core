@@ -8,6 +8,7 @@ class Usuario {
 	String apellidoMaterno
 	String nombres
 	String nombre
+	String email
 	
 	String username
 	String password
@@ -28,6 +29,7 @@ class Usuario {
 		accountExpired()
 		accountLocked()
 		passwordExpired()
+		email nullable:true,email:true
 	}
 
 	static mapping = {
@@ -49,7 +51,7 @@ class Usuario {
 			
 		}
 		if (isDirty('apellidoPaterno') || isDirty('apellidoMaterno') || isDirty('nombres')) {
-			encodePassword()
+			capitalizarNombre()
 			
 		}
 		

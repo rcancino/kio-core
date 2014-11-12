@@ -20,7 +20,7 @@
   					<span class="glyphicon glyphicon-plus"></span> Nuevo
   			    </g:link>
   			</li>
-  			<li><g:link action="cambiarPassword" id="${usuarioInstance.id}">
+  			<li><g:link action="cambioDePassword" id="${usuarioInstance.id}">
   					<span class="glyphicon glyphicon-pencil"></span> Cambiar password
   			    </g:link>
   			</li>

@@ -1,7 +1,9 @@
 package com.luxsoft.kio
 
 import grails.converters.JSON
+import org.springframework.security.access.annotation.Secured
 
+@Secured(["hasAnyRole('ADMINISTRACION','CAJERO','MOSTRADOR')"])
 class ProductoController {
 	
     static scaffold = true
@@ -18,6 +20,7 @@ class ProductoController {
 		[productoInstanceList:Producto.list(params),productoInstanceCount:Producto.count()]
 	}
 	
+	@Secured(["hasAnyRole('ROLE_ADMIN')"])
 	def importar(){
 		println 'Importando productos'
 		importadorService.importarProductos()

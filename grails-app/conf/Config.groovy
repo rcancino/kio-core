@@ -195,5 +195,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     "/console/**": ['ROLE_ADMIN'],
     "/plugins/console*/**": ['ROLE_ADMIN']
 ]
-
+grails.plugin.springsecurity.roleHierarchy = '''
+   ADMINISTRACION > CAJERO > MOSTRADOR
+'''
 

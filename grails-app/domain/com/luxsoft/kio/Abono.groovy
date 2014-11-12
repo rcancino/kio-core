@@ -14,6 +14,12 @@ class Abono {
 	String nombre
 	
 	BigDecimal importe
+
+	BigDecimal impuestoTasa=0.16
+
+	BigDecimal impuestos
+
+	BigDecimal total
 	
 	BigDecimal aplicado
 	
@@ -29,6 +35,7 @@ class Abono {
 	static hasMany = [aplicaciones:Aplicacion]
 
     static constraints = {
+    	comentario nullable:true, maxSize:300
     }
 	
 	static mapping = {

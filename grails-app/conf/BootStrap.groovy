@@ -27,6 +27,7 @@ class BootStrap {
 				,nombre:' ADMIN ADMIN').save(flush:true)
 			UsuarioRole.create(admin,userRole,true)
 			UsuarioRole.create(admin,adminRole,true)
+			UsuarioRole.create(admin,administracionRole,true)
 		}
 		
 		environments {
