@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Alta de nota</title>
+	<title>Nota: ${notaDeCreditoInstance.id}</title>
 	<asset:stylesheet src="jquery-ui.css"/>
 	<asset:javascript src="jquery-ui/autocomplete.js"/>
 	<asset:javascript src="forms/autoNumeric.js"/>
@@ -15,7 +15,7 @@
 			<div class="col-md-12">
 				<div class="alert alert-info">
 					<h2> 
-						Alta de Nota de crédito
+						Nota de credito ${notaDeCreditoInstance.id} - ${notaDeCreditoInstance.cliente}
 					</h2>
 					<g:if test="${flash.message}">
 						<span class="label label-warning">${flash.message}</span>
@@ -30,6 +30,9 @@
 				<div class="list-group">
 					<g:link class="list-group-item" action='index'> 
 						<i class="fa fa-bars"></i>&nbsp;Catalogos</g:link>
+					<g:link class="list-group-item" action='agregarConcepto' 
+						controller="notaDeCreditoDet" id="${notaDeCreditoInstance.id}"> 
+						<i class="fa fa-plus"></i>&nbsp;Agregar concepto</g:link>
 				</div>
 			</div>
 
@@ -39,20 +42,11 @@
 						<g:renderErrors bean="${notaDeCreditoInstance}" as="list" />
 					</div>
 				</g:hasErrors>
-				<g:form class="form-horizontal " action="save" name="notaForm" >
-
-					<div class="form-group ${hasErrors(bean:notaDeCreditoInstance,field:'cliente', 'has-error')}">
-						<label for="cliente" class="col-sm-2 control-label">Cliente</label>
-						<div class="col-sm-8">
-							<g:hiddenField id="clienteId" name="cliente.id" value="${notaDeCreditoInstance?.cliente?.id}"/>
-							<input id="cliente" name="cliente.nombre" type="text" class="form-control"
-							  autocomplete="off" autofocus="on"
-							  value="${notaDeCreditoInstance?.cliente?.nombre}">
-						</div>
-					</div>
+				<g:form class="form-horizontal " action="update" name="notaForm" method="PUT">
+					
 					<div class="form-group">
 						<label for="fecha" class="col-sm-2 control-label">Fecha</label>
-						<div class="col-sm-8">
+						<div class="col-sm-10">
 							<input  id="fecha" name="fecha" type="text" class="form-control" type="text"
 							  autocomplete="off"
 							  value="${notaDeCreditoInstance?.fecha?.format('dd/MM/yyyy')}">
@@ -60,20 +54,78 @@
 					</div>
 					<f:with bean="${notaDeCreditoInstance}">
 
-						<f:field property="tipo" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-2"/>
-						<f:field property="comentario" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-2"/>
+						<f:field property="tipo" input-class="form-control" />
+						<f:field property="comentario" input-class="form-control" />
 					</f:with>
 					<div class="form-group">
 						<div class="buttons  col-md-offset-2  col-md-3">
-							<g:submitButton name="Generar" class="btn btn-primary  btn-block" value="Aceptar"/>
-							%{-- <button id="cobrarBtn" class="btn btn-primary btn-lg btn-block">Cobrar</button>	 --}%
-							
+							<g:submitButton name="Generar" class="btn btn-primary  btn-block" value="Salvar"/>
 						</div>
 					</div>
 				</g:form>
+			</div><!-- end .col-md-6 -->
+
+			<div class="col-md-4">
+				<div class="table-panel">
+					<table class="table table-striped table-bordered table-condensed">
+						<tbody>
+							<tr>
+								<td>Importe</td>
+								<td>${notaDeCreditoInstance.importe}</td>
+							</tr>
+							<tr>
+								<td>Imupesto (tasa)</td>
+								<td>${notaDeCreditoInstance.impuestoTasa}</td>
+							</tr>
+							<tr>
+								<td>Impuesto</td>
+								<td>${notaDeCreditoInstance.impuestos}</td>
+							</tr>
+							<tr>
+								<td>Total</td>
+								<td>${notaDeCreditoInstance.total}</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
 			</div>
 
 		</div><!-- end .row2 -->
+
+		<div class="row">
+			<div class="col-md-12">
+
+				<div class="table-panel">
+					<legend>Conceptos</legend>
+					<table class="table table-striped table-bordered table-condensed">
+						<thead>
+							<tr>
+								<th>Cantidad</th>
+								<th>Concepto</th>
+								<th>Descripcion</th>
+								<th>Unidad</th>
+								<th>Importe</th>
+							</tr>
+						</thead>
+						<tbody>
+							<g:each in="${productoInstanceList}" var="row">
+								<tr>
+									<td>
+										<g:link action="show" id="${row.id}">
+											${fieldValue(bean:row,field:"id")}
+										</g:link>
+									</td>
+									<td>${fieldValue(bean:row,field:"clave")}</td>
+									
+								</tr>
+							</g:each>
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+		</div>
 
 	</div>
 
@@ -108,20 +160,7 @@
 				}
 			});
 
-			// $("#tipoDeNota").change(function(){
-			// 	var text = "";
-			// 	   $(this).children("option:selected").each(function() {
-			// 	      text += $( this ).text() ;
-			// 	});
-			// 	if(text==='BONIFICACION'){
-			// 		$("#importe").attr('disabled','disabled');
-			// 		//$("#referencia").attr('required','required');
-			// 	}else{
-			// 		$("#importe").removeAttr('disabled');
-			// 		$("#importe").attr('required','required');
-					
-			// 	}
-			// });
+			
 
 		});
 	</script>	

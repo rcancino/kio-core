@@ -42,6 +42,7 @@
 				<th>Fecha</th>
 				<th>Importe</th>
 				<th>Tipo</th>
+				<th>Estatus</th>
 				<th>Cfdi</th>
 				<th>Modificado</th>
 			</tr>
@@ -61,7 +62,8 @@
 					</td>
 					<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
 					<td><g:formatNumber number="${row.importe}" type="currency"/></td>
-					<td>${row.tipoDeNota}</td>
+					<td>${row.tipo}</td>
+					<td>${row.estatus}</td>
 					<td>${row?.cfdi?.uuid}</td>
 					<td><g:formatDate date="${row.lastUpdated}" format="dd/MM/yyyy HH:mm"/></td>
 				</tr>

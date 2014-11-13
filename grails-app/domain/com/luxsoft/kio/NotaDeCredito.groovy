@@ -8,21 +8,17 @@ import groovy.transform.ToString
 class NotaDeCredito  {
 
 	@BindingFormat('dd/MM/yyyy')
-	String fecha
+	Date fecha
 	
 	Cliente cliente
 	
-	BigDecimal importe
-
+	BigDecimal subTotal=0
 	BigDecimal impuestoTasa=0.16
-
-	BigDecimal impuestos
-
-	BigDecimal total
+	BigDecimal impuesto=0
+	BigDecimal total=0
 	
-	BigDecimal aplicado
-	
-	BigDecimal disponible
+	BigDecimal aplicado=0
+	BigDecimal disponible=0
 	
 	String comentario
 
@@ -34,15 +30,22 @@ class NotaDeCredito  {
 
 	Date lastUpdated
     
+    static hasMany = [conceptos: NotaDeCredito]
 	
 	static mapping = {
-		aplicaciones cascade: "all-delete-orphan"
+		conceptos cascade: "all-delete-orphan"
 	}
 
 	static constraints = {
     	tipo inList:['DESCUENTO','BONIFICACION','DEVOLUCION']
     	comentario nullable:true, maxSize:300
-    	cfdi nulllable:true
+    	cfdi nullable:true
+    }
+
+    static transients = ['estatus']
+
+    def getEstatus(){
+    	return cfdi?'TIMBRADA':'PENDIENTE'
     }
 	
 	

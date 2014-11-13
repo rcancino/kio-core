@@ -1,7 +1,9 @@
 package com.luxsoft.kio
 
 import com.luxsoft.kio.MonedaUtils
+import org.springframework.security.access.annotation.Secured
 
+@Secured(["hasAnyRole('MOSTRADOR')"])
 class VentaDetController {
     //static scaffold = true
 

@@ -29,17 +29,18 @@ class NotaDeCreditoController {
     @Transactional
     def save(AltaDeNotaCommand command) {
         
-        if (notaDeCreditoInstance == null) {
+        if (command == null) {
             notFound()
             return
         }
-        notaDeCreditoInstance.
-        if (notaDeCreditoInstance.hasErrors()) {
-            flash.message="Errores de validacion"
-            respond notaDeCreditoInstance.errors, view:'create'
+        if (command.hasErrors()) {
+            render view:'create',model:[notaDeCreditoInstance:command]
             return
         }
-
+        def notaDeCreditoInstance =command.generarNota()
+        notaDeCreditoInstance.save failOnError:true
+        flash.message="Nota generada: $notaDeCreditoInstance.id"
+        redirect action:'edit',params:[id:notaDeCreditoInstance.id]
         // notaDeCreditoInstance.save flush:true
 
         // request.withFormat {
@@ -92,6 +93,7 @@ class NotaDeCreditoController {
 @Validateable
 class AltaDeNotaCommand{
     Cliente cliente 
+    Date fecha=new Date()
     String tipo
     String comentario
 
@@ -102,6 +104,17 @@ class AltaDeNotaCommand{
 
     String toString(){
         return "$cliente $tipo"
+    }
+
+    NotaDeCredito generarNota(){
+        def nota=new NotaDeCredito(
+            cliente:this.cliente,
+            fecha:this.fecha,
+            tipo:this.tipo,
+            comentario:this.comentario
+
+        )
+
     }
 
 }
