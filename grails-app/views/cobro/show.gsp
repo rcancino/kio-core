@@ -37,11 +37,12 @@
         			<g:link action="index" class="list-group-item">
         				<i class="fa fa-tasks fa-fw fa-2x"></i>&nbsp;  Cobros
         			</g:link>
-        			<g:link action="delete" class="list-group-item" onclick="return confirm('Eliminar el cobro?');"
-        				id="${cobroInstance.id}">
-        				<i class="fa fa-trash fa-fw fa-2x"></i>&nbsp;  Eliminar
-        			</g:link>
+        			
         			<g:if test="${!cobroInstance.venta.cfdi}">
+        				<g:link action="delete" class="list-group-item" onclick="return confirm('Eliminar el cobro?');"
+        					id="${cobroInstance.id}">
+        					<i class="fa fa-trash fa-fw fa-2x"></i>&nbsp;  Eliminar
+        				</g:link>
         				<g:link action="facturar" class="list-group-item" onclick="return confirm('Facturar la venta ventaInstance.id?');"
         					id="${cobroInstance.id}">
         					<i class="fa fa-file-pdf-o fa-fw fa-2x"></i>&nbsp;  Facturar
@@ -80,6 +81,18 @@
 								<strong>
 									<p class="form-control-static ">
 										<g:formatNumber number="${cobroInstance.venta.saldo}" type="currency"/>
+									</p>
+								</strong>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">CFDI </label>
+							<div class="col-sm-8">
+								<strong>
+									<p class="form-control-static ">
+										<g:link controller="cfdi" action="show">
+											${cobroInstance.venta?.cfdi?.uuid}
+										</g:link>
 									</p>
 								</strong>
 							</div>

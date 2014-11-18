@@ -47,9 +47,9 @@ navigation={
 				notasDeCredito(controller:'notaDeCredito',action:'index')
 				ventas(titleText:'Ventas pagadas')
 			}
-			pagos(controller:'pago',action:'index')
+			//pagos(controller:'pago',action:'index')
 			cxc(controller:'cxc',action:'index')
-			cfdi(controller:'cfdi',action:'index')
+			cfdi(controller:'cfdi',action:'index',titleText:"CFDI's")
 			credencial(controller:'credencial',action:'index')
 		}
 		procesos(){
