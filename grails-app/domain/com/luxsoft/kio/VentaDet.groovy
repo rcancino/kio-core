@@ -66,6 +66,10 @@ class VentaDet {
     def getImporteNetoSinIva(){
         return MonedaUtils.calcularImporteDelTotal(importeNeto)
     }
+
+    def getPrecioSinIva(){
+        return MonedaUtils.calcularImporteDelTotal(precio)
+    }
    
 
 

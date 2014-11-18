@@ -2,6 +2,7 @@ package com.luxsoft.cfdi
 
 import mx.gob.sat.cfd.x3.ComprobanteDocument.Comprobante
 import org.springframework.security.access.annotation.Secured
+import com.luxsoft.kio.Cliente
 
 @Secured(["hasAnyRole('ADMINISTRACION','CAJERO','MOSTRADOR')"])
 class CfdiController {
@@ -12,7 +13,13 @@ class CfdiController {
 	}
 	
 	def show(Cfdi cfdi){
-		[cfdiInstance:cfdi]
+		def cliente=Cliente.findByNombre(cfdi.receptor)
+		def model=[cfdiInstance:cfdi]
+		if(cliente){
+			model.correoDeEnvio=cliente.emailCfdi
+		}
+		return model
+		
 	}
 	
 	def mostrarXml(long id){
@@ -54,5 +61,31 @@ class CfdiController {
 		chain(controller:'jasper',action:'index',model:[data:modelData],params:params)
 
 		
+	}
+
+	def mandarCorreo(CfdiMail command){
+		command.validate()
+		if(command.hasErrors()){
+			flash.message="Errores en parametros para envio de correo ${command.errors}"
+			redirect action:'show',params:[id:command?.cfdi?.id]
+		}
+		sendMail{
+			multipart true
+			to command.mail
+			subject "CFDI: $command.cfdi.folio"
+			from "john@g2one.com"
+			body "PENDIENTE"
+			attachBytes "${command.cfdi.xmlName}", "text/xml", command.cfdi.xml
+		}
+
+	}
+}
+
+class CfdiMail{
+	Cfdi cfdi
+	String mail
+
+	static constraints={
+		mail email:true
 	}
 }
