@@ -9,7 +9,7 @@ import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import org.apache.commons.lang.WordUtils
 
 @Secured(['ROLE_ADMIN','ADMINISTRACION','MOSTRADOR'])
-class ReporteController {
+class ReportController {
 
 	def jasperService
 
@@ -52,9 +52,7 @@ class ReporteController {
 		
 	}
 	
-	private File findFile(String name){
-		return grailsApplication.mainContext.getResource("/reports/$name").file
-	}
+	
 }
 
 
