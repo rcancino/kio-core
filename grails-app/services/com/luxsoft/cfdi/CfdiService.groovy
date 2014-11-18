@@ -95,7 +95,7 @@ class CfdiService {
 			Traslado traslado=traslados.addNewTraslado()
 			traslado.setImpuesto(Traslado.Impuesto.IVA)
 			traslado.setImporte(venta.impuesto)
-			traslado.setTasa(venta.impuestTasa)
+			traslado.setTasa(venta.impuestoTasa)
 		}
 		
 		Conceptos conceptos=comprobante.addNewConceptos()
