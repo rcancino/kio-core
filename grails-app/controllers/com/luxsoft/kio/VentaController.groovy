@@ -14,9 +14,9 @@ class VentaController {
     	params.max = Math.min(max ?: 20, 100)
 		params.sort=params.sort?:'dateCreated'
 		params.order='desc'
-		def query=Venta.where{status!='VENTA'}
+		//def query=Venta.where{status=='VENTA'}
 		
-		[ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count(params)]
+		[ventaInstanceList:Venta.list(params),ventaInstanceListTotal:Venta.count()]
     }
 
     

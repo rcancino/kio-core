@@ -42,7 +42,7 @@ class Venta {
 
 	BigDecimal saldo
 
-	BigDecimal abonos=0
+	BigDecimal pagos=0
 	
 	Cfdi cfdi
 
@@ -69,9 +69,8 @@ class Venta {
 
     static mapping = {
 		partidas cascade: "all-delete-orphan"
+		saldo formula: 'total - pagos'
 	}
-
-	static transients = ['saldo']
 
 	
 	def actualizarImportes(){
@@ -83,9 +82,7 @@ class Venta {
 		return this
 	}
 
-	def getSaldo(){
-		return total-abonos
-	}
+	
 	
 	
 }

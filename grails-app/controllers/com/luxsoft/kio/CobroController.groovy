@@ -6,6 +6,7 @@ import org.springframework.security.access.annotation.Secured
 class CobroController {
 
     def cobroService
+    def cfdiService
     
     def index(Long max){
         params.max = Math.min(max ?: 50, 100)
@@ -18,7 +19,7 @@ class CobroController {
         params.max = Math.min(max ?: 50, 100)
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
-        def query=Venta.where{status=='VENTA' }
+        def query=Venta.where{pagos==0.0 }
         [ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count(params)]
     }
 
@@ -49,7 +50,7 @@ class CobroController {
                 cobroInstance=cobroService.save(cobroInstance)
 				log.info 'Cobro registrado: '+cobroInstance
                 //render view:'show',model:[ventaInstance:cobroInstance.venta,cobroInstance:cobroInstance]
-				redirect action:'show',params:[id:venta.id]
+				redirect action:'show',params:[id:cobroInstance.id]
 				
             }
             catch(CobroException ex) {
@@ -69,6 +70,22 @@ class CobroController {
         cobroService.delete(cobroInstance)
 		flash.message="Cobro $cobroInstance.id eliminado"
 		redirect action:'index'
+    }
+
+    def ventas(){ 
+
+    }
+
+    def facturar(Cobro cobro){
+        def venta=cobro.venta
+        if(venta.cfdi){
+            flash.message="Venta ya facturada"
+            redirect acion:'show',params:[id:cobro.id]
+            return
+        }
+        def cfdi=cfdiService.generar(venta)
+        redirect controller:'cfdi',action:'show',params:[id:cfdi.id]
+        //render cfdi.getComprobante()
     }
 
     

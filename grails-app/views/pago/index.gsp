@@ -39,33 +39,33 @@
 				<th>Fecha</th>
 				<th>Importe</th>
 				<th>F.P</th>
-				<th>Modificado</th>
+				<th>Disponible</th>
+				%{-- <th>Modificado</th> --}%
 			</tr>
 		</thead>
 		<tbody>
-			<g:each in="${cobroInstanceList}" var="row">
+			<g:each in="${pagoInstanceList}" var="row">
 				<tr id="${row.id}">
 					<td >
-						<g:link  action="show" id="${row.id}">
+						<g:link  action="edit" id="${row.id}">
 							${fieldValue(bean:row,field:"id")}
 						</g:link>
 					</td>
 					<td>
-						<g:link  action="show" id="${row.id}">
+						<g:link  action="edit" id="${row.id}">
 							${fieldValue(bean:row,field:"cliente.nombre")}
 						</g:link>
 					</td>
 					<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
 					<td><g:formatNumber number="${row.importe}" type="currency"/></td>
 					<td>${row.formaDePago}</td>
-					<td><g:formatDate date="${row.lastUpdated}" format="dd/MM/yyyy HH:mm"/></td>
+					<td><g:formatNumber number="${row.disponible}" type="currency"/></td>
+					%{-- <td><g:formatDate date="${row.lastUpdated}" format="dd/MM/yy HH:mm"/></td> --}%
 				</tr>
 			</g:each>
 		</tbody>
 	</table>
-	<div class="pagination">
-		<g:paginate total="${cobroInstanceCount ?: 0}"/>
-	</div>
+	
 </div>
 </content><!-- End content document -->
 

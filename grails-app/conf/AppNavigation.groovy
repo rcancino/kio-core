@@ -40,9 +40,12 @@ navigation={
 		operaciones(){
 			ventas(controller:'venta',action:'index')
 			caja(controller:'cobro',action:'pendientes'){
-				cobrosPendientes(controller:'caja',action:'index',titleText:'Pendientes de cobrar')
+				//cobrosPendientes(controller:'caja',action:'index',titleText:'Pendientes de cobrar')
+				pendientes(controller:'cobro',action:'pendientes')
+				cobros(controller:'cobro',action:'index')
 				pagos(controller:'pago',action:'index',titleText:'Pagos ',data:[icon:'fa fa-pencil fa-fw'])
 				notasDeCredito(controller:'notaDeCredito',action:'index')
+				ventas(titleText:'Ventas pagadas')
 			}
 			pagos(controller:'pago',action:'index')
 			cxc(controller:'cxc',action:'index')
@@ -52,11 +55,14 @@ navigation={
 		procesos(){
 			cfdi(controller:'cfdi',action:'index')
 		}
+
 		reportes(){
 			
 		}
 		consultas(){
 			socios()
+			clientes()
+			productos()
 			acceso(controller:'accessLog',action:'index')
 			reportes()
 			

@@ -2,29 +2,25 @@ package com.luxsoft.kio
 
 import org.grails.databinding.BindingFormat
 import groovy.transform.ToString
-//import groovy.transform.EqualsAndHashCode
+import groovy.transform.EqualsAndHashCode
 import org.grails.databinding.BindingFormat
 
 @ToString(includeNames=true,includePackage=false)
-//@EqualsAndHashCode(includes='documento,importe')
-class Aplicacion {
+@EqualsAndHashCode(includes='documento,importe')
+class AplicacionDePago {
 
-	@BindingFormat('dd/MM/yyyy')
+	Venta venta 
+
+    @BindingFormat('dd/MM/yyyy')
 	Date fecha
-
-	Pago pago
 
 	BigDecimal importe
 
-	Long documento
-	String documentoFecha
-	String documentoTipo
 	String comentario
 
-	static belongsTo = [abono: Abono]
+	static belongsTo = [pago: Pago]
 
     static constraints = {
-    	documentoTipo inList:['VENTA']
     	comentario nullable:true
     }
 
@@ -33,5 +29,5 @@ class Aplicacion {
 		
 	}
 
-    
 }
+

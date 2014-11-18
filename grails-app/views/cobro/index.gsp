@@ -3,18 +3,104 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="layout" content="application"/>
+	<meta name="layout" content="pago"/>
 	<title>Caja</title>
 	<asset:stylesheet src="datatables/dataTables.css"/>
 	<asset:javascript src="datatables/dataTables.js"/> 
 </head>
 <body>
+
+<content tag="header">
+	<h3>Cobros registrados</h3>
+	<nav:set path="user/operaciones/caja/cobros"/>
+</content>
+
+<content tag="operaciones">
+	%{-- <li>
+	    <g:link action="create" >
+	        <i class="fa fa-plus"></i> Nuevo
+	    </g:link>
+	    
+	</li> --}%
+</content>
+
+<content tag="reportes">
+	<li><g:link controller="reporte" action="pagosPorDia"> Cobranza</g:link></li>
+</content>	
+
+<content tag="document">
+	<div class="">
+		<table id="cobrosTable" class="table table-striped table-bordered table-condensed">
+			<thead>
+				<tr>
+					<th>Folio</th>
+					
+					<th>Cliente</th>
+					<th>Venta</th>
+					<th>Fecha</th>
+					<th>Importe</th>
+				</tr>
+			</thead>
+			<tbody>
+				<g:each in="${cobroInstanceList}" var="row">
+					<tr id="${row.id}">
+						<td >
+							<g:link  action="show" id="${row.id}">
+								${fieldValue(bean:row,field:"id")}
+							</g:link>
+						</td>
+						
+						<td>
+							<g:link  action="show" id="${row.id}">
+								${fieldValue(bean:row,field:"cliente.nombre")}
+							</g:link>
+						</td>
+						<td>${fieldValue(bean:row,field:"venta.id")}</td>
+						<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
+						<td><g:formatNumber number="${row.importe}" type="currency"/></td>
+					</tr>
+				</g:each>
+			</tbody>
+		</table>
+		<div class="pagination">
+			<g:paginate total="${cobroInstanceCount ?: 0}"/>
+		</div>
+		
+	</div>
+</content>
+<content tag="javascript">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$('#cobrosTable').dataTable( {
+	        	"paging":   false,
+	        	"ordering": false,
+	        	"info":     false
+	        	,"dom": '<"toolbar col-md-4">rt<"bottom"lp>'
+	    	} );
+
+	    	var table = $('#cobrosTable').DataTable();
+	    	
+	    	$("#filterField").on('keyup',function(e){
+	    		var term=$(this).val();
+	    		//console.log('Filtrando para: '+term);
+	    		$('#cobrosTable').DataTable().search(
+					$(this).val()
+	    		).draw();
+	    	});
+
+	    	
+
+		});
+	</script>
+</content>
+
 	<div class="container">
 		
 		<div class="row">
 			<div class="col-md-12">
 				<div class="alert alert-info">
-					<h2>Cobros registrados</h2>
+					<h2></h2>
 					<g:if test="${flash.message}">
 	                    <div class="">
 	                        <span class="label label-warning">${flash.message}</span>
@@ -45,72 +131,12 @@
 		<br/>
 		<div class="row">
 
-			<div class="col-md-12">
-				<table id="cobrosTable" class="table table-striped table-bordered table-condensed">
-					<thead>
-						<tr>
-							<th>Folio</th>
-							
-							<th>Cliente</th>
-							<th>Venta</th>
-							<th>Fecha</th>
-							<th>Importe</th>
-						</tr>
-					</thead>
-					<tbody>
-						<g:each in="${cobroInstanceList}" var="row">
-							<tr id="${row.id}">
-								<td >
-									<g:link  action="show" id="${row.id}">
-										${fieldValue(bean:row,field:"id")}
-									</g:link>
-								</td>
-								
-								<td>
-									<g:link  action="show" id="${row.id}">
-										${fieldValue(bean:row,field:"cliente.nombre")}
-									</g:link>
-								</td>
-								<td>${fieldValue(bean:row,field:"venta.id")}</td>
-								<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
-								<td><g:formatNumber number="${row.importe}" type="currency"/></td>
-							</tr>
-						</g:each>
-					</tbody>
-				</table>
-				<div class="pagination">
-					<g:paginate total="${cobroInstanceCount ?: 0}"/>
-				</div>
-				
-			</div>
+			
 		</div>
 
 	</div>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		
-		$('#cobrosTable').dataTable( {
-        	"paging":   false,
-        	"ordering": false,
-        	"info":     false
-        	,"dom": '<"toolbar col-md-4">rt<"bottom"lp>'
-    	} );
 
-    	var table = $('#cobrosTable').DataTable();
-    	
-    	$("#filterField").on('keyup',function(e){
-    		var term=$(this).val();
-    		//console.log('Filtrando para: '+term);
-    		$('#cobrosTable').DataTable().search(
-				$(this).val()
-    		).draw();
-    	});
-
-    	
-
-	});
-</script>
 	
 </body>
 </html>

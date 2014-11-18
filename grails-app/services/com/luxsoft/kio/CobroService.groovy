@@ -5,37 +5,34 @@ import grails.transaction.Transactional
 @Transactional
 class CobroService {
 
+	def pagoService 
+
     def save(Cobro cobro) {
-		cobro.validate()
-		if(cobro.hasErrors()){
-			throw new CobroException(cobro:cobro,message:'Errores de validacion')
-		}
-		cobro=cobro.save failOnError:true
+		//cobro.validate()
+		// if(cobro.hasErrors()){
+		// 	throw new CobroException(cobro:cobro,message:'Errores de validacion')
+		// }
+		
 		def venta=cobro.venta
-		//def abonos=Cobro.executeQuery('select sum(c.importe) from Cobro c where c.venta=?',[venta])[0]
-		//venta.abonos=abonos
-		//venta.status='PAGADA'
-		actualizarAbonos(venta)
+
+		cobro.pago=pagoService.registrarPago(cobro)
+
+		cobro=cobro.save failOnError:true
+		//def aplicacion=generarAplicacion(pago,venta)
+		//def actualizarSaldo(venta)
 		
 		return cobro
     }
-	
-	def actualizarAbonos(Venta venta){
-		def abonos=Cobro.executeQuery('select sum(c.importe) from Cobro c where c.venta=?',[venta])[0]
-		venta.abonos=abonos
-		if(venta.saldo<=0.0	)
-			venta.status='PAGADA'
-		venta.save()
-	}
+    
 	
 	def delete(Cobro cobro){
-		def venta=cobro.venta
+		def pago=cobro.pago
+		if(pago.aplicaciones.size()>1){
+			throw new CobroException(message:'Pago con aplicaciones adicionales, eliminar desde pagos',cobro:cobro)
+		}
+		cobro.pago=null
 		cobro.delete flush:true
-		
-		venta.abonos-=cobro.importe
-		venta.status='VENTA'
-		venta.save flush:true
-		
+		pagoService.delete(pago)
 	}
 	
 	

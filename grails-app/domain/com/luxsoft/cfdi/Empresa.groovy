@@ -10,6 +10,7 @@ import org.apache.commons.lang.exception.ExceptionUtils
 
 class Empresa {
 	
+	String clave
 	String nombre
 	Direccion direccion
 	String rfc

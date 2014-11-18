@@ -34,15 +34,10 @@
 			<div class="col-md-3">
         		<div class="list-group">
 
-        			<g:link action="index" class="list-group-item">
+        			<g:link action="pendientes" class="list-group-item">
         				<i class="fa fa-tasks fa-fw fa-2x"></i>&nbsp;  Ventas por cobrar
         			</g:link>
-        			<g:link action="abonos" class="list-group-item">
-        				&nbsp;  Abonos
-        			</g:link>
-        			<g:link action="abonos" class="list-group-item">
-        				&nbsp;  Saldo
-        			</g:link>
+        			
         		  
         		  %{-- <a class="list-group-item" href="#"><i class="fa fa-book fa-fw fa-2x"></i>&nbsp; Library</a>
         		  <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw fa-2x"></i>&nbsp; Applications</a>

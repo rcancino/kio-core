@@ -10,6 +10,8 @@ class Cobro {
 	
 	Cliente cliente
 
+	Pago pago
+
 	@BindingFormat('dd/MM/yyyy')
 	Date fecha
 

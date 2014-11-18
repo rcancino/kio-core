@@ -106,7 +106,8 @@ grails.project.dependency.resolution = {
 		
         compile ":standalone:1.2.3"
         
-        compile ":jasper:1.10.0"
+        //compile ":jasper:1.10.0"
+        compile ":jasper:1.11.0-SNAPSHOT"
         compile ":spring-security-core:2.0-RC4"
         //compile ":spring-security-core:2.0-RC3"
         

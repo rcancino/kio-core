@@ -61,6 +61,7 @@
 							<th>Impuesto</th>
 							<th>Total</th>
 							<th>Cobrar</th>
+							<th>Saldo</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -84,11 +85,13 @@
 								<td><g:formatNumber number="${row.impuesto}" type="currency"/></td>
 								<td><g:formatNumber number="${row.total}" type="currency"/></td>
 								<td>
-									<g:link action="mandarFacturar" id="${row.id}">
-										<span class="glyphicon glyphicon-shopping-cart"></span>
-									</g:link>
-									
+									<g:if test="${row.saldo>0}">
+										<g:link action="mandarFacturar" id="${row.id}">
+											<span class="glyphicon glyphicon-shopping-cart"></span>
+										</g:link>
+									</g:if>
 								</td>
+								<td><g:formatNumber number="${row.saldo}" type="currency"/></td>
 							</tr>
 						</g:each>
 					</tbody>

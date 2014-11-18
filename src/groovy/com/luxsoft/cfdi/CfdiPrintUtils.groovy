@@ -18,24 +18,29 @@ class CfdiPrintUtils {
 		Comprobante comprobante=cfdi.getComprobante()
 		def parametros=[:]
 		// Datos tomados del Comprobante fiscal digital XML
-		
 		parametros.put("SERIE", 			comprobante.getSerie());
 		parametros.put("FOLIO", 			comprobante.getFolio());
 		parametros.put("NUM_CERTIFICADO", 	comprobante.getNoCertificado());
 		parametros.put("SELLO_DIGITAL", 	comprobante.getSello());
-		parametros.put("CADENA_ORIGINAL", 	cfdi.getCadenaOriginal());
+		//parametros.put("CADENA_ORIGINAL", 	cfdi.getCadenaOriginal());
 		parametros.put("RECEPTOR_NOMBRE", 			comprobante.getReceptor().getNombre()); //Recibir como Parametro
 		parametros.put("RECEPTOR_RFC", 				comprobante.getReceptor().getRfc());
+		
 		parametros.put("FECHA", 			comprobante.getFecha().getTime());
-		parametros.put("NFISCAL", 			comprobante.getSerie()+" - "+comprobante.getFolio());
+		
+		
 		parametros.put("IMPORTE", 			comprobante.getSubTotal());
-		parametros.put("IVA", 			comprobante.getImpuestos().getTotalImpuestosTrasladados());
+		
+		parametros.put("IVA", 			comprobante.getImpuestos().getTotalImpuestosTrasladados()?:0.0);
+		
 		parametros.put("TOTAL", 			comprobante.getTotal());
+		
 		parametros.put("RECEPTOR_DIRECCION", 		getDireccionEnFormatoEstandar(comprobante.getReceptor().getDomicilio()) );
 		parametros.put("NUM_CTA_PAGO", 		comprobante.getNumCtaPago());
 		parametros.put("METODO_PAGO", 		comprobante.getMetodoDePago());
 		parametros.put("FORMA_PAGO", 		comprobante.getFormaDePago());
 		//Datos tomado de la aplicacion
+		
 		parametros.put("IMP_CON_LETRA", 	ImporteALetra.aLetra(comprobante.getTotal()));
 		parametros['FORMA_DE_PAGO']=comprobante.formaDePago
 		parametros['PINT_IVA']='16 '
@@ -84,13 +89,8 @@ class CfdiPrintUtils {
 				,expedido.getEstado()
 				);
 			parametros.put("EXPEDIDO_DIRECCION", expedidoDir);
-			
-			
 		}
-			
-		
 		//Especiales para CFDI
-			
 		if(cfdi.uuid!=null){
 			
 			//println 'Imagen generada: '+img
@@ -105,8 +105,6 @@ class CfdiPrintUtils {
 			parametros.put("CERTIFICADO_SAT", timbre.noCertificadoSAT);
 			parametros.put("CADENA_ORIGINAL_SAT", timbre.cadenaOriginal());
 		}
-		
-		
 		
 		return parametros;
 	}

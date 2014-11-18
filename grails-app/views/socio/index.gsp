@@ -74,9 +74,13 @@
 					    	</a>
 					    </li>
 					    <li>
-					    	<g:link action="importar" onclick="return confirm('Importar socios de SIIPAP');">
-								<span class="glyphicon glyphicon-import"></span> Importar
-							</g:link>
+					    	<sec:link action="importar" expression="hasRole('ROLE_ADMIN')" 
+					    		onclick="return confirm('Importar socios de SIIPAP');">
+					    		<span class="glyphicon glyphicon-import"></span> Importar
+					    	</sec:link>
+					    	%{-- <g:link action="importar" onclick="return confirm('Importar socios de SIIPAP');">
+								
+							</g:link> --}%
 						</li>
 					</ul>
 				</div>

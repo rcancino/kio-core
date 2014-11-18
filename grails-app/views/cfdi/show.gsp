@@ -36,6 +36,9 @@
 								<span class="glyphicon glyphicon-cloud-download"> Descargar XML</span>
 							</g:link>
 							
+							<g:link  action="email" class="btn btn-default btn-sm" id="${cfdiInstance.id}">
+								<span class="glyphicon glyphicon-envelope"></span> Enviar
+							</g:link>
 							<g:link  action="cancelar" class="btn btn-default btn-sm"  
 									onclick="return confirm('Cancelar CFDI?');" id="${cfdiInstance.id }">
 								<span class="glyphicon glyphicon-remove-circle"></span> Cancelar

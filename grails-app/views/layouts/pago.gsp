@@ -79,9 +79,15 @@
                                         class="btn btn-default" data-toggle="modal" data-target="#searchDialog">
                                         <i class="fa fa-search"></i> Buscar
                                 </button> --}%
-                                <g:link action="index" class="btn btn-default ">
-                                    <span class="glyphicon glyphicon-repeat"></span> Refrescar
-                                </g:link>
+                                <g:if test="${pageProperty(name:'page.refreshButton')}">
+                                    <g:pageProperty name="page.refreshButton"/>    
+                                </g:if>
+                                <g:else>
+                                    <g:link action="${action}" class="btn btn-default ">
+                                        <span class="glyphicon glyphicon-repeat"></span> Refrescar
+                                    </g:link>
+                                </g:else>
+                                
                             </div>
                             <div class="btn-group">
                                 <button type="button" name="operaciones"

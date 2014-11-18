@@ -5,7 +5,10 @@ import com.luxsoft.sec.Usuario
 import com.luxsoft.sec.UsuarioRole
 
 
+
 class BootStrap {
+
+	def grailsApplication
 
     def init = { servletContext ->
 
@@ -29,6 +32,42 @@ class BootStrap {
 			UsuarioRole.create(admin,adminRole,true)
 			UsuarioRole.create(admin,administracionRole,true)
 		}
+
+		def serie=grailsApplication.config.luxsoft.cfdi.serie.venta
+		def cfdiFolio=CfdiFolio.findBySerie(serie)
+		if(!cfdiFolio){
+			cfdiFolio=new CfdiFolio(serie:serie,folio:0)
+			cfdiFolio.save()
+		}
+
+			def empresa=Empresa.findWhere(clave:'KIO')
+			if(!empresa){
+				empresa=new Empresa(clave:'GASOC',nombre:'OPERADORA Y ADMINISTRADOR GASOC S.A. DE C.V.',
+					rfc:'OAG100209GN8',
+					regimen:'REGIMEN GENERAL DE LEY PERSONAS MORALE',
+		            registroPatronal:'0')
+				empresa.direccion=new Direccion(
+					calle:'AVENIDA CUAUHTEMOC',
+					numeroExterior:'1461',
+					colonia:'SANTA CRUZ ATOYAC',
+					municipio:'BENITO JUAREZ',
+					codigoPostal:'03310',
+					estado:'DISTRITO FEDERAL',
+					pais:'MEXICO'
+		        )
+		        empresa.numeroDeCertificado='00001000000201478375'
+		        empresa.certificadoDigital=grailsApplication.mainContext
+		  		.getResource("/WEB-INF/sat/00001000000201478375.cer").file.readBytes()
+		  		empresa.llavePrivada=grailsApplication.mainContext
+		  		.getResource("/WEB-INF/sat/gasoc.key").file.readBytes()	
+		  		empresa.usuarioPac="PAP830101CR3"
+		  		empresa.passwordPac="yqjvqfofb"
+		  		//empresa.certificadoDigitalPfx=grailsApplication.mainContext
+		  		//.getResource("/WEB-INF/data/kio/PAPEL_CFDI_CERT.pfx").file.readBytes()	
+				empresa.save()
+			}
+		  	
+		  	
 		
 		environments {
 			development {

@@ -74,9 +74,13 @@
 					    	</a>
 					    </li>
 					    <li>
-					    	<g:link action="importar" class="">
+					    	%{-- <g:link action="importar" class="">
 								<span class="glyphicon glyphicon-import"></span> Importar
-							</g:link>
+							</g:link> --}%
+							<sec:link action="importar" expression="hasRole('ROLE_ADMIN')" 
+					    		onclick="return confirm('Importar clientes de SIIPAP');">
+					    		<span class="glyphicon glyphicon-import"></span> Importar
+					    	</sec:link>
 						</li>
 					</ul>
 				</div>

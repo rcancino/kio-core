@@ -193,7 +193,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':                ['permitAll'],
     
     "/console/**": ['ROLE_ADMIN'],
-    "/plugins/console*/**": ['ROLE_ADMIN']
+    "/plugins/console*/**": ['ROLE_ADMIN'],
+    "/jasper/**":                     ['IS_AUTHENTICATED_REMEMBERED']
 ]
 grails.plugin.springsecurity.roleHierarchy = '''
    ADMINISTRACION > CAJERO > MOSTRADOR

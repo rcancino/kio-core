@@ -1,7 +1,9 @@
 package com.luxsoft.cfdi
 
 import mx.gob.sat.cfd.x3.ComprobanteDocument.Comprobante
+import org.springframework.security.access.annotation.Secured
 
+@Secured(["hasAnyRole('ADMINISTRACION','CAJERO','MOSTRADOR')"])
 class CfdiController {
 
     def index(Integer max) {
@@ -15,7 +17,8 @@ class CfdiController {
 	
 	def mostrarXml(long id){
 		def cfdi=Cfdi.findById(id)
-		render view:'cfdiXml',model:[cfdiInstance:cfdi,xml:cfdi.getComprobanteDocument().xmlText()]
+		//render view:'cfdiXml',model:[cfdiInstance:cfdi,xml:cfdi.getComprobanteDocument().xmlText()]
+		render(text: cfdi.comprobanteDocument.xmlText(), contentType: "text/xml", encoding: "UTF-8")
 	}
 	
 	def descargarXml(long id){

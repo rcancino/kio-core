@@ -22,6 +22,7 @@ import org.apache.xmlbeans.XmlValidationError
 
 import org.apache.commons.lang.StringUtils
 import org.bouncycastle.util.encoders.Base64
+import com.luxsoft.kio.MonedaUtils
 
 @Transactional
 class CfdiService {
@@ -33,8 +34,11 @@ class CfdiService {
 	
 	def empresa
 
+	//def static VALID_STATUS=['VENTA','PAGADA']
+
     def Cfdi generar(Venta venta) {
-		assert venta.status=='VENTA',"La venta debe tener status VENTA status actual: $venta.status"
+
+		assert (venta.status=='VENTA' || venta.status=='PAGADA'),"La venta debe tener status VENTA o PAGADA status actual: $venta.status"
 		
 		if(empresa==null){
 			empresa=Empresa.first();
@@ -70,7 +74,7 @@ class CfdiService {
 		Emisor emisor=CfdiUtils.registrarEmisor(comprobante, empresa)
 		Receptor receptor=CfdiUtils.registrarReceptor(comprobante, venta.cliente)
 		
-		comprobante.setSubTotal(venta.importeNeto)
+		comprobante.setSubTotal(venta.subTotal)
 		comprobante.setDescuento(venta.descuento)
 		comprobante.setTotal(venta.total)
 		
@@ -79,19 +83,19 @@ class CfdiService {
 		
 		//Facturacion a clientes extranjero
 		if(rfc=="XEXX010101000"){
-			comprobante.setSubTotal(source.importe)
-			comprobante.setTotal(source.subtotal)
+			comprobante.setSubTotal(venta.total)
+			comprobante.setTotal(venta.total)
 		}else if(rfc=="XAXX010101000"){
-			comprobante.setSubTotal(venta.importeBruto*(1+MonedaUtils.IVA))
-			comprobante.setDescuento(venta.descuento*(1+MonedaUtils.IVA))
+			comprobante.setSubTotal(venta.total)
+			//comprobante.setDescuento(venta.descuento)
 			comprobante.setTotal(venta.total)
 		}else{
 			impuestos.setTotalImpuestosTrasladados(venta.impuesto)
 			Traslados traslados=impuestos.addNewTraslados()
 			Traslado traslado=traslados.addNewTraslado()
 			traslado.setImpuesto(Traslado.Impuesto.IVA)
-			traslado.setImporte(source.impuestos)
-			traslado.setTasa(MonedaUtils.IVA*100)
+			traslado.setImporte(venta.impuesto)
+			traslado.setTasa(venta.impuestTasa)
 		}
 		
 		Conceptos conceptos=comprobante.addNewConceptos()
@@ -103,14 +107,20 @@ class CfdiService {
 			c.setUnidad(det.producto.unidad)
 			c.setNoIdentificacion(det.producto.clave)
 			String desc = det.producto.descripcion
-			if(det.servicioPorSocio){
+			if(det.socio){
 				//desc = (new StringBuilder(String.valueOf(desc))).append(StringUtils.stripToEmpty(det.comentario)).toString()
-				desc+=" Socio:$det.servicioPorSocio.socio.id"
+				desc+=" Socio:$det.socio.numeroDeSocio"
 			}
 			desc = StringUtils.abbreviate(desc, 250)
 			c.setDescripcion(desc)
-			c.setValorUnitario(det.precioUnitario)
-			c.setImporte(det.importeNeto)
+			if(rfc=="XEXX010101000" || rfc=="XAXX010101000"){
+				c.setValorUnitario(det.precio)
+				c.setImporte(det.importeNeto)
+			} else{
+				c.setValorUnitario(MonedaUtils.calcularImporteDelTotal(det.precio))
+				c.setImporte(det.importeNetoSinIva)
+			}
+			
 			
 		}
 		

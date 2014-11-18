@@ -16,6 +16,9 @@
 				<li>
 					<g:link controller="usuario" ><i class="fa fa-users"></i> Usuarios</g:link>
 				</li>
+				<li>
+					<g:link controller="configuracion" ><i class="fa fa-users"></i> Configuración</g:link>
+				</li>
 			</sec:ifAllGranted>
 			
 		</ul>
