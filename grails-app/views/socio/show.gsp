@@ -50,7 +50,7 @@
 					 	<div class="tab-pane" id="facturacion">
 					 		
 					 		<fieldset disabled>
-								%{-- <g:render template="datosDeFacturacionForm" /> --}%
+								<g:render template="datosDeFacturacionForm" />
 							</fieldset>
 					 	</div>
 					 	<div class="tab-pane" id="perfil">

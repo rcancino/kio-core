@@ -27,14 +27,14 @@
 		
 		<div class="row">
 			
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="list-group">
 					<g:link class="list-group-item" action='index'> 
 						<i class="fa fa-bars"></i>&nbsp;Pagos</g:link>
 				</div>
 			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-9">
 				<g:hasErrors bean="${pagoInstance}">
 					<div class="alert alert-danger">
 						<g:renderErrors bean="${pagoInstance}" as="list" />

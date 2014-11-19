@@ -35,7 +35,8 @@
 						<g:link action="create" class="list-group-item ">
 							<span class="glyphicon glyphicon-floppy-saved"></span> Nuevo
 						</g:link>
-						<g:link action="delete" class="list-group-item " id="${g.pageProperty(name:'page.beanId') }">
+						<g:link action="delete" class="list-group-item " id="${g.pageProperty(name:'page.beanId') }"
+                            onclick="return confirm('Eliminar el registro?');">
 							<span class="glyphicon glyphicon-trash"></span> Eliminar
 						</g:link>
 					</div>

@@ -25,21 +25,55 @@
 
 		<div class="row">
 			
-			<div class=" col-md-4">
-				<g:link action="index" class="btn btn-default ">
-					<span class="glyphicon glyphicon-repeat"></span> Refrescar
-				</g:link>
-				<g:link action="create" class="btn btn-default">
-					<span class="glyphicon glyphicon-floppy-saved"></span> Nueva
-				</g:link>
-				
-				
-			</div>
+			<div class="col-md-12">
+				<div class="row toolbar-panel">
+				    <div class="col-md-6">
+				        <div class="input-group">
+				          
+				          <input type='text' id="filtro" placeholder="Filtrar" class="form-control" autofocus="on">
+				          <span class="input-group-btn">
+				            <button type="button" name="search"
+				                class="btn btn-default" data-toggle="modal" data-target="#searchDialog">
+				                <i class="fa fa-search"></i> Buscar
+				        	</button>
+				          </span>
+				        </div><!-- /input-group -->
+				    </div>
+				   
 
-			<div class="btn-group col-md-3">
-				<div class="input-group ">
-					<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-					<input type="text" class="form-control" placeholder="Buscar" autofocus="autofocus">
+				    <div class="btn-group">
+				        <g:link action="${action}" class="btn btn-default ">
+				            <span class="glyphicon glyphicon-repeat"></span> Refrescar
+				        </g:link>
+				    </div>
+
+				    <div class="btn-group">
+				        <button type="button" name="operaciones"
+				                class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+				                role="menu">
+				                Operaciones <span class="caret"></span>
+				        </button>
+				        <ul class="dropdown-menu">
+				            <li>
+				                <g:link action="create" >
+				                    <i class="fa fa-plus"></i> Nuevo
+				                </g:link>
+				            </li>
+				        </ul>
+				    </div>
+				    <div class="btn-group">
+				        <button type="button" name="reportes"
+				                class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+				                role="menu">
+				                Reportes <span class="caret"></span>
+				        </button>
+
+				        <ul class="dropdown-menu">
+				            
+				            
+				        </ul>
+				    </div>
+				    
 				</div>
 			</div>
 			

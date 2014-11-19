@@ -8,7 +8,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="jumbotron">
+			<div class="jumbotron logo-panel">
 			  <h1>KYO Admin </h1>Sistema integral de información</h3></p>
 			</div>
 			
@@ -80,6 +80,7 @@
 				
 			</div>
 		</div>
+		
 
 	</div>
 

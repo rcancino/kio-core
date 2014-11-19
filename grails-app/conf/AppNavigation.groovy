@@ -56,15 +56,17 @@ navigation={
 			cfdi(controller:'cfdi',action:'index')
 		}
 
-		reportes(){
-			
+		reportes(controller:'report',action:'index'){
+			ventas(controller:'report'){
+				ventasGenerales(controller:'report')
+			}
 		}
 		consultas(){
 			socios()
 			clientes()
 			productos()
 			acceso(controller:'accessLog',action:'index')
-			reportes()
+			
 			
 		}
 		configuracion(){

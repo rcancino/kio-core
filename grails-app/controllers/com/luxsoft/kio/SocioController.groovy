@@ -56,7 +56,8 @@ class SocioController {
 			return
 		}
 		socioInstance=socioService.salvarSocio(socioInstance)
-		render view:'edit',model:[socioInstance:socioInstance]
+		//render view:'edit',model:[socioInstance:socioInstance]
+		redirect view:'edit',params:[id:socioInstance.id]
 	}
 
 	def show(Socio socioInstance){

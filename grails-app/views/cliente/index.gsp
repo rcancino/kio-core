@@ -59,15 +59,11 @@
 					</button>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="#uploadCfdiDialog" data-toggle="modal" class="">
+							<g:link action="create">
 								<span class="glyphicon glyphicon-plus"></span> Nuevo cliente
-							</a>
+							</g:link>
 						</li>
-					    <li>
-					    	<a href="#filtrarDialog" data-toggle="modal" >
-					    		<span class="glyphicon glyphicon-filter"></span> Filtrar
-					    	</a>
-					    </li>
+					    
 					    <li>
 					    	<a href="#searchDialog" data-toggle="modal" >
 					    		<span class="glyphicon glyphicon-find"></span> Busqueda avanzada

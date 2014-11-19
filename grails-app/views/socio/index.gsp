@@ -117,7 +117,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#nombreField").autocomplete({
-				source:'/kio-core/socio/getSociosJSON',
+				source:'<g:createLink controller="socio" action="getSociosJSON"/>',
 				minLength:3,
 				select:function(e,ui){
 					console.log('Valor seleccionado: '+ui.item.id);

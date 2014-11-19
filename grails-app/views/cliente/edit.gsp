@@ -11,6 +11,9 @@
 	<content tag="header">
 		<h3>${clienteInstance} (${clienteInstance.id})</h3>
 	</content>
+	<content tag="beanId">
+		${clienteInstance.id}
+	</content>
 	<content tag="form">
 		<g:hasErrors bean="${clienteInstance}">
 			<ul class="errors" role="alert">

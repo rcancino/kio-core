@@ -54,7 +54,7 @@
 					 		<g:render template="datosGeneralesForm" model="['socioInstance':socioInstance]"/>
 					 	</div>
 					 	<div class="tab-pane" id="facturacion">
-					 		%{-- <g:render template="datosDeFacturacionForm" /> --}%
+					 		<g:render template="datosDeFacturacionForm" />
 					 	</div>
 					 	<div class="tab-pane" id="perfil">
 					 		<g:render template="perfilForm" />
@@ -169,7 +169,7 @@
 		};
 
 		$("[name='cliente.nombre']").autocomplete({
-			source:'/kio-core/cliente/getClientesJSON',
+			source:'<g:createLink controller="cliente" action="getClientesJSON"/>',
 			minLength:3,
 			select:function(e,ui){
 				console.log('Cliente seleccionado: '+ui.item.value);

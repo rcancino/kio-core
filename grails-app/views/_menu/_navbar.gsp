@@ -39,6 +39,12 @@
 				      <nav:menu class="dropdown-menu" scope="user/consultas" /> 
 	        	</li>
 
+	        	<li>
+				    <g:link controller='report' >
+				    	<i class="fa fa-line-chart"></i> Reportes
+				 	</g:link>
+	        	</li>
+
         	</ul>
 
         	
