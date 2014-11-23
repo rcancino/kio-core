@@ -1,7 +1,7 @@
 <table class="table table-striped table-bordered table-condensed">
 	<thead>
 		<tr>
-			<g:sortableColumn property="id" title="Id"/>
+			<th>Id</th>
 			<th>Cliente</th>
 			<th>Rfc</th>
 			<th>Status</th>
@@ -11,6 +11,7 @@
 			<th>Importe</th>
 			<th>Impuesto</th>
 			<th>Total</th>
+			<th>Comentario</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -29,6 +30,7 @@
 				<td><g:formatNumber number="${row.subTotal}" type="currency"/></td>
 				<td><g:formatNumber number="${row.descuento}" type="currency"/></td>
 				<td><g:formatNumber number="${row.subTotal}" type="currency"/></td>
+				<td>${fieldValue(bean:row,field:'comentario')}</td>
 			</tr>
 		</g:each>
 	</tbody>

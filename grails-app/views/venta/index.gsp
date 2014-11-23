@@ -85,17 +85,19 @@
 				<table class="table table-striped table-bordered table-condensed">
 					<thead>
 						<tr>
-							<g:sortableColumn property="id" title="Id"/>
+							<th>Id</th>
 							<th>Cliente</th>
 							<th>Rfc</th>
 							<th>Status</th>
-							
+							<th>Cfdi</th>
 							<th>Fecha</th>
 							<th>Importe</th>
 							<th>Impuesto</th>
 							<th>Total</th>
 							<th>Cobrar</th>
 							<th>Saldo</th>
+							<th>Comentario</th>
+
 						</tr>
 					</thead>
 					<tbody>
@@ -114,6 +116,13 @@
 								</td>
 								<td>${fieldValue(bean:row,field:"cliente.rfc")}</td>
 								<td>${fieldValue(bean:row,field:"status")}</td>
+								<td>
+									<g:if test="${row.cfdi}">
+										<g:link action="show" id="${row.cfdi.id}">
+											${row.cfdi.folio}
+										</g:link>
+									</g:if>
+								</td>
 								<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
 								<td><g:formatNumber number="${row.subTotal}" type="currency"/></td>
 								<td><g:formatNumber number="${row.impuesto}" type="currency"/></td>
@@ -126,6 +135,7 @@
 									</g:if>
 								</td>
 								<td><g:formatNumber number="${row.saldo}" type="currency"/></td>
+								<td>${fieldValue(bean:row,field:"comentario")}</td>
 							</tr>
 						</g:each>
 					</tbody>
