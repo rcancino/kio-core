@@ -85,18 +85,16 @@
 				<table class="table table-striped table-bordered table-condensed">
 					<thead>
 						<tr>
-							<th>Id</th>
-							<th>Cliente</th>
-							<th>Rfc</th>
-							<th>Status</th>
-							<th>Cfdi</th>
+							<th>Folio</th>
+							<th>Fac</th>
 							<th>Fecha</th>
-							<th>Importe</th>
-							<th>Impuesto</th>
+							<th>Cliente</th>
 							<th>Total</th>
-							<th>Cobrar</th>
-							<th>Saldo</th>
+							<th>Atendió</th>
 							<th>Comentario</th>
+							<th>Cobrar</th>
+							
+							
 
 						</tr>
 					</thead>
@@ -109,14 +107,6 @@
 									</g:link>
 								</td>
 								<td>
-									<g:link action="${row.status=='PEDIDO'?'edit':'show'}" id="${row.id}">
-										${fieldValue(bean:row,field:"cliente.nombre")}
-									</g:link>
-									
-								</td>
-								<td>${fieldValue(bean:row,field:"cliente.rfc")}</td>
-								<td>${fieldValue(bean:row,field:"status")}</td>
-								<td>
 									<g:if test="${row.cfdi}">
 										<g:link action="show" id="${row.cfdi.id}">
 											${row.cfdi.folio}
@@ -124,9 +114,15 @@
 									</g:if>
 								</td>
 								<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
-								<td><g:formatNumber number="${row.subTotal}" type="currency"/></td>
-								<td><g:formatNumber number="${row.impuesto}" type="currency"/></td>
+								<td>
+									<g:link action="${row.status=='PEDIDO'?'edit':'show'}" id="${row.id}">
+										${fieldValue(bean:row,field:"cliente.nombre")}
+									</g:link>
+									
+								</td>
 								<td><g:formatNumber number="${row.total}" type="currency"/></td>
+								<td>${fieldValue(bean:row,field:"creadoPor")}</td>
+								<td>${fieldValue(bean:row,field:"comentario")}</td>
 								<td>
 									<g:if test="${row.saldo>0}">
 										<g:link action="mandarFacturar" id="${row.id}">
@@ -134,8 +130,8 @@
 										</g:link>
 									</g:if>
 								</td>
-								<td><g:formatNumber number="${row.saldo}" type="currency"/></td>
-								<td>${fieldValue(bean:row,field:"comentario")}</td>
+								
+								
 							</tr>
 						</g:each>
 					</tbody>

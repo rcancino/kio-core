@@ -53,6 +53,8 @@ class Venta {
 
 	String creadoPor
 
+	Boolean cancelada=false
+
 	static hasMany = [partidas: VentaDet]
 
     static constraints = {

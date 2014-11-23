@@ -262,6 +262,16 @@
 					  		    </div>
 					  		</div>
 					  		<div class="form-group">
+					  			<label for="corporativo" class="col-sm-3 control-label">Corporativo</label>
+					  			<g:select class="form-control"  
+					  				name="tipoDecorporativo" 
+					  				value="${socioInstance.perfil.tipoDeCorporativo}"
+					  				from="${com.luxsoft.kio.TipoDeCorporativo.findAll()}" 
+					  				optionKey="id" 
+					  				optionValue="clave"
+					  				noSelection="[null:'Seleccione un corporativo']"/>
+					  		</div>
+					  		<div class="form-group">
 					  			<div class="buttons  col-md-offset-8  col-md-3">
 					  				<g:submitButton id="actualizarMembresia"
 					  					name="Actualizar" 

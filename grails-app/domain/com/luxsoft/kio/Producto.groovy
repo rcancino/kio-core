@@ -18,6 +18,8 @@ class Producto {
 	
 	String periodicidad
 	Integer duracion
+
+    Boolean suspendido=false
 	
 
 	Date dateCreated

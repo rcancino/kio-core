@@ -50,7 +50,7 @@ class ConsultaController {
         if(direccion.hasErrors()){
             render direccion as JSON
         }
-        Direccion.sleep(2000)
+        //Direccion.sleep(2000)
         socio.direccion=direccion
         socio=socioService.actualizarSocio(socio)
 
@@ -65,6 +65,7 @@ class ConsultaController {
         log.info 'Actualizando membresia: '
         
         bindData(socio.membresia,params,[include: ['ultimoPago', 'proximoPago','toleranca']])
+        
         socio=socioService.actualizarSocio(socio)
         def membresia=socio.membresia
         def data= membresia as JSON
