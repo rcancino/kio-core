@@ -19,7 +19,7 @@ class CobroController {
         params.max = Math.min(max ?: 50, 100)
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
-        def query=Venta.where{pagos==0.0 }
+        def query=Venta.where{pagos>0.0 }
         [ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count(params)]
     }
 

@@ -103,7 +103,7 @@ $(document).ready(function(){
 	 });
 
 	$("#socio").autocomplete({
-		source:'/kio-core/socio/getSociosJSON',
+		source:'<g:createLink controller="socio" action="getSociosJSON"/>',
 		minLength:3,
 		select:function(e,ui){
 			console.log('Socio seleccionado: '+ui.item.value);

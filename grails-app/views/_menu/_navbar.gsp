@@ -36,7 +36,7 @@
 	        	<li class="dropdown">
 	          		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	          			<span class="glyphicon glyphicon-dashboard"></span> Consultas <span class="caret"></span>
-				      <nav:menu class="dropdown-menu" scope="user/consultas" /> 
+				      <nav:menu class="dropdown-menu" scope="user/consulta" /> 
 	        	</li>
 
 	        	<li>

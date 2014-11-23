@@ -22,7 +22,21 @@
         
         <g:render template="/_menu/footer"/>
         
-        
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document).keydown(function(e){
+                  //CTRL + S keydown combo
+                  if(e.ctrlKey && e.keyCode == 83){
+                        var location='<g:createLink controller="consulta" action="socios"/>';
+                        console.log("I've been pressed!: Ctrl+s "+location);
+                        window.location=location;
+                        //$('<g:createLink controller="socio" action="index"/>').click();
+                  }
+            });
+            
+        });
+
+    </script>        
         
     </body>
 </html>

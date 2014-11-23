@@ -12,7 +12,7 @@ class SocioController {
 	def socioService
 	
 	def index(Long max){
-		println 'index action'
+		
 		params.max = Math.min(max ?: 20, 100)
 		params.sort=params.sort?:'lastUpdated'
 		params.order='desc'

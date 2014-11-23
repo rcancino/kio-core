@@ -41,11 +41,12 @@ navigation={
 			ventas(controller:'venta',action:'index')
 			caja(controller:'cobro',action:'pendientes'){
 				//cobrosPendientes(controller:'caja',action:'index',titleText:'Pendientes de cobrar')
-				pendientes(controller:'cobro',action:'pendientes')
+				pendientes(controller:'cobro',action:'pendientes',titleText:'Ventas (Pendientes)')
 				cobros(controller:'cobro',action:'index')
-				pagos(controller:'pago',action:'index',titleText:'Pagos ',data:[icon:'fa fa-pencil fa-fw'])
+				pagos(controller:'pago',action:'index',titleText:'Pagos ',data:[icon:'fa fa-pencil fa-fw']
+					,visible:SpringSecurityUtils.ifAllGranted('ADMINISTRACION'))
 				notasDeCredito(controller:'notaDeCredito',action:'index')
-				ventas(titleText:'Ventas pagadas')
+				ventas(titleText:'Ventas (Todas)')
 			}
 			//pagos(controller:'pago',action:'index')
 			cxc(controller:'cxc',action:'index')
@@ -61,8 +62,8 @@ navigation={
 				ventasGenerales(controller:'report')
 			}
 		}
-		consultas(){
-			socios()
+		consulta(titleText:'Socios'){
+			socios(titleText:'Socios (Ctrl+S) ')
 			clientes()
 			productos()
 			acceso(controller:'accessLog',action:'index')

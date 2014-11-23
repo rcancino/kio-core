@@ -46,8 +46,12 @@ class Venta {
 	
 	Cfdi cfdi
 
+	String comentario
+
 	Date dateCreated
 	Date lastUpdated
+
+	String creadoPor
 
 	static hasMany = [partidas: VentaDet]
 
@@ -64,6 +68,8 @@ class Venta {
     	total(scale:2)
 		cfdi nullable:true
 		tipo nullable:true
+		comentario nullable:true
+		creadoPor nullalbe:true
     	
     }
 

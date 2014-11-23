@@ -75,13 +75,15 @@
 							<td><g:formatNumber number="${row.total}" type="currency"/></td>
 							<td><g:formatNumber number="${row.saldo}" type="currency"/></td>
 							<td>
-								<abbr title="${row.cfdi.uuid}">
+								
 									<g:if test="${row.cfdi}">
-										<g:link controller="cfdi" action="show" id="${row.cfdi.id}">
-											${org.apache.commons.lang.StringUtils.substringAfterLast(row.cfdi.uuid,'-')}
+										<abbr title="${row.cfdi.uuid}">
+										<g:link controller="cfdi" action="show" id="${row?.cfdi?.id}">
+											${org.apache.commons.lang.StringUtils.substringAfterLast(row?.cfdi?.uuid,'-')}
 										</g:link>
+										</abbr>
 									</g:if>
-								</abbr>
+								
 							</td>
 						</tr>
 					</g:each>

@@ -1,8 +1,9 @@
 package com.luxsoft.kio
 
 import grails.validation.Validateable;
+import groovy.transform.ToString
 
-
+@ToString(includeNames=true,includePackage=false)
 @Validateable(nullable=true)
 class Direccion implements Serializable{
 	
@@ -27,7 +28,5 @@ class Direccion implements Serializable{
 		pais(nullable:true,size:1..100)
     }
 	
-	String toString(){
-		return "${calle} ${numeroInterior?:''} ${numeroExterior?:''} ${colonia}"
-	}
+	
 }
