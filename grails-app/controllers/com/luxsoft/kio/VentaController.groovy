@@ -40,6 +40,7 @@ class VentaController {
         venta.moneda=MonedaUtils.PESOS
         venta.status='PEDIDO'
         log.info 'Venta: '+venta
+        venta.creadoPor=getAuthenticatedUser().username
         //redirect action:'create'
         
     	//def venta=cmd.toVenta()
