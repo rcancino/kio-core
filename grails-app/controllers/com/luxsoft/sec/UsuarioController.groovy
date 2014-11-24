@@ -159,6 +159,7 @@ class UsuarioCommand{
     String username
     String password
     String confirmPassword
+    String tarjeta
     boolean enabled = true
 
     List roles=[]
@@ -176,6 +177,7 @@ class UsuarioCommand{
             }
         }
         email nullable:true,email:true
+        
     }
 
 
