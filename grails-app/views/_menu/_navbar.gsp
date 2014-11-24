@@ -45,10 +45,16 @@
 				 	</g:link>
 	        	</li>
 
+	        	<g:if env="development">
+    				<p class="navbar-text">
+    					<span class="label label-warning">BASE DE DATOS DE PRUEBAS</span>
+    				</p>
+				</g:if>
+
         	</ul>
 
         	
-
+			
         	
 
         	
