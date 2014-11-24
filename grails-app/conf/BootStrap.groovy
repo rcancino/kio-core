@@ -115,6 +115,32 @@ class BootStrap {
 			
 			production {
 				
+				TipoDeCliente.findOrSaveWhere(clave:'PARTICULAR',descripcion:'Particular')
+				TipoDeCliente.findOrSaveWhere(clave:'EMPRESARIAL',descripcion:'Empresa')
+				MedioDeContacto.findOrSaveWhere(clave:'NO_DEFINIDO',descripcion:'Sin definir')
+				MedioDeContacto.findOrSaveWhere(clave:'PEDIODICO',descripcion:'Anuncio en periodico')
+				MedioDeContacto.findOrSaveWhere(clave:'RECOMENDACION',descripcion:'Recomandado por una amistad/familiar')
+				MedioDeContacto.findOrSaveWhere(clave:'WEB',descripcion:'Página web')
+
+				TipoDeSocio.findOrSaveWhere(clave:'GENERAL',descripcion:'Pendiente de asignar')
+				TipoDeSocio.findOrSaveWhere(clave:'PROFESIONISTA',descripcion:'Profesionista')
+				TipoDeSocio.findOrSaveWhere(clave:'AMA DE CASA',descripcion:'Señoras amas de casa')
+				TipoDeSocio.findOrSaveWhere(clave:'ESTUDIANTE',descripcion:'Estudiante')
+
+				Cliente.findOrSaveWhere(nombre:'MOSTRADOR'
+					,rfc:'XAXX010101000'
+					,tipo:TipoDeCliente.findOrSaveWhere(clave:'MOSTRADOR',descripcion:'Cliente mostrador no requiere iva desgosado')
+					)
+
+				TipoDeVenta.findOrSaveWhere(clave:'MEMBRESIA',descripcion:'Venta para el cobro de membresias')
+				TipoDeVenta.findOrSaveWhere(clave:'GENERAL',descripcion:'Venta general de productos y servicios')
+
+				def folioSocio=CfdiFolio.findWhere(serie:'SOCIOS')
+				
+				if(folioSocio==null){
+					folioSocio=new CfdiFolio(serie:'SOCIOS',folio:50000)
+					folioSocio.save()
+				}
 			}
 		}
     	
