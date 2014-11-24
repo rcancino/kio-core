@@ -60,6 +60,7 @@
 						<f:field property="accountExpired" input-class="form-control" label="La cuenta expira"/>
 						<f:field property="accountLocked" input-class="form-control" label="Cuenta bloqueada"/>
 						<f:field property="passwordExpired" input-class="form-control" label="Password vencido"/>
+						<f:field property="tarjeta" input-class="form-control"/>
 					</f:with>
 					</form>
 				</div>
