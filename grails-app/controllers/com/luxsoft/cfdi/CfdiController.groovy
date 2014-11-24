@@ -73,10 +73,12 @@ class CfdiController {
 			multipart true
 			to command.mail
 			subject "CFDI: $command.cfdi.folio"
-			from "john@g2one.com"
+			from "noreplay@kyo.mx"
 			body "PENDIENTE"
 			attachBytes "${command.cfdi.xmlName}", "text/xml", command.cfdi.xml
 		}
+		flash.message="Correo enviado"
+		redirect action:'show',params:[id:command.cfdi.id]
 
 	}
 }
