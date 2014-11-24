@@ -7,6 +7,7 @@ import grails.converters.JSON
 class ConsultaController {
 
     def socioService
+    def productoService
 
     def index() { }
 
@@ -54,7 +55,7 @@ class ConsultaController {
         socio.direccion=direccion
         socio=socioService.actualizarSocio(socio)
 
-        def data=socio.direccion as JSON
+        def data=direccion.properties as JSON
         render data
 
     }
@@ -86,4 +87,23 @@ class ConsultaController {
         def data= socio as JSON
         render data
     }
+
+    def productos(){
+        log.info 'Productos...'
+        params.max = 30
+        params.sort=params.sort?:'lastUpdated'
+        params.order='desc'
+        [productoInstanceList:Producto.list(params),productoInstanceCount:Producto.count()]
+    }
+
+    def showProducto(Producto p){
+        [productoInstance:p]
+    }
+
+    def actualizarProducto(Producto p){
+        productoService.save(p)
+        redirect action:'showProducto',params:[id:p.id]
+    }
+
+    
 }

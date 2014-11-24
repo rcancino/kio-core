@@ -32,6 +32,13 @@
                         window.location=location;
                         //$('<g:createLink controller="socio" action="index"/>').click();
                   }
+
+                  if(e.altKey && e.keyCode == 80){
+                        var location='<g:createLink controller="consulta" action="productos"/>';
+                        console.log("I've been pressed!: Alt+p "+location);
+                        window.location=location;
+                        //$('<g:createLink controller="socio" action="index"/>').click();
+                  }
             });
             
         });

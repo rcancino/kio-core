@@ -10,6 +10,9 @@ class SocioMembresia {
     Socio socio
 
     @BindingFormat('dd/MM/yyyy')
+    Date inscripcion
+
+    @BindingFormat('dd/MM/yyyy')
     Date ultimoPago
 
     @BindingFormat('dd/MM/yyyy')
@@ -20,6 +23,8 @@ class SocioMembresia {
 
     int toleranciaEnDias=5
 
+    Integer diasParaProximoPago=0
+
     Producto servicio
 
     String comentario
@@ -27,11 +32,13 @@ class SocioMembresia {
     static belongsTo = [socio: Socio]
 
     static constraints = {
+        inscripcion nullable:true
     	ultimoPago nullable:true
     	proximoPago nullable:true
     	suspender nullable:true
     	servicio nullable:true
     	comentario nullable:true
+        diasParaProximoPago nullable:true
     }
     
     static mapping = {

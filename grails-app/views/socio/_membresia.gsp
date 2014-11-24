@@ -42,6 +42,12 @@
 		</div>
 
 		<div class="col-md-6">
+			<f:field property="membresia.inscripcion" 
+				input-autocomplete="off"
+				input-class="form-control" 
+				colsLabel="col-md-4" cols="col-md-8"
+				input-disabled="disabled" 
+				/>
 			<f:field property="membresia.ultimoPago" 
 				input-autocomplete="off"
 				input-class="form-control" 

@@ -99,7 +99,7 @@ class ImportadorService {
 						tipoDeSocio:tipo,
 						cliente:cliente,
 						perfil:new SocioPerfil(tipoDeSocio:tipoDeSocio),
-						membresia:new SocioMembresia(),
+						membresia:new SocioMembresia(proximoPago:row.PROXIMO_PAGO,inscripcion:row.INSCRIPCION),
 						sexo:'MASCULINO',
 						numeroDeSocio:row.SOCIO
 						)

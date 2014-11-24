@@ -36,6 +36,7 @@
 					<f:field property="precioBruto" input-class="form-control" input-type="text" input-data-moneda="moneda"/>
 					<f:field property="descuento" input-class="form-control" input-type="text"/>
 					<f:field property="precioNeto" input-class="form-control" input-type="text"/>
+					<f:field property="suspendido" input-class="form-control" />
 				</f:with>
 				
 			</fieldset>

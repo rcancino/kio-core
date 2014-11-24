@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	%{-- <meta name="layout" content="catalogos"/> --}%
-	<title>Socios</title>
+	<title>Productos</title>
 	<asset:stylesheet src="jquery-ui.css"/>
 	<asset:javascript src="jquery-ui/autocomplete.js"/>
 </head>
@@ -13,7 +13,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="alert alert-info">
-					<h4 class="text-center">Consulta rápida de Socios</h4>
+					<h4 class="text-center">Consutla rápida de Productos</h4>
 					<g:if test="${flash.message}">
 						<span class="label label-warning text-center">${flash.message}</span>
 					</g:if>
@@ -51,20 +51,7 @@
 					
 					
 				</div>
-				<div class="btn-group">
-					<button type="button" name="operaciones"
-							class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-							role="menu">
-							Operaciones <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li>
-					    	<g:link action="create" class="">
-								<span class="glyphicon glyphicon-plus"></span> Nuevo socio
-							</g:link>
-						</li>
-					</ul>
-				</div>
+				
 				<div class="btn-group">
 					<button type="button" name="reportes"
 							class="btn btn-default dropdown-toggle" data-toggle="dropdown"
@@ -85,54 +72,36 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<div class="grid-panel">
-					<table class="table table-striped table-bordered table-condensed">
-						<thead>
+				<table class="table table-striped table-bordered table-condensed">
+					<thead>
+						<tr>
+							<g:sortableColumn property="id" title="Id"/>
+							<g:sortableColumn property="clave" title="Clave"/>
+							<g:sortableColumn property="descripcion" title="Descripcion"/>
+							<th>Tipo</th>
+							<th>Modificado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<g:each in="${productoInstanceList}" var="row">
 							<tr>
-								<g:sortableColumn property="id" title="No Socio"/>
-								<g:sortableColumn property="apellidoPaterno" title="Nombre"/>
-								<th>Servicio</th>
-								<th>Vencimiento</th>
-								<th>Corporativo</th>
-								<th>Area</th>
-								<th>Activo</th>
+								<td>
+									<g:link action="showProducto" id="${row.id}">
+										${fieldValue(bean:row,field:"id")}
+									</g:link>
+								</td>
+								<td>${fieldValue(bean:row,field:"clave")}</td>
+								<td>${fieldValue(bean:row,field:"descripcion")}</td>
+								<td>${fieldValue(bean:row,field:"tipo.clave")}</td>
+								<td><g:formatDate date="${row.lastUpdated}"/></td>
 							</tr>
-						</thead>
-						<tbody>
-							<g:each in="${socioInstanceList}" var="row">
-								<tr class="${row.activo?'':'danger'}">
-									
-									<td>
-										<g:link action="showSocio" id="${row.id}">
-											${fieldValue(bean:row,field:"numeroDeSocio")}
-										</g:link>
-									</td>
-									<td>
-										<g:link action="showSocio" id="${row.id}">
-											${row.toString()}
-										</g:link>
-										
-									</td>
-									<td>
-										<g:link controller="producto" action="show" id="${row.membresia?.servicio?.id}">
-											${fieldValue(bean:row,field:"membresia.servicio.descripcion")}
-										</g:link>
-									</td>
-									<td>${fieldValue(bean:row,field:"membresia.proximoPago")}</td>
-									<td>${fieldValue(bean:row,field:"perfil.tipoDeCorporativo")}</td>
-									<td>${fieldValue(bean:row,field:"perfil.areaDeInteres")}</td>
-									<td class="text-center">
-										<g:checkBox name="myCheckbox" value="${row.activo}" disabled="true"/>
-									</td>
-									
-								</tr>
-							</g:each>
-						</tbody>
-					</table>
-					<div class="pagination">
-						<g:paginate total="${socioInstanceCount ?: 0}"/>
-					</div>
+						</g:each>
+					</tbody>
+				</table>
+				<div class="pagination">
+					<g:paginate total="${productoInstanceCount ?: 0}"/>
 				</div>
+				
 			</div>
 		</div>
 	
@@ -141,7 +110,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#nombreField").autocomplete({
-				source:'<g:createLink controller="socio" action="getSociosJSON"/>',
+				source:'<g:createLink controller="producto" action="getProductosAsJSON"/>',
 				minLength:3,
 				select:function(e,ui){
 					console.log('Valor seleccionado: '+ui.item.id);
@@ -151,9 +120,7 @@
 	    			button.removeAttr('disabled');
 				}
 			});
-			$("#id").change(function(e){
-				console.log('Detectando id...');
-			});
+			
 			
 		});
 	</script>

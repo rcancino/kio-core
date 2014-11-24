@@ -12,7 +12,7 @@
 
 			<div class="col-md-12">
 
-				<div class="panel panel-primary">
+				<div class="panel ${productoInstance.suspendido?'panel-danger':'panel-primary'}">
 					<!-- Default panel contents -->
   					<div class="panel-heading">
   						${productoInstance}  
@@ -54,9 +54,9 @@
   							<g:link class="btn btn-default btn-sm" action='edit' id="${productoInstance.id}"> 
   								<span class="glyphicon glyphicon-pencil"> Editar
   							</g:link>
-  							<g:link class="btn btn-danger btn-sm" action='delete' onclick="return confirm('Seguro que desea eliminar este producto');"> 
+  							%{-- <g:link class="btn btn-danger btn-sm" action='delete' onclick="return confirm('Seguro que desea eliminar este producto');"> 
   								<span class="glyphicon glyphicon-trash"> Eliminar
-  							</g:link>
+  							</g:link> --}%
   							
   						</div>
 						

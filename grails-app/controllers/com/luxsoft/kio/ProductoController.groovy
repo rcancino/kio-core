@@ -60,7 +60,7 @@ class ProductoController {
 		
 		def term='%'+params.term.trim()+'%'
 		def query=Producto.where{
-			clave=~term || descripcion=~term
+			(clave=~term || descripcion=~term ) && suspendido==false
 		}
 		def list=query.list(max:30, sort:"descripcion")
 		//println 'Buscando productos JSON: '+list.size()+' params: '+params.term

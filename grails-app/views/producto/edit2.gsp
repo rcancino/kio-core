@@ -43,9 +43,9 @@
   								<span class="glyphicon glyphicon-arrow-left"> Catálogo
   							</g:link>
   							
-  							<g:link class="btn btn-danger btn-sm" action='delete' onclick="return confirm('Seguro que desea eliminar este producto');"> 
+  							%{-- <g:link class="btn btn-danger btn-sm" action='delete' onclick="return confirm('Seguro que desea eliminar este producto');"> 
   								<span class="glyphicon glyphicon-trash"> Eliminar
-  							</g:link>
+  							</g:link> --}%
   							
   						</div>
 						

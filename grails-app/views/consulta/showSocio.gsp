@@ -33,7 +33,7 @@
 				<div class="ro">
 					<div class="panel panel-primary">
 					  <div class="panel-heading">
-					    <h3 class="panel-title">Generales</h3>
+					    <h3 class="panel-title">Generales  <span id="direccionInfo"></span></h3>
 					  </div>
 					  <div class="panel-body">
 					  		<div class="row">
@@ -43,7 +43,7 @@
 					  					class="form-horizontal"
 					  					id="${socioInstance.id}">
 					  				<fieldset>
-					  					<legend>Dirección </legend><span id="direccionInfo"></span>
+					  					<legend>Dirección </legend>
 					  					<div class="form-group">
 					  						<label for="calle" class="col-sm-2 control-label">Calle </label>
 					  						<div class="col-sm-10">
@@ -226,7 +226,18 @@
 				  			 </div>
 				  	</div>
 				  	<div class="row">
-				  		<g:form class="form-horizontal" name="membresiaForm" action="actualizarMembresia" id="${socioInstance.id}">
+				  		<g:form class="form-horizontal" name="membresiaForm" action="actualizarMembresia" 
+				  			id="${socioInstance.id}">
+
+				  			<div class="form-group">
+				  			    <label class="col-sm-3 control-label">Inscripción</label>
+				  			    <div class="col-sm-8">
+				  			      <p class="form-control-static">
+				  			      	<g:formatDate date="${socioInstance?.membresia?.inscripcion}" 
+				  			      		format="dd/MM/yyyy"/>
+				  			      </p>
+				  			    </div>
+				  			</div>
 
 					  		<div class="form-group">
 					  			<label for="ultimoPago" class="col-sm-3 control-label">Último pago</label>
@@ -279,7 +290,7 @@
 					  			<div class="col-sm-8">
 					  				<g:select class="form-control"  
 					  					name="tipoDeCorporativo" 
-					  					value="${socioInstance.perfil.tipoDeCorporativo.id}"
+					  					value="${socioInstance?.perfil?.tipoDeCorporativo?.id}"
 					  					from="${com.luxsoft.kio.TipoDeCorporativo.findAll()}" 
 					  					optionKey="id" 
 					  					optionValue="clave"

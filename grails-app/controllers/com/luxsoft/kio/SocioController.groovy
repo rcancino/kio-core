@@ -208,6 +208,9 @@ class SocioController {
 	
 }
 
+import grails.validation.Validateable;
+
+@Validateable
 class SocioFotoCmd{
 	
 	Long socioId

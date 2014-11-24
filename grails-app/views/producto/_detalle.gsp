@@ -43,6 +43,12 @@
 				<p class="form-control-static">${productoInstance.periodicidad}</p>
 			</div>
 		</div>
+		<div class="form-group">
+			<label class="col-sm-4 control-label">Estatus</label>
+			<div class="col-sm-8 ${productoInstance.suspendido?'alert alert-danger':''}">
+				<p class="form-control-static">${productoInstance.suspendido?'SUSPENDIDO':'ACTIVO'}</p>
+			</div>
+		</div>
 	</form>	
 </div>
 

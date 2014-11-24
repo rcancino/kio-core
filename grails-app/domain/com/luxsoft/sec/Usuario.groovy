@@ -16,6 +16,7 @@ class Usuario {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+	String tarjeta
 
 	static transients = ['springSecurityService']
 
@@ -30,6 +31,7 @@ class Usuario {
 		accountLocked()
 		passwordExpired()
 		email nullable:true,email:true
+		tarjeta nullable:true
 	}
 
 	static mapping = {

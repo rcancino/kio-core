@@ -64,8 +64,7 @@ navigation={
 		}
 		consulta(titleText:'Socios'){
 			socios(titleText:'Socios (Ctrl+S) ')
-			clientes()
-			productos()
+			productos(titleText:'Productos (Alt+P)')
 			acceso(controller:'accessLog',action:'index')
 			
 			
