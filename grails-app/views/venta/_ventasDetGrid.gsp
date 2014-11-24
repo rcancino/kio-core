@@ -18,10 +18,25 @@
 		<g:each in="${ventaInstance.partidas}" var="row" status="i"> 
 			<tr>
 				<td>
-					<g:link controller="ventaDet" action="edit" id="${row.id}">${row?.socio?.id}</g:link>
+					<g:if test="${!row.venta.cfdi}">
+						<g:link controller="ventaDet" action="edit" id="${row.id}">
+							<g:formatNumber number="${row.id}" format='####'/>
+						</g:link>
+					</g:if>
+					<g:else>
+						<g:formatNumber number="${row.id}" format='####'/>
+					</g:else>
 				</td>
 				<td>
-					<g:link controller="ventaDet" action="edit" id="${row.id}">${row.producto.clave}</g:link>
+					%{-- <g:link controller="ventaDet" action="edit" id="${row.id}">${row.producto.clave}</g:link> --}%
+					<g:if test="${!row.venta.cfdi}">
+						<g:link controller="ventaDet" action="edit" id="${row.id}">
+							${row.producto.clave}
+						</g:link>
+					</g:if>
+					<g:else>
+						${row.producto.clave}
+					</g:else>
 				</td>
 				<td>${row.producto.descripcion}</td>
 				<td>${row.producto.unidad}</td>
@@ -40,9 +55,14 @@
 					<g:formatNumber number="${row.importeNeto}" type="currency"/>
 				</td>
 				<td>
-					<g:link controller="ventaDet" action="delete" id="${row.id}" onclick="return confirm('Eliminar producto');">
-						<span class="glyphicon glyphicon-trash"></span>
-					</g:link>
+					<g:if test="${!row.venta.cfdi}">
+						<g:link controller="ventaDet" action="delete" id="${row.id}" 
+							onclick="return confirm('Eliminar producto');">
+							<span class="glyphicon glyphicon-trash"></span>
+						</g:link>
+					</g:if>
+					
+					
 				</td>
 			</tr>
 		</g:each>

@@ -13,6 +13,8 @@
 		<f:field property="tipo" input-class="form-control"/>
 		<f:field property="periodicidad" input-class="form-control"/>
 		<f:field property="duracion" input-class="form-control" input-type="text"/>
+		<f:field property="suspendido" input-class="form-control" />
+
 		
 </div>
 

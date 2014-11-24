@@ -76,7 +76,7 @@
 	$(document).ready(function(){
 		$(".data-moneda").autoNumeric({wEmpty:'zero'});
 		$("#producto").autocomplete({
-			source:'/kio-core/producto/getProductosAsJSON',
+			source:'<g:createLink controller="producto" action="getProductosAsJSON"/>',
             minLength: 2,
             select:function(e,ui){
 				console.log('Producto seleccionado: '+ui.item.value);

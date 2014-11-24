@@ -261,15 +261,31 @@
 					  		      <p class="form-control-static">${socioInstance?.membresia?.suspender}</p>
 					  		    </div>
 					  		</div>
+					  		
+					  		<div class="form-group">
+					  			<label for="servicio" class="col-sm-3 control-label">Servicio</label>
+					  			<g:hiddenField id="productoId" 
+					  				name="producto.id" value="${socioInstance?.membresia?.servicio?.id}"/>
+					  			<div class="col-sm-8">
+					  					<input name="servicio" id="servicio"
+					  						class="form-control mayusculas" 
+					  						type="text"
+					  						value="${socioInstance?.membresia?.servicio?.descripcion}">
+					  			</div>
+					  		</div>
+
 					  		<div class="form-group">
 					  			<label for="corporativo" class="col-sm-3 control-label">Corporativo</label>
-					  			<g:select class="form-control"  
-					  				name="tipoDecorporativo" 
-					  				value="${socioInstance.perfil.tipoDeCorporativo}"
-					  				from="${com.luxsoft.kio.TipoDeCorporativo.findAll()}" 
-					  				optionKey="id" 
-					  				optionValue="clave"
-					  				noSelection="[null:'Seleccione un corporativo']"/>
+					  			<div class="col-sm-8">
+					  				<g:select class="form-control"  
+					  					name="tipoDeCorporativo" 
+					  					value="${socioInstance.perfil.tipoDeCorporativo.id}"
+					  					from="${com.luxsoft.kio.TipoDeCorporativo.findAll()}" 
+					  					optionKey="id" 
+					  					optionValue="clave"
+					  					noSelection="[null:'Seleccione un corporativo']"/>
+					  			</div>
+					  			
 					  		</div>
 					  		<div class="form-group">
 					  			<div class="buttons  col-md-offset-8  col-md-3">
@@ -439,6 +455,15 @@
 	 			
 	 			//e.unbind(); //to stop multiple form submits
 	 		});
+
+			$("#servicio").autocomplete({
+				source:'<g:createLink controller="producto" action="geMembresiasAsJSON"/>',
+				minLength:3,
+				select:function(e,ui){
+					console.log('Producto seleccionado: '+ui.item.value);
+					$("#productoId").val(ui.item.id);
+				}
+			});
 		
 		</script>
 	

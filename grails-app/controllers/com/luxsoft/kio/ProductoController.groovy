@@ -78,5 +78,27 @@ class ProductoController {
 		}
 		def res=list as JSON
 		render res
-			}
+	}
+
+	def geMembresiasAsJSON() {
+		
+		def term='%'+params.term.trim()+'%'
+		
+		//def list=query.list(max:30, sort:"descripcion")
+		def list =Producto.findAll("from Producto p where p.tipo.clave=? and lower(p.descripcion) like ?"
+			,['MEMBRESIA',term.toLowerCase()])
+		//println 'Buscando productos JSON: '+list.size()+' params: '+params.term
+		list=list.collect{ c->
+			def descripcion="$c.descripcion "
+			[id:c.id,
+				label:descripcion,
+				value:descripcion,
+				clave:c.clave,
+				descripcion:c.descripcion
+				
+			]
+		}
+		def res=list as JSON
+		render res
+	}
 }

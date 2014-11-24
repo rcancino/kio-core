@@ -62,6 +62,13 @@ class VentaController {
     def edit(Long id){
         
         Venta ventaInstance=Venta.get(id)
+        if(ventaInstance.cfdi){
+            redirect action:'show',params:[id:id]
+        }
+        [ventaInstance:ventaInstance]
+    }
+
+    def show(Venta ventaInstance){
         [ventaInstance:ventaInstance]
     }
 

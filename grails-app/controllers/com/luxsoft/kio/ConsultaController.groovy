@@ -65,7 +65,12 @@ class ConsultaController {
         log.info 'Actualizando membresia: '
         
         bindData(socio.membresia,params,[include: ['ultimoPago', 'proximoPago','toleranca']])
-        
+        println 'Parametros: '+params
+        def corporativo=TipoDeCorporativo.get(params.tipoDeCorporativo)
+        if(corporativo){
+            println 'Corporativo: '+corporativo
+            socio.perfil.tipoDeCorporativo=corporativo
+        }
         socio=socioService.actualizarSocio(socio)
         def membresia=socio.membresia
         def data= membresia as JSON
