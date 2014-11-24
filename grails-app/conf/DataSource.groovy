@@ -33,30 +33,32 @@ dataSource_importacion{
 // environment specific settings
 environments {
     development {
-        dataSource {
-            //dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            //url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-			dbCreate="update"
-			url="jdbc:mysql://localhost/kyo?autoReconnect=true"
-			driverClassName = "com.mysql.jdbc.Driver"
-			dialect = org.hibernate.dialect.MySQL5InnoDBDialect
-			username = "root"
-			password = "sys"
-			properties {
-				maxActive = 2
-				maxIdle = 2
-				minIdle = 1
-				initialSize = 1
-				minEvictableIdleTimeMillis=1800000
-				timeBetweenEvictionRunsMillis=1800000
-				numTestsPerEvictionRun=3
-				testOnBorrow=true
-				testWhileIdle=true
-				testOnReturn=true
-				maxWait = 10000
-			}
-        }
+          dataSource {
+                  //dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+                //url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+              dbCreate="update"
+              url="jdbc:mysql://localhost/kyo_dev?autoReconnect=true"
+              driverClassName = "com.mysql.jdbc.Driver"
+              dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+              username = "root"
+              password = "sys"
+              properties {
+                  maxActive = 2
+                  maxIdle = 2
+                  minIdle = 1
+                  initialSize = 1
+              	  minEvictableIdleTimeMillis=1800000
+              	  timeBetweenEvictionRunsMillis=1800000
+              	  numTestsPerEvictionRun=3
+              	  testOnBorrow=true
+              	  testWhileIdle=true
+              	  testOnReturn=true
+              	  maxWait = 10000
+              }
+          }
+
     }
+
     test {
         dataSource {
             dbCreate = "update"
