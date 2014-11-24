@@ -79,12 +79,13 @@
 							<g:sortableColumn property="clave" title="Clave"/>
 							<g:sortableColumn property="descripcion" title="Descripcion"/>
 							<th>Tipo</th>
+							<th>Estatus</th>
 							<th>Modificado</th>
 						</tr>
 					</thead>
 					<tbody>
 						<g:each in="${productoInstanceList}" var="row">
-							<tr>
+							<tr class="${ row.suspendido?'danger':'' }">
 								<td>
 									<g:link action="showProducto" id="${row.id}">
 										${fieldValue(bean:row,field:"id")}
@@ -93,6 +94,7 @@
 								<td>${fieldValue(bean:row,field:"clave")}</td>
 								<td>${fieldValue(bean:row,field:"descripcion")}</td>
 								<td>${fieldValue(bean:row,field:"tipo.clave")}</td>
+								<td>${row.suspendido?'SUSPENDIDO':'ACTIVO'}</td>
 								<td><g:formatDate date="${row.lastUpdated}"/></td>
 							</tr>
 						</g:each>

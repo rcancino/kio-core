@@ -26,7 +26,7 @@
         $(document).ready(function(){
             $(document).keydown(function(e){
                   //CTRL + S keydown combo
-                  if(e.ctrlKey && e.keyCode == 83){
+                  if(e.altKey && e.keyCode == 83){
                         var location='<g:createLink controller="consulta" action="socios"/>';
                         console.log("I've been pressed!: Ctrl+s "+location);
                         window.location=location;

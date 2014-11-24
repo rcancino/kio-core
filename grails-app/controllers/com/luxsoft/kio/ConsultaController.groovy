@@ -102,7 +102,7 @@ class ConsultaController {
 
     def actualizarProducto(Producto p){
         productoService.save(p)
-        redirect action:'showProducto',params:[id:p.id]
+        redirect action:'productos'
     }
 
     

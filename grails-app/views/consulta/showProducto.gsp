@@ -51,11 +51,14 @@
 							<f:field property="descuento" input-class="form-control" input-type="text"/>
 							<f:field property="precioNeto" input-class="form-control" input-type="text"/>
 						</div>
-						<div class="form-group">
-							<div class="col-md-offset-2 col-md-2">
-								<g:submitButton name="Actualizar" class="btn btn-primary " />
+						<sec:ifAllGranted roles="ADMINISTRACION">
+							<div class="form-group">
+								<div class="col-md-offset-2 col-md-2">
+									<g:submitButton name="Actualizar" class="btn btn-primary " />
+								</div>
 							</div>
-						</div>
+						</sec:ifAllGranted>
+						
 					</f:with>
 				</g:form>
 			</div>
