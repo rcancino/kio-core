@@ -3,15 +3,18 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Pagos</title>
+	<title>Cortes</title>
+	<meta name="layout" content="pago"/>
 	<asset:stylesheet src="datatables/dataTables.css"/>
 	<asset:javascript src="datatables/dataTables.js"/> 
+	<asset:stylesheet src="jquery-ui.css"/>
+	<asset:javascript src="jquery-ui/autocomplete.js"/>
 </head>
 <body>
 
 <content tag="header">
-	<h3>Pagos registrados</h3>
-	<nav:set path="user/operaciones/caja/pagos"/>
+	<h3>Cortes de caja  (${session.fecha?:new Date().format('dd/MM/yyyy')})</h3>
+	<nav:set path="user/operaciones/caja/corte"/>
 </content>
 
 <content tag="operaciones">
@@ -23,50 +26,47 @@
 	</li>
 </content>
 <content tag="reportes">
-	<li><g:link controller="reporte" action="pagosPorDia"> Pagos por día</g:link></li>
+	<li>
+		%{-- <g:link controller="reporte" action="cortesDeCaja"> Arqueo</g:link> --}%
+		<a href="#arqueoForm" data-toggle="modal">Arqueo</a>
+	</li>
 </content>
 
 <content tag="document">
-<div class="">
-	
+<div class="grid-panel">
 	
 	<table id="grid" class="table table-striped table-bordered table-condensed">
 
 		<thead>
 			<tr>
 				<th>Folio</th>
-				<th>Cliente</th>
 				<th>Fecha</th>
-				<th>Importe</th>
-				<th>F.P</th>
-				<th>Disponible</th>
-				<th>Usuario</th>
-				%{-- <th>Modificado</th> --}%
+				<th>Hora</th>
+				<th>Total</th>
+				<th>Cajero</th>
 			</tr>
 		</thead>
 		<tbody>
-			<g:each in="${pagoInstanceList}" var="row">
+			<g:each in="${corteDeCajaInstanceList}" var="row">
 				<tr id="${row.id}">
 					<td >
-						<g:link  action="edit" id="${row.id}">
+						<g:link  action="show" id="${row.id}">
 							${fieldValue(bean:row,field:"id")}
 						</g:link>
 					</td>
 					<td>
-						<g:link  action="edit" id="${row.id}">
-							<abbr title="${row.cliente.nombre}">
+						<g:link  action="show" id="${row.id}">
+							<g:formatDate date="${row.fechaHora}" format="dd/MM/yyyy"/>
+							%{-- <abbr title="${row.fecha}">
 								${org.apache.commons.lang.StringUtils.substring(row.cliente.nombre,0,20)}
-							</abbr>
-							%{-- ${fieldValue(bean:row,field:"cliente.nombre")} --}%
-							
+							</abbr> --}%
 						</g:link>
 					</td>
-					<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
-					<td><g:formatNumber number="${row.importe}" type="currency"/></td>
-					<td>${row.formaDePago}</td>
-					<td><g:formatNumber number="${row.disponible}" type="currency"/></td>
-					<td>${org.apache.commons.lang.StringUtils.substring(row.usuario,0,10)}</td>
-					%{-- <td><g:formatDate date="${row.lastUpdated}" format="dd/MM/yy HH:mm"/></td> --}%
+					<td>
+						<g:formatDate date="${row.fechaHora}" format="HH:mm"/>
+					</td>
+					<td><g:formatNumber number="${row.total}" type="currency"/></td>
+					<td>${row.cajero}</td>
 				</tr>
 			</g:each>
 		</tbody>
@@ -76,8 +76,7 @@
 </content><!-- End content document -->
 
 <content tag="searchForm">
-	<g:render template="search"/>
-	
+	<g:render template="arqueoReport"/>
 </content>
 
 <content tag="javascript">

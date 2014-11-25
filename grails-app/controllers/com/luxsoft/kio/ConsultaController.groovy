@@ -65,13 +65,18 @@ class ConsultaController {
         assert socio,'No localizo el socio: '+params.socio
         log.info 'Actualizando membresia: '
         
-        bindData(socio.membresia,params,[include: ['ultimoPago', 'proximoPago','toleranca']])
-        println 'Parametros: '+params
+        bindData(socio.membresia,params,[include: ['ultimoPago', 'proximoPago','toleranca','servicio']])
+        
         def corporativo=TipoDeCorporativo.get(params.tipoDeCorporativo)
         if(corporativo){
             println 'Corporativo: '+corporativo
             socio.perfil.tipoDeCorporativo=corporativo
         }
+        def servicio=Producto.get(params.productoId)
+        if(servicio){
+            socio.membresia.servicio=servicio
+        }
+        
         socio=socioService.actualizarSocio(socio)
         def membresia=socio.membresia
         def data= membresia as JSON

@@ -8,7 +8,7 @@ import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
 import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import org.apache.commons.lang.WordUtils
 
-@Secured(["hasAnyRole('ADMINISTRACION','MOSTRADOR')"])
+@Secured(["hasAnyRole('ADMINISTRACION','CAJERO','MOSTRADOR')"])
 class ReportController {
 
 	def jasperService
@@ -58,6 +58,27 @@ class ReportController {
 		repParams['FECHA_INICIAL']=command.fechaInicial
 		repParams['FECHA_FINAL']=command.fechaFinal
 		repParams['reportName']=command.reportName
+		ByteArrayOutputStream  pdfStream=runReport(repParams)
+		render(file: pdfStream.toByteArray(), contentType: 'application/pdf'
+			,fileName:repParams.reportName)
+	}
+
+	def catalogoDeSocios(){
+		if(request.method=='GET'){
+			return [tipos:['ACTIVOS','SUSPENDIDOS','TODOS']]
+		}
+		def repParams=['TIPO':params.tipo]
+		repParams['reportName']='CatalogoDeSocios'
+		ByteArrayOutputStream  pdfStream=runReport(repParams)
+		render(file: pdfStream.toByteArray(), contentType: 'application/pdf'
+			,fileName:repParams.reportName)
+	}
+
+	def arqueo(ArqueoReportCommand command){
+		def repParams=[:]
+		repParams['FECHA']=command.fecha
+		repParams['CAJERO']=command.fecha
+		repParams['reportName']='Arqueo'
 		ByteArrayOutputStream  pdfStream=runReport(repParams)
 		render(file: pdfStream.toByteArray(), contentType: 'application/pdf'
 			,fileName:repParams.reportName)
@@ -115,5 +136,11 @@ class PorClienteCommand{
 		fechaInicial nullable:true
 		fechaFinal nullable:true
 	}
+}
+
+@Validateable
+class ArqueoReportCommand {
+	String cajero
+	Date fecha
 }
 

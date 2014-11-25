@@ -276,9 +276,9 @@
 					  		<div class="form-group">
 					  			<label for="servicio" class="col-sm-3 control-label">Servicio</label>
 					  			<g:hiddenField id="productoId" 
-					  				name="producto.id" value="${socioInstance?.membresia?.servicio?.id}"/>
+					  				name="servicio" value="${socioInstance?.membresia?.servicio?.id}"/>
 					  			<div class="col-sm-8">
-					  					<input name="servicio" id="servicio"
+					  					<input id="servicioField"
 					  						class="form-control mayusculas" 
 					  						type="text"
 					  						value="${socioInstance?.membresia?.servicio?.descripcion}">
@@ -467,7 +467,7 @@
 	 			//e.unbind(); //to stop multiple form submits
 	 		});
 
-			$("#servicio").autocomplete({
+			$("#servicioField").autocomplete({
 				source:'<g:createLink controller="producto" action="geMembresiasAsJSON"/>',
 				minLength:3,
 				select:function(e,ui){

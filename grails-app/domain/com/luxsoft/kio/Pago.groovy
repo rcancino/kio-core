@@ -8,6 +8,8 @@ import groovy.transform.EqualsAndHashCode
 @ToString(includes='nombre,fecha,total,disponible,formaDePago',includeNames=true,includePackage=false)
 class Pago {
 
+	transient springSecurityService
+
 	@BindingFormat('dd/MM/yyyy')
 	Date fecha
 	
@@ -26,6 +28,8 @@ class Pago {
 	BigDecimal disponible=0.0
 	
 	String comentario
+
+	String usuario
 	
 	Date dateCreated
 	Date lastUpdated
@@ -36,18 +40,24 @@ class Pago {
     	comentario nullable:true, maxSize:300
     	referenciaBancaria nullable:true,maxSize:20
     	banco nullable:true,maxSize:30
+    	usuario nullable:true
     }
 
     static mapping = {
 		aplicaciones cascade: "all-delete-orphan"
 	}
 
-	static transients = ['disponible']
+	static transients = ['disponible','springSecurityService']
+	
 
 	BigDecimal getDisponible(){
 		return  importe-aplicado
 	}
 
+
+	def beforeInsert() {
+		usuario=springSecurityService.getCurrentUser().username
+	}
 
     
 }

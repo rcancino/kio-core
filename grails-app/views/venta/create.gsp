@@ -47,7 +47,7 @@
 			<div class="col-sm-8">
 				<g:hiddenField id="clienteId" name="cliente.id" value="${ventaInstance?.cliente?.id}"/>
 				<input id="cliente" name="cliente.nombre" type="text" class="form-control"
-				 readonly="readonly" autocomplete="off">
+				 autocomplete="off">
 			</div>
 		</div>
 
@@ -122,7 +122,7 @@ $(document).ready(function(){
 			
 		}
 	});
-	/*
+	
 	$("#cliente").autocomplete({
 		source:'/kio-core/cliente/getClientesJSON',
 		minLength:3,
@@ -134,7 +134,7 @@ $(document).ready(function(){
 			$("#socio").val(null);
 			
 		}
-	});*/
+	});
 	$("#next").click(function(){
 		console.log('Siguiete paso');
 		$("#createForm").submit();

@@ -5,7 +5,7 @@ import grails.validation.Validateable
 import grails.converters.JSON
 import org.grails.databinding.BindingFormat
 
-@Secured(["hasAnyRole('ADMINISTRACION')"])
+@Secured(["hasAnyRole('ADMINISTRACION','CAJERO')"])
 class PagoController {
 
 	def pagoService
