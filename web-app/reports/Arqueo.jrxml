@@ -27,7 +27,7 @@
 	<parameter name="EMPRESA_LOGO" isForPrompting="false" class="java.lang.Object"/>
 	<parameter name="EMPRESA_LOGO_1" isForPrompting="false" class="java.lang.Object"/>
 	<queryString><![CDATA[SELECT cajero,date_created,fecha_hora,forma_de_pago,acumulado,importe_corte,cobrado ,nombre
-FROM corte_de_caja c join corte_de_caja_det d on (c.id=d.corte_id) JOIN usuario U ON (U.username=C.CAJERO)
+FROM corte_de_caja c join corte_de_caja_det d on (c.id=d.corte_id) JOIN usuario U ON (U.username=C.cajero)
 where date(fecha_hora)=$P{FECHA} 
 order by cajero,forma_de_pago,date_created]]></queryString>
 
