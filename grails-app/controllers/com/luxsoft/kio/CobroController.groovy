@@ -19,7 +19,7 @@ class CobroController {
         params.max = Math.min(max ?: 50, 100)
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
-        def query=Venta.where{pagos>0.0 }
+        def query=Venta.where{saldo>0.0 }
         [ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count(params)]
     }
 
@@ -35,6 +35,14 @@ class CobroController {
 
     def show(Cobro cobroInstance){
         [cobroInstance:cobroInstance]
+    }
+    def showVenta(Venta ventaInstance){
+        def cobro=Cobro.findByVenta(ventaInstance)
+        if(cobro){
+            render view:'show',model:[cobroInstance:cobro]
+            return
+        }
+        [ventaInstance:ventaInstance]
     }
 
     def cobrar(Cobro cobroInstance){

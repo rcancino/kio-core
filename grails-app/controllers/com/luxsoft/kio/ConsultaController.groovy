@@ -67,11 +67,17 @@ class ConsultaController {
         
         bindData(socio.membresia,params,[include: ['ultimoPago', 'proximoPago','toleranca','servicio']])
         
-        def corporativo=TipoDeCorporativo.get(params.tipoDeCorporativo)
-        if(corporativo){
-            println 'Corporativo: '+corporativo
+        
+        if(params.tipoDeCorporativo){
+            //println 'Tipo de corporativo: '+params.tipoDeCorporativo
+            def corporativo=null
+            if(params.tipoDeCorporativo!='null'){
+                corporativo=TipoDeCorporativo.get(params.tipoDeCorporativo)
+                
+            }
             socio.perfil.tipoDeCorporativo=corporativo
         }
+
         def servicio=Producto.get(params.productoId)
         if(servicio){
             socio.membresia.servicio=servicio

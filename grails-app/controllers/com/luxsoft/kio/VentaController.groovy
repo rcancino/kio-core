@@ -14,9 +14,15 @@ class VentaController {
     	params.max = Math.min(max ?: 20, 100)
 		params.sort=params.sort?:'dateCreated'
 		params.order='desc'
-		//def query=Venta.where{status=='VENTA'}
+		def query=Venta.where{status=='PEDIDO'}
 		
-		[ventaInstanceList:Venta.list(params),ventaInstanceListTotal:Venta.count()]
+		[ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count()]
+    }
+
+    def todas(PeriodoCommand command){
+        def list=Venta.executeQuery("from Venta v where date(v.fecha) between ? and ? "
+            ,[command.fechaInicial,command.fechaFinal])
+        [ventaInstanceList:list,ventaInstanceListTotal:list.size(),periodo:command]
     }
 
     

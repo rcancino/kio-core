@@ -115,7 +115,8 @@
 									</td>
 									<td>
 										<g:link controller="producto" action="show" id="${row.membresia?.servicio?.id}">
-											${fieldValue(bean:row,field:"membresia.servicio.descripcion")}
+											${org.apache.commons.lang.StringUtils.substring(row.membresia?.servicio?.descripcion,0,50)}
+											
 										</g:link>
 									</td>
 									<td>${fieldValue(bean:row,field:"membresia.proximoPago")}</td>

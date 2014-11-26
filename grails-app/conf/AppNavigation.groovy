@@ -41,9 +41,10 @@ navigation={
 			ventas(controller:'venta',action:'index')
 			caja(controller:'cobro',action:'pendientes'){
 				//cobrosPendientes(controller:'caja',action:'index',titleText:'Pendientes de cobrar')
-				pendientes(controller:'cobro',action:'pendientes',titleText:'Ventas (Pendientes)')
-				cobros(controller:'cobro',action:'index')
+				pendientes(controller:'cobro',action:'pendientes',titleText:'Por cobrar')
 				pagos(controller:'pago',action:'index',titleText:'Pagos ',data:[icon:'fa fa-pencil fa-fw'])
+				cobros(controller:'cobro',action:'index')
+				
 				corte(controller:'corteDeCaja',action:'index')
 				notasDeCredito(controller:'notaDeCredito',action:'index')
 				ventas(titleText:'Ventas (Todas)')

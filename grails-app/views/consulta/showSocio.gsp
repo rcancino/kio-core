@@ -294,7 +294,7 @@
 					  					from="${com.luxsoft.kio.TipoDeCorporativo.findAll()}" 
 					  					optionKey="id" 
 					  					optionValue="clave"
-					  					noSelection="[null:'Seleccione un corporativo']"/>
+					  					noSelection="[null:'No aplica']"/>
 					  			</div>
 					  			
 					  		</div>

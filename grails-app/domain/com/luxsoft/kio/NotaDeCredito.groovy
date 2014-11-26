@@ -7,6 +7,8 @@ import groovy.transform.ToString
 @ToString(excludes='id,version',includeNames=true,includePackage=false)
 class NotaDeCredito  {
 
+	transient springSecurityService
+
 	@BindingFormat('dd/MM/yyyy')
 	Date fecha
 	
@@ -29,11 +31,16 @@ class NotaDeCredito  {
 	Date dateCreated
 
 	Date lastUpdated
+
+	String usuario
     
-    static hasMany = [conceptos: NotaDeCredito]
+    static hasMany = [conceptos: NotaDeCredito,aplicaciones:AplicacionDeNota]
+
+    
 	
 	static mapping = {
 		conceptos cascade: "all-delete-orphan"
+		aplicaciones cascade: "all-delete-orphan"
 	}
 
 	static constraints = {
@@ -42,11 +49,15 @@ class NotaDeCredito  {
     	cfdi nullable:true
     }
 
-    static transients = ['estatus']
+    static transients = ['estatus','springSecurityService']
 
     def getEstatus(){
     	return cfdi?'TIMBRADA':'PENDIENTE'
     }
+
+    def beforeInsert() {
+		usuario=springSecurityService.getCurrentUser().username
+	}
 	
 	
 }

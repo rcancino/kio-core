@@ -43,6 +43,8 @@ class Venta {
 	BigDecimal saldo
 
 	BigDecimal pagos=0
+
+	BigDecimal abonos=0
 	
 	Cfdi cfdi
 
@@ -77,7 +79,7 @@ class Venta {
 
     static mapping = {
 		partidas cascade: "all-delete-orphan"
-		saldo formula: 'total - pagos'
+		saldo formula: 'total - pagos-abonos'
 	}
 
 	

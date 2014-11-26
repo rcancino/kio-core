@@ -12,8 +12,9 @@
 		
 		<div class="row">
 			<div class="col-md-12">
-				<div class="alert alert-info">
-					<h2>Pedidos</h2>
+				<div class="alert alert-warning">
+					<h2>Ventas registradas Periodo: (${periodo.fechaInicial.format('dd/MM/yyyy')} al 
+						${periodo.fechaFinal.format('dd/MM/yyyy')}) </h2>
 					<g:if test="${flash.message}">
 	                    <div class="">
 	                        <span class="label label-warning">${flash.message}</span>
@@ -42,8 +43,8 @@
 				   
 
 				    <div class="btn-group">
-				        <g:link action="${action}" class="btn btn-default ">
-				            <span class="glyphicon glyphicon-repeat"></span> Refrescar
+				        <g:link action="index" class="btn btn-default ">
+				            <i class="fa fa-arrow-left"></i> Pedidos
 				        </g:link>
 				    </div>
 
@@ -91,12 +92,13 @@
 					<thead>
 						<tr>
 							<th>Folio</th>
+							<th>Fac</th>
 							<th>Fecha</th>
 							<th>Cliente</th>
 							<th>Total</th>
 							<th>Atendió</th>
 							<th>Comentario</th>
-							%{-- <th>Estatus</th> --}%
+							<th>Estatus</th>
 							<th>Cobrar</th>
 							
 							
@@ -111,7 +113,13 @@
 										${fieldValue(bean:row,field:"id")}
 									</g:link>
 								</td>
-								
+								<td>
+									<g:if test="${row.cfdi}">
+										<g:link action="show" id="${row.cfdi.id}">
+											${row.cfdi.folio}
+										</g:link>
+									</g:if>
+								</td>
 								<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
 								<td>
 									<g:link action="${row.status=='PEDIDO'?'edit':'show'}" id="${row.id}">
@@ -122,7 +130,7 @@
 								<td><g:formatNumber number="${row.total}" type="currency"/></td>
 								<td>${fieldValue(bean:row,field:"creadoPor")}</td>
 								<td>${fieldValue(bean:row,field:"comentario")}</td>
-								%{-- <td>${fieldValue(bean:row,field:"status")}</td> --}%
+								<td>${fieldValue(bean:row,field:"status")}</td>
 								<td>
 									<g:if test="${row.saldo>0}">
 										<g:link action="mandarFacturar" id="${row.id}">

@@ -2,8 +2,9 @@ package com.luxsoft.kio
 
 import grails.events.Listener
 import grails.transaction.Transactional
+import grails.transaction.NotTransactional
 
-@Transactional
+//@Transactional
 class AccesoService {
 
     @Listener(namespace='gorm')

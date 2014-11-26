@@ -44,6 +44,7 @@
 						%{-- <th>Importe</th>
 						<th>Impuesto</th> --}%
 						<th>Total</th>
+						<th>Pagos</th>
 						<th>Saldo</th>
 						<th>CFDI</th>
 					</tr>
@@ -52,13 +53,13 @@
 					<g:each in="${ventaInstanceList}" var="row">
 						<tr id="${row.id}">
 							<td >
-								<g:link  action="show" id="${row.id}">
+								<g:link  action="showVenta" id="${row.id}">
 									${fieldValue(bean:row,field:"id")}
 								</g:link>
 							</td>
 							<td>
 								<abbr title="${row.cliente.nombre}">
-									<g:link action="show" id="${row.id}">
+									<g:link action="showVenta" id="${row.id}">
 										${org.apache.commons.lang.StringUtils.substring(row.cliente.nombre,0,20)}
 									</g:link>
 								</abbr>
@@ -70,9 +71,12 @@
 							</td>
 							
 							<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
-							%{-- <td><g:formatNumber number="${row.importe}" type="currency"/></td>
-							<td><g:formatNumber number="${row.impuesto}" type="currency"/></td> --}%
 							<td><g:formatNumber number="${row.total}" type="currency"/></td>
+							<td>
+								<g:link action="showVenta" id="${row.id}">
+									<g:formatNumber number="${row.pagos}" type="currency"/></td>
+								</g:link>
+								
 							<td><g:formatNumber number="${row.saldo}" type="currency"/></td>
 							<td>
 								

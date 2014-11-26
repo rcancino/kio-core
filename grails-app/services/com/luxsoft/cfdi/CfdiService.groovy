@@ -178,6 +178,55 @@ class CfdiService {
 		return errors;
 		
 	}
+	/*
+	public void cancelar(String[] uuidList,Periodo periodo) throws Exception{
+		String dirPath="Z:\\CFDI\\cancelaciones";
+		File dir=new File(dirPath);
+		Assert.isTrue(dir.exists(),"No existe el directorio para cancelaciones: "+dirPath);
+		Assert.isTrue(dir.isDirectory(),"La ruta para las cancelaciones no es un directorio "+dirPath);
+		
+		Resource pfx=ServiceLocator2.instance().getContext().getResource("sat/PAPEL_CFDI_CERT.pfx");
+		//Resource pfx=ServiceLocator2.instance().getContext().getResource("sat/papelsacfdikey.pfx");
+		Assert.isTrue(pfx.exists(),"No existe el archivo pfx");
+		
+		byte[] pfxData=new byte[(int)pfx.getFile().length()];
+		pfx.getInputStream().read(pfxData);
+		client=new CfdiClient();
+		
+		CancelaResponse res=client.cancelCfdi(
+				"PAP830101CR3"
+				,"yqjvqfofb"
+				, empresa.getRfc()
+				, uuidList
+				, pfxData
+				, pfxPassword);
+		String msg=res.getText();
+		String aka=res.getAck();
+			
+		//String msg=new String(Base64.encode("Prueba de cancelacion".getBytes()));
+		//String aka=new String(Base64.encode("Prueba de cancelacion".getBytes()));
+		try {
+			
+			String xmlFile=empresa.getClave()+"_CANCELACIONES_"+periodo.toString2();
+			//String xmlFile="QUERETARO"+"_CANCELACIONES_"+periodo.toString2();
+			File msgFile=new File(dir,xmlFile+"_MSG.xml");
+			
+			FileOutputStream out1=new FileOutputStream(msgFile);
+			out1.write(Base64.decode(msg));
+			out1.close();
+			
+			
+			File akaFile=new File(dir,xmlFile+"_AKA.xml");
+			FileOutputStream out2=new FileOutputStream(akaFile);
+			out2.write(Base64.decode(aka.getBytes()));
+			out2.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error salvando archivos de cancelacion: "+ExceptionUtils.getRootCauseMessage(e));
+		}
+	}
+	*/
 	
 	
 	
