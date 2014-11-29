@@ -11,10 +11,11 @@ class PagoController {
 	def pagoService
 
     def index(Integer max) { 
-    	params.max = Math.min(max ?: 10, 100)
+    	params.max = Math.min(max ?: 40, 100)
     	params.sort?:'lastUpdated'
     	params.order?:'asc'
-    	[pagoInstanceList:Pago.list(params),pagoInstanceCount:Pago.count()]
+        def list=Pago.executeQuery("from Pago p where (p.importe-p.aplicado)>0")
+    	[pagoInstanceList:list,pagoInstanceCount:list.size()]
     }
 
     def create(){

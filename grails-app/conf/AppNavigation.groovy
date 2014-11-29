@@ -26,7 +26,7 @@ navigation={
 		
 		catalogos(controller:'home'){
 			tipoDeSocio(controller:'tipoDeSocio',action:'index',enabled:SpringSecurityUtils.ifAllGranted('ADMINISTRACION'))
-			tipoDeCorporativo(controller:'tipoDeCorporativo',action:'index',titleText:'Corporativos',enabled:SpringSecurityUtils.ifAllGranted('ADMINISTRACION'))
+			tipoDeCorporativo(controller:'tipoDeCorporativo',action:'index',titleText:'Corporativos')
 			socio(controller:'socio',action:'index')
 			tipoDeCliente(controller:'tipoDeCliente',action:'index',enabled:SpringSecurityUtils.ifAllGranted('ADMINISTRACION'))
 			cliente(controller:'cliente',action:'index')

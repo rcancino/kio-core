@@ -185,6 +185,29 @@ class SocioController {
 		render res
 	}
 
+	def getSociosActivosJSON() {
+
+		def term='%'+params.term.trim()+'%'
+		def query=Socio.where{
+		 	//apellidoPaterno=~term || apellidoMaterno=~term || nombres=~term
+		 	nombre=~term
+		 }
+		def list=query.list(max:30, sort:"nombre")
+		
+		list=list.collect{ c->
+			def nombre=c.toString()
+			[id:c.id,
+			label:nombre,
+			value:nombre,
+			nombre:nombre,
+			cliente:[id:c.cliente.id,nombre:c.cliente.nombre]
+			]
+		}
+		def res=list as JSON
+		
+		render res
+	}
+
 	def spa(){
 		render view:'spa/create'
 	}

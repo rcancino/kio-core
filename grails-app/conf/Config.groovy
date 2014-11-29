@@ -182,6 +182,10 @@ jodatime.format.html5 = false
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.luxsoft.sec.Usuario'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.luxsoft.sec.UsuarioRole'
 grails.plugin.springsecurity.authority.className = 'com.luxsoft.sec.Role'
+grails.plugin.springsecurity.useSecurityEventListener = true
+grails.plugin.springsecurity.logout.handlerNames = [
+   'rememberMeServices', 'securityContextLogoutHandler', 'luxorSecurityLogoutHandler'
+]
 
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],

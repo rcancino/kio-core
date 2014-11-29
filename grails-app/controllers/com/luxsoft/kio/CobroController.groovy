@@ -90,8 +90,8 @@ class CobroController {
         [ventaInstanceList:Venta.list(params),ventaInstanceListTotal:Venta.count()]
     }
 
-    def facturar(Cobro cobro){
-        def venta=cobro.venta
+    def facturar(Venta venta){
+        
         if(venta.cfdi){
             flash.message="Venta ya facturada"
             redirect acion:'show',params:[id:cobro.id]

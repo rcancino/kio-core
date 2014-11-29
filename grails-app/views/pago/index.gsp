@@ -71,6 +71,9 @@
 			</g:each>
 		</tbody>
 	</table>
+	<div class="pagination">
+		<g:paginate total="${pagoInstanceCount ?: 0}"/>
+	</div>
 	
 </div>
 </content><!-- End content document -->

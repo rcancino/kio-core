@@ -16,8 +16,11 @@
 				<li>
 					<g:link controller="usuario" ><i class="fa fa-users"></i> Usuarios</g:link>
 				</li>
-				
+				<li>
+					<g:link controller="consulta" action="sesiones"><i class="fa fa-cogs"></i> Sessiones</g:link>
+				</li>
 			</sec:ifAllGranted>
+
 			
 		</ul>
 	</sec:ifLoggedIn>

@@ -46,6 +46,14 @@
         					<i class="fa fa-file-pdf-o fa-fw fa-2x"></i>&nbsp;  Facturar
         				</g:link>
         			</g:if>
+        			<g:else>
+        				<g:link action="cancelarVentaFacturada" controller="cfdi"
+        					class="list-group-item" 
+        					onclick="return confirm('Cancelar venta facturada ?');"
+        					id="${ventaInstance.id}">
+        					<i class="fa fa-trash fa-fw fa-2x"></i>&nbsp;  Cancelar 
+        				</g:link>
+        			</g:else>
         			
         		</div>
 			</div>

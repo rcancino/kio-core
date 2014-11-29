@@ -2,6 +2,7 @@ package com.luxsoft.kio
 
 import org.springframework.security.access.annotation.Secured
 import grails.converters.JSON
+import com.luxsoft.sec.LuxorSession
 
 @Secured(["hasAnyRole('ADMINISTRACION','MOSTRADOR','CAJERO')"])
 class ConsultaController {
@@ -114,6 +115,10 @@ class ConsultaController {
     def actualizarProducto(Producto p){
         productoService.save(p)
         redirect action:'productos'
+    }
+
+    def sesiones(){
+        [luxorSessionList:LuxorSession.list()]
     }
 
     

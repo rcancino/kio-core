@@ -44,7 +44,7 @@
         					<i class="fa fa-trash fa-fw fa-2x"></i>&nbsp;  Eliminar
         				</g:link>
         				<g:link action="facturar" class="list-group-item" onclick="return confirm('Facturar la venta ventaInstance.id?');"
-        					id="${cobroInstance.id}">
+        					id="${cobroInstance.venta.id}">
         					<i class="fa fa-file-pdf-o fa-fw fa-2x"></i>&nbsp;  Facturar
         				</g:link>
         			</g:if>

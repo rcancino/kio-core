@@ -64,7 +64,7 @@
 			<div class="col-sm-4">
 				<input id="fecha" name="fecha" type="text"  
 					value="${g.formatDate(date:ventaInstance.fecha,format:'dd/MM/yyyy') }"
-					class="form-control" autocomplete="off">
+					class="form-control" autocomplete="off" disabled>
 			</div>
 		</div>
 
@@ -107,9 +107,9 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#fecha").datepicker({
+	// $("#fecha").datepicker({
 	     
-	 });
+	//  });
 
 	$("#socio").autocomplete({
 		source:'<g:createLink controller="socio" action="getSociosJSON"/>',

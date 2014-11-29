@@ -85,7 +85,7 @@ class ProductoController {
 		def term='%'+params.term.trim()+'%'
 		
 		//def list=query.list(max:30, sort:"descripcion")
-		def list =Producto.findAll("from Producto p where p.tipo.clave=? and lower(p.descripcion) like ?"
+		def list =Producto.findAll("from Producto p where p.tipo.clave=? and lower(p.descripcion) like ? and p.suspendido=false"
 			,['MEMBRESIA',term.toLowerCase()])
 		//println 'Buscando productos JSON: '+list.size()+' params: '+params.term
 		list=list.collect{ c->

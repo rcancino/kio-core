@@ -4,6 +4,8 @@ import org.springframework.web.servlet.i18n.FixedLocaleResolver
 import com.luxsoft.cfdi.CfdiCadenaBuilder
 import com.luxsoft.cfdi.CfdiSellador
 import com.luxsoft.cfdi.CfdiTimbrador
+import com.luxsoft.sec.LuxorSecurityEventListener
+import com.luxsoft.sec.LuxorSecurityLogoutHandler
 
 import grails.util.Environment
 
@@ -38,4 +40,7 @@ beans = {
 	cfdiTimbrador(CfdiTimbrador){}
 	
 	localeResolver(FixedLocaleResolver,Locale.US)
+
+	luxorSecurityEventListener(LuxorSecurityEventListener){}
+	luxorSecurityLogoutHandler(LuxorSecurityLogoutHandler){}
 }
