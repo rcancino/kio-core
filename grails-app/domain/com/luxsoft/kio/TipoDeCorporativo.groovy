@@ -15,7 +15,7 @@ class TipoDeCorporativo {
     }
 
     def beforeUpdate() {
-        capitalizarNombre()
+        capitalizar()
     }
 
     def beforeInsert() {
@@ -25,5 +25,7 @@ class TipoDeCorporativo {
     private capitalizar(){
         clave=clave.toUpperCase()
     }
+
+    
 	
 }
