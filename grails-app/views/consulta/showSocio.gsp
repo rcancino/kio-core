@@ -291,7 +291,7 @@
 					  				<g:select class="form-control"  
 					  					name="tipoDeCorporativo" 
 					  					value="${socioInstance?.perfil?.tipoDeCorporativo?.id}"
-					  					from="${com.luxsoft.kio.TipoDeCorporativo.findAll()}" 
+					  					from="${com.luxsoft.kio.TipoDeCorporativo.findAllWhere(activo:true)}" 
 					  					optionKey="id" 
 					  					optionValue="clave"
 					  					noSelection="[null:'No aplica']"/>

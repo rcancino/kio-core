@@ -4,6 +4,7 @@
 			<td>Id</td>
 			<th>Clave</th>
 			<th>Descripción</th>
+			<th>Activo</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -16,6 +17,14 @@
 				</td>
 				<td>${fieldValue(bean:row,field:"clave")}</td>
 				<td>${fieldValue(bean:row,field:"descripcion")}</td>
+				<td>
+					<g:if test="${row.activo}">
+						<i class="fa fa-check"></i>
+					</g:if>
+					<g:else>
+						<i class="fa fa-times"></i>
+					</g:else>
+				</td>
 			</tr>
 		</g:each>
 	</tbody>

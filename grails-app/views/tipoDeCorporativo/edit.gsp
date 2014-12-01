@@ -28,6 +28,7 @@
 					<g:hiddenField name="id" value="${tipoDeCorporativoInstance?.id}" />
 					<f:field property="clave" input-required="required" input-class="form-control" cols="col-sm-5"/>
 					<f:field property="descripcion" input-required="required" input-class="form-control" cols="col-sm-5" input-autofocus="autofocus"/>
+					<f:field property="activo" input-class="form-control" cols="col-sm-5" />
 				</f:with>
 				
 			</fieldset>

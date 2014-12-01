@@ -28,6 +28,7 @@
 				<f:with bean="${tipoDeCorporativoInstance}">
 					<f:field property="clave" input-required="required" input-class="form-control" cols="col-sm-5"/>
 					<f:field property="descripcion" input-required="required" input-class="form-control" cols="col-sm-5"/>
+					<f:field property="activo" input-required="required" input-class="form-control" cols="col-sm-5"/>
 				</f:with>
 				
 			</fieldset>

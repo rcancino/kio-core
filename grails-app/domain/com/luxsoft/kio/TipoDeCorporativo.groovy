@@ -4,6 +4,7 @@ class TipoDeCorporativo {
 	
     String clave
 	String descripcion
+    Boolean activo=true
 
     static constraints = {
     	clave nullable:false,unique:true,maxSize:20
