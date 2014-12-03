@@ -19,6 +19,9 @@
 				<li>
 					<g:link controller="consulta" action="sesiones"><i class="fa fa-cogs"></i> Sessiones</g:link>
 				</li>
+				<li>
+					<g:link controller="empresa" action="index"><i class="fa fa-building-o"></i> Empresa</g:link>
+				</li>
 			</sec:ifAllGranted>
 
 			

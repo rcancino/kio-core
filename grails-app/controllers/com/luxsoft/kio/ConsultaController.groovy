@@ -85,9 +85,23 @@ class ConsultaController {
         }
         
         socio=socioService.actualizarSocio(socio)
-        def membresia=socio.membresia
-        def data= membresia as JSON
-        render data
+        def now=new Date()
+        // def membresia=socio.membresia
+        // def data= membresia as JSON
+        // render data
+        def diasParaProximoPago=socio.membresia.diasParaProximoPago
+        def data= [diasParaProximoPago:diasParaProximoPago]
+        if(socio.membresia.proximoPago){
+            data.atraso=now-socio.membresia.proximoPago
+            if(data.atraso<0) data.atraso=0
+        }else{
+            data.atraso=0
+        }
+        
+        data.suspender=socio.membresia.getSuspender()?.format('dd/MM/yyyy')
+        
+        render data as JSON
+
     }
     def actualizarContacto(){
         def socio=Socio.get(params.id)

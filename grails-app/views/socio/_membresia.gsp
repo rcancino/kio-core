@@ -54,11 +54,11 @@
 				colsLabel="col-md-4" cols="col-md-8"
 				input-disabled="disabled" 
 				/>
-			<f:field property="membresia.suspender" label="Suspender en" 
+			%{-- <f:field property="membresia.suspender" label="Suspender en" 
 				input-autocomplete="off"
 				input-class="form-control" 
 				colsLabel="col-md-4" cols="col-md-8"
-				/>
+				/> --}%
 			<f:field property="membresia.toleranciaEnDias" 
 				input-autocomplete="off"
 				input-class="form-control" 

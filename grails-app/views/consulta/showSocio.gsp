@@ -203,7 +203,7 @@
 				<div class="panel panel-primary">
 				  <div class="panel-heading">
 				    <h3 class="panel-title">Membresia</h3>
-				    <span id="membresiaInfo"></span>
+				    %{-- <span id="membresiaInfo"></span> --}%
 				  </div>
 				  <div class="panel-body">
 				  	<div class="row">
@@ -231,11 +231,15 @@
 
 				  			<div class="form-group">
 				  			    <label class="col-sm-3 control-label">Inscripción</label>
-				  			    <div class="col-sm-8">
+				  			    <div class="col-sm-3">
 				  			      <p class="form-control-static">
 				  			      	<g:formatDate date="${socioInstance?.membresia?.inscripcion}" 
 				  			      		format="dd/MM/yyyy"/>
 				  			      </p>
+				  			      
+				  			    </div>
+				  			    <div class="col-sm-3">
+				  			    	<span id="membresiaInfo"></span>	
 				  			    </div>
 				  			</div>
 
@@ -250,16 +254,14 @@
 					  		</div>
 					  		<div class="form-group">
 					  			<label for="proximoPago" class="col-sm-3 control-label">Próximo pago</label>
-					  			<div class="col-sm-8">
-					  					<input name="proximoPago" id="proximoPago"
-					  						class="form-control mayusculas" 
-					  						type="text"
-					  						value="${socioInstance?.membresia?.proximoPago?.format('dd/MM/yyyy')}">
+					  			<div class="col-sm-3">
+				  					<input name="proximoPago" id="proximoPago"
+				  						class="form-control mayusculas" 
+				  						type="text"
+				  						value="${socioInstance?.membresia?.proximoPago?.format('dd/MM/yyyy')}">
 					  			</div>
-					  		</div>
-					  		<div class="form-group">
-					  			<label for="tolerancia" class="col-sm-3 control-label">Tolerancia</label>
-					  			<div class="col-sm-8">
+					  			<label for="tolerancia" class="col-sm-2 control-label">Tolerancia</label>
+					  			<div class="col-sm-3">
 					  					<input name="tolerancia" 
 					  						class="form-control mayusculas" 
 					  						type="number"
@@ -267,9 +269,20 @@
 					  			</div>
 					  		</div>
 					  		<div class="form-group">
+					  			
+					  		</div>
+					  		<div class="form-group">
 					  		    <label class="col-sm-3 control-label">Suspender</label>
-					  		    <div class="col-sm-8">
-					  		      <p class="form-control-static">${socioInstance?.membresia?.suspender}</p>
+					  		    <div class="col-sm-3">
+					  		      <p id="suspenderField"
+					  		      	class="form-control-static">${socioInstance?.membresia?.suspender?.format('dd/MM/yyyy')}</p>
+					  		    </div>
+					  		    <label for="atraso" class="col-sm-2 control-label">Atraso</label>
+					  		    <div class="col-sm-3">
+					  		    	<p id="atrasoField"
+					  		    		class="form-control-static">
+					  		    		${socioInstance?.membresia?.diasParaProximoPago>0?socioInstance?.membresia?.diasParaProximoPago:0}
+					  		    	</p>
 					  		    </div>
 					  		</div>
 					  		
@@ -411,7 +424,10 @@
 		 				},
 		 				success:function(data,textStatus,jqXHR){
 		 					console.log("Ok data: "+data);
-		 					info.attr('class','label label-success').text("Actualizada");
+		 					info.attr('class','label label-success').text("Membresia actualizada");
+		 					$("#suspenderField").text(data.suspender);
+		 					$("#atrasoField").text(data.atraso);
+		 					
 		 				},
 		 				error:function(jqXHR,textStatus,errorThrown){
 		 					console.log("Error : "+errorThrown);

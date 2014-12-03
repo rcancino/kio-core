@@ -25,6 +25,8 @@ class SocioMembresia {
 
     Integer diasParaProximoPago=0
 
+
+
     Producto servicio
 
     String comentario
@@ -35,10 +37,10 @@ class SocioMembresia {
         inscripcion nullable:true
     	ultimoPago nullable:true
     	proximoPago nullable:true
-    	suspender nullable:true
+    	//suspender nullable:true
     	servicio nullable:true
     	comentario nullable:true
-        diasParaProximoPago nullable:true
+        //diasParaProximoPago nullable:true
     }
     
     static mapping = {
@@ -49,7 +51,28 @@ class SocioMembresia {
         
     }
 
+    static transients = ['diasParaProximoPago','suspender']
+
     String toString(){
         "$socio $proximoPago"
     }
+
+    Integer getDiasParaProximoPago(){
+        if(proximoPago){
+            def now=new Date()
+            return proximoPago-now
+        }
+        else
+            return 0
+    }
+
+    Date getSuspender(){
+        if(proximoPago){
+            return proximoPago+toleranciaEnDias
+        }
+        return proximoPago
+    }
+    
+
+
 }

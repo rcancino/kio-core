@@ -2,7 +2,7 @@ package com.luxsoft.kio
 
 //import groovy.transform.ToString
 import groovy.transform.EqualsAndHashCode
-
+import org.apache.commons.lang.math.NumberUtils
 
 //@ToString(includes='nombre',includeNames=true,includePackage=false)
 @EqualsAndHashCode(includes='apellidoPaterno,apellidoMaterno,nombres')
@@ -80,18 +80,44 @@ class Socio {
 
     def beforeUpdate() {
     	capitalizarNombre()
+        logLectora()
     }
 
     def beforeInsert() {
     	capitalizarNombre()
+        logLectora()
+
     }
 
     private capitalizarNombre(){
-    	apellidoPaterno=apellidoPaterno.toUpperCase()
-    	apellidoMaterno=apellidoMaterno.toUpperCase()
-    	nombres=nombres.toUpperCase()
-		nombre="$nombres $apellidoPaterno $apellidoMaterno"
+        if (isDirty('apellidoPaterno') || isDirty('apellidoMaterno') || isDirty('nombres')) {
+            apellidoPaterno=apellidoPaterno.toUpperCase()
+            apellidoMaterno=apellidoMaterno.toUpperCase()
+            nombres=nombres.toUpperCase()
+            nombre="$nombres $apellidoPaterno $apellidoMaterno"
+        }
+    	
     }
+
+    def logLectora(){
+        if (isDirty('activo') || isDirty('tarjeta') ) {
+            actualizarLectora()
+        }
+    }
+
+    def actualizarLectora(){
+        AccessLog.withNewSession{
+            AccessLog log=new AccessLog()
+            log.nombre=this.nombre
+            log.numero=NumberUtils.toLong(this.numeroDeSocio)
+            log.tarjeta=this.tarjeta
+            log.activo=this.activo
+            log.save failOnError:true
+            return log
+        }
+        
+    }
+
 
     
 

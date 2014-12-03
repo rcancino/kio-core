@@ -75,6 +75,7 @@ navigation={
 		}
 		configuracion(){
 			usuarios(controller:'usuario',action:'index')
+			emresa(controller:'empresa',action:'index')
 		}
 		info(view:'info')
 	}
