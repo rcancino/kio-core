@@ -13,7 +13,7 @@ class LuxorSession {
 
 	String tipo
 	String ip
-	String session
+	String session='UNKNOWN'
 
 	Date dateCreated
 	Date lastUpdated
