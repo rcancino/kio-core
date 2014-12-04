@@ -20,7 +20,7 @@ class LuxorSecurityEventListener implements ApplicationListener<AuthenticationSu
       		,login:new Date(event.getTimestamp())
       		,tipo:'LOGIN'
       		,ip:details.getRemoteAddress()
-      		,session:details.getSessionId()
+      		,session:details.getSessionId()?:'DESCONOCIDA'
       		)
       	session.save failOnError:true
       	log.info 'Session: '+session
