@@ -28,10 +28,58 @@
 						<g:renderErrors bean="${empresaInstance}" as="list" />
 					</div>
 				</g:hasErrors>
-				<g:form class="form-horizontal " action="save" name="empresaForm" >
+				<g:form class="form-horizontal " action="update" name="empresaForm" method="PUT">
+					<g:hiddenField name="id" value="${empresaInstance.id}"/>
+					<g:hiddenField name="version" value="${empresaInstance.id}"/>
+					<f:with bean="${empresaInstance}">
+						
+						<f:field property="clave" input-class="form-control" cols="col-sm-5"/>
+						<f:field property="nombre" input-class="form-control" cols="col-sm-5"/>
+						<f:field property="regimen" input-class="form-control" cols="col-sm-5"/>
+						<f:field property="numeroDeCertificado" input-class="form-control" cols="col-sm-5"/>
+					</f:with>
+
+					<legend>Timbrado</legend>
+					<div class="row">
+						<div class="col-sm-6">
+							<f:with bean="${empresaInstance}">
+								<f:field property="timbradoDePrueba" colsLabel="col-sm-4" cols="col-sm-8" 
+								input-class="form-control" />
+								<f:field property="usuarioPac" colsLabel="col-sm-4" cols="col-sm-8" 
+								input-class="form-control" />
+								<f:field property="passwordPac" colsLabel="col-sm-4" cols="col-sm-8" 
+								input-class="form-control" />
+								
+							</f:with>
+							
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="certificadoDigitalFile" class="col-sm-4 control-lable">Certificado</label>
+								<div class="col-sm-8">
+									<a href="#cambiarCertificado" class="btn btn-default">Cambiar</a>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="certificadoDigitalFile" class="col-sm-4 control-lable">Llave privada</label>
+								<div class="col-sm-8">
+									<a href="#cambiarLlavePrivada" class="btn btn-default">Cambiar</a>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="certificadoDigitalFile" class="col-sm-4 control-lable">Certificado PFX</label>
+								<div class="col-sm-8">
+									<a href="#cambiarCertificadoPfx" class="btn btn-default">Cambiar</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<g:render template="/_common/direccion" bean="${empresaInstance}"/>
 					<div class="form-group">
-						<label for="fecha" class="col-sm-3 control-label">Última modificación</label>
-						<div class="col-sm-9">
+						<label for="fecha" class="col-sm-2 control-label">Última modificación</label>
+						<div class="col-sm-4">
 							<p class="form-control-static">
 								<strong>
 									<g:formatDate date="${empresaInstance.lastUpdated}" format="dd/MM/yyyy HH:mm"/>
@@ -41,21 +89,12 @@
 							  value="${empresaInstance?.lastUpdated?.format('dd/MM/yyyy HH:mm')}"/>
 						</div>
 					</div>
-
-					%{-- <div class="form-group">
-						<label for="cajero" class="col-sm-2 control-label">Cajero</label>
-						<div class="col-sm-8">
-							<p class="form-control-static">
-								<strong>
-									<g:fieldValue bean="${empresaInstance}" field="cajero"/>
-								</strong>
-							</p>
-							<g:hiddenField  name="cajero" value="${empresaInstance.cajero}"/>
+					<div class="form-group">
+						<div class="buttons  col-md-offset-2  col-md-3">
+							<g:submitButton name="Generar" class="btn btn-primary  btn-block" value="Actualizar"/>
 						</div>
-					</div> --}%
-			  		
-
-					
+					</div>
+					<br>
 				</g:form>
 			</div>
 
@@ -64,7 +103,16 @@
 	</div>
 
 	<script type="text/javascript">
-		
+			$(document).ready(function(){
+				$('form[name=empresaForm]').submit(function(e){
+		    		$(this).children('input[type=submit]').attr('disabled', 'disabled');
+		    		var button=$("#Generar");
+		    		button.attr('disabled','disabled').attr('value','Procesando...');
+		    		return true;
+				});
+				
+
+			});
 	</script>	
 	
 </body>

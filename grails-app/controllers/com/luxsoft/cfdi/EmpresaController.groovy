@@ -56,26 +56,21 @@ class EmpresaController {
     }
 
     @Transactional
-    def update(Empresa empresaInstance) {
-        if (empresaInstance == null) {
-            notFound()
+    def update() {
+
+        def empresa=Empresa.get(params.id)
+        if(empresa){
+            bindData(empresa, params,[exclude: ['id', 'version']])
+        }
+
+        if (empresa.hasErrors()) {
+            redirect action:'show',model:[empreaInstance:empresa]
             return
         }
+        empresa.save flush:true
+        redirect action:'show',params:[id:empresa.id]
 
-        if (empresaInstance.hasErrors()) {
-            respond empresaInstance.errors, view:'edit'
-            return
-        }
-
-        empresaInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Empresa.label', default: 'Empresa'), empresaInstance.id])
-                redirect empresaInstance
-            }
-            '*'{ respond empresaInstance, [status: OK] }
-        }
+        
     }
 
     @Transactional

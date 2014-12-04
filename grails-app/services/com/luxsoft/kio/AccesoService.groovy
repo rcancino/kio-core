@@ -36,23 +36,30 @@ class AccesoService {
 		log.info("Detectando una modificacion de aplicacion de pago: ${aplicacionDePago.id}")
 	}
 
-	@Listener(namespace='gorm')
-	def afterUpdate(SocioMembresia m){
-		actualizarAcceso m.socio
-	}
+	// @Listener(namespace='gorm')
+	// def afterUpdate(SocioMembresia m){
+	// 	//actualizarAcceso m.socio
+	// }
 
+	
+	// @Transactional
+	// def actualizarAcceso(Socio socio){
 
-	def actualizarAcceso(Socio socio){
-		def proximoPago=socio.membresia.proximoPago
-		
-		if(proximoPago ){
-			def now=new Date()
-			def suspender=proximoPago+socio.membresia.toleranciaEnDias
-			socio.membresia.suspender=suspender
-			socio.membresia.diasParaProximoPago=proximoPago-now
-			socio.activo=suspender>=now
-			socio.save()
-			println "Suspender en: $suspender Socio activo: ${socio.activo}"
-		}
-	}
+	// 	def proximoPago=socio.membresia.proximoPago
+	// 	if(proximoPago ){
+	// 		def now=new Date()
+	// 		def suspender=proximoPago+socio.membresia.toleranciaEnDias
+	// 		socio.membresia.suspender=suspender
+	// 		if(now>=suspender){
+	// 			log.info 'Suspendiendo socio'
+	// 			socio.activo=false
+	// 			socio.save()
+				
+	// 		}
+			
+			
+			
+	// 	}
+	// }
+	
 }

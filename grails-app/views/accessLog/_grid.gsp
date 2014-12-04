@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			
-			<th>Numero</th>
+			<th>Folio</th>
 			<th>Nombre</th>
 			<th>Tarjeta</th>
 			<th>Activo</th>
@@ -15,14 +15,14 @@
 			<tr>
 				<td>
 					<g:link action="show" id="${row.id}">
-						${fieldValue(bean:row,field:"numero")}
+						${row.id}
 					</g:link>
 				</td>
 				<td>${fieldValue(bean:row,field:"nombre")}</td>
 				<td>${fieldValue(bean:row,field:"tarjeta")}</td>
 				<td>${fieldValue(bean:row,field:"activo")}</td>
-				<td><g:formatDate date="${row.dateCreated}" format="dd/MM hh:mm:ss"/></td>
-				<td><g:formatDate date="${row.replicado}" format="dd/MM hh:mm:ss"/></td>
+				<td><g:formatDate date="${row.dateCreated}" format="dd/MM HH:mm:ss"/></td>
+				<td><g:formatDate date="${row.replicado}" format="dd/MM HH:mm:ss"/></td>
 				
 			</tr>
 		</g:each>

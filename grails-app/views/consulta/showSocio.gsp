@@ -281,7 +281,8 @@
 					  		    <div class="col-sm-3">
 					  		    	<p id="atrasoField"
 					  		    		class="form-control-static">
-					  		    		${socioInstance?.membresia?.diasParaProximoPago>0?socioInstance?.membresia?.diasParaProximoPago:0}
+					  		    		%{-- ${socioInstance?.membresia?.diasParaProximoPago>0?socioInstance?.membresia?.diasParaProximoPago:0} --}%
+					  		    		${socioInstance?.membresia?.atraso}
 					  		    	</p>
 					  		    </div>
 					  		</div>

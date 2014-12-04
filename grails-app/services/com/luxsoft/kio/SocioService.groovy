@@ -51,7 +51,16 @@ class SocioService {
 	
 	def actualizarSocio(Socio socio) {
 		
-				
+		def proximoPago=socio.membresia.proximoPago
+        if(proximoPago ){
+            def now=new Date()
+            def suspender=proximoPago+socio.membresia.toleranciaEnDias
+            socio.membresia.suspender=suspender
+            if(now>=suspender){
+                log.info 'Suspendiendo socio'
+                socio.activo=false
+            }
+        }		
 		socio=socio.save failOnError:true
 		
 		return socio

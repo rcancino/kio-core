@@ -91,13 +91,7 @@ class ConsultaController {
         // render data
         def diasParaProximoPago=socio.membresia.diasParaProximoPago
         def data= [diasParaProximoPago:diasParaProximoPago]
-        if(socio.membresia.proximoPago){
-            data.atraso=now-socio.membresia.proximoPago
-            if(data.atraso<0) data.atraso=0
-        }else{
-            data.atraso=0
-        }
-        
+        data.atraso=socio.membresia.atraso
         data.suspender=socio.membresia.getSuspender()?.format('dd/MM/yyyy')
         
         render data as JSON

@@ -25,7 +25,7 @@ class SocioMembresia {
 
     Integer diasParaProximoPago=0
 
-
+    Integer atraso
 
     Producto servicio
 
@@ -51,7 +51,7 @@ class SocioMembresia {
         
     }
 
-    static transients = ['diasParaProximoPago','suspender']
+    static transients = ['diasParaProximoPago','suspender','atraso']
 
     String toString(){
         "$socio $proximoPago"
@@ -72,7 +72,24 @@ class SocioMembresia {
         }
         return proximoPago
     }
-    
 
+    Integer getAtraso(){
+        if(proximoPago){
+            def now=new Date()
+            atraso=now-proximoPago
+            return atraso>0?atraso:0
+        }
+        return 0
+    }
+    
+    // def beforeUpdate() {
+
+    //     if(proximoPago ){
+    //         println 'Actualizando membresia...'
+    //         def now=new Date()
+    //         socio.activo=getSuspender()>now
+            
+    //     }
+    // }
 
 }
