@@ -10,6 +10,8 @@ class AccesoService {
     @Listener(namespace='gorm')
 	def afterDelete(AplicacionDePago aplicacionDePago){
 		log.debug "Detectando eliminacion de aplicacion de pago ${aplicacionDePago.id}"
+		//Actualizando socio
+		
 		// if(neDet.concepto.clave==CONCEPTO){
 		// 	PrestamoAbono.withNewSession{
 		// 		log.debug 'Buscando prestamoAbono para NominaPorEmpleadoDet:'+neDet.id

@@ -42,7 +42,7 @@ class VentaController {
 	
 
     def save(Venta venta){
-    	
+    	venta.fecha=new Date()
         venta.moneda=MonedaUtils.PESOS
         venta.status='PEDIDO'
         log.info 'Venta: '+venta

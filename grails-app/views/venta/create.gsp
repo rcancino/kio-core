@@ -62,9 +62,11 @@
 		<div class="form-group">
 			<label for="fecha" class="col-sm-2 control-label">Fecha</label>
 			<div class="col-sm-4">
-				<input id="fecha" name="fecha" type="text"  
+				<input id="fecha" 
+					type="text"  
 					value="${g.formatDate(date:ventaInstance.fecha,format:'dd/MM/yyyy') }"
-					class="form-control" autocomplete="off" disabled>
+					class="form-control" 
+					disabled>
 			</div>
 		</div>
 

@@ -34,8 +34,14 @@
 						<i class="fa fa-bars"></i>&nbsp;Pagos</g:link>
 					<g:if test="${pagoInstance.disponible}">
 						<g:link class="list-group-item" action='agregarAplicacion' id="${pagoInstance.id}"> 
-							<i class="fa fa-plus"></i>&nbsp; Agregar aplicacion</g:link>
+							<i class="fa fa-plus"></i>&nbsp; Agregar aplicacion
+						</g:link>
+
 					</g:if>
+					<g:link class="list-group-item" action='actualizarMembresias' id="${pagoInstance.id}"
+						onclick="return confim('Actualizar las membresias de los socios relacionados?');"> 
+						<i class="fa fa-unlock"></i>&nbsp; Actualizar membresias
+					</g:link>
 					
 				</div>
 			</div>

@@ -31,6 +31,8 @@ class SocioMembresia {
 
     String comentario
 
+    Integer diaDeCorte
+
     static belongsTo = [socio: Socio]
 
     static constraints = {
@@ -41,6 +43,7 @@ class SocioMembresia {
     	servicio nullable:true
     	comentario nullable:true
         //diasParaProximoPago nullable:true
+        diaDeCorte range:1..28
     }
     
     static mapping = {

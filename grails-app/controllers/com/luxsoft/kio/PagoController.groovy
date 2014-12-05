@@ -13,8 +13,9 @@ class PagoController {
     def index(Integer max) { 
     	params.max = Math.min(max ?: 40, 100)
     	params.sort?:'lastUpdated'
-    	params.order?:'asc'
-        def list=Pago.executeQuery("from Pago p where (p.importe-p.aplicado)>0")
+    	params.order?:'desc'
+        //def list=Pago.executeQuery("from Pago p where (p.importe-p.aplicado)>0")
+        def list=Pago.executeQuery("from Pago p order by lastUpdated desc")
     	[pagoInstanceList:list,pagoInstanceCount:list.size()]
     }
 
@@ -103,6 +104,11 @@ class PagoController {
         def res=list as JSON
         //log.info 'Buscando ventas disponibles para '+pago.cliente+ ' Found: '+res
         render res
+    }
+
+    def actualizarMembresias(Long id){
+        pagoService.actualizarMembresias(id)
+        redirect action:'edit',params:[id:pago.id]
     }
     
 

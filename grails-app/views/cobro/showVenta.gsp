@@ -152,9 +152,7 @@
 							<tr>
 								<td>
 									<g:if test="${!row.venta.cfdi}">
-										<g:link controller="ventaDet" action="edit" id="${row.id}">
-											<g:formatNumber number="${row.id}" format='####'/>
-										</g:link>
+										<g:formatNumber number="${row?.socio?.numeroDeSocio}" format='####'/>
 									</g:if>
 									<g:else>
 										<g:formatNumber number="${row.id}" format='####'/>
@@ -163,9 +161,7 @@
 								<td>
 									%{-- <g:link controller="ventaDet" action="edit" id="${row.id}">${row.producto.clave}</g:link> --}%
 									<g:if test="${!row.venta.cfdi}">
-										<g:link controller="ventaDet" action="edit" id="${row.id}">
-											${row.producto.clave}
-										</g:link>
+										${row.producto.clave}
 									</g:if>
 									<g:else>
 										${row.producto.clave}
