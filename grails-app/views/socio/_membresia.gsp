@@ -59,10 +59,17 @@
 				input-class="form-control" 
 				colsLabel="col-md-4" cols="col-md-8"
 				/> --}%
-			<f:field property="membresia.toleranciaEnDias" 
+			<f:field property="membresia.diaDeCorte" 
 				input-autocomplete="off"
 				input-class="form-control" 
 				colsLabel="col-md-4" cols="col-md-8"
+				/>
+
+			<f:field property="membresia.ultimoPago" 
+				input-autocomplete="off"
+				input-class="form-control" 
+				colsLabel="col-md-4" cols="col-md-8"
+				input-disabled="disabled" 
 				/>
 		</div>
 

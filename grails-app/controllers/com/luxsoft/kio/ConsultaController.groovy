@@ -66,7 +66,7 @@ class ConsultaController {
         assert socio,'No localizo el socio: '+params.socio
         log.info 'Actualizando membresia: '
         
-        bindData(socio.membresia,params,[include: ['ultimoPago', 'proximoPago','toleranca','servicio']])
+        bindData(socio.membresia,params,[include: ['ultimoPago', 'proximoPago','toleranca','servicio','diaDeCorte']])
         
         
         if(params.tipoDeCorporativo){

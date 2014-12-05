@@ -245,11 +245,18 @@
 
 					  		<div class="form-group">
 					  			<label for="ultimoPago" class="col-sm-3 control-label">Último pago</label>
-					  			<div class="col-sm-8">
+					  			<div class="col-sm-3">
 					  					<input name="ultimoPago" id="ultimoPago"
 					  						class="form-control mayusculas" 
 					  						type="text"
 					  						value="${socioInstance?.membresia?.ultimoPago?.format('dd/MM/yyyy')}">
+					  			</div>
+					  			<label for="ultimoPago" class="col-sm-2 control-label">Dia de corte</label>
+					  			<div class="col-sm-3">
+					  					<g:select class="form-control"  
+					  						name="diaDeCorte" 
+					  						value="${socioInstance?.membresia?.diaDeCorte}"
+					  						from="${(1..28)}" />
 					  			</div>
 					  		</div>
 					  		<div class="form-group">

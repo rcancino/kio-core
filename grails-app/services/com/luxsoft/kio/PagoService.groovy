@@ -104,7 +104,7 @@ class PagoService {
                         Calendar cal=Calendar.getInstance()
                         cal.set(Calendar.DATE,socio.membresia.diaDeCorte)   
 
-                        socio.membresia.proximoPago=
+                        //socio.membresia.proximoPago=
                     }
                 }
             }

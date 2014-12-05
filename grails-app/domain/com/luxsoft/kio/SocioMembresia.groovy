@@ -31,7 +31,7 @@ class SocioMembresia {
 
     String comentario
 
-    Integer diaDeCorte
+    Integer diaDeCorte=1
 
     static belongsTo = [socio: Socio]
 
