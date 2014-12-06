@@ -74,6 +74,7 @@ class CobroController {
         
     }
 
+    @Secured(["hasAnyRole('ADMINISTRACION')"])
     def delete(Cobro cobroInstance){
         cobroService.delete(cobroInstance)
 		flash.message="Cobro $cobroInstance.id eliminado"

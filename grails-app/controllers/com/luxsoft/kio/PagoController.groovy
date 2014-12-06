@@ -69,12 +69,12 @@ class PagoController {
         
     }
     
-
+    @Secured(["hasAnyRole('ADMINISTRACION','CAJERO')"])
     def delete(Pago pagoInstance){
 
     }
 
-    @Secured(["hasAnyRole('ADMINISTRACION')"])
+    
     def eliminarAplicacion(AplicacionDePago aplicacion){
         assert aplicacion,'Error aplicacion no puede ser nula'
         def pago=pagoService.eliminarAplicacion(aplicacion)

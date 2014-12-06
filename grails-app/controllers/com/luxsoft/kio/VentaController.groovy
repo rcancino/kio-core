@@ -131,6 +131,7 @@ class VentaController {
         render res as JSON
     }
 
+    @Secured(["hasAnyRole('ADMINISTRACION')"])
     def delete(Venta venta){
         ventaService.eliminar(venta)
         flash.message="Venta eliminada ${venta.id}"
