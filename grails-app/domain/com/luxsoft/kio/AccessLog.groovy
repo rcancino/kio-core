@@ -13,6 +13,7 @@ class AccessLog {
 
     static constraints = {
     	replicado nullable:true
+    	tarjeta nullable:true
     }
 
 }

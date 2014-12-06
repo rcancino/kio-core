@@ -51,7 +51,7 @@ class PagoService {
         pago.save failOnError:true
         actualizarSaldos(pago)
         actualizarDisponible(pago)
-        //aplicarPagoAMembresiaDeSocio(venta,fecha)
+        //registrarPagoDeMembresia(venta,fecha)
         log.info 'Aplicacion de pago registrada '
         return pago
     }
@@ -92,26 +92,83 @@ class PagoService {
     	}
     }
 
-    def actualizarMembresias(Long id){
-        def pago=Pago.get(id)
+    def actualizarMembresias(Long pagoId){
+        def pago=Pago.get(pagoId)
         pago.aplicaciones.each{a->
-            def venta=a.venta
-            venta.partidas.each{det ->
-                if(det.producto.tipo.clave=='MEMBRESIA'){
-                    def socio=det.socio
-                    if(socio){
-                        socio.membresia.ultimoPago=a.fecha
-                        Calendar cal=Calendar.getInstance()
-                        cal.set(Calendar.DATE,socio.membresia.diaDeCorte)   
+            actualizarMembresia(a)
+        }
+    }
 
-                        //socio.membresia.proximoPago=
-                    }
+    def actualizarMembresia(AplicacionDePago a){
+        def venta=a.venta
+        venta.partidas.each{det ->
+            if(det.producto.tipo.clave=='MEMBRESIA' && (det.socio)){
+
+                def socio=det.socio
+                if(socio.membresia.diaDeCorte==0){
+                    socio.membresia.diaDeCorte=a.fecha.getAt(Calendar.DATE)
                 }
+
+                def pagoLog=new PagoDeMembresiaLog(
+                    aplicacion:a
+                    ,membresia:socio.membresia
+                    ,servicio:det.producto
+                    ,diaDeCorte:socio.membresia.diaDeCorte
+                    ,ultimoPago:socio.membresia.ultimoPago
+                    ,proximoPago:socio.membresia.proximoPago
+                    ,activo:socio.activo
+                )
+
+                
+                
+                def diaDeCorte=socio.membresia.diaDeCorte
+                def fechaOriginalDePago=socio.membresia.proximoPago?:a.fecha
+                def duracion=det.producto.duracion?:1
+                def proximoPago=MembresiaUtils.calcularProximoPago(fechaOriginalDePago,diaDeCorte,duracion)
+                log.info "Actualizando socio: $socio.numeroDeSocio Servicio:$det.producto.clave Duracion:$duracion mes"
+                log.info "Corte:$diaDeCorte Fecha de pago:${fechaOriginalDePago.format('dd/MM/yyyy')} Proximo:${proximoPago.format('dd/MM/yyyy')}"
+                
+                socio.membresia.ultimoPago=a.fecha
+                socio.membresia.proximoPago=proximoPago
+                if(!socio.activo)
+                    socio.activo=true
+                pagoLog.save failOnError:true
+                //socio.save failOnError:true
+
             }
         }
     }
 
-    def aplicarPagoAMembresiaDeSocio(Venta venta,Date fecha){
+    def cancelarPagoDeMembresias(Long pagoId){
+        def pago=Pago.get(pagoId)
+        pago.aplicaciones.each{a->
+            cancelarPagoDeMembresias(a)
+        }
+    }
+
+    def cancelarPagoDeMembresias(AplicacionDePago a){
+        def venta=a.venta
+        venta.partidas.each{det ->
+            if(det.producto.tipo.clave=='MEMBRESIA' && (det.socio)){
+
+                def socio=det.socio
+                def log=buscarUltimoPago(socio.membresia)
+                if(log){
+                    socio.membresia.ultimoPago=log.ultimoPago
+                    socio.membresia.proximoPago=log.proximoPago
+                    socio.activo=log.activo
+                }
+                
+            }
+        }
+    }
+
+
+    def PagoDeMembresiaLog buscarUltimoPago(SocioMembresia m){
+        return PagoDeMembresiaLog.find("from PagoDeMembresiaLog p where p.membresia=? order by p.id desc",[m])
+    }
+
+    def registrarPagoDeMembresia(Venta venta,Date fecha){
         
         def found=venta.partidas.find{it.producto.tipo.clave=='MEMBRESIA'}
         if(found){
@@ -119,7 +176,8 @@ class PagoService {
             
             if(servicio.duracion){
                 def servicio=found.producto
-                def duracion=Math.round(servicio.duracion/30.4)
+                Integer duracion=servicio.duracion?:1
+
                 def socio=it.socio
                 def m=socio.membresia
                 def fpago=m.proximoPago?:new Date()

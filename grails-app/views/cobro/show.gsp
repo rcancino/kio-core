@@ -151,8 +151,40 @@
 
 		</div><!-- end .row2 -->
 
-	</div>
-	
-	
+			<div class="row">
+				<div class="col-md-12 grid-panel">
+					<legend>Aplicaciones</legend>
+					<table id="grid" class="table table-striped table-bordered table-condensed">
+						<thead>
+							<tr>
+								<th>Folio</th>
+								<th>Venta</th>
+								<th>Fecha</th>
+								<th>Importe</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<g:each in="${cobroInstance.pago.aplicaciones}" var="row">
+								<tr id="${row.id}">
+									<td >
+										${row.id}
+									</td>
+									<td>
+										${fieldValue(bean:row,field:"venta.id")}
+									</td>
+									<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
+									<td><g:formatNumber number="${row.importe}" type="currency"/></td>
+									
+								</tr>
+							</g:each>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+
+	</div><!-- end .container -->
 </body>
 </html>

@@ -6,7 +6,7 @@
 	<asset:stylesheet src="jquery-ui.css"/>
 	<asset:javascript src="jquery-ui/autocomplete.js"/>
 	<asset:javascript src="holder/holder.js"/>
-	<title>Socio ${socioInstance.numeroDeSocio}</title>
+	<title>Socio ${socioInstance.id}</title>
 </head>
 <body>
 

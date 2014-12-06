@@ -25,7 +25,7 @@ class SocioController {
 	}
 	def save(Socio socioInstance){
 		
-		println 'Cliente de socio: '+params.cliente.direccion
+		//println 'Cliente de socio: '+params.cliente.direccion
 		
 		
 		if(socioInstance.cliente==null){
@@ -38,7 +38,7 @@ class SocioController {
 		 	
 			socioInstance.cliente=cliente
 		}
-		println socioInstance.cliente
+		//println socioInstance.cliente
 		
 		if(socioInstance.perfil==null){
 			//socioInstance.perfil=new SocioPerfil(tipoDeSocio:TipoDeSocio.first())

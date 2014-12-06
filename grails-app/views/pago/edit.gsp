@@ -42,6 +42,9 @@
 						onclick="return confim('Actualizar las membresias de los socios relacionados?');"> 
 						<i class="fa fa-unlock"></i>&nbsp; Actualizar membresias
 					</g:link>
+					<g:link class="list-group-item" action='cancelarPagoDeMembresias' id="${pagoInstance.id}">
+						<i class="fa fa-lock"></i>&nbsp; Cancelar pago de membresias
+					</g:link>
 					
 				</div>
 			</div>

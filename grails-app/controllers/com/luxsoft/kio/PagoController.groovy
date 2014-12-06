@@ -108,7 +108,13 @@ class PagoController {
 
     def actualizarMembresias(Long id){
         pagoService.actualizarMembresias(id)
-        redirect action:'edit',params:[id:pago.id]
+        flash.message="Membresias del pago actualizadas"
+        redirect action:'edit',params:[id:id]
+    }
+    def cancelarPagoDeMembresias(Long id){
+        pagoService.cancelarPagoDeMembresias(id)
+        flash.message="Pago de membresias cancelado"
+        redirect action:'edit',params:[id:id]
     }
     
 
