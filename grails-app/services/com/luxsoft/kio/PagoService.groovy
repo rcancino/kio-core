@@ -157,6 +157,7 @@ class PagoService {
                     socio.membresia.ultimoPago=log.ultimoPago
                     socio.membresia.proximoPago=log.proximoPago
                     socio.activo=log.activo
+                    log.delete()
                 }
                 
             }
@@ -168,57 +169,7 @@ class PagoService {
         return PagoDeMembresiaLog.find("from PagoDeMembresiaLog p where p.membresia=? order by p.id desc",[m])
     }
 
-    def registrarPagoDeMembresia(Venta venta,Date fecha){
-        
-        def found=venta.partidas.find{it.producto.tipo.clave=='MEMBRESIA'}
-        if(found){
-            //Actualizando la membresia
-            
-            if(servicio.duracion){
-                def servicio=found.producto
-                Integer duracion=servicio.duracion?:1
+    
 
-                def socio=it.socio
-                def m=socio.membresia
-                def fpago=m.proximoPago?:new Date()
-                def proximo=DateUtils.addMonths(fpago,duracion)
-                m.proximoPago=proximo
-                m.ultimoPago=fecha
-                m.save()
-                if(socio.activo==false){
-                    socio.activo=true
-                    socio.save()
-                } 
-            }
-            
-        }
-    }
-
-    def cancelarAplicacionAMembresiaDeSocio(Venta venta,Date fecha){
-       
-        def found=venta.partidas.find{it.producto.tipo.clave=='MEMBRESIA'}
-        if(found){
-            //Actualizando la membresia
-            println 'Actualizando membresia a partir de la aplicacion de un pago......'+found.producto
-            if(servicio.duracion){
-                def servicio=found.producto
-                def duracion=Math.round(servicio.duracion/30.4)
-                def socio=it.socio
-                def m=socio.membresia
-                def fpago=m.proximoPago
-                if(fpago){
-                    def ul=DateUtils.addMonths(fpago,-duracion)
-                    m.proximoPago=ul
-                    m.ultimoPago=null
-                    m.save()
-                    if(m.getAtraso()>=m.getTolerancia()){
-                        socio.activo=false
-                        socio.save()
-                    }
-                }
-            }
-            
-            
-        }
-    }
+    
 }

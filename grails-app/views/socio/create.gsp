@@ -97,7 +97,7 @@
 						<g:select class="form-control"  
 							name="membresia.servicio" 
 							value="${socioInstance.membresia?.servicio?.id}"
-							from="${com.luxsoft.kio.Producto.findAll{tipo.clave=='MEMBRESIA'}}" 
+							from="${com.luxsoft.kio.Producto.findAll{tipo.clave=='MEMBRESIA'&& suspendido==false}}" 
 							noSelection="${['null':'Seleccione una membresia']}"
 							optionKey="id" 
 							optionValue="descripcion"
