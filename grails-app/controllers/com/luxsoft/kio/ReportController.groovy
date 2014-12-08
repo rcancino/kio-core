@@ -7,6 +7,7 @@ import grails.validation.Validateable
 import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
 import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import org.apache.commons.lang.WordUtils
+import org.grails.databinding.BindingFormat
 
 @Secured(["hasAnyRole('ADMINISTRACION','CAJERO','MOSTRADOR')"])
 class ReportController {
@@ -84,6 +85,15 @@ class ReportController {
 			,fileName:repParams.reportName)
 	}
 
+	def cobranza(FechaCommand command){
+		def repParams=[:]
+		repParams['FECHA']=command.fecha
+		repParams['reportName']=command.reportName
+		ByteArrayOutputStream  pdfStream=runReport(repParams)
+		render(file: pdfStream.toByteArray(), contentType: 'application/pdf'
+			,fileName:repParams.reportName)
+	}
+
 	private runReport(Map repParams){
 		File logoFile = grailsApplication.mainContext.getResource("images/kyo_logo.png").file
 
@@ -91,7 +101,7 @@ class ReportController {
 			repParams['EMPRESA_LOGO']=logoFile.newInputStream()
 		}
 		def nombre=WordUtils.capitalize(repParams.reportName)
-		//log.info "Ejectuando reporte $nombre params:"+repParams
+		log.info "Ejectuando reporte $nombre params:"+repParams
 		def reportDef=new JasperReportDef(
 			name:nombre
 			,fileFormat:JasperExportFormat.PDF_FORMAT
@@ -113,9 +123,21 @@ class ReportCommand{
 }
 
 @Validateable 
-class PeriodoCommand extends ReportCommand{
+class FechaCommand extends ReportCommand{
 	
+	@BindingFormat('dd/MM/yyyy')
+	Date fecha=new Date()
+
+	static constraints={
+		fecha nullable:false
+	}
+}
+
+@Validateable 
+class PeriodoCommand extends ReportCommand{
+	@BindingFormat('dd/MM/yyyy')
 	Date fechaInicial=new Date()
+	@BindingFormat('dd/MM/yyyy')
 	Date fechaFinal=new Date()
 
 	static constraints={
@@ -128,7 +150,9 @@ class PeriodoCommand extends ReportCommand{
 class PorClienteCommand{
 
 	Cliente cliente
+	@BindingFormat('dd/MM/yyyy')
 	Date fechaInicial=new Date()-30
+	@BindingFormat('dd/MM/yyyy')
 	Date fechaFinal=new Date()
 	
 

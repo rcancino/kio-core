@@ -145,7 +145,23 @@
 					    	</p>
 					    </div>
 					</div>
-					
+					<div class="form-group">
+					    <label class="col-sm-4 control-label">Pagos</label>
+					    <div class="col-sm-8">
+					    	<p class="form-control-static">
+					      		<g:formatNumber number="${cobroInstance.venta.pagos}" type="currency"/>
+					    	</p>
+					    </div>
+					</div>
+
+					<div class="form-group">
+					    <label class="col-sm-4 control-label">Saldo</label>
+					    <div class="col-sm-8">
+					    	<p class="form-control-static">
+					      		<g:formatNumber number="${cobroInstance.venta.saldo}" type="currency"/>
+					    	</p>
+					    </div>
+					</div>
 				</form>
 			</div>
 

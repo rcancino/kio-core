@@ -25,7 +25,10 @@
 </content>
 
 <content tag="reportes">
-	<li><g:link controller="reporte" action="pagosPorDia"> Cobranza</g:link></li>
+	<li>
+		%{-- <g:link controller="reporte" action="cobranza"> Cobranza</g:link> --}%
+		<a href="#cobranzaDialog" data-toggle="modal">Cobranza</a>
+	</li>
 </content>	
 
 <content tag="document">
@@ -65,7 +68,7 @@
 		<div class="pagination">
 			<g:paginate total="${cobroInstanceCount ?: 0}"/>
 		</div>
-		
+		<g:render template="cobranzaDialog"/>
 	</div>
 </content>
 <content tag="javascript">
@@ -89,7 +92,9 @@
 	    		).draw();
 	    	});
 
-	    	
+	   //  	$("#fecha").datepicker({
+	     
+	 		// });
 
 		});
 	</script>
