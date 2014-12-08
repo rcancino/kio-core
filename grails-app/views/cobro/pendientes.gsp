@@ -51,13 +51,13 @@
 					<g:each in="${ventaInstanceList}" var="row">
 						<tr id="${row.id}">
 							<td >
-								<g:link  action="${row.pagos==0.0?'registrar':'show'}" id="${row.id}">
+								<g:link  action="${row.saldo>0.0?'registrar':'show'}" id="${row.id}">
 									${fieldValue(bean:row,field:"id")}
 								<span class="glyphicon glyphicon-shopping-cart"></span> 
 								</g:link>
 							</td>
 							<td>
-								<g:link action="${row.pagos==0.0?'registrar':'show'}" id="${row.id}">
+								<g:link action="${row.saldo>0.0?'registrar':'show'}" id="${row.id}">
 									${fieldValue(bean:row,field:"cliente.nombre")}
 								</g:link>
 								

@@ -25,6 +25,8 @@
 		</div><!-- end .row -->
 		
 		<div class="row">
+			<div class="col-md-12">
+				
 			
 			<div class="col-md-3">
 				<div class="list-group">
@@ -115,7 +117,8 @@
 					</div>
 				</g:form>
 			</div>
-
+		
+		</div>
 		</div><!-- end .row2 -->
 
 	</div>

@@ -16,7 +16,7 @@ class CobroController {
     }
 
     def pendientes(Long max){
-        params.max = Math.min(max ?: 50, 100)
+        params.max = Math.min(max ?: 100, 100)
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
         def query=Venta.where{saldo>0.0 }
@@ -28,7 +28,7 @@ class CobroController {
             response.sendError(404)
 
         }else{
-            def cobroInstance=new Cobro(fecha:new Date(),cliente:venta.cliente,importe:venta.total,formaDePago:'EFECTIVO')
+            def cobroInstance=new Cobro(fecha:new Date(),cliente:venta.cliente,importe:venta.saldo,formaDePago:'EFECTIVO')
             [ventaInstance:venta,cobroInstance:cobroInstance]
         }
     }
@@ -52,6 +52,7 @@ class CobroController {
             try {
 				def venta=Venta.get(params.ventaId)
 				cobroInstance.venta=venta
+                cobroInstance.fecha=new Date()
 				cobroInstance.cliente=venta.cliente
 				cobroInstance.recibe=cobroInstance.importe
 				cobroInstance.cambio=0.0

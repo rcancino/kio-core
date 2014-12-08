@@ -50,31 +50,31 @@
 					<g:hiddenField name="ventaId" value="${ventaInstance.id}"/>
 
 					<div class="form-group">
-						<label class="col-sm-4 control-label">Fecha venta</label>
-					    <div class="col-sm-8">
+						<label class="col-sm-6 control-label">Fecha venta</label>
+					    <div class="col-sm-6">
 					      <p class="form-control-static"><g:formatDate date="${ventaInstance?.fecha}" format="dd/MM/yyyy"/></p>
 					    </div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-4 control-label">Tipo</label>
-					    <div class="col-sm-8">
+						<label class="col-sm-6 control-label">Tipo</label>
+					    <div class="col-sm-6">
 					      <p class="form-control-static">${ventaInstance.tipo}</p>
 					    </div>
 					</div>
 					<f:with bean="${cobroInstance}">
 						<f:field property="formaDePago" value="${cobroInstance.formaDePago}"
-							input-class="form-control" cols="col-sm-8" colsLabel="col-sm-4" />
+							input-class="form-control" cols="col-sm-6" colsLabel="col-sm-6" />
 						<f:field property="referencia" 
-							input-class="form-control" cols="col-sm-8" colsLabel="col-sm-4" input-disabled="disabled"/>
-						<f:field property="importe" input-type="text" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-4" />
-						<div class="form-group">
-							<label class="col-sm-4 control-label">Tipo</label>
+							input-class="form-control" cols="col-sm-6" colsLabel="col-sm-6" input-disabled="disabled"/>
+						<f:field property="importe" input-type="text" input-class="form-control" cols="col-sm-6" colsLabel="col-sm-6" />
+						%{-- <div class="form-group">
+							<label class="col-sm-4 control-label">Fecha</label>
 							<div class="col-sm-8">
 								<input id="fecha" name="fecha" type="text"  
 								value="${g.formatDate(date:ventaInstance?.fecha,format:'dd/MM/yyyy') }"
 								class="form-control" autocomplete="off">
 							</div>
-						</div>
+						</div> --}%
 					</f:with>
 					<div class="form-group">
 						<div class="buttons  col-md-offset-4  col-md-8">
@@ -130,7 +130,23 @@
 					    	</p>
 					    </div>
 					</div>
-					
+					<div class="form-group">
+					    <label class="col-sm-4 control-label">Pagos</label>
+					    <div class="col-sm-8">
+					    	<p class="form-control-static">
+					      		<g:formatNumber number="${ventaInstance.pagos}" type="currency"/>
+					    	</p>
+					    </div>
+					</div>
+
+					<div class="form-group">
+					    <label class="col-sm-4 control-label">Saldo</label>
+					    <div class="col-sm-8">
+					    	<p class="form-control-static">
+					      		<g:formatNumber number="${ventaInstance.saldo}" type="currency"/>
+					    	</p>
+					    </div>
+					</div>
 				</form>
 			</div>
 
@@ -152,9 +168,9 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//$("#precioBruto").autoNumeric({wEmpty:'zero',mRound:'B',aSign: '$'});
-			$("#fecha").datepicker({
+			// $("#fecha").datepicker({
 	     
-	 		});
+	 	// 	});
 
 			$('form[name=pagoForm]').submit(function(e){
 	    		$(this).children('input[type=submit]').attr('disabled', 'disabled');

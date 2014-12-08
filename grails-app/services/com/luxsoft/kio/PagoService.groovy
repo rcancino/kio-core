@@ -21,7 +21,9 @@ class PagoService {
     		,referenciaBancaria:cobro.referencia
     		,importe:cobro.importe
     		,aplicado:0.0)
-    	pago.addToAplicaciones(fecha:new Date(),importe:cobro.importe,venta:cobro.venta)
+        def venta=cobro.venta
+        def aplicado=venta.saldo>=cobro.importe?cobro.importe:venta.saldo
+    	pago.addToAplicaciones(fecha:new Date(),importe:aplicado,venta:cobro.venta)
     	pago.save failOnError:true
     	actualizarDisponible(pago)
     	actualizarSaldos(pago)
