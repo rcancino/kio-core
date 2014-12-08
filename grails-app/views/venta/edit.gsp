@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="comentario" class="col-sm-2 control-label">Fecha</label>
+				<label for="comentario" class="col-sm-2 control-label">Comentario</label>
 				<div class="col-sm-10">
 					<input id="comentario" name="comentario" type="text"  
 						value="${ventaInstance.comentario}"
