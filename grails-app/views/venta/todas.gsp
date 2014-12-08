@@ -65,6 +65,11 @@
 				                    <i class="fa fa-database"></i> Todas las ventas
 				                </g:link>
 				            </li>
+				            <li>
+				                <a href="#searchDialog" data-toggle="modal" >
+				                	<i class="fa fa-binoculars"></i> Busqueda avanzada
+				                </a>
+				            </li>
 				        </ul>
 				    </div>
 				    <div class="btn-group">

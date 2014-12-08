@@ -71,7 +71,9 @@ class PagoController {
     
     @Secured(["hasAnyRole('ADMINISTRACION','CAJERO')"])
     def delete(Pago pagoInstance){
-
+        pagoService.delete(pagoInstance)
+        flash.message="Pago $pagoInstance.id y todas sus aplicaciones eliminados"
+        redirect action:'index'
     }
 
     
@@ -106,11 +108,14 @@ class PagoController {
         render res
     }
 
+    @Secured(["hasAnyRole('ADMINISTRACION')"])
     def actualizarMembresias(Long id){
         pagoService.actualizarMembresias(id)
         flash.message="Membresias del pago actualizadas"
         redirect action:'edit',params:[id:id]
     }
+
+    @Secured(["hasAnyRole('ADMINISTRACION')"])
     def cancelarPagoDeMembresias(Long id){
         pagoService.cancelarPagoDeMembresias(id)
         flash.message="Pago de membresias cancelado"

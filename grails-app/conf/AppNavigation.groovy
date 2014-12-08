@@ -41,11 +41,11 @@ navigation={
 			ventas(controller:'venta',action:'index')
 			caja(controller:'cobro',action:'pendientes'){
 				//cobrosPendientes(controller:'caja',action:'index',titleText:'Pendientes de cobrar')
-				pendientes(controller:'cobro',action:'pendientes',titleText:'Por cobrar')
+				pendientes(controller:'cobro',action:'pendientes',titleText:'Ventas por cobrar')
+				cobros(controller:'cobro',action:'index',data:[icon:'fa fa-money fa-fw'])
 				pagos(controller:'pago',action:'index',titleText:'Pagos ',data:[icon:'fa fa-pencil fa-fw'])
-				cobros(controller:'cobro',action:'index')
-				
-				corte(controller:'corteDeCaja',action:'index')
+				cobranza(controller:'pago',action:'cobranza',titleText:'Cobranza ',data:[icon:'fa fa-usd fa-fw'])
+				corte(controller:'corteDeCaja',action:'index',data:[icon:'fa fa-tag fa-fw'])
 				notasDeCredito(controller:'notaDeCredito',action:'index')
 				ventas(titleText:'Ventas (Todas)')
 			}
@@ -69,6 +69,7 @@ navigation={
 		consulta(titleText:'Socios'){
 			socios(titleText:'Socios (Ctrl+S) ')
 			productos(titleText:'Productos (Alt+P)')
+			ventas(controller:'venta',action:'todas')
 			acceso(controller:'accessLog',action:'index')
 			
 			

@@ -10,6 +10,7 @@ class PagoService {
         pago.save failOnError:true
         actualizarDisponible pago
         actualizarSaldos pago
+        actualizarMembresias(pago)
         return pago
     }
 
@@ -24,6 +25,7 @@ class PagoService {
     	pago.save failOnError:true
     	actualizarDisponible(pago)
     	actualizarSaldos(pago)
+        actualizarMembresias(pago)
     	log.info 'Pago generado: '+pago
     	return pago
 
@@ -47,11 +49,12 @@ class PagoService {
     }
 
     def agregarAplicacion(Pago pago,Venta venta,Date fecha,BigDecimal importe,String comentario){
-        pago.addToAplicaciones(venta:venta,importe:importe,comentario:comentario,fecha:fecha)
+        def a=new AplicacionDePago(venta:venta,importe:importe,comentario:comentario,fecha:fecha)
+        pago.addToAplicaciones(a)
         pago.save failOnError:true
         actualizarSaldos(pago)
         actualizarDisponible(pago)
-        //registrarPagoDeMembresia(venta,fecha)
+        actualizarMembresia(a)
         log.info 'Aplicacion de pago registrada '
         return pago
     }
@@ -72,13 +75,15 @@ class PagoService {
             log.info "Saldo actuaizado ${venta.saldo}  (Pagos: ${venta.pagos}) "
         }
         actualizarDisponible(pago)
+        cancelarPagoDeMembresias(aplicacion)
         log.info 'Aplicacion eliminada '+aplicacion.id
         return pago
     }
 
     def delete(Pago pago){
+
     	def ventas=pago.aplicaciones.collect{it.venta}
-       
+        cancelarPagoDeMembresias(pago)
     	pago.delete flush:true
 
     	ventas.each{ venta->
@@ -94,6 +99,9 @@ class PagoService {
 
     def actualizarMembresias(Long pagoId){
         def pago=Pago.get(pagoId)
+        actualizarMembresias(pago)
+    }
+    def actualizarMembresias(Pago pago){
         pago.aplicaciones.each{a->
             actualizarMembresia(a)
         }
@@ -141,6 +149,10 @@ class PagoService {
 
     def cancelarPagoDeMembresias(Long pagoId){
         def pago=Pago.get(pagoId)
+        cancelarPagoDeMembresias(pago)
+    }
+    
+    def cancelarPagoDeMembresias(Pago pago){
         pago.aplicaciones.each{a->
             cancelarPagoDeMembresias(a)
         }
