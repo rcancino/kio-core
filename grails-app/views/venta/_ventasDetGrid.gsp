@@ -18,14 +18,15 @@
 		<g:each in="${ventaInstance.partidas}" var="row" status="i"> 
 			<tr>
 				<td>
-					<g:if test="${!row.venta.cfdi}">
-						<g:link controller="ventaDet" action="edit" id="${row.id}">
-							<g:formatNumber number="${row.id}" format='####'/>
-						</g:link>
-					</g:if>
-					<g:else>
+					<a href="#" tabindex="0" class=""  data-toggle="popover" 
+						data-trigger="focus" 
+						data-placement="top"
+						data-container="body"
+						title="${row?.socio?.nombre}" 
+						data-content="And here's some amazing content. It's very engaging. Right?">
 						<g:formatNumber number="${row.id}" format='####'/>
-					</g:else>
+					</a>
+					
 				</td>
 				<td>
 					%{-- <g:link controller="ventaDet" action="edit" id="${row.id}">${row.producto.clave}</g:link> --}%
@@ -38,7 +39,17 @@
 						${row.producto.clave}
 					</g:else>
 				</td>
-				<td>${row.producto.descripcion}</td>
+				<td>
+					<g:if test="${!row.venta.cfdi}">
+						<g:link controller="ventaDet" action="edit" id="${row.id}">
+							${row.producto.descripcion}
+						</g:link>
+					</g:if>
+					<g:else>
+						<g:formatNumber number="${row.id}" format='####'/>
+					</g:else>
+					
+				</td>
 				<td>${row.producto.unidad}</td>
 				<td>${row.cantidad}</td>
 				<td >

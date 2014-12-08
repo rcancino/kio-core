@@ -49,10 +49,11 @@
 		</div>
 
 		<div class="form-group">
-			<label for="descuentoTasa" class="col-sm-2 control-label">Descuento</label>
+			<label for="descuentoTasa" class="col-sm-2 control-label">Descuento (%)</label>
 			<div class="col-sm-4">
-				<input id="descuento" class="form-control data-moneda" 
-					name="descuento"  value="${ventaDetInstance?.descuento }"
+				<input id="descuentoTasa" class="form-control data-descuento" 
+					name="descuentoTasa"  
+					value="${ventaDetInstance?.descuentoTasa }"
 					autocomplete="off" >
 			</div>
 		</div>
@@ -75,6 +76,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".data-moneda").autoNumeric({wEmpty:'zero'});
+		$(".data-descuento").autoNumeric({vMin: '0', vMax: '99.99'})
 		$("#producto").autocomplete({
 			source:'<g:createLink controller="producto" action="getProductosAsJSON"/>',
             minLength: 2,

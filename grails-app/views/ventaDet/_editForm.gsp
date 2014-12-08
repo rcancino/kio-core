@@ -62,7 +62,7 @@
 		<div class="form-group">
 			<label for="descuentoTasa" class="col-sm-2 control-label">Descuento</label>
 			<div class="col-sm-4">
-				<input id="descuento" class="form-control porentaje" 
+				<input id="descuentoTasa" class="form-control porentaje" 
 					name="descuentoTasa"  value="${ventaDetInstance?.descuentoTasa }"
 					autocomplete="off">
 			</div>
@@ -87,6 +87,7 @@
 	$(document).ready(function(){
 		$(".data-moneda").autoNumeric('init',{wEmpty:'zero'});
 		$(".porentaje").autoNumeric('init',{vMin:0,vMax:90});
+		$(".data-descuento").autoNumeric({vMin: '0', vMax: '99.99'})
 		$("#producto").autocomplete({
 			source:'<g:createLink controller="producto" action="getProductosAsJSON"/>',
             minLength: 2,

@@ -25,6 +25,12 @@ class VentaService {
     	}
     }
 
+    def actualizar(Venta venta){
+        if(venta.status=='PEDIDO')
+            venta.save failOnError:true
+        return venta
+    }
+
     def eliminar(Venta venta){
         if(venta.cfdi){
             throw new VentaException(message:'Venta ya facturada imposible eliminar')

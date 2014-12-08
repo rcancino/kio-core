@@ -21,15 +21,19 @@ class VentaDetController {
 	
 	def save(Long ventaId,VentaDet det){
 		//def ventaInstance=Venta.get(ventaId)
+        // if(det.descuentoTasa>0){
+        //     det.descuentoTasa=MonedaUtils.calcularImporteDelTotal(cmd.descuentoTasa)
+        // }
+        log.info 'salvando partida: '+det+ " Descuento Tasa: "+det.descuentoTasa+ ' Descuento: '+det.descuento
 		def ventaInstance=ventaService.agregarPartida(ventaId,det)
 		redirect controller:'venta',action:'edit',id:ventaInstance.id
 	}
 
     def update(VentaDet cmd){
         //println 'Id: '+cmd.id+" Vta: "+cmd.venta?.id+ " "+cmd.cantidad
-        if(cmd.descuento>0){
-            cmd.descuento=MonedaUtils.calcularImporteDelTotal(cmd.descuento)
-        }
+        // if(cmd.descuento>0){
+        //     cmd.descuento=MonedaUtils.calcularImporteDelTotal(cmd.descuento)
+        // }
     	cmd.validate()
     	if(cmd.hasErrors()){
     		render view:'edit',model:[ventaInstance:cmd.venta,ventaDetInstance:cmd]

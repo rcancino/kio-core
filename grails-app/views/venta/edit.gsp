@@ -56,6 +56,15 @@
 					<p class="form-control-static">${g.formatDate(date:ventaInstance.fecha,format:'dd/MM/yyyy') }</p>
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="comentario" class="col-sm-2 control-label">Fecha</label>
+				<div class="col-sm-10">
+					<input id="comentario" name="comentario" type="text"  
+						value="${ventaInstance.comentario}"
+						class="form-control">
+					
+				</div>
+			</div>
 		</g:form>
 	</div>		
 	<div class=" col-md-4">
@@ -173,6 +182,8 @@ $(document).ready(function(){
 		console.log('Siguiete paso');
 		$("#updateForm").submit();
 	});
+
+	//$('[data-toggle="popover"]').popover();
 	
 });
 </script>

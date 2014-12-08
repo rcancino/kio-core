@@ -80,6 +80,7 @@ class VentaController {
 
     def update(Venta ventaInstance){
         log.info 'Actualizando ventas:'
+        ventaInstance=ventaService.actualizar(ventaInstance)
         flash.message="Venta $ventaInstance.id actualizada"
         chain action:'index'
         //[ventaInstance:ventaInstance]
