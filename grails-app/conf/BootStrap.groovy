@@ -54,14 +54,15 @@ class BootStrap {
 					codigoPostal:'03310',
 					estado:'DISTRITO FEDERAL',
 					pais:'MEXICO'
+					
 		        )
 		        empresa.numeroDeCertificado='00001000000201478375'
 		        empresa.certificadoDigital=grailsApplication.mainContext
 		  		.getResource("/WEB-INF/sat/00001000000201478375.cer").file.readBytes()
 		  		empresa.llavePrivada=grailsApplication.mainContext
 		  		.getResource("/WEB-INF/sat/gasoc.key").file.readBytes()	
-		  		empresa.usuarioPac="PAP830101CR3"
-		  		empresa.passwordPac="yqjvqfofb"
+		  		empresa.usuarioPac="OAG100209GN8"
+		  		empresa.passwordPac="guwueofei"
 		  		//empresa.certificadoDigitalPfx=grailsApplication.mainContext
 		  		//.getResource("/WEB-INF/data/kio/PAPEL_CFDI_CERT.pfx").file.readBytes()	
 				empresa.save()
