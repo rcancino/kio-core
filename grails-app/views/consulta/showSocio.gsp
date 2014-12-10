@@ -20,6 +20,7 @@
                     		<span class="label label-danger"><strong>SUSPENDIDO</strong></span>
                 		</g:if> 
 					</h3>
+
 					<g:if test="${flash.message}">
                     	<span class="label label-warning">${flash.message}</span>
                 	</g:if> 
@@ -42,7 +43,14 @@
 					  					action="actualizarDireccion" 
 					  					class="form-horizontal"
 					  					id="${socioInstance.id}">
+					  					<div class="form-group">
+					  					    <label class="col-sm-2 control-label">Cliente</label>
+					  					    <div class="col-sm-10">
+					  					      <p class="form-control-static">${socioInstance.cliente.nombre}</p>
+					  					    </div>
+					  					 </div>
 					  				<fieldset>
+					  					
 					  					<legend>Dirección </legend>
 					  					<div class="form-group">
 					  						<label for="calle" class="col-sm-2 control-label">Calle </label>
