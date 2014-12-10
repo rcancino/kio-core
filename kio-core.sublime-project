@@ -73,6 +73,11 @@
 			"name": "Web App",
 			"path": "web-app"
 		},
+		{	
+			"name":"Jobs",
+			"path":"grails-app/jobs"
+
+		},
 		{
 			"name": "Templates",
 			"path": "src/templates"

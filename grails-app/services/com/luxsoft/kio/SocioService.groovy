@@ -1,6 +1,7 @@
 package com.luxsoft.kio
 
 import grails.transaction.Transactional
+import grails.transaction.NotTransactional
 
 import org.springframework.beans.BeanUtils
 
@@ -97,6 +98,90 @@ class SocioService {
 		}
 		return null
         
+    }
+
+
+    /**
+    * Genera una bitacora de acceso para todos los socios activos.
+    *
+    **/
+    @NotTransactional
+    def exportarALectora(){
+        def socios=Socio.findAll("from Socio s where s.activo=true")
+        def exportados=[]
+        socios.each{ s->
+            if(s.tarjeta){
+                try {
+                    def alog=logAccess(s)
+                    exportados.add(alog)
+                }
+                catch(Exception e) {
+                }
+            }
+
+        }
+        return exportados
+    }
+
+    /**
+    *
+    * Limpia los registros AccessLog anteriores a la fecha indicada y si estan replicados
+    *
+    **/
+    @NotTransactional
+    def limpiarBitacora(Date fecha,boolean replicados){
+        if(replicados){
+            def res=AccessLog.executeUpdate("delete from AccessLog a where date(a.dateCreated)<? and replicado is not null"
+                ,[fecha])
+            return res
+        }else{
+            def res=AccessLog.executeUpdate("delete from AccessLog a where date(a.dateCreated)<? "
+                ,[fecha])
+            return res
+        }
+        
+    }
+
+    /**
+    *   Actualizar suspencion de socios por atraso en pago
+    *
+    **/
+    @NotTransactional
+    def suspender(){
+        def socios=Socio.findAll("from Socio s where tarjeta is not null")
+        def res=[:]
+        def suspendidos=0
+        def activados=0
+        socios.each{socio->
+            def proximoPago=socio.membresia.proximoPago
+            if(proximoPago ){
+                def now=new Date()
+                def suspender=proximoPago+socio.membresia.toleranciaEnDias
+                //socio.membresia.suspender=suspender
+                if(now>=suspender){
+                    if(socio.activo==true){
+                        log.debug "Suspendiendo $socio.nombre por atraso de $socio.membresia.atraso  Tarjeta: $socio.tarjeta"
+                        socio.activo=false
+                        suspendidos++
+                    }
+                }else{
+                    if(socio.activo==false){
+                        log.debug "Activando $socio.nombre"
+                        socio.activo=true
+                        activados++
+                    }
+                }
+            } else{
+                if(socio.activo){
+                    log.debug "Suspendiendo $socio.nombre por no tener proximo pago definido"
+                    socio.activo=false
+                    suspendidos++
+                }
+            }  
+        }
+        res.suspendidos=suspendidos
+        res.activados=activados
+        return res
     }
 }
 

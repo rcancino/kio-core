@@ -28,9 +28,16 @@
 					<div class="btn-group">
 						<input type='text' id="tarjetaField" placeholder="Tarjeta" class="form-control" autocomplete="off" >
 					</div>
+
 					<div class="btn-group ">
 						<g:link action="index" class="btn btn-default" > Refrescar</g:link>
+						<sec:ifAllGranted roles="ADMINISTRACION">
+							<g:link onclick="return confirm('Exportar todos los socios activos a la lectora?');" 
+								action="exportarALectora" class="btn btn-default" > Exportar a lectora</g:link>
+						</sec:ifAllGranted>
+						
 					</div> <%-- end .btn-group acciones --%>
+
 				</div>
 			</div>
 		</div><!-- end .row button panel -->

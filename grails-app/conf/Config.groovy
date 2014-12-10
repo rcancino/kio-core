@@ -102,12 +102,20 @@ environments {
     }
 }
 
+String logDir = System.properties['user.home']  + '/.grails/'
 // log4j configuration
 log4j.main = {
     // Example of changing the log pattern for the default console appender:
     //
     appenders {
-        console name:'stdout', layout:pattern(conversionPattern: '%c{1}: %m%n')
+        console name:'stdout', layout:pattern(conversionPattern: '%-5p  %c{1}: %m%n')
+        //console name:'stdout', layout:pattern(conversionPattern: '%-5p [%t] %c{1}: %m%n')
+
+        rollingFile name:'luxorFileAppender',
+                    maxFileSize:1024,
+                    file:"$logDir/kyo-luxor.log",
+                    maxBackupIndex:7
+                    layout: pattern(conversionPattern: '%-5p [%t] %c{1}: %m%n')
     }
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
@@ -126,24 +134,24 @@ log4j.main = {
 
     environments{
         
-        development{
-            info 'grails.app.controllers.com.luxsoft.kyo'
-            debug 'grails.app.services.com.luxsoft.kyo'
-            debug 'grails.app.services.com.luxsoft.kio'
-			debug 'grails.app.services.com.luxsoft.cfdi'
-            debug 'grails.app.controllers.com.luxsoft.kio'
-			debug 'com.luxsoft.cfdi'
-
-            
-        }
+      development{
+        info 'grails.app.controllers.com.luxsoft.kyo'
+        info 'grails.app.services.com.luxsoft.kyo'
+        info 'grails.app.services.com.luxsoft.kio'
+			  info 'grails.app.services.com.luxsoft.cfdi'
+        info 'grails.app.controllers.com.luxsoft.kio'
+			  info 'com.luxsoft.cfdi'
+        info 'grails.app.jobs'
+        info luxorFileAppender: 'grails.apps.jobs'
+      }
         
-        produccion{
-            error 'grails.app.services'
-            error 'grails.app.controllers'
-			error 'grails.app.services.com.luxsoft.kyo'
-			error 'grails.app.services.com.luxsoft.cfdi'
-            
-        }
+      produccion{
+        error 'grails.app.services'
+        error 'grails.app.controllers'
+        error 'grails.app.services.com.luxsoft.kyo'
+			  error 'grails.app.services.com.luxsoft.cfdi'
+        error 'grails.app.jobs'    
+      }
         
     }
 }
