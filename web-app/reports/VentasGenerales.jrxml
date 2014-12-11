@@ -106,7 +106,7 @@
 FROM
      `cliente` cliente INNER JOIN `venta` venta ON cliente.`id` = venta.`cliente_id`
 left join cfdi cfdi on (cfdi.id=venta.cfdi_id)
-where venta.fecha between $P{FECHA_INI} AND $P{FECHA_FIN}]]></queryString>
+where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN}]]></queryString>
 
 	<field name="venta_id" class="java.lang.Long"/>
 	<field name="venta_fecha" class="java.sql.Timestamp"/>
