@@ -56,8 +56,8 @@ class ReportController {
 		}
 
 		def repParams=[:]
-		repParams['FECHA_INICIAL']=command.fechaInicial
-		repParams['FECHA_FINAL']=command.fechaFinal
+		repParams['FECHA_INI']=command.fechaInicial
+		repParams['FECHA_FIN']=command.fechaFinal
 		repParams['reportName']=command.reportName
 		ByteArrayOutputStream  pdfStream=runReport(repParams)
 		render(file: pdfStream.toByteArray(), contentType: 'application/pdf'
