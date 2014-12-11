@@ -32,8 +32,13 @@
 ,(case when p.forma_de_pago ='CHEQUE' THEN a.importe ELSE 0 END) AS 'CHEQUE'
 ,(case when p.forma_de_pago ='TARJETA_DE_CREDITO' THEN a.importe ELSE 0 END) AS 'TARJETA_DE_CREDITO'
 ,(case when p.forma_de_pago ='TARJETA_DE_DEBITO' THEN a.importe ELSE 0 END) AS 'TARJETA_DE_DEBITO'
+,(case when p.forma_de_pago ='CARGO_RECURRENTE' THEN a.importe ELSE 0 END) AS 'CARGO_RECURRENTE'
+,(case when p.forma_de_pago ='AMERICAN_EXPRESS' THEN a.importe ELSE 0 END) AS 'AMERICAN_EXPRESS'
+,(case when p.forma_de_pago ='DEPOSITO' THEN a.importe ELSE 0 END) AS 'DEPOSITO'
+,(case when p.forma_de_pago ='TRANSFERENCIA' THEN a.importe ELSE 0 END) AS 'TRANSFERENCIA'
 FROM aplicacion_de_pago a join pago p on (p.id=a.pago_id) join venta v on (v.id=a.venta_id) join cliente c on (c.id=v.cliente_id) left join cfdi d on (d.origen=v.id)
-where a.fecha=$P{FECHA}]]></queryString>
+where a.fecha=$P{FECHA}
+order by p.forma_de_pago]]></queryString>
 
 	<field name="nombre" class="java.lang.String"/>
 	<field name="id" class="java.lang.Long"/>
@@ -47,6 +52,10 @@ where a.fecha=$P{FECHA}]]></queryString>
 	<field name="CHEQUE" class="java.math.BigDecimal"/>
 	<field name="TARJETA_DE_CREDITO" class="java.math.BigDecimal"/>
 	<field name="TARJETA_DE_DEBITO" class="java.math.BigDecimal"/>
+	<field name="CARGO_RECURRENTE" class="java.math.BigDecimal"/>
+	<field name="AMERICAN_EXPRESS" class="java.math.BigDecimal"/>
+	<field name="DEPOSITO" class="java.math.BigDecimal"/>
+	<field name="TRANSFERENCIA" class="java.math.BigDecimal"/>
 
 	<variable name="TOTAL_POR_TIPO" class="java.math.BigDecimal" resetType="Group" resetGroup="FORMA_DE_PAGO" calculation="Sum">
 		<variableExpression><![CDATA[$F{cobrado}]]></variableExpression>
@@ -64,7 +73,16 @@ where a.fecha=$P{FECHA}]]></queryString>
 		<variableExpression><![CDATA[$F{TARJETA_DE_DEBITO}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_DEPOSITO" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
-		<variableExpression><![CDATA[new BigDecimal(0)]]></variableExpression>
+		<variableExpression><![CDATA[$F{DEPOSITO}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_TRANSFER" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{TRANSFERENCIA}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_AMEX" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{AMERICAN_EXPRESS}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_RECURRENTE" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{CARGO_RECURRENTE}]]></variableExpression>
 	</variable>
 
 		<group  name="FORMA_DE_PAGO" >
@@ -87,9 +105,9 @@ where a.fecha=$P{FECHA}]]></queryString>
 				</line>
 				<staticText>
 					<reportElement
-						x="321"
+						x="301"
 						y="7"
-						width="51"
+						width="34"
 						height="11"
 						key="staticText-112"/>
 					<box></box>
@@ -100,13 +118,13 @@ where a.fecha=$P{FECHA}]]></queryString>
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="380"
+						x="335"
 						y="7"
-						width="51"
+						width="96"
 						height="11"
 						key="textField"/>
 					<box></box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{forma_de_pago}]]></textFieldExpression>
@@ -678,68 +696,68 @@ where a.fecha=$P{FECHA}]]></queryString>
 			</band>
 		</lastPageFooter>
 		<summary>
-			<band height="98"  isSplitAllowed="true" >
+			<band height="281"  isSplitAllowed="true" >
 				<staticText>
 					<reportElement
-						x="347"
+						x="298"
 						y="6"
-						width="66"
+						width="115"
 						height="11"
 						key="staticText-115"/>
 					<box></box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
 				<text><![CDATA[EFECTIVO : ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="347"
+						x="298"
 						y="17"
-						width="66"
+						width="115"
 						height="11"
 						key="staticText-116"/>
 					<box></box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
 				<text><![CDATA[CHEQUE :]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="347"
+						x="298"
 						y="28"
-						width="66"
+						width="115"
 						height="11"
 						key="staticText-117"/>
 					<box></box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
 				<text><![CDATA[TARJETA CRE :]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="347"
+						x="298"
 						y="39"
-						width="66"
+						width="115"
 						height="11"
 						key="staticText-118"/>
 					<box></box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
 				<text><![CDATA[TARJETA DEB :]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="347"
+						x="298"
 						y="50"
-						width="66"
+						width="115"
 						height="11"
 						key="staticText-119"/>
 					<box></box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
 				<text><![CDATA[DEPOSITO :]]></text>
@@ -811,13 +829,13 @@ where a.fecha=$P{FECHA}]]></queryString>
 				</textField>
 				<staticText>
 					<reportElement
-						x="347"
-						y="61"
-						width="66"
+						x="298"
+						y="95"
+						width="115"
 						height="11"
 						key="staticText-120"/>
 					<box></box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
 				<text><![CDATA[TOTAL :]]></text>
@@ -825,7 +843,7 @@ where a.fecha=$P{FECHA}]]></queryString>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="418"
-						y="61"
+						y="95"
 						width="66"
 						height="11"
 						key="textField-89"/>
@@ -834,7 +852,85 @@ where a.fecha=$P{FECHA}]]></queryString>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_EFECTIVO}.add( $V{TOTAL_CHEQUE}.add( $V{TOTAL_TAR_CRE}.add( $V{TOTAL_TAR_DEB}.add( $V{TOTAL_DEPOSITO} )) ) )]]></textFieldExpression>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_EFECTIVO}.add( $V{TOTAL_CHEQUE}.add( $V{TOTAL_TAR_CRE}.add( $V{TOTAL_TAR_DEB}.add( $V{TOTAL_DEPOSITO}.add($V{TOTAL_TRANSFER}.add($V{TOTAL_AMEX}.add($V{TOTAL_RECURRENTE}))) )) ) )]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="298"
+						y="61"
+						width="115"
+						height="11"
+						key="staticText-121"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[TRANSFERNCIA :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="298"
+						y="72"
+						width="115"
+						height="11"
+						key="staticText-122"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[CARGO RECURRENTE :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="298"
+						y="83"
+						width="115"
+						height="11"
+						key="staticText-123"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[AMERICAN EXPRESS :]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="418"
+						y="61"
+						width="66"
+						height="11"
+						key="textField-90"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_TRANSFER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="418"
+						y="72"
+						width="66"
+						height="11"
+						key="textField-91"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_RECURRENTE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="418"
+						y="83"
+						width="66"
+						height="11"
+						key="textField-92"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_AMEX}]]></textFieldExpression>
 				</textField>
 			</band>
 		</summary>
