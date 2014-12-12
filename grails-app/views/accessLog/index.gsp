@@ -34,6 +34,8 @@
 						<sec:ifAllGranted roles="ADMINISTRACION">
 							<g:link onclick="return confirm('Exportar todos los socios activos a la lectora?');" 
 								action="exportarALectora" class="btn btn-default" > Exportar a lectora</g:link>
+							<g:link onclick="return confirm('Actualizar el status de todos los socios?');" 
+								action="actualizarStatus" class="btn btn-default" > Actualizar status</g:link>
 						</sec:ifAllGranted>
 						
 					</div> <%-- end .btn-group acciones --%>

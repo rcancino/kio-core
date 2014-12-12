@@ -52,16 +52,44 @@ class SocioService {
 	
 	def actualizarSocio(Socio socio) {
 		
-		def proximoPago=socio.membresia.proximoPago
+		// def proximoPago=socio.membresia.proximoPago
+  //       if(proximoPago ){
+  //           def now=new Date()
+  //           def suspender=proximoPago+socio.membresia.toleranciaEnDias
+  //           socio.membresia.suspender=suspender
+  //           if(now>=suspender){
+  //               log.info 'Suspendiendo socio'
+  //               socio.activo=false
+  //           }else{
+  //               log.info 'Activando socio'
+  //               socio.activo=true
+  //           }
+  //       }	
+        def proximoPago=socio.membresia.proximoPago
         if(proximoPago ){
             def now=new Date()
             def suspender=proximoPago+socio.membresia.toleranciaEnDias
-            socio.membresia.suspender=suspender
+            //socio.membresia.suspender=suspender
             if(now>=suspender){
-                log.info 'Suspendiendo socio'
-                socio.activo=false
+                if(socio.activo==true){
+                    log.debug "Suspendiendo $socio.nombre por atraso de $socio.membresia.atraso  Tarjeta: $socio.tarjeta"
+                    socio.activo=false
+                    suspendidos++
+                }
+            }else{
+                if(socio.activo==false){
+                    log.debug "Activando $socio.nombre"
+                    socio.activo=true
+                    activados++
+                }
             }
-        }		
+        } else{
+            if(socio.activo){
+                log.debug "Suspendiendo $socio.nombre por no tener proximo pago definido"
+                socio.activo=false
+                suspendidos++
+            }
+        }  	
 		socio=socio.save failOnError:true
 		
 		return socio
@@ -153,6 +181,7 @@ class SocioService {
         def suspendidos=0
         def activados=0
         socios.each{socio->
+            println 'Procesando: '+socio
             def proximoPago=socio.membresia.proximoPago
             if(proximoPago ){
                 def now=new Date()
@@ -162,12 +191,14 @@ class SocioService {
                     if(socio.activo==true){
                         log.debug "Suspendiendo $socio.nombre por atraso de $socio.membresia.atraso  Tarjeta: $socio.tarjeta"
                         socio.activo=false
+                        socio.flush
                         suspendidos++
                     }
                 }else{
                     if(socio.activo==false){
                         log.debug "Activando $socio.nombre"
                         socio.activo=true
+                        socio.flush
                         activados++
                     }
                 }
@@ -175,9 +206,11 @@ class SocioService {
                 if(socio.activo){
                     log.debug "Suspendiendo $socio.nombre por no tener proximo pago definido"
                     socio.activo=false
+                    socio.flush
                     suspendidos++
                 }
-            }  
+            } 
+            socio.sleep(1000)
         }
         res.suspendidos=suspendidos
         res.activados=activados

@@ -12,7 +12,7 @@ class AccessLogController {
 		params.sort=params.sort?:'dateCreated'
 		params.order='desc'
         def now=new Date()
-        def list=AccessLog.findAll("from AccessLog a where date(a.dateCreated) between ? and ?",[now-1,now],params)
+        def list=AccessLog.findAll("from AccessLog a where date(a.dateCreated) between ? and ? order by a.dateCreated desc",[now-1,now],params)
         def count=AccessLog.executeQuery("select count(*) from AccessLog a where date(a.dateCreated) between ? and ?",[now-1,now])
 		[accessLogInstanceList:list,accessLogInstanceCount:count[0]]
     }
@@ -25,6 +25,12 @@ class AccessLogController {
     def exportarALectora(){
         socioService.exportarALectora()
         redirect action:'index'
+    }
+
+    def actualizarStatus(){
+        socioService.suspender()
+        redirect action:'index'
+
     }
 
 

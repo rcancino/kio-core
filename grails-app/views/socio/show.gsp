@@ -74,12 +74,10 @@
 								Catálogo
 							</g:link>
 							
-							<g:if test="${socioInstance.activo}">
-								<g:link class="btn btn-primary" 
+							<g:link class="btn btn-primary" 
 									action="edit" id="${socioInstance.id}">
-									<span class="glyphicon glyphicon-penciel"></span> Editar
-								</g:link>
-							</g:if>
+								<span class="glyphicon glyphicon-penciel"></span> Editar
+							</g:link>
 							
 							
 						</div>
