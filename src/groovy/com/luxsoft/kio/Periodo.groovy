@@ -81,6 +81,11 @@ class Periodo implements Comparable<Periodo>{
 		Calendar now=Calendar.getInstance()
 		return getPeriodoEnUnMes(now.get(Calendar.MONTH),now.get(Calendar.YEAR))
 	}
+
+	public static Periodo getCurrentMonthToday(){
+		def periodo=getCurrentMonth()
+		return new Periodo(periodo.fechaInicial,new Date())
+	}
 	
 	public static Periodo getPeriodoEnUnMes(int mes){
 		Calendar cal=Calendar.getInstance();

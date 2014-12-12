@@ -83,13 +83,14 @@ class CobroController {
     }
 
     def ventas(){ 
-        params.max = 50
+        params.max = 100
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
-        def query=Venta.where{status!='PAGADA' }
-        def list=query.list(params)
-        println 'Ventas: '+list.size()
-        [ventaInstanceList:Venta.list(params),ventaInstanceListTotal:Venta.count()]
+        def now=new Date()
+        def list=Venta.executeQuery("from Venta v where date(v.fecha) between ? and ? and v.status='PAGADA'"
+            ,[now-2,now])
+        log.info 'Ventas registradas: '+list.size()
+        [ventaInstanceList:list,ventaInstanceListTotal:list.size()]
     }
 
     def facturar(Venta venta){

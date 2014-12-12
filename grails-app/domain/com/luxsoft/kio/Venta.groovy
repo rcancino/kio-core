@@ -11,7 +11,7 @@ import com.luxsoft.kio.MonedaUtils
 //@Sortable(includes="id")
 class Venta {
 
-	
+	transient springSecurityService
 
 	Cliente cliente
 	
@@ -55,6 +55,8 @@ class Venta {
 
 	String creadoPor
 
+	String modificadoPor
+
 	Boolean cancelada=false
 
 	static hasMany = [partidas: VentaDet]
@@ -74,6 +76,7 @@ class Venta {
 		tipo nullable:true
 		comentario nullable:true
 		creadoPor nullalbe:true
+		modificadoPor nullalble:true
     	
     }
 
@@ -92,6 +95,13 @@ class Venta {
 		return this
 	}
 
+	def beforeInsert() {
+		creadoPor=springSecurityService.getCurrentUser().username
+	}
+
+	def beforeUpdate() {
+		modificadoPor=springSecurityService.getCurrentUser().username
+	}
 	
 	
 	

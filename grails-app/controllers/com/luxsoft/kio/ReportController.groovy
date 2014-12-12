@@ -136,13 +136,17 @@ class FechaCommand extends ReportCommand{
 @Validateable 
 class PeriodoCommand extends ReportCommand{
 	@BindingFormat('dd/MM/yyyy')
-	Date fechaInicial=new Date()
+	Date fechaInicial=new Date()-30
 	@BindingFormat('dd/MM/yyyy')
 	Date fechaFinal=new Date()
 
 	static constraints={
 		fechaInicial nullable:false
 		fechaFinal nullable:false
+	}
+
+	Periodo toPeriodo(){
+		retur new Periodo(fechaInicial,fechaFinal)
 	}
 }
 

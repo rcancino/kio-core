@@ -19,10 +19,11 @@ class VentaController {
 		[ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count()]
     }
 
-    def todas(PeriodoCommand command){
+    def todas(){
+        def periodo=session.periodo
         def list=Venta.executeQuery("from Venta v where date(v.fecha) between ? and ? "
-            ,[command.fechaInicial,command.fechaFinal])
-        [ventaInstanceList:list,ventaInstanceListTotal:list.size(),periodo:command]
+            ,[periodo.fechaInicial,periodo.fechaFinal])
+        [ventaInstanceList:list,ventaInstanceListTotal:list.size()]
     }
 
     

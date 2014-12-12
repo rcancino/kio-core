@@ -13,8 +13,8 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="alert alert-warning">
-					<h2>Ventas registradas Periodo: (${periodo.fechaInicial.format('dd/MM/yyyy')} al 
-						${periodo.fechaFinal.format('dd/MM/yyyy')}) </h2>
+					<h2>Ventas registradas Periodo: (${session.periodo.fechaInicial.format('dd/MM/yyyy')} al 
+						${session.periodo.fechaFinal.format('dd/MM/yyyy')}) </h2>
 					<g:if test="${flash.message}">
 	                    <div class="">
 	                        <span class="label label-warning">${flash.message}</span>
@@ -64,6 +64,11 @@
 				                <g:link action="todas" >
 				                    <i class="fa fa-database"></i> Todas las ventas
 				                </g:link>
+				            </li>
+				            <li>
+				            	<a href="#periodoDialog" data-toggle="modal" >
+				                	<i class="fa fa-calendar"></i> Cambiar periodo
+				                </a>
 				            </li>
 				            <li>
 				                <a href="#searchDialog" data-toggle="modal" >
@@ -154,7 +159,8 @@
 				</div>
 			</div>
 		</div>
-
+	
+		<g:render template="/_common/periodoDialog"/>
 	</div>
 	
 </body>

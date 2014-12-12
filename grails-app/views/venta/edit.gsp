@@ -139,7 +139,7 @@
 
 		<g:link class="btn btn-default btn-sm" 
 			action="mandarFacturar" id="${ventaInstance.id}" >
-			<span class="glyphicon glyphicon-shopping-cart"></span> Mandar Facturar 
+			<span class="glyphicon glyphicon-shopping-cart"></span> Mandar Cobrar
 		</g:link>
 		
 		<button id="next" class="btn btn-success btn-sm">

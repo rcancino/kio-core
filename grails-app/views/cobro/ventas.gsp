@@ -46,12 +46,12 @@
 						<th>Total</th>
 						<th>Pagos</th>
 						<th>Saldo</th>
-						<th>CFDI</th>
+						<th>Factura</th>
 					</tr>
 				</thead>
 				<tbody>
 					<g:each in="${ventaInstanceList}" var="row">
-						<tr id="${row.id}">
+						<tr id="${row.id}" class="${row.descuento}?'warning':''">
 							<td >
 								<g:link  action="showVenta" id="${row.id}">
 									${fieldValue(bean:row,field:"id")}
@@ -83,7 +83,8 @@
 									<g:if test="${row.cfdi}">
 										<abbr title="${row.cfdi.uuid}">
 										<g:link controller="cfdi" action="show" id="${row?.cfdi?.id}">
-											${org.apache.commons.lang.StringUtils.substringAfterLast(row?.cfdi?.uuid,'-')}
+											%{-- ${org.apache.commons.lang.StringUtils.substringAfterLast(row?.cfdi?.uuid,'-')} --}%
+											${row.cfdi.folio}
 										</g:link>
 										</abbr>
 									</g:if>

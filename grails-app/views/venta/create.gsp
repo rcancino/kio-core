@@ -70,14 +70,14 @@
 			</div>
 		</div>
 
-		<div class="form-group">
+		%{-- <div class="form-group">
 			<label for="fecha" class="col-sm-2 control-label">Comentario</label>
 			<div class="col-sm-4">
 				<input id="comentario" name="comentario" type="text"  
 					value="${ventaInstance.comentario}"
 					class="form-control" >
 			</div>
-		</div>
+		</div> --}%
 
 		%{-- <div class="form-group">
 			<div class="col-sm-offset-8 col-sm-4">
