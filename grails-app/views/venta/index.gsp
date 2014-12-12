@@ -120,7 +120,7 @@
 									
 								</td>
 								<td><g:formatNumber number="${row.total}" type="currency"/></td>
-								<td>${fieldValue(bean:row,field:"creadoPor")}</td>
+								<td>${fieldValue(bean:row,field:"modificadoPor")}</td>
 								<td>${fieldValue(bean:row,field:"comentario")}</td>
 								%{-- <td>${fieldValue(bean:row,field:"status")}</td> --}%
 								<td>

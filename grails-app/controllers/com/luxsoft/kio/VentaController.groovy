@@ -48,6 +48,7 @@ class VentaController {
         venta.status='PEDIDO'
         log.info 'Venta: '+venta
         venta.creadoPor=getAuthenticatedUser().username
+        venta.modificadoPor=venta.creadoPor
         //redirect action:'create'
         
     	//def venta=cmd.toVenta()

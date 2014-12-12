@@ -97,6 +97,7 @@ class Venta {
 
 	def beforeInsert() {
 		creadoPor=springSecurityService.getCurrentUser().username
+		modificadoPor=springSecurityService.getCurrentUser().username
 	}
 
 	def beforeUpdate() {
