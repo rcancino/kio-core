@@ -109,7 +109,9 @@ class ConsultaController {
         def socio=Socio.get(params.id)
         assert socio,'No localizo el socio: '+params.socio
         log.info 'Actualizando contacto: '
-        
+        if(!socio.membresia.diaDeCorte){
+            socio.membresia.diaDeCorte=1
+        }
         bindData(socio,params,[include: ['telefonoCasa', 'telefonoTrabajo','celular','email','email2','tarjeta']])
         socio=socioService.actualizarSocio(socio)
         def data= socio as JSON
