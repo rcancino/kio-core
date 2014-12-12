@@ -17,12 +17,13 @@
 </content>
 
 <content tag="operaciones">
-	%{-- <li>
-	    <g:link action="create" >
-	        <i class="fa fa-plus"></i> Nuevo
-	    </g:link>
+	<li>
+		<a href="#searchDialog" data-toggle="modal">
+			<i class="fa fa-search"></i> Busqueda avanzada
+		</a>
 	    
-	</li> --}%
+	    
+	</li>
 </content>
 <content tag="refreshButton">
 	<g:link action="ventas" class="btn btn-default ">
@@ -39,7 +40,7 @@
 					<tr>
 						<th>Id</th>
 						<th>Cliente</th>
-						<th>Status</th>
+						<th>Atendio</th>
 						<th>Fecha</th>
 						%{-- <th>Importe</th>
 						<th>Impuesto</th> --}%
@@ -66,7 +67,7 @@
 							</td>
 							<td>
 								<abbr title="${row.status}">
-									${org.apache.commons.lang.StringUtils.substring(row.status,0,3)}
+									${row.modificadoPor}
 								</abbr>
 							</td>
 							
@@ -96,6 +97,7 @@
 			</table>
 			
 		</div>
+		<g:render template="search"/>
 	</div>
 </content>
 <content tag="javascript">

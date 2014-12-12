@@ -1,6 +1,8 @@
 package com.luxsoft.kio
 
 import org.springframework.security.access.annotation.Secured
+import grails.validation.Validateable
+import org.grails.databinding.BindingFormat
 
 @Secured(["hasAnyRole('ADMINISTRACION','CAJERO')"])
 class CobroController {
@@ -16,10 +18,10 @@ class CobroController {
     }
 
     def pendientes(Long max){
-        params.max = Math.min(max ?: 100, 100)
+        params.max = Math.min(max ?: 500, 500)
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
-        def query=Venta.where{saldo>0.0 }
+        def query=Venta.where{saldo>0.0 && status=='VENTA'}
         [ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count(params)]
     }
 
@@ -87,7 +89,7 @@ class CobroController {
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
         def now=new Date()
-        def list=Venta.executeQuery("from Venta v where date(v.fecha) between ? and ? and v.status='PAGADA'"
+        def list=Venta.executeQuery("from Venta v where date(v.fecha) between ? and ? and v.status in ('VENTA','PAGADA','FACTURADA','CANCELADA')"
             ,[now-2,now])
         log.info 'Ventas registradas: '+list.size()
         [ventaInstanceList:list,ventaInstanceListTotal:list.size()]
@@ -106,4 +108,40 @@ class CobroController {
     }
 
     
+
+    def searchVentas(SearchVentaCommand command){
+        command.nombre=command.nombre?:'%'
+        command.fechaInicial=command.fechaInicial?:new Date()-30
+        command.fechaFinal=command.fechaFinal?:new Date()
+        params.max = 50
+        params.sort=params.sort?:'dateCreated'
+        params.order='desc'
+        println 'Nomibr: '+command.nombre
+        
+        def hql="from Venta v where lower(v.cliente.nombre) like ?  and date(v.fecha) between ? and ? "
+        
+        def list=Venta.findAll(hql,[command.nombre.toLowerCase(),command.fechaInicial,command.fechaFinal],params)
+        render view:'ventas',model:[ventaInstanceList:list,ventaInstanceCount:list.size()]
+    }
+
+    
+}
+
+@Validateable
+class SearchVentaCommand{
+    
+    String nombre
+
+    @BindingFormat('dd/MM/yyyy')
+    Date fechaInicial=new Date()-30
+    
+    @BindingFormat('dd/MM/yyyy')
+    Date fechaFinal=new Date()
+    
+
+    static constraints={
+        fechaInicial nullable:true
+        fechaFinal nullable:true
+        nombre nullable:true
+    }
 }

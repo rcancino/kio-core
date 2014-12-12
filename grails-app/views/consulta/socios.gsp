@@ -22,7 +22,7 @@
 		</div><!-- end .row 1 Header -->
 
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<g:form class="form-horizontal" action="showSocio">
 					<g:hiddenField name="id" />
 		      		<div class="input-group">
@@ -38,9 +38,24 @@
 		      		</div><!-- /input-group -->
 	      		</g:form>
 			</div>	<!-- end .col-md-6-->
+
+			<div class="col-md-3">
+				<g:form class="form-horizontal" action="buscarPorNumeroDeSocio">
+					<g:hiddenField name="id" />
+		      		<div class="input-group">
+		      		    <input id="numeroDesocioField" name="numero" type="text" 
+				    	    class="form-control " placeholder="Numero de socio">
+	      		    	<span class="input-group-btn">
+	      		       		<button id="buscarBtn" type="submit" class="btn btn-default" >
+	      						<span class="glyphicon glyphicon-search"></span>
+	      					</button> 
+	      		      	</span>
+		      		</div><!-- /input-group -->
+	      		</g:form>
+			</div>	<!-- end .col-md-6-->
 			
 
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div class="btn-toolbar">
 					
 				

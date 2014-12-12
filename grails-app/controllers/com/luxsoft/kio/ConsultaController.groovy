@@ -19,6 +19,14 @@ class ConsultaController {
 		[socioInstanceList:Socio.list(params),socioInstanceCount:Socio.count()]
     }
 
+    def buscarPorNumeroDeSocio(){
+        params.max = 30
+        params.sort=params.sort?:'lastUpdated'
+        params.order='desc'
+        def list=Socio.findAllByNumeroDeSocioLike(params.numero+"%")
+        render view:'socios',model:[socioInstanceList:list,socioInstanceCount:list.size()]
+    }
+
     def showSocio(Socio socio){
     	if(socio==null){
     		redirect action:'socios'

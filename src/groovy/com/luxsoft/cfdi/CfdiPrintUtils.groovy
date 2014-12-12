@@ -55,8 +55,8 @@ class CfdiPrintUtils {
 		Emisor emisor=comprobante.getEmisor();
 		parametros.put("EMISOR_NOMBRE", 	emisor.getNombre());
 		parametros.put("EMISOR_RFC", 		emisor.getRfc());
-		String pattern="{0} {1}  {2}  {3}" +
-				"\n{4}  {5}  {6}";
+		String pattern="{0}, {1},  {2},  {3}," +
+				"\n{4},  {5},  {6}";
 		String direccionEmisor=MessageFormat.format(pattern
 				,emisor.getDomicilioFiscal().getCalle()
 				,emisor.getDomicilioFiscal().getNoExterior()
@@ -77,8 +77,8 @@ class CfdiPrintUtils {
 		if (emisor.getExpedidoEn() != null){
 			TUbicacion expedido=emisor.getExpedidoEn();
 		
-			String pattern2="{0} {1}  {2}  {3}" +
-				"\n{4}  {5}  {6}";
+			String pattern2="{0}, {1},  {2},  {3}," +
+				"\n{4},  {5},  {6}";
 			String expedidoDir=MessageFormat.format(pattern2
 				,expedido.getCalle()
 				,expedido.getNoExterior()
@@ -113,9 +113,9 @@ class CfdiPrintUtils {
 		if(!u){
 			return ""
 		}
-		String pattern="{0} {1} {2} {3}" +
-				" {4} {5} {6}" +
-				" {7} {8}";
+		String pattern="{0}, {1}, {2}, {3}," +
+				" {4}, {5}, {6}," +
+				" {7}, {8}";
 		return MessageFormat.format(pattern
 				,u.getCalle()?:''
 				,u.getNoExterior()?:''

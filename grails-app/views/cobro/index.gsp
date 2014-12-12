@@ -58,7 +58,7 @@
 								${fieldValue(bean:row,field:"cliente.nombre")}
 							</g:link>
 						</td>
-						<td>${fieldValue(bean:row,field:"venta.id")}</td>
+						<td>${fieldValue(bean:row,field:"venta.cfdi.folio")}</td>
 						<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
 						<td><g:formatNumber number="${row.importe}" type="currency"/></td>
 					</tr>
