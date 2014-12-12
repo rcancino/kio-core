@@ -64,7 +64,7 @@ class CfdiController {
 		if(logoFile.exists()){
 			repParams['EMPRESA_LOGO']=logoFile.newInputStream()
 		}
-		
+		println 'Generando PDF de CFDI: '+repParams
 		chain(controller:'jasper',action:'index',model:[data:modelData],params:params)
 
 		
