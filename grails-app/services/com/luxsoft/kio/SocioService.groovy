@@ -142,6 +142,7 @@ class SocioService {
                 try {
                     def alog=logAccess(s)
                     exportados.add(alog)
+                    s.sleep(300)
                 }
                 catch(Exception e) {
                 }
@@ -181,7 +182,7 @@ class SocioService {
         def suspendidos=0
         def activados=0
         socios.each{socio->
-            println 'Procesando: '+socio
+            
             def proximoPago=socio.membresia.proximoPago
             if(proximoPago ){
                 def now=new Date()
@@ -210,7 +211,7 @@ class SocioService {
                     suspendidos++
                 }
             } 
-            socio.sleep(1000)
+            //socio.sleep(1000)
         }
         res.suspendidos=suspendidos
         res.activados=activados
