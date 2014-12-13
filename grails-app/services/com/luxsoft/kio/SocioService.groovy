@@ -54,6 +54,8 @@ class SocioService {
 		
 		
         def proximoPago=socio.membresia.proximoPago
+        def suspendidos=0
+        def activados=0
         if(proximoPago ){
             def now=new Date()
             def suspender=proximoPago+socio.membresia.toleranciaEnDias
