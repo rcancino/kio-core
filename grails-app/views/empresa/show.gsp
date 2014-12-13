@@ -100,6 +100,40 @@
 
 		</div><!-- end .row2 -->
 
+		<div class="row">
+			<div class="col-md-12">
+				<legend>Folios del sistema</legend>
+				<form action="#" class="form-horizontal" >
+					<div class="form-group">
+						<label for="fecha" class="col-sm-2 control-label">Folio de facturas</label>
+						<div class="col-sm-2">
+							<p class="form-control-static">
+								<strong>
+									${com.luxsoft.cfdi.CfdiFolio.findBySerie('FACTURA')?.folio}
+								</strong>
+							</p>
+						</div>
+						<div class="col-sm-2">
+							<a href="#cambioDeFolioFactura" data-toggle="modal" class="btn btn-default"> Cambiar</a>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fecha" class="col-sm-2 control-label">Folio de socio</label>
+						<div class="col-sm-2">
+							<p class="form-control-static">
+								<strong>
+									${com.luxsoft.cfdi.CfdiFolio.findBySerie('SOCIOS').folio}
+								</strong>
+							</p>
+						</div>
+						<div class="col-sm-2">
+							<a href="#cambioDeFolioSocio" data-toggle="modal" class="btn btn-default"> Cambiar</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
 	</div>
 
 	<script type="text/javascript">

@@ -142,7 +142,7 @@ class SocioService {
                 try {
                     def alog=logAccess(s)
                     exportados.add(alog)
-                    s.sleep(300)
+                    s.sleep(1000)
                 }
                 catch(Exception e) {
                 }
@@ -192,14 +192,14 @@ class SocioService {
                     if(socio.activo==true){
                         log.debug "Suspendiendo $socio.nombre por atraso de $socio.membresia.atraso  Tarjeta: $socio.tarjeta"
                         socio.activo=false
-                        socio.flush
+                        socio.save flush:true
                         suspendidos++
                     }
                 }else{
                     if(socio.activo==false){
                         log.debug "Activando $socio.nombre"
                         socio.activo=true
-                        socio.flush
+                        socio.save flush:true
                         activados++
                     }
                 }
@@ -207,7 +207,7 @@ class SocioService {
                 if(socio.activo){
                     log.debug "Suspendiendo $socio.nombre por no tener proximo pago definido"
                     socio.activo=false
-                    socio.flush
+                    socio.save flush:true
                     suspendidos++
                 }
             } 
