@@ -52,19 +52,7 @@ class SocioService {
 	
 	def actualizarSocio(Socio socio) {
 		
-		// def proximoPago=socio.membresia.proximoPago
-  //       if(proximoPago ){
-  //           def now=new Date()
-  //           def suspender=proximoPago+socio.membresia.toleranciaEnDias
-  //           socio.membresia.suspender=suspender
-  //           if(now>=suspender){
-  //               log.info 'Suspendiendo socio'
-  //               socio.activo=false
-  //           }else{
-  //               log.info 'Activando socio'
-  //               socio.activo=true
-  //           }
-  //       }	
+		
         def proximoPago=socio.membresia.proximoPago
         if(proximoPago ){
             def now=new Date()
@@ -121,7 +109,7 @@ class SocioService {
         log.tarjeta=socio.tarjeta
         log.activo=socio.activo
 		if(log.validate()){
-			log.save failOnError:true
+			log.save flush:true
 			return log
 		}
 		return null
@@ -135,16 +123,24 @@ class SocioService {
     **/
     @NotTransactional
     def exportarALectora(){
-        def socios=Socio.findAll("from Socio s where s.activo=true")
+        //def socios=Socio.findAll("from Socio s where s.activo=true")
+        def socios=Socio.executeQuery("select s.id from Socio s where s.tarjeta is not null and s.activo=true")
         def exportados=[]
-        socios.each{ s->
+        def count=0
+        socios.each{ id->
+            def s=Socio.get(id)
             if(s.tarjeta){
                 try {
                     def alog=logAccess(s)
-                    exportados.add(alog)
-                    s.sleep(1000)
+                    if(alog){
+                        exportados.add(alog)
+                        s.sleep(2000)
+                    }
+                    count++
+                    log.info "Procesado $s ($count de ${socios.size()})"
                 }
                 catch(Exception e) {
+                    log.error "Error exportando a lectora ",e
                 }
             }
 
@@ -177,29 +173,29 @@ class SocioService {
     **/
     @NotTransactional
     def suspender(){
-        def socios=Socio.findAll("from Socio s where tarjeta is not null")
+        //def socios=Socio.findAll("from Socio s where tarjeta is not null")
+        def socios=Socio.executeQuery("select s.id from Socio s where s.tarjeta is not null")
         def res=[:]
         def suspendidos=0
         def activados=0
-        socios.each{socio->
-            
+        def row=0
+        socios.each{id->
+            def socio=Socio.get(id)
             def proximoPago=socio.membresia.proximoPago
             if(proximoPago ){
                 def now=new Date()
                 def suspender=proximoPago+socio.membresia.toleranciaEnDias
-                //socio.membresia.suspender=suspender
+                
                 if(now>=suspender){
                     if(socio.activo==true){
                         log.debug "Suspendiendo $socio.nombre por atraso de $socio.membresia.atraso  Tarjeta: $socio.tarjeta"
                         socio.activo=false
-                        socio.save flush:true
                         suspendidos++
                     }
                 }else{
                     if(socio.activo==false){
                         log.debug "Activando $socio.nombre"
                         socio.activo=true
-                        socio.save flush:true
                         activados++
                     }
                 }
@@ -207,11 +203,12 @@ class SocioService {
                 if(socio.activo){
                     log.debug "Suspendiendo $socio.nombre por no tener proximo pago definido"
                     socio.activo=false
-                    socio.save flush:true
                     suspendidos++
                 }
             } 
-            //socio.sleep(1000)
+            row++
+            socio.save flush:true
+            log.info "Procesado $socio ($row de ${socios.size()})"
         }
         res.suspendidos=suspendidos
         res.activados=activados
