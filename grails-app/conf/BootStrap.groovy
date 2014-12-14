@@ -3,7 +3,7 @@ import com.luxsoft.cfdi.*
 import com.luxsoft.sec.Role
 import com.luxsoft.sec.Usuario
 import com.luxsoft.sec.UsuarioRole
-
+import org.bouncycastle.jce.provider.BouncyCastleProvider
 
 
 class BootStrap {
@@ -11,6 +11,8 @@ class BootStrap {
 	def grailsApplication
 
     def init = { servletContext ->
+
+    	java.security.Security.addProvider(new BouncyCastleProvider())
 
     	def adminRole=Role.findOrSaveWhere(authority:'ROLE_ADMIN')
 		def userRole=Role.findOrSaveWhere(authority:'ROLE_USER')
