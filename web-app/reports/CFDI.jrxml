@@ -102,7 +102,7 @@
 			</band>
 			</groupHeader>
 			<groupFooter>
-			<band height="253"  isSplitAllowed="true" >
+			<band height="431"  isSplitAllowed="true" >
 				<line direction="TopDown">
 					<reportElement
 						x="0"
@@ -573,29 +573,6 @@
 		</pageHeader>
 		<columnHeader>
 			<band height="204"  isSplitAllowed="true" >
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="0"
-						y="3"
-						width="242"
-						height="68"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="textField-146"/>
-					<box></box>
-					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="50" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{EMISOR_RFC}.equals( "PIM050124GY7" ) ? "I M P A P" :
-$P{EMISOR_RFC}.equals( "PIM050124GY7" ) ? "P A P E R" :
-$P{EMISOR_RFC}.equals( "ICP760402388" ) ? "C E N P A" :
-$P{EMISOR_RFC}.equals( "ISA870406UF4" ) ? "S   A   N" :
-$P{EMISOR_RFC}.equals( "BER830101IQ4" ) ? "B E R S A N" :
-$P{EMISOR_RFC}.equals( "SIN000114UV0" ) ? "S O L S A N" :
-$P{EMISOR_RFC}.equals( "ISL7406175K7" ) ? "S A N L I Z" :
-$P{EMISOR_RFC}.equals( "ICS050919728" ) ? "   4   S   " :
- "S/EMPRESA"]]></textFieldExpression>
-				</textField>
 				<rectangle>
 					<reportElement
 						mode="Transparent"
@@ -924,7 +901,7 @@ $P{EMISOR_RFC}.equals( "ICS050919728" ) ? "   4   S   " :
 					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
 						<font fontName="Arial" pdfFontName="Times-Roman" isBold="false"/>
 					</textElement>
-				<text><![CDATA[EXPEDIDO EN]]></text>
+				<text><![CDATA[EXPEDIDO EN TT]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1180,14 +1157,14 @@ $P{EMISOR_RFC}.equals( "ICS050919728" ) ? "   4   S   " :
 				</textField>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="0"
-						y="3"
-						width="242"
-						height="68"
+						x="4"
+						y="7"
+						width="191"
+						height="62"
 						key="image-2"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA[$P{EMPRESA_LOGO}]]></imageExpression>
+					<imageExpression class="java.io.File"><![CDATA[$P{EMPRESA_LOGO}]]></imageExpression>
 				</image>
 			</band>
 		</columnHeader>

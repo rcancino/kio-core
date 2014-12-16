@@ -56,15 +56,18 @@ class CfdiController {
 			return res
 		}
 		def repParams=CfdiPrintUtils.resolverParametros(cfdi)
-		params<<repParams
-		params.FECHA=cfd.fecha.getTime().format("yyyy-MM-dd'T'HH:mm:ss")
-
 		File logoFile = grailsApplication.mainContext.getResource("images/kyo_logo.png").file
 
 		if(logoFile.exists()){
-			repParams['EMPRESA_LOGO']=logoFile.newInputStream()
+			repParams['EMPRESA_LOGO']=logoFile
 		}
+
+		params<<repParams
+		params.FECHA=cfd.fecha.getTime().format("yyyy-MM-dd'T'HH:mm:ss")
+
+		
 		println 'Generando PDF de CFDI: '+repParams
+		//println 'LOGO: '+ logoFile
 		chain(controller:'jasper',action:'index',model:[data:modelData],params:params)
 
 		
