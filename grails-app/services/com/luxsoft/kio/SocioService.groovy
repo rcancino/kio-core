@@ -136,7 +136,7 @@ class SocioService {
                     def alog=logAccess(s)
                     if(alog){
                         exportados.add(alog)
-                        s.sleep(2000)
+                        s.sleep(200)
                     }
                     count++
                     log.info "Procesado $s ($count de ${socios.size()})"
