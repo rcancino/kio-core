@@ -95,7 +95,7 @@ class CfdiPrintUtils {
 			
 			//println 'Imagen generada: '+img
 			def img=QRCodeUtils.generarQR(cfdi.getComprobante())
-			println 'Imagen generada: '+img
+			//println 'Imagen generada: '+img
 			parametros.put("QR_CODE",img);
 			//parametros.put("QR_CODE",QRCodeUtils.getQCode(cfdi.getComprobante()))
 			TimbreFiscal timbre=new TimbreFiscal(cfdi.getComprobante())

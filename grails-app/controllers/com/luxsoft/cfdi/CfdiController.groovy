@@ -66,7 +66,7 @@ class CfdiController {
 		params.FECHA=cfd.fecha.getTime().format("yyyy-MM-dd'T'HH:mm:ss")
 
 		
-		println 'Generando PDF de CFDI: '+repParams
+		//println 'Generando PDF de CFDI: '+repParams
 		//println 'LOGO: '+ logoFile
 		chain(controller:'jasper',action:'index',model:[data:modelData],params:params)
 
