@@ -35,6 +35,11 @@ class ConsultaController {
     	//log.info 'Mostrando detalle de socio'
     	[socioInstance:socio]
     }
+    def actualizarLectora(Socio socio){
+        def log=socioService.logAccess(socio)
+        flash.message="Lectoras actualizada"
+        redirect action:'showSocio',params:[id:socio.id]
+    }
 
     def cargarFoto(SocioFotoCmd cmd){
         if(cmd.hasErrors()){

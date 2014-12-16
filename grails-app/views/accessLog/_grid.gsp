@@ -7,7 +7,9 @@
 			<th>Tarjeta</th>
 			<th>Activo</th>
 			<th>Creado</th>
-			<th>Replicado</th>
+			<th>Lectora 1</th>
+			<th>Lectora 2</th>
+			<th>Lectora 3</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -22,8 +24,9 @@
 				<td>${fieldValue(bean:row,field:"tarjeta")}</td>
 				<td>${fieldValue(bean:row,field:"activo")}</td>
 				<td><g:formatDate date="${row.dateCreated}" format="dd/MM HH:mm:ss"/></td>
-				<td><g:formatDate date="${row.replicado}" format="dd/MM HH:mm:ss"/></td>
-				
+				<td><g:formatDate date="${row.lectora1}" format="dd/MM HH:mm:ss"/></td>
+				<td><g:formatDate date="${row.lectora2}" format="dd/MM HH:mm:ss"/></td>
+				<td><g:formatDate date="${row.lectora3}" format="dd/MM HH:mm:ss"/></td>
 			</tr>
 		</g:each>
 	</tbody>

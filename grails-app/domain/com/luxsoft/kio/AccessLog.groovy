@@ -7,6 +7,9 @@ class AccessLog {
 	String tarjeta
 	Boolean activo
 	Date replicado
+	Date lectora1
+	Date lectora2
+	Date lectora3
 
 	Date dateCreated
 	Date lastUpdated
@@ -14,6 +17,9 @@ class AccessLog {
     static constraints = {
     	replicado nullable:true
     	tarjeta nullable:true
+    	lectora1 nullable:true
+    	lectora2 nullable:true
+    	lectora3 nullable:true
     }
 
 }

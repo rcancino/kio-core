@@ -29,6 +29,56 @@
 		</div>
 
 		<div class="row">
+			<div class="col-md-5">
+				<g:form class="form-horizontal" action="showSocio">
+					<g:hiddenField id="socioSearchId" name="id" />
+		      		<div class="input-group">
+		      		    <span class="input-group-addon">Buscar</span>
+		      		    <input id="nombreField" name="term" type="text" 
+				    	    class="form-control " placeholder="Nombre"
+				    		autofocus="autofocus" autocomplete="off">
+	      		    	<span class="input-group-btn">
+	      		       		<button id="buscarBtn" type="submit" class="btn btn-default" disabled="disabled">
+	      						<span class="glyphicon glyphicon-search"></span>
+	      					</button> 
+	      		      	</span>
+		      		</div><!-- /input-group -->
+	      		</g:form>
+			</div>	<!-- end .col-md-6-->
+
+			<div class="col-md-3">
+				<g:form class="form-horizontal" action="buscarPorNumeroDeSocio">
+					<g:hiddenField name="id" />
+		      		<div class="input-group">
+		      		    <input id="numeroDesocioField" name="numero" type="text" 
+				    	    class="form-control " placeholder="Numero de socio">
+	      		    	<span class="input-group-btn">
+	      		       		<button id="buscarBtn" type="submit" class="btn btn-default" >
+	      						<span class="glyphicon glyphicon-search"></span>
+	      					</button> 
+	      		      	</span>
+		      		</div><!-- /input-group -->
+	      		</g:form>
+			</div>	<!-- end .col-md-6-->
+
+			<div class="col-md-4">
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<g:link action="showSocio" id="${socioInstance.id}" class="btn btn-default">
+							<span class="glyphicon glyphicon-repeat"></span> Refrescar
+						</g:link>
+						<sec:ifAllGranted roles="CAJERO,MOSTRADOR,ADMINISTRACION">
+							<g:link onclick="return confirm('Actualizar lectoras?');"
+								id="${socioInstance.id}" 
+								action="actualizarLectora" class="btn btn-default" > Actualizar lectoras</g:link>
+						</sec:ifAllGranted>
+					</div>
+					
+				</div>
+			</div> 
+		</div>
+
+		<div class="row">
 			
 			<div class="col-md-6">
 				<div class="ro">
@@ -505,6 +555,18 @@
 				select:function(e,ui){
 					console.log('Producto seleccionado: '+ui.item.value);
 					$("#productoId").val(ui.item.id);
+				}
+			});
+
+			$("#nombreField").autocomplete({
+				source:'<g:createLink controller="socio" action="getSociosJSON"/>',
+				minLength:3,
+				select:function(e,ui){
+					console.log('Valor seleccionado: '+ui.item.id);
+					$("#nombreField").val(ui.item.id);
+					$("#socioSearchId").val(ui.item.id);
+					var button=$("#buscarBtn");
+	    			button.removeAttr('disabled');
 				}
 			});
 		
