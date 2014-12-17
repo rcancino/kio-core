@@ -29,6 +29,7 @@
 
 	<style 
 		name="Title"
+		isDefault="false"
 		fontName="Arial"
 		fontSize="26"
 		isBold="true"
@@ -37,6 +38,7 @@
 	</style>
 	<style 
 		name="SubTitle"
+		isDefault="false"
 		forecolor="#666666"
 		fontName="Arial"
 		fontSize="18"
@@ -44,6 +46,7 @@
 	</style>
 	<style 
 		name="Column header"
+		isDefault="false"
 		forecolor="#666666"
 		fontName="Arial"
 		fontSize="12"
@@ -52,6 +55,7 @@
 	</style>
 	<style 
 		name="Detail"
+		isDefault="false"
 		fontName="Arial"
 		fontSize="12"
 	>
@@ -106,7 +110,7 @@
 FROM
      `cliente` cliente INNER JOIN `venta` venta ON cliente.`id` = venta.`cliente_id`
 left join cfdi cfdi on (cfdi.id=venta.cfdi_id)
-where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN}]]></queryString>
+where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('VENTA','FACTURADA')]]></queryString>
 
 	<field name="venta_id" class="java.lang.Long"/>
 	<field name="venta_fecha" class="java.sql.Timestamp"/>

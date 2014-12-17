@@ -47,7 +47,7 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 		<variableExpression><![CDATA[$F{cobrado}]]></variableExpression>
 	</variable>
 
-		<group  name="CAJERO" isStartNewPage="true" >
+		<group  name="CAJERO" >
 			<groupExpression><![CDATA[$F{cajero}]]></groupExpression>
 			<groupHeader>
 			<band height="20"  isSplitAllowed="true" >
