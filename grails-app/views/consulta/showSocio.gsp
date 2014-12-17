@@ -228,7 +228,7 @@
 					    	<div class="form-group">
 					    		<label for="email2" class="col-sm-3 control-label">Email 2</label>
 					    		<div class="col-sm-8">
-					    				<input name="email" id="email2"
+					    				<input name="email2" id="email2"
 					    					class="form-control" 
 					    					type="email"
 					    					value="${socioInstance?.email2}">

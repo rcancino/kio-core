@@ -36,6 +36,11 @@ class ConsultaController {
     	[socioInstance:socio]
     }
     def actualizarLectora(Socio socio){
+        if(!socio.tarjeta){
+            flash.message="No hay tarjeta registrada no se puede actualizar las lectoras"
+            redirect action:'showSocio',params:[id:socio.id]
+            return
+        }
         def log=socioService.logAccess(socio)
         flash.message="Lectoras actualizada"
         redirect action:'showSocio',params:[id:socio.id]

@@ -76,7 +76,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".data-moneda").autoNumeric({wEmpty:'zero'});
-		$(".data-descuento").autoNumeric({vMin: '0', vMax: '99.99'})
+		$(".data-descuento").autoNumeric({vMin: '0', vMax: '99.9999'})
 		$("#producto").autocomplete({
 			source:'<g:createLink controller="producto" action="getProductosAsJSON"/>',
             minLength: 2,

@@ -7,6 +7,8 @@ import org.apache.commons.lang.math.NumberUtils
 //@ToString(includes='nombre',includeNames=true,includePackage=false)
 @EqualsAndHashCode(includes='apellidoPaterno,apellidoMaterno,nombres')
 class Socio {
+
+    transient socioService
 	
 	//Datos personales
 	String apellidoPaterno
@@ -52,9 +54,9 @@ class Socio {
     	telefonoCasa nullable:true,maxSize:30
     	telefonoTrabajo nullable:true,maxSize:30
     	celular nullable:true,maxSize:30
-    	email nullable:true,maxSize:50
-    	email2 nullable:true,maxSize:50
-    	cfdiEmail nullable:true,maxSize:50
+    	email nullable:true,maxSize:150
+    	email2 nullable:true,maxSize:150
+    	cfdiEmail nullable:true,maxSize:150
 		direccion nullable:true
 		origen nullable:true
         perfil unique:true
@@ -69,6 +71,8 @@ class Socio {
     static hasOne = [perfil: SocioPerfil,foto:SocioFoto,membresia:SocioMembresia]
 
     static embedded = ['direccion']
+
+    static transients = ['socioService']
 
     static mapping = {
     	 foto lazy: true
@@ -106,6 +110,8 @@ class Socio {
     }
 
     def actualizarLectora(){
+        //socioService.logAccess(this)
+        
         AccessLog.withNewSession{
             AccessLog log=new AccessLog()
             log.nombre=this.nombre
@@ -115,6 +121,7 @@ class Socio {
             log.save failOnError:true
             return log
         }
+        
         
     }
 

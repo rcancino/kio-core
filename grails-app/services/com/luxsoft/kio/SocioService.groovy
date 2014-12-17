@@ -105,15 +105,16 @@ class SocioService {
     
 
     def AccessLog logAccess(Socio socio){
-        AccessLog log=new AccessLog()
-        log.nombre=socio.nombre
-        log.numero=NumberUtils.toLong(socio.numeroDeSocio)
-        log.tarjeta=socio.tarjeta
-        log.activo=socio.activo
-		if(log.validate()){
-			log.save flush:true
-			return log
-		}
+        if(socio.tarjeta){
+            AccessLog log=new AccessLog()
+            log.nombre=socio.nombre
+            log.numero=NumberUtils.toLong(socio.numeroDeSocio)
+            log.tarjeta=socio.tarjeta
+            log.activo=socio.activo
+            if(!log.info) log.info="NORMAL"
+            log.save flush:true
+            return log
+        }
 		return null
         
     }
