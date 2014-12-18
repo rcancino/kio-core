@@ -27,6 +27,14 @@
 	<parameter name="EMPRESA_LOGO" isForPrompting="false" class="java.lang.Object"/>
 	<parameter name="EMPRESA_LOGO_1" isForPrompting="false" class="java.lang.Object"/>
 	<queryString><![CDATA[SELECT cajero,date_created,fecha_hora,forma_de_pago,acumulado,importe_corte,cobrado ,nombre
+,(case when d.forma_de_pago ='EFECTIVO' THEN importe_corte ELSE 0 END) AS 'EFECTIVO'
+,(case when d.forma_de_pago ='CHEQUE' THEN importe_corte ELSE 0 END) AS 'CHEQUE'
+,(case when d.forma_de_pago ='TARJETA_DE_CREDITO' THEN importe_corte ELSE 0 END) AS 'TARJETA_DE_CREDITO'
+,(case when d.forma_de_pago ='TARJETA_DE_DEBITO' THEN importe_corte ELSE 0 END) AS 'TARJETA_DE_DEBITO'
+,(case when d.forma_de_pago ='CARGO_RECURRENTE' THEN importe_corte ELSE 0 END) AS 'CARGO_RECURRENTE'
+,(case when d.forma_de_pago ='AMERICAN_EXPRESS' THEN importe_corte ELSE 0 END) AS 'AMERICAN_EXPRESS'
+,(case when d.forma_de_pago ='DEPOSITO' THEN importe_corte ELSE 0 END) AS 'DEPOSITO'
+,(case when d.forma_de_pago ='TRANSFERENCIA' THEN importe_corte ELSE 0 END) AS 'TRANSFERENCIA'
 FROM corte_de_caja c join corte_de_caja_det d on (c.id=d.corte_id) JOIN usuario U ON (U.username=c.cajero)
 where date(fecha_hora)=$P{FECHA} 
 order by cajero,forma_de_pago,date_created]]></queryString>
@@ -39,12 +47,44 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 	<field name="importe_corte" class="java.math.BigDecimal"/>
 	<field name="cobrado" class="java.math.BigDecimal"/>
 	<field name="nombre" class="java.lang.String"/>
+	<field name="EFECTIVO" class="java.math.BigDecimal"/>
+	<field name="CHEQUE" class="java.math.BigDecimal"/>
+	<field name="TARJETA_DE_CREDITO" class="java.math.BigDecimal"/>
+	<field name="TARJETA_DE_DEBITO" class="java.math.BigDecimal"/>
+	<field name="CARGO_RECURRENTE" class="java.math.BigDecimal"/>
+	<field name="AMERICAN_EXPRESS" class="java.math.BigDecimal"/>
+	<field name="DEPOSITO" class="java.math.BigDecimal"/>
+	<field name="TRANSFERENCIA" class="java.math.BigDecimal"/>
 
 	<variable name="SUM_CORTE" class="java.math.BigDecimal" resetType="Group" resetGroup="CAJERO" calculation="Sum">
 		<variableExpression><![CDATA[$F{importe_corte}]]></variableExpression>
 	</variable>
 	<variable name="SUM_COBRADO" class="java.math.BigDecimal" resetType="Group" incrementType="Group" incrementGroup="FORMA_DE_PAGO" resetGroup="CAJERO" calculation="Sum">
 		<variableExpression><![CDATA[$F{cobrado}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_RECURRENTE" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{CARGO_RECURRENTE}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_AMEX" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{AMERICAN_EXPRESS}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_TRANSFER" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{TRANSFERENCIA}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_DEPOSITO" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{DEPOSITO}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_TAR_DEB" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{TARJETA_DE_DEBITO}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_TAR_CRE" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{TARJETA_DE_CREDITO}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_CHEQUE" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{CHEQUE}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_EFECTIVO" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{EFECTIVO}]]></variableExpression>
 	</variable>
 
 		<group  name="CAJERO" >
@@ -90,7 +130,7 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 			</band>
 			</groupHeader>
 			<groupFooter>
-			<band height="19"  isSplitAllowed="true" >
+			<band height="65"  isSplitAllowed="true" >
 				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="328"
@@ -149,6 +189,46 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 					</textElement>
 				<text><![CDATA[DEPOSITO CAJERO :]]></text>
 				</staticText>
+				<staticText>
+					<reportElement
+						x="34"
+						y="49"
+						width="127"
+						height="14"
+						key="staticText-113"/>
+					<box>					<topPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[REVISO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="413"
+						y="48"
+						width="127"
+						height="14"
+						key="staticText-114"/>
+					<box>					<topPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[CAJERO]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="64"
+						width="582"
+						height="0"
+						forecolor="#CCCCCC"
+						key="line-15"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="2.0"/>
+</graphicElement>
+				</line>
 			</band>
 			</groupFooter>
 		</group>
@@ -692,7 +772,255 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 			</band>
 		</lastPageFooter>
 		<summary>
-			<band height="0"  isSplitAllowed="true" >
+			<band height="111"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="202"
+						y="7"
+						width="96"
+						height="11"
+						key="staticText-115"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[EFECTIVO :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="202"
+						y="18"
+						width="96"
+						height="11"
+						key="staticText-116"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[CHEQUE :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="202"
+						y="29"
+						width="96"
+						height="11"
+						key="staticText-117"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[TARJETA CRE :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="202"
+						y="40"
+						width="96"
+						height="11"
+						key="staticText-118"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[TARJETA DEB :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="202"
+						y="51"
+						width="96"
+						height="11"
+						key="staticText-119"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[DEPOSITO :]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="303"
+						y="7"
+						width="66"
+						height="11"
+						key="textField-90"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_EFECTIVO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="303"
+						y="18"
+						width="66"
+						height="11"
+						key="textField-91"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_CHEQUE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="303"
+						y="29"
+						width="66"
+						height="11"
+						key="textField-92"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_TAR_CRE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="303"
+						y="40"
+						width="66"
+						height="11"
+						key="textField-93"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_TAR_DEB}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="303"
+						y="51"
+						width="66"
+						height="11"
+						key="textField-94"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_DEPOSITO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="202"
+						y="96"
+						width="96"
+						height="11"
+						key="staticText-120"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[TOTAL :]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="303"
+						y="96"
+						width="66"
+						height="11"
+						key="textField-95"/>
+					<box>					<topPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_EFECTIVO}.add( $V{TOTAL_CHEQUE}.add( $V{TOTAL_TAR_CRE}.add( $V{TOTAL_TAR_DEB}.add( $V{TOTAL_DEPOSITO}.add($V{TOTAL_TRANSFER}.add($V{TOTAL_AMEX}.add($V{TOTAL_RECURRENTE}))) )) ) )]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="202"
+						y="62"
+						width="96"
+						height="11"
+						key="staticText-121"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[TRANSFERENCIA :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="202"
+						y="73"
+						width="96"
+						height="11"
+						key="staticText-122"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[CARGO RECURRENTE :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="202"
+						y="84"
+						width="96"
+						height="11"
+						key="staticText-123"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[AMERICAN EXPRESS :]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="303"
+						y="62"
+						width="66"
+						height="11"
+						key="textField-96"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_TRANSFER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="303"
+						y="73"
+						width="66"
+						height="11"
+						key="textField-97"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_RECURRENTE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="303"
+						y="84"
+						width="66"
+						height="11"
+						key="textField-98"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_AMEX}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="186"
+						y="7"
+						width="16"
+						height="100"
+						key="staticText-124"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[RESUMEN COBRANZA]]></text>
+				</staticText>
 			</band>
 		</summary>
 </jasperReport>
