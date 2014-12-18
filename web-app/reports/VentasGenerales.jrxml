@@ -197,7 +197,7 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 						key="image"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA[$P{EMPRESA_LOGO}]]></imageExpression>
+					<imageExpression class="java.io.File"><![CDATA[$P{EMPRESA_LOGO}]]></imageExpression>
 				</image>
 			</band>
 		</title>

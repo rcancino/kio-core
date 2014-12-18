@@ -307,7 +307,8 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 						key="image-1"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA[$P{EMPRESA_LOGO}]]></imageExpression>
+					<imageExpression class="java.io.File"><![CDATA[$P{EMPRESA_LOGO}]]></imageExpression>
+					
 				</image>
 				<staticText>
 					<reportElement

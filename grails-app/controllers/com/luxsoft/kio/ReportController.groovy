@@ -98,7 +98,8 @@ class ReportController {
 		File logoFile = grailsApplication.mainContext.getResource("images/kyo_logo.png").file
 
 		if(logoFile.exists()){
-			repParams['EMPRESA_LOGO']=logoFile.newInputStream()
+			//repParams['EMPRESA_LOGO']=logoFile.newInputStream()
+			repParams['EMPRESA_LOGO']=logoFile
 		}
 		def nombre=WordUtils.capitalize(repParams.reportName)
 		log.info "Ejectuando reporte $nombre params:"+repParams
