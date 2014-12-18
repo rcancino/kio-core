@@ -9,6 +9,7 @@ class CobroController {
 
     def cobroService
     def cfdiService
+    def ventaService
     
     def index(Long max){
         params.max = Math.min(max ?: 50, 100)
@@ -82,6 +83,27 @@ class CobroController {
         cobroService.delete(cobroInstance)
 		flash.message="Cobro $cobroInstance.id eliminado"
 		redirect action:'index'
+    }
+
+    @Secured(["hasAnyRole('ADMINISTRACION')"])
+    def deleteVenta(Venta venta){
+        ventaService.eliminar(venta)
+        flash.message="Venta eliminada ${venta.id}"
+        redirect action:'pendientes'
+    }
+
+    def regresarAPedido(Venta venta){
+        if(venta.status=='VENTA'){
+            venta=ventaService.regresarAPedido(venta)
+            redirect action:'pendientes'
+            return
+        }else{
+            flash.message="La venta no se puede regresar a pedidos por estar en estatus: "+venta.status
+            redirect action:'pendientes'
+
+        }
+
+        
     }
 
     def ventas(){ 

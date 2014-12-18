@@ -126,6 +126,15 @@ class VentaService {
         
     }
 
+    def regresarAPedido(Venta venta){
+        if(venta.status=='VENTA'){
+            venta.status='PEDIDO'
+            venta.save()
+            
+        }
+        return venta
+    }
+
 
 }
 

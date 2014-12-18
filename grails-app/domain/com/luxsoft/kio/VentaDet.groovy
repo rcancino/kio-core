@@ -50,7 +50,7 @@ class VentaDet {
         
         importeBruto=precio*cantidad 
 
-        if(descuentoTasa){
+        if(descuentoTasa>=0.0){
             descuento=(descuentoTasa/100)*importeBruto
         }
         

@@ -7,6 +7,8 @@ import com.luxsoft.kio.Cliente
 @Secured(["hasAnyRole('ADMINISTRACION','CAJERO','MOSTRADOR')"])
 class CfdiController {
 
+	def cfdiService
+
     def index(Integer max) {
 		params.max = Math.min(max ?: 20, 100)
 		[cfdiInstanceList:Cfdi.list(params), cfdiInstanceCount: Cfdi.count()]
@@ -90,6 +92,12 @@ class CfdiController {
 		flash.message="Correo enviado"
 		redirect action:'show',params:[id:command.cfdi.id]
 
+	}
+
+	def cancelar(Cfdi cfdi){
+		def res=cfdiService.cancelar(cfdi,message)
+		flash.message="CFDI Cancelado exitosamente"
+		redirect action:'show',params:[id:cfdi.id]
 	}
 }
 

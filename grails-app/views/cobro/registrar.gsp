@@ -37,6 +37,16 @@
         			<g:link action="pendientes" class="list-group-item">
         				<i class="fa fa-tasks fa-fw fa-2x"></i>&nbsp;  Ventas por cobrar
         			</g:link>
+					
+					<g:link  action="regresarAPedido" class="list-group-item" id="${ventaInstance.id}"
+        				onclick="return confirm('Regresar a pedidos');">
+        				<i class="fa fa-reply"></i>&nbsp;  Regresar Pedido
+        			</g:link>
+
+        			<g:link  action="deleteVenta" class="list-group-item" id="${ventaInstance.id}"
+        				onclick="return confirm('Eliminar la venta');">
+        				<i class="fa fa-tasks fa-trash fa-2x"></i>&nbsp;  Eliminar
+        			</g:link>
         			
         		  
         		  %{-- <a class="list-group-item" href="#"><i class="fa fa-book fa-fw fa-2x"></i>&nbsp; Library</a>

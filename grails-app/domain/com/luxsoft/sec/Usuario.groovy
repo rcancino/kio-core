@@ -1,5 +1,7 @@
 package com.luxsoft.sec
 
+import com.luxsoft.kio.AccessLog
+
 class Usuario {
 
 	transient springSecurityService
@@ -16,6 +18,7 @@ class Usuario {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+	Integer numeroDeEmpleado
 	String tarjeta
 
 	static transients = ['springSecurityService']
@@ -32,6 +35,7 @@ class Usuario {
 		passwordExpired()
 		email nullable:true,email:true
 		tarjeta nullable:true
+		numeroDeEmpleado nullable:true
 	}
 
 	static mapping = {
@@ -45,6 +49,7 @@ class Usuario {
 	def beforeInsert() {
 		encodePassword()
 		capitalizarNombre()
+		logLectora()
 	}
 
 	def beforeUpdate() {
@@ -56,6 +61,7 @@ class Usuario {
 			capitalizarNombre()
 			
 		}
+		logLectora()
 		
 	}
 
@@ -69,4 +75,27 @@ class Usuario {
 		nombres=nombres.toUpperCase()
 		nombre="$nombres $apellidoPaterno $apellidoMaterno"
 	}
+
+	def logLectora(){
+        if (isDirty('enabled') || isDirty('tarjeta') ) {
+            actualizarLectora()
+        }
+    }
+
+	def actualizarLectora(){
+        //socioService.logAccess(this)
+        if(numeroDeEmpleado){
+        	AccessLog.withNewSession{
+        	    AccessLog log=new AccessLog()
+        	    log.nombre=this.nombre
+        	    log.numero=numeroDeEmpleado
+        	    log.tarjeta=this.tarjeta
+        	    log.activo=this.enabled
+        	    log.save failOnError:true
+        	    return log
+        	}
+        }
+        
+        
+    }
 }

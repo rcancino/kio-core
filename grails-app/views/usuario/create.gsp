@@ -58,6 +58,7 @@
 							input-type="password"  input-autocomplete="off"/>
 						<f:field property="enabled" input-class="form-control" label="Activo"/>
 						<f:field property="tarjeta" input-class="form-control"/>
+						<f:field property="numeroDeEmpleado" input-class="form-control"/>
 					</f:with>
 
 					<div class="form-group">

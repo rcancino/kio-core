@@ -3,8 +3,9 @@
 		<tr>
 			
 			<th>Folio</th>
-			<th>Nombre</th>
+			<th>Numero</th>
 			<th>Tarjeta</th>
+			<th>Nombre</th>
 			<th>Activo</th>
 			<th>Creado</th>
 			<th>Lectora 1</th>
@@ -20,8 +21,9 @@
 						${row.id}
 					</g:link>
 				</td>
-				<td>${fieldValue(bean:row,field:"nombre")}</td>
+				<td>${row.numero}</td>
 				<td>${fieldValue(bean:row,field:"tarjeta")}</td>
+				<td>${fieldValue(bean:row,field:"nombre")}</td>
 				<td>${fieldValue(bean:row,field:"activo")}</td>
 				<td><g:formatDate date="${row.dateCreated}" format="dd/MM HH:mm:ss"/></td>
 				<td><g:formatDate date="${row.lectora1}" format="dd/MM HH:mm:ss"/></td>

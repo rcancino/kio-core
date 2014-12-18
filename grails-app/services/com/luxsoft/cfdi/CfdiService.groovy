@@ -24,6 +24,10 @@ import org.apache.commons.lang.StringUtils
 import org.bouncycastle.util.encoders.Base64
 import com.luxsoft.kio.MonedaUtils
 
+import com.edicom.ediwinws.cfdi.client.CfdiClient
+import org.bouncycastle.util.encoders.Base64
+import com.edicom.ediwinws.service.cfdi.CancelaResponse
+
 @Transactional
 class CfdiService {
 	
@@ -177,6 +181,41 @@ class CfdiService {
 		node.validate(options);
 		return errors;
 		
+	}
+
+	def CancelacionDeCfdi cancelar(Cfdi cfdi,String comentario){
+		
+		def venta=Venta.findByCfdi(cfdi)
+		venta.cfdi=null
+		venta.save()
+
+		CancelacionDeCfdi cancel=new CancelacionDeCfdi()
+		cancel.cfdi=cfdi
+		cancel.comentario=comentario
+
+		def empresa=Empresa.first()
+		byte[] pfxData=empresa.certificadoDigitalPfx
+		
+		def client=new CfdiClient()
+		CancelaResponse res=client.cancelCfdi(
+				empresa.usuarioPac
+				, empresa.passwordPfx
+				, empresa.getRfc()
+				, [cfdi.uuid]
+				, pfxData
+				, empresa.passwordPfx);
+		String msg=res.getText()
+		println 'Message: '+ msg
+		cancel.message=Base64.decode(msg)
+		String aka=res.getAck()
+		println 'Aka:'+aka
+		cancel.aka=Base64.decode(aka.getBytes())
+		cancel.save failOnError:true
+
+
+
+		return cancel
+
 	}
 	/*
 	public void cancelar(String[] uuidList,Periodo periodo) throws Exception{

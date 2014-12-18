@@ -36,6 +36,8 @@ class VentaDetController {
         // }
     	cmd.validate()
     	if(cmd.hasErrors()){
+            
+            flash.message="Errores de validacion"
     		render view:'edit',model:[ventaInstance:cmd.venta,ventaDetInstance:cmd]
             return
     	}
