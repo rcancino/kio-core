@@ -77,7 +77,7 @@ class Usuario {
 	}
 
 	def logLectora(){
-        if (isDirty('enabled') || isDirty('tarjeta') ) {
+        if (isDirty('enabled') || isDirty('tarjeta') || isDirty('tarjeta')) {
             actualizarLectora()
         }
     }

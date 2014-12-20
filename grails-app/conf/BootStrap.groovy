@@ -69,7 +69,15 @@ class BootStrap {
 		  		//.getResource("/WEB-INF/data/kio/PAPEL_CFDI_CERT.pfx").file.readBytes()	
 				empresa.save()
 			}
-		  	
+		  	if(!empresa.certificadoDigitalPfx){
+		  		def file=grailsApplication.mainContext
+		  			.getResource("/WEB-INF/sat/gasoc.pfx")
+		  		assert file.exists(),'Debe existir el archivo PFX'
+		  		empresa.certificadoDigitalPfx=grailsApplication.mainContext
+		  		.getResource("/WEB-INF/sat/gasoc.pfx").file.readBytes()
+		  		empresa.passwordPfx="pfxfilegasoc"
+		  		empresa.save(flush:true)
+		  	}
 		  	
 		
 		environments {

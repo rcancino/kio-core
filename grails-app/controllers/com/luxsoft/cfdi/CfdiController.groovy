@@ -95,9 +95,11 @@ class CfdiController {
 	}
 
 	def cancelar(Cfdi cfdi){
+		log.info 'Cancelando cfdi: '+cfdi.uuid
+		def message=params.comentaio?:'NA'
 		def res=cfdiService.cancelar(cfdi,message)
 		flash.message="CFDI Cancelado exitosamente"
-		redirect action:'show',params:[id:cfdi.id]
+		redirect controller:'cancelacionDeCfdi', action:'index'
 	}
 }
 
