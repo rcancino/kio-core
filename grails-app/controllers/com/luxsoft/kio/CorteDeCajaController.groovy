@@ -2,6 +2,8 @@ package com.luxsoft.kio
 
 import org.springframework.security.access.annotation.Secured
 import org.apache.commons.lang.StringUtils
+import org.grails.databinding.BindingFormat
+import grails.validation.Validateable
 
 @Secured(["hasAnyRole('ADMINISTRACION','CAJERO')"])
 class CorteDeCajaController {
@@ -19,10 +21,10 @@ class CorteDeCajaController {
     	[corteDeCajaInstanceList:list,fecha:time]
     }
 
-    def create(){
+    def create(CorteDeCajaCommand command){
         //Todos los pagos del dia del cajero
         def cajero=getAuthenticatedUser().username
-        def corte=corteDeCajaService.generarCorte(cajero)
+        def corte=corteDeCajaService.generarCorte(cajero,command.fecha)
     	[corteDeCajaInstance:corte,partidas:corte.partidas]
     }
 
@@ -48,3 +50,14 @@ class CorteDeCajaController {
         [corteDeCajaInstance:corteDeCajaInstance,partidas:corteDeCajaInstance.partidas]
     }
 }
+
+@Validateable
+class CorteDeCajaCommand{
+
+    @BindingFormat('dd/MM/yyyy')    
+    Date fecha=new Date()
+    
+
+    
+}
+

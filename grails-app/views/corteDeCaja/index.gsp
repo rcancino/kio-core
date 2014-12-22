@@ -19,9 +19,10 @@
 
 <content tag="operaciones">
 	<li>
-	    <g:link action="create" >
-	        <i class="fa fa-plus"></i> Nuevo
-	    </g:link>
+		<a href="#corteForm" data-toggle="modal">
+			<i class="fa fa-plus"></i> Nuevo
+		</a>
+	    
 	    
 	</li>
 </content>
@@ -73,10 +74,12 @@
 	</table>
 	
 </div>
+
 </content><!-- End content document -->
 
 <content tag="searchForm">
 	<g:render template="arqueoReport"/>
+	<g:render template="generarCorte"/>
 </content>
 
 <content tag="javascript">

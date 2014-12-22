@@ -5,8 +5,8 @@ import grails.transaction.Transactional
 @Transactional
 class CorteDeCajaService {
 
-    def generarCorte(String cajero) {
-    	def time=new Date()
+    def generarCorte(String cajero,Date time) {
+    	//def time=new Date()
     	def pagos=Pago.findAll("from Pago p where date(p.fecha)=? and p.usuario=?",[time,cajero])
     	
 
