@@ -31,6 +31,8 @@ class Cfdi {
 	ComprobanteDocument comprobanteDocument
 	TimbreFiscal timbreFiscal
 
+	static hasOne = [cancelacion: CancelacionDeCfdi]
+
     static constraints = {
 		serie blannk:false,maxSize:15
 		folio blank:false,maxSize:20

@@ -10,10 +10,10 @@
 	
 		<div class="row">
 			<div class="col-md-12">
-				<div class="panel panel-primary">
+				<div class="panel ${cfdiInstance.cancelacion?'panel-danger':'panel-primary'}">
 					<!-- Default panel contents -->
   					<div class="panel-heading">
-  						Cfdi: ${cfdiInstance.serie}- ${cfdiInstance?.folio}
+  						Cfdi: ${cfdiInstance.serie}- ${cfdiInstance?.folio}  ${cfdiInstance.cancelacion?' **CANCELADO**':''}
   					</div>
   					<div class="panel-body">
 						<div class="row">
@@ -40,10 +40,20 @@
 							<a href="#enviarCorreoForm" data-toggle="modal" class="btn btn-default btn-sm">
 								<span class="glyphicon glyphicon-envelope"></span> Enviar
 							</a>
-							<g:link  action="cancelar" class="btn btn-default btn-sm"  
-									onclick="return confirm('Cancelar CFDI?');" id="${cfdiInstance.id }">
-								<span class="glyphicon glyphicon-remove-circle"></span> Cancelar
-							</g:link>
+							<g:if test="${cfdiInstance.cancelacion}">
+								<g:link  action="mostrarAcuse" controller="cancelacionDeCfdi"
+									id="${cfdiInstance.cancelacion.id}"
+									class="btn btn-default btn-sm" >
+									</span> Acuse
+								</g:link>
+							</g:if>
+							<g:else>
+								<g:link  action="cancelar" class="btn btn-default btn-sm"  
+										onclick="return confirm('Cancelar CFDI?');" id="${cfdiInstance.id }">
+									<span class="glyphicon glyphicon-remove-circle"></span> Cancelar
+								</g:link>
+							</g:else>
+							
 							
 							<g:jasperReport
 									controller="cfdi"

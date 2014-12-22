@@ -183,17 +183,14 @@ class CfdiService {
 		
 	}
 
+	@Transactional
 	def CancelacionDeCfdi cancelar(Cfdi cfdi,String comentario){
 		
-		def venta=Venta.findByCfdi(cfdi)
-		venta?.cfdi=null
-		venta?.save()
+		
 
 		CancelacionDeCfdi cancel=new CancelacionDeCfdi()
 		cancel.cfdi=cfdi
-		cancel.comentario=comentario
-
-
+		
 
 		def empresa=Empresa.first()
 		//byte[] pfxData=empresa.certificadoDigitalPfx
@@ -209,14 +206,16 @@ class CfdiService {
 				, "pfxfilegasoc");
 		String msg=res.getText()
 		println 'Message: '+ msg
-		cancel.message=Base64.decode(msg)
+		//cancel.message=Base64.decode(msg)
 		String aka=res.getAck()
 		println 'Aka:'+aka
+
 		cancel.aka=Base64.decode(aka.getBytes())
 		cancel.save failOnError:true
 
-
-
+		def venta=Venta.findByCfdi(cfdi)
+		venta?.cfdi=null
+		venta?.save()
 		return cancel
 
 	}

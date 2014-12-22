@@ -99,8 +99,11 @@ class CfdiController {
 		def message=params.comentaio?:'NA'
 		def res=cfdiService.cancelar(cfdi,message)
 		flash.message="CFDI Cancelado exitosamente"
-		redirect controller:'cancelacionDeCfdi', action:'index'
+		//redirect controller:'cancelacionDeCfdi', action:'index'
+		redirect action:'show',paras:[id:cfdi.id]
 	}
+
+	
 }
 
 class CfdiMail{

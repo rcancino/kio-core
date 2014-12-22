@@ -12,7 +12,7 @@
 	</thead>
 	<tbody>
 		<g:each in="${cfdiInstanceList}" var="row">
-			<tr>
+			<tr class="${row.cancelacion?'danger':''}">
 				<td>
 					<g:link action="show" id="${row.id}">
 						${fieldValue(bean:row,field:"id")}
