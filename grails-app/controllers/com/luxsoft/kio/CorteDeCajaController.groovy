@@ -31,7 +31,7 @@ class CorteDeCajaController {
     def save(CorteDeCaja corteDeCajaInstance){
         println 'Corte: '+corteDeCajaInstance
         
-    	corteDeCajaInstance=corteDeCajaService.generarCorte(corteDeCajaInstance.cajero)
+    	corteDeCajaInstance=corteDeCajaService.generarCorte(corteDeCajaInstance.cajero,corteDeCajaInstance.fechaHora)
         corteDeCajaInstance.creadoPor=getAuthenticatedUser().username
         corteDeCajaInstance=corteDeCajaService.salvar(corteDeCajaInstance)
         flash.message="Corte registrado: $corteDeCajaInstance.id "

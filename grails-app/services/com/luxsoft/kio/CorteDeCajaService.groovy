@@ -14,7 +14,7 @@ class CorteDeCajaService {
     	
     	
     	def total=pagos.sum 0.0,{it.importe}
-    	def corte=new CorteDeCaja(fechaHora:new Date()
+    	def corte=new CorteDeCaja(fechaHora:time
     	    ,cajero:cajero
     	    ,total:total)
 
