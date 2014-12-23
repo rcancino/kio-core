@@ -161,6 +161,7 @@ class UsuarioCommand{
     String confirmPassword
     String tarjeta
     boolean enabled = true
+    Integer numeroDeEmpleado
 
     List roles=[]
 
