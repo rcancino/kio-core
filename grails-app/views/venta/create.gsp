@@ -131,7 +131,7 @@ $(document).ready(function(){
 		select:function(e,ui){
 			console.log('Cliente seleccionado: '+ui.item.value);
 			$("#clienteId").val(ui.item.id);
-			$("#cliente").val(ui.item.cliente.nombre);
+			//$("#cliente").val(ui.item.cliente.nombre);
 			$("#socioId").val(null);
 			$("#socio").val(null);
 			
