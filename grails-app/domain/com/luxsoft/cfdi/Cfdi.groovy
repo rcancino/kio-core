@@ -47,6 +47,7 @@ class Cfdi {
 		xml maxSize:(1024 * 512)  // 50kb para almacenar el xml
 		cadenaOriginal maxSize:1024*64, nullable:true 
 		origen blank:false,maxSize:255
+		cancelacion nullable:true
     }
 	
 	static transients = ['comprobanteDocument','timbreFiscal']
