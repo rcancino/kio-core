@@ -23,8 +23,8 @@
 						data-placement="top"
 						data-container="body"
 						title="${row?.socio?.nombre}" 
-						data-content="And here's some amazing content. It's very engaging. Right?">
-						<g:formatNumber number="${row.numeroDeSocio}" format='####'/>
+						data-content="">
+						<g:formatNumber number="${row.socio.numeroDeSocio}" format='####'/>
 					</a>
 					
 				</td>
