@@ -173,7 +173,7 @@ class CfdiService {
 			for(XmlValidationError e:errores){
 				buff.append(e.getMessage()+"\n");
 			}
-			throw new RuntimeException(message:"Datos para generar el comprobante fiscal (CFDI) incorrectos "+buff.toString());
+			throw new CfdiException(message:"Datos para generar el comprobante fiscal (CFDI) incorrectos "+buff.toString());
 		}
 	}
 	
