@@ -23,7 +23,7 @@ class CobroController {
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
         //def query=Venta.where{saldo>0.0 && status=='VENTA'}
-        def query=Venta.where{saldo>0.0}
+        def query=Venta.where{saldo>0.0 && status!='PEDIDO'}
         [ventaInstanceList:query.list(params),ventaInstanceListTotal:query.count(params)]
     }
 
