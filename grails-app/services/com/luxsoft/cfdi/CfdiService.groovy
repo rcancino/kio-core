@@ -108,7 +108,8 @@ class CfdiService {
 			
 			Concepto c=conceptos.addNewConcepto()
 			c.setCantidad(det.cantidad)
-			c.setUnidad(det.producto.unidad)
+			//c.setUnidad(det.producto.unidad)
+			c.setUnidad('NO APLICA')
 			c.setNoIdentificacion(det.producto.clave)
 			String desc = det.producto.descripcion
 			if(det.socio){
@@ -121,8 +122,10 @@ class CfdiService {
 				c.setValorUnitario(det.precio)
 				c.setImporte(det.importeNeto)
 			} else{
-				c.setValorUnitario(MonedaUtils.calcularImporteDelTotal(det.precio))
-				c.setImporte(det.importeNetoSinIva)
+				//c.setValorUnitario(MonedaUtils.calcularImporteDelTotal(det.precio))
+				//c.setImporte(det.importeNetoSinIva)
+				c.setValorUnitario(det.precio)
+				c.setImporte(det.importeBruto)
 			}
 			
 			
