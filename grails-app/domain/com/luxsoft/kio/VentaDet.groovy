@@ -37,7 +37,7 @@ class VentaDet {
     	cantidad(scale:2)
     	precio(scale:2)
     	importeBruto(scale:2)
-    	descuento(scale:2)
+    	descuento(scale:4)
         descuentoTasa(scale:2,maxSize:90)
     	importeNeto(scale:2)
     	comentario nullable:true
