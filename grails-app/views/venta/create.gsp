@@ -126,7 +126,7 @@ $(document).ready(function(){
 	});
 	
 	$("#cliente").autocomplete({
-		source:'/kio-core/cliente/getClientesJSON',
+		source:'<g:createLink controller="cliente" action="getClientesJSON"/>',
 		minLength:3,
 		select:function(e,ui){
 			console.log('Cliente seleccionado: '+ui.item.value);
