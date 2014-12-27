@@ -122,10 +122,10 @@ class CfdiService {
 				c.setValorUnitario(det.precio)
 				c.setImporte(det.importeNeto)
 			} else{
-				//c.setValorUnitario(MonedaUtils.calcularImporteDelTotal(det.precio))
-				//c.setImporte(det.importeNetoSinIva)
-				c.setValorUnitario(det.precio)
-				c.setImporte(det.importeBruto)
+				c.setValorUnitario(MonedaUtils.calcularImporteDelTotal(det.precio))
+				c.setImporte(det.importeNetoSinIva)
+				//c.setValorUnitario(det.precio)
+				//c.setImporte(det.importeBruto)
 			}
 			
 			
