@@ -79,7 +79,7 @@ class VentaService {
             //Todo Mandar mesanje de venta pendiente de facturar
             return venta
         }else{
-            throw new RuntimeException(
+            throw new VentaException(
                 message:"Solo se pueden mandar facturar ventas en status PEDIDO status actual:${venta.status}",
                 venta:venta
                 )

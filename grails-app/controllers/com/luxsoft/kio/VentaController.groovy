@@ -36,7 +36,11 @@ class VentaController {
     }
 	
 	def mandarFacturar(Venta ventaInstance){
-		ventaService.mandarFacturar(ventaInstance)
+        if(ventaInstance.status=='PEDIDO'){
+            ventaService.mandarFacturar(ventaInstance)
+        }else{
+            flash.message="Solo se pueden mandar facturar ventas con estatus PEDIDO"
+        }
 		redirect action:'index'
 	}
 	
