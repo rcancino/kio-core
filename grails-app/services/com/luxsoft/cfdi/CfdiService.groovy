@@ -123,7 +123,8 @@ class CfdiService {
 				c.setImporte(det.importeNeto)
 			} else{
 				c.setValorUnitario(MonedaUtils.calcularImporteDelTotal(det.precio))
-				c.setImporte(det.importeNetoSinIva)
+				//c.setImporte(det.importeNetoSinIva)
+				c.setImporte(det.importeBruto)
 				//c.setValorUnitario(det.precio)
 				//c.setImporte(det.importeBruto)
 			}

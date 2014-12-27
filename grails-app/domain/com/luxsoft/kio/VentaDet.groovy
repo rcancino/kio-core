@@ -38,7 +38,7 @@ class VentaDet {
     	precio(scale:2)
     	importeBruto(scale:2)
     	descuento(scale:4)
-        descuentoTasa(scale:2,maxSize:90)
+        descuentoTasa(scale:4,maxSize:90)
     	importeNeto(scale:2)
     	comentario nullable:true
         socio nullable:true
