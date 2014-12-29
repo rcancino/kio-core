@@ -25,6 +25,8 @@ class VentaDet {
 
     BigDecimal importeNetoSinIva=0.0
 
+    BigDecimal importeBrutoSinIva=0.0
+
 	String comentario
 
 	Date dateCreated
@@ -44,7 +46,7 @@ class VentaDet {
         socio nullable:true
     }
 
-    static transients = ['importeNetoSinIva']
+    static transients = ['importeNetoSinIva','importeBrutoSinIva']
 
     def actualizarImportes(){
         
@@ -65,6 +67,10 @@ class VentaDet {
 
     def getImporteNetoSinIva(){
         return MonedaUtils.calcularImporteDelTotal(importeNeto)
+    }
+
+    def getImporteBrutoSinIva(){
+        return MonedaUtils.calcularImporteDelTotal(importeBruto)
     }
 
     def getPrecioSinIva(){

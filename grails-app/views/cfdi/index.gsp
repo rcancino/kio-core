@@ -37,12 +37,28 @@
 						<input type="text" class="form-control" placeholder="Buscar" autofocus="autofocus">
 					</div>
 				</div>
+
+				<div class="btn-group">
+				        <button type="button" name="operaciones"
+				                class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+				                role="menu">
+				                Operaciones <span class="caret"></span>
+				        </button>
+				        <ul class="dropdown-menu">
+				            <li>
+				            	<a href="#searchDialog" data-toggle="modal">
+				            		<i class="fa fa-search"></i> Busqueda avanzada
+				            	</a>
+				            </li>
+				        </ul>
+				    </div>
 			</div>
 		</div> <!-- end .row 2-->
 		
 		<div class="row">
 			<div class="col-md-12">
 				<g:render template="grid"/>
+				<g:render template="search"/>
 			</div>
 		</div>
 

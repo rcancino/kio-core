@@ -3,6 +3,9 @@ package com.luxsoft.cfdi
 import mx.gob.sat.cfd.x3.ComprobanteDocument.Comprobante
 import org.springframework.security.access.annotation.Secured
 import com.luxsoft.kio.Cliente
+import grails.validation.Validateable
+import org.grails.databinding.BindingFormat
+import groovy.transform.ToString
 
 @Secured(["hasAnyRole('ADMINISTRACION','CAJERO','MOSTRADOR')"])
 class CfdiController {
@@ -10,9 +13,32 @@ class CfdiController {
 	def cfdiService
 
     def index(Integer max) {
-		params.max = Math.min(max ?: 20, 100)
+		params.max = Math.min(max ?: 50, 100)
+		params.sort=params.sort?:'dateCreated'
+		params.order='desc'
 		[cfdiInstanceList:Cfdi.list(params), cfdiInstanceCount: Cfdi.count()]
 	}
+
+	def search(CfdiSearch command){
+		command.receptor=command.receptor?:'%'
+        command.receptor=command.receptor+'%'
+        //command.receptor='%'
+        command.fechaInicial=command.fechaInicial?:new Date()-30
+        command.fechaFinal=command.fechaFinal?:new Date()
+        command.folio=command.folio?:'%'
+        params.max = 50
+        params.sort=params.sort?:'dateCreated'
+        params.order='desc'
+        log.info 'Buscando por: '+command
+        println 'Buscando por :'+command
+        def hql="from Cfdi c where lower(c.receptor) like ?  and date(c.fecha) between ? and ? and folio like ? order by fecha desc"
+        
+        def list=Cfdi.findAll(hql,[command.receptor.toLowerCase(),command.fechaInicial
+        	,command.fechaFinal
+        	,command.folio]
+        	,params)
+        render view:'index',model:[cfdiInstanceList:list,cfdiInstanceCount:list.size()]
+    }
 	
 	def show(Cfdi cfdi){
 		def cliente=Cliente.findByNombre(cfdi.receptor)
@@ -113,4 +139,27 @@ class CfdiMail{
 	static constraints={
 		mail email:true
 	}
+}
+
+@Validateable
+@ToString(includeNames=true,includePackage=false)
+class CfdiSearch{
+    
+    String receptor
+
+    @BindingFormat('dd/MM/yyyy')
+    Date fechaInicial=new Date()-30
+    
+    @BindingFormat('dd/MM/yyyy')
+    Date fechaFinal=new Date()
+
+    String folio
+    
+
+    static constraints={
+        fechaInicial nullable:true
+        fechaFinal nullable:true
+        receptor nullable:true
+        folio nullable:true
+    }
 }

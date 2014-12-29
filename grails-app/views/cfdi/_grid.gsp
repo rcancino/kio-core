@@ -21,8 +21,16 @@
 				<td>${fieldValue(bean:row,field:"serie")}</td>
 				<td>${fieldValue(bean:row,field:"folio")}</td>
 				<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
-				<td>${fieldValue(bean:row,field:"receptor")}</td>
-				<td>${fieldValue(bean:row,field:"uuid")}</td>
+				<td>
+					<abbr title="${row.receptor}">
+					${org.apache.commons.lang.StringUtils.substring(row.receptor,0,50)}
+					</abbr>
+				</td>
+				<td>
+					<abbr title="${row.uuid}">
+					${org.apache.commons.lang.StringUtils.substringAfterLast(row.uuid,'-')}
+					</abbr>
+				</td>
 				<td><g:formatNumber number="${row.total}" type="currency"/></td>
 			</tr>
 		</g:each>
