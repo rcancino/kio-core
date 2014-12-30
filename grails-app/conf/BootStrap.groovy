@@ -42,42 +42,45 @@ class BootStrap {
 			cfdiFolio.save()
 		}
 
-			def empresa=Empresa.findWhere(clave:'KIO')
-			if(!empresa){
-				empresa=new Empresa(clave:'GASOC',nombre:'OPERADORA Y ADMINISTRADOR GASOC S.A. DE C.V.',
-					rfc:'OAG100209GN8',
-					regimen:'REGIMEN GENERAL DE LEY PERSONAS MORALE',
-		            registroPatronal:'0')
-				empresa.direccion=new Direccion(
-					calle:'AVENIDA CUAUHTEMOC',
-					numeroExterior:'1461',
-					colonia:'SANTA CRUZ ATOYAC',
-					municipio:'BENITO JUAREZ',
-					codigoPostal:'03310',
-					estado:'DISTRITO FEDERAL',
-					pais:'MEXICO'
-					
-		        )
-		        empresa.numeroDeCertificado='00001000000201478375'
-		        empresa.certificadoDigital=grailsApplication.mainContext
-		  		.getResource("/WEB-INF/sat/00001000000201478375.cer").file.readBytes()
-		  		empresa.llavePrivada=grailsApplication.mainContext
-		  		.getResource("/WEB-INF/sat/gasoc.key").file.readBytes()	
-		  		empresa.usuarioPac="OAG100209GN8"
-		  		empresa.passwordPac="guwueofei"
-		  		//empresa.certificadoDigitalPfx=grailsApplication.mainContext
-		  		//.getResource("/WEB-INF/data/kio/PAPEL_CFDI_CERT.pfx").file.readBytes()	
-				empresa.save()
-			}
-		  	if(!empresa.passwordPfx){
-		  		def file=grailsApplication.mainContext
-		  			.getResource("/WEB-INF/sat/gasoc.pfx")
-		  		assert file.exists(),'Debe existir el archivo PFX'
-		  		empresa.certificadoDigitalPfx=grailsApplication.mainContext
-		  		.getResource("/WEB-INF/sat/gasoc.pfx").file.readBytes()
-		  		empresa.passwordPfx="pfxfilegasoc"
-		  		empresa.save(flush:true)
-		  	}
+		def empresa=Empresa.findWhere(clave:'GASOC')
+		if(!empresa){
+			
+			empresa=new Empresa(clave:'GASOC',nombre:'OPERADORA Y ADMINISTRADOR GASOC S.A. DE C.V.',
+				rfc:'OAG100209GN8',
+				regimen:'REGIMEN GENERAL DE LEY PERSONAS MORALE',
+	            registroPatronal:'0')
+			empresa.direccion=new Direccion(
+				calle:'AVENIDA CUAUHTEMOC',
+				numeroExterior:'1461',
+				colonia:'SANTA CRUZ ATOYAC',
+				municipio:'BENITO JUAREZ',
+				codigoPostal:'03310',
+				estado:'DISTRITO FEDERAL',
+				pais:'MEXICO'
+				
+	        )
+	        empresa.numeroDeCertificado='00001000000201478375'
+	        empresa.certificadoDigital=grailsApplication.mainContext
+	  		.getResource("/WEB-INF/sat/00001000000201478375.cer").file.readBytes()
+	  		empresa.llavePrivada=grailsApplication.mainContext
+	  		.getResource("/WEB-INF/sat/gasoc.key").file.readBytes()	
+	  		empresa.usuarioPac="OAG100209GN8"
+	  		empresa.passwordPac="guwueofei"
+	  		//empresa.certificadoDigitalPfx=grailsApplication.mainContext
+	  		//.getResource("/WEB-INF/data/kio/PAPEL_CFDI_CERT.pfx").file.readBytes()	
+			empresa.save()
+		}
+	  	if(empresa.passwordPfx==null){
+	  		println 'Alta de datos para cancelacion'
+	  		def file=grailsApplication.mainContext
+	  			.getResource("/WEB-INF/sat/gasoc.pfx")
+	  		assert file.exists(),'Debe existir el archivo PFX'
+	  		empresa.certificadoDigitalPfx=grailsApplication.mainContext
+	  		.getResource("/WEB-INF/sat/gasoc.pfx").file.readBytes()
+	  		empresa.passwordPfx="pfxfilegasoc"
+	  		//empresa.save(flush:true)
+	  		empresa.save failOnError:true
+	  	}
 		  	
 		
 		environments {
