@@ -55,6 +55,8 @@ class CfdiController {
 		//render view:'cfdiXml',model:[cfdiInstance:cfdi,xml:cfdi.getComprobanteDocument().xmlText()]
 		render(text: cfdi.comprobanteDocument.xmlText(), contentType: "text/xml", encoding: "UTF-8")
 	}
+
+
 	
 	def descargarXml(long id){
 		Cfdi cfdi=Cfdi.findById(id)
@@ -128,6 +130,8 @@ class CfdiController {
 		//redirect controller:'cancelacionDeCfdi', action:'index'
 		redirect action:'show',paras:[id:cfdi.id]
 	}
+
+	
 
 	
 }

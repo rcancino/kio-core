@@ -46,7 +46,13 @@
 									class="btn btn-default btn-sm" >
 									</span> Acuse
 								</g:link>
+								<g:link  action="descargarAcuseXml" controller="cancelacionDeCfdi"
+									id="${cfdiInstance.cancelacion.id}"
+									class="btn btn-default btn-sm" >
+									</span> Descargar acuse
+								</g:link>
 							</g:if>
+
 							<g:else>
 								<g:link  action="cancelar" class="btn btn-default btn-sm"  
 										onclick="return confirm('Cancelar CFDI?');" id="${cfdiInstance.id }">
