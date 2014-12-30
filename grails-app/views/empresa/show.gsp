@@ -49,6 +49,8 @@
 								input-class="form-control" />
 								<f:field property="passwordPac" colsLabel="col-sm-4" cols="col-sm-8" 
 								input-class="form-control" />
+								<f:field property="passwordPfx" colsLabel="col-sm-4" cols="col-sm-8" 
+								input-class="form-control" />
 								
 							</f:with>
 							

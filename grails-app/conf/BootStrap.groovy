@@ -71,15 +71,15 @@ class BootStrap {
 			empresa.save()
 		}
 	  	if(empresa.passwordPfx==null){
-	  		println 'Alta de datos para cancelacion'
+	  		//println 'Alta de datos para cancelacion'
 	  		def file=grailsApplication.mainContext
 	  			.getResource("/WEB-INF/sat/gasoc.pfx")
 	  		assert file.exists(),'Debe existir el archivo PFX'
 	  		empresa.certificadoDigitalPfx=grailsApplication.mainContext
 	  		.getResource("/WEB-INF/sat/gasoc.pfx").file.readBytes()
 	  		empresa.passwordPfx="pfxfilegasoc"
-	  		//empresa.save(flush:true)
-	  		empresa.save failOnError:true
+	  		empresa.save(flush:true)
+	  		//empresa.save failOnError:true
 	  	}
 		  	
 		
