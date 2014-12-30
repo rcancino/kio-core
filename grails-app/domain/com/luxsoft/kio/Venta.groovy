@@ -104,6 +104,14 @@ class Venta {
 		modificadoPor=springSecurityService.getCurrentUser().username
 	}
 	
+
+	def getSubTotalSinIva(){
+        return MonedaUtils.calcularImporteDelTotal(subTotal)
+    }
+
+    def getDescuentoSinIva(){
+    	return MonedaUtils.calcularImporteDelTotal(descuento)
+    }
 	
 	
 }

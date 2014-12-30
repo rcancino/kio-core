@@ -79,7 +79,7 @@ class CfdiService {
 		Receptor receptor=CfdiUtils.registrarReceptor(comprobante, venta.cliente)
 		
 		comprobante.setSubTotal(venta.subTotal)
-		comprobante.setDescuento(venta.descuento)
+		comprobante.setDescuento(venta.descuentoSinIva)
 		comprobante.setTotal(venta.total)
 		
 		Impuestos impuestos=comprobante.addNewImpuestos()

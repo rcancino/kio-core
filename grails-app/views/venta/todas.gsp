@@ -106,10 +106,11 @@
 							<th>Fecha</th>
 							<th>Cliente</th>
 							<th>Total</th>
+							<th>Descuento</th>
 							<th>Atendió</th>
 							<th>Comentario</th>
 							<th>Estatus</th>
-							<th>Cobrar</th>
+							
 							
 							
 
@@ -133,13 +134,24 @@
 								<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
 								<td>
 									<g:link action="${row.status=='PEDIDO'?'edit':'show'}" id="${row.id}">
-										${fieldValue(bean:row,field:"cliente.nombre")}
+										<abbr title="${row.cliente.nombre}">
+										${org.apache.commons.lang.StringUtils.substring(row.cliente?.nombre,0,30)}
+										</abbr>
+										
 									</g:link>
+
 									
 								</td>
 								<td><g:formatNumber number="${row.total}" type="currency"/></td>
+								<td><g:formatNumber number="${row.descuentoSinIva}" type="currency"/></td>
 								<td>${fieldValue(bean:row,field:"creadoPor")}</td>
-								<td>${fieldValue(bean:row,field:"comentario")}</td>
+								<td>
+									<abbr title="${row.comentario}">
+									${org.apache.commons.lang.StringUtils.substring(row.comentario,0,30)}
+									</abbr>
+									
+
+								</td>
 								<td>${fieldValue(bean:row,field:"status")}</td>
 								<td>
 									<g:if test="${row.saldo>0}">

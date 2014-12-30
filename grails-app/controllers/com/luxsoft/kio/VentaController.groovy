@@ -21,7 +21,7 @@ class VentaController {
 
     def todas(){
         def periodo=session.periodo
-        def list=Venta.executeQuery("from Venta v where date(v.fecha) between ? and ? "
+        def list=Venta.executeQuery("from Venta v where date(v.fecha) between ? and ?  order by v.dateCreated desc"
             ,[periodo.fechaInicial,periodo.fechaFinal])
         [ventaInstanceList:list,ventaInstanceListTotal:list.size()]
     }

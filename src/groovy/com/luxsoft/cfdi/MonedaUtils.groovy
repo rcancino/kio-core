@@ -57,6 +57,18 @@ class MonedaUtils {
 		BigDecimal importe=total.divide(val,2,RoundingMode.HALF_EVEN);
 		return importe;
 	}
+
+	public static final BigDecimal calcularImporteDelTotal(BigDecimal total,int presision){
+		BigDecimal val=BigDecimal.valueOf(1).add(IVA);
+		BigDecimal importe=total.divide(val,presision,RoundingMode.HALF_EVEN);
+		return importe;
+	}
+
+	public static final BigDecimal calcularImporteDelTotal(BigDecimal total,BigDecimal tasaIva,int presision){
+		BigDecimal val=BigDecimal.valueOf(1).add(tasaIva);
+		BigDecimal importe=total.divide(val,presision,RoundingMode.HALF_EVEN);
+		return importe;
+	}
 	
 	
 	public static final BigDecimal aplicarDescuentosEnCascadaSinRedondeo(

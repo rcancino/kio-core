@@ -70,19 +70,36 @@
 	<div class=" col-md-4">
 		<form class="form-horizontal">
 			<div class="form-group">
-				<label class="col-sm-offset-2 col-sm-4 control-label">SubTotal</label>
+				<label class="col-sm-offset-2 col-sm-4 control-label">Importe</label>
 				<div class=" col-sm-6 ">
 					<input value="${formatNumber(number:ventaInstance.importe,type:'currency')}" 
 					class="form-control text-right" disabled/>
 				</div>
 			</div>
+			
 			<div class="form-group">
+				<label class="col-sm-offset-2 col-sm-4 control-label">Descuento</label>
+				<div class=" col-sm-6 ">
+					<input value="${formatNumber(number:ventaInstance.descuento,type:'currency')}" 
+					class="form-control text-right" disabled/>
+				</div>
+			</div>
+			%{-- <div class="form-group">
+				<label class="col-sm-offset-2 col-sm-4 control-label">Sub Total</label>
+				<div class=" col-sm-6 ">
+					<input 
+						value="${formatNumber(
+							number:com.luxsoft.kio.MonedaUtils.calcularImporteDelTotal(ventaInstance.subTotal),type:'currency')}" 
+					class="form-control text-right" disabled/>
+				</div>
+			</div> --}%
+			%{-- <div class="form-group">
 				<label class="col-sm-offset-2 col-sm-4 control-label">Impuesto</label>
 				<div class=" col-sm-6 ">
 					<input value="${formatNumber(number:ventaInstance.impuesto,type:'currency')}" 
 					class="form-control text-right" disabled/>
 				</div>
-			</div>
+			</div> --}%
 			<div class="form-group">
 				<label class="col-sm-offset-2 col-sm-4 control-label">Total</label>
 				<div class=" col-sm-6 ">
