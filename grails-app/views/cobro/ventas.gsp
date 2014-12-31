@@ -38,7 +38,7 @@
 			<table id="cajaTable" class="table table-striped table-bordered table-condensed">
 				<thead>
 					<tr>
-						<th>Id</th>
+						<th>Venta</th>
 						<th>Cliente</th>
 						<th>Atendio</th>
 						<th>Fecha</th>

@@ -101,7 +101,7 @@
 				<table class="table table-striped table-bordered table-condensed">
 					<thead>
 						<tr>
-							<th>Folio</th>
+							<th>Venta</th>
 							<th>Fac</th>
 							<th>Fecha</th>
 							<th>Cliente</th>

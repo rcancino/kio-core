@@ -207,17 +207,30 @@ class CfdiService {
 				, pfxData
 				, "pfxfilegasoc");
 		String msg=res.getText()
-		println 'Message: '+ msg
+		println 'Message: '+ new String(msg)
 		//cancel.message=Base64.decode(msg)
 		String aka=res.getAck()
-		println 'Aka:'+aka
+		//println 'Aka:'+aka
 
 		cancel.aka=Base64.decode(aka.getBytes())
 		cancel.save failOnError:true
 
 		def venta=Venta.findByCfdi(cfdi)
-		venta?.cfdi=null
-		venta?.save()
+		if(venta){
+			if(venta.saldo==venta.total){
+				venta.comentario="VENTA CANCELADA"
+				venta.cancelada=true
+				venta.partidas.clear()
+				venta.actualizarImportes()
+				venta.delete()
+			}else{
+				cancel.comentario="Venta Origen: "+venta.id
+				venta?.cfdi=null
+				venta?.save()
+			}
+		}
+		
+		
 		return cancel
 
 	}
