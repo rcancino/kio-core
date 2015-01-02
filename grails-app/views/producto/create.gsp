@@ -50,10 +50,12 @@
 		</g:form>
 		
 		<script type="text/javascript">
-$(document).ready(function(){
-	$("#precioBruto").autoNumeric({wEmpty:'zero',mRound:'B',aSign: '$'});
+			$(document).ready(function(){
+				$("#precioBruto").autoNumeric(
+					//{wEmpty:'zero',mRound:'B',aSign: ''}
+					);
 
-});
+			});
 </script>
 		
 	</content>

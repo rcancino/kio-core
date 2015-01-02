@@ -235,9 +235,18 @@
 					    		</div>
 					    	</div>
 					    	<div class="form-group">
+					    		<label for="tarjet" class="col-sm-3 control-label">No Socio</label>
+					    		<div class="col-sm-8">
+					    				<input name="numeroDeSocio" id="numeroDeSocio"
+					    					class="form-control" 
+					    					type="string"
+					    					value="${socioInstance?.numeroDeSocio}">
+					    		</div>
+					    	</div>
+					    	<div class="form-group">
 					    		<label for="tarjet" class="col-sm-3 control-label">Tarjeta</label>
 					    		<div class="col-sm-8">
-					    				<input name="tarjeta" id="email2"
+					    				<input name="tarjeta" id="tarjeta"
 					    					class="form-control" 
 					    					type="string"
 					    					value="${socioInstance?.tarjeta}">

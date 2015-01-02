@@ -119,7 +119,7 @@ class ConsultaController {
         if(!socio.membresia.diaDeCorte){
             socio.membresia.diaDeCorte=1
         }
-        bindData(socio,params,[include: ['telefonoCasa', 'telefonoTrabajo','celular','email','email2','tarjeta']])
+        bindData(socio,params,[include: ['telefonoCasa', 'telefonoTrabajo','celular','email','email2','tarjeta','numeroDeSocio']])
         socio=socioService.actualizarSocio(socio)
         def data= socio as JSON
         render data
