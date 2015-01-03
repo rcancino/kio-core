@@ -77,14 +77,15 @@ class SocioController {
 		if(socioInstance.hasErrors()){
 			log.debug 'Erores de validacion: '+socioInstance.errors
 			flash.message="Errores de validacion en el socio"
-			render view:'edit/edit',model:[socioInstance:socioInstance]
+			render view:'edit',model:[socioInstance:socioInstance]
 			return 
 		}
 		socioInstance.membresia.validate()
 		if(socioInstance.membresia.hasErrors()){
+			println 'Ultimo pago: '+params
 			log.debug 'Erores de validacion de membresia: '+socioInstance.membresia.errors
 			flash.message="Errores en membresia de socio "+socioInstance.membresia.errors
-			render view:'edit/edit',model:[socioInstance:socioInstance]
+			render view:'edit',model:[socioInstance:socioInstance]
 			return
 		}
 		

@@ -30,10 +30,12 @@
 				colsLabel="col-md-4" cols="col-md-8"
 				/>
 		</div>
-		<g:render template="domicilioFiscal"/>
+		%{-- <g:render template="domicilioFiscal"/> --}%
 
 	</div>
-
+	<div class="row">
+		<g:render template="domicilioFiscal"/>
+	</div>
 	
 		
 </f:with>

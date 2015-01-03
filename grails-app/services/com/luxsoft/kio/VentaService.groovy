@@ -75,6 +75,7 @@ class VentaService {
     def mandarFacturar(Venta venta){
         if(venta.status=='PEDIDO'){
             venta.status='VENTA'
+            venta.fecha=new Date()
             venta.save()
             //Todo Mandar mesanje de venta pendiente de facturar
             return venta
