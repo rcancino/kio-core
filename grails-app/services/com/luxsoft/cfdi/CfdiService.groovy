@@ -221,6 +221,7 @@ class CfdiService {
 		if(venta){
 			if(venta.saldo==venta.total){
 				venta.comentario="VENTA CANCELADA"
+				venta.status='PEDIDO'
 				venta.cancelada=true
 				venta.partidas.clear()
 				venta.actualizarImportes()
