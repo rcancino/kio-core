@@ -88,9 +88,11 @@ class CfdiService {
 		//Facturacion a clientes extranjero
 		if(rfc=="XEXX010101000"){
 			comprobante.setSubTotal(venta.total)
+			comprobante.setDescuento(venta.descuento)
 			comprobante.setTotal(venta.total)
 		}else if(rfc=="XAXX010101000"){
 			comprobante.setSubTotal(venta.total)
+			comprobante.setDescuento(venta.descuento)
 			//comprobante.setDescuento(venta.descuento)
 			comprobante.setTotal(venta.total)
 		}else{
