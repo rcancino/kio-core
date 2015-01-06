@@ -15,6 +15,8 @@ class UsuarioController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 100, 100)
+        params.sort=params.sort?:'numeroDeEmpleado'
+        params.order='desc'
         respond Usuario.list(params), model:[usuarioInstanceCount: Usuario.count()]
     }
 

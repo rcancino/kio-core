@@ -4,8 +4,10 @@
 		<tr>
 			<th>UseName</th>
 			<th>Nombre</th>
+			<th>Número</th>
+			<th>Tarjeta</th>
 			<th>Activo</th>
-			%{-- <th>Modificado</th> --}%
+			
 		</tr>
 	</thead>
 	<tbody>
@@ -21,6 +23,9 @@
 						${row.nombre}
 					</g:link>
 				</td>
+				
+				<td>${row.tarjeta}</td>
+				<td>${row.numeroDeEmpleado}</td>
 				<td>
 					<g:if test="${row.enabled}">
 						<i class="fa fa-check"></i>
@@ -29,8 +34,6 @@
 						<i class="fa fa-toggle-off"></i>
 					</g:else>
 				</td>
-				%{-- <td><g:formatDate date="${row.lastUpdated}" format="dd-MM HH:mm"/></td> --}%
-				
 			</tr>
 		</g:each>
 	</tbody>
