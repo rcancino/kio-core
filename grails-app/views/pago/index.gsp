@@ -21,6 +21,13 @@
 	    </g:link>
 	    
 	</li>
+	<li>
+		<a href="#searchDialog" data-toggle="modal">
+			<i class="fa fa-search"></i> Busqueda avanzada
+		</a>
+	    
+	    
+	</li>
 </content>
 <content tag="reportes">
 	<li><g:link controller="reporte" action="pagosPorDia"> Pagos por día</g:link></li>

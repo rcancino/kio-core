@@ -65,8 +65,9 @@ class PagoService {
     def eliminarAplicacion(AplicacionDePago aplicacion){
         def pago=aplicacion.pago
         def ventas=pago.aplicaciones.collect{it.venta}
+        cancelarPagoDeMembresias(aplicacion)
         pago.removeFromAplicaciones(aplicacion)
-        pago.save flush:true
+        //pago.save flush:true
         ventas.each{ venta->
             def aplicaciones=AplicacionDePago.executeQuery("select sum(importe) from AplicacionDePago a where a.venta=?",[venta])[0]
             venta.pagos=aplicaciones?:0.0
@@ -77,7 +78,7 @@ class PagoService {
             log.info "Saldo actuaizado ${venta.saldo}  (Pagos: ${venta.pagos}) "
         }
         actualizarDisponible(pago)
-        cancelarPagoDeMembresias(aplicacion)
+        
         log.info 'Aplicacion eliminada '+aplicacion.id
         return pago
     }
@@ -177,6 +178,7 @@ class PagoService {
             }
         }
     }
+
 
 
     def PagoDeMembresiaLog buscarUltimoPago(SocioMembresia m){

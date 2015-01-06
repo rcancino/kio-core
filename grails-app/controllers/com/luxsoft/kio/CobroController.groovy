@@ -139,7 +139,7 @@ class CobroController {
         params.max = 50
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
-        println 'Nomibr: '+command.nombre
+        //println 'Nomibr: '+command.nombre
         
         def hql="from Venta v where lower(v.cliente.nombre) like ?  and date(v.fecha) between ? and ? "
         

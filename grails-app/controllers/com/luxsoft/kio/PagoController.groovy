@@ -11,12 +11,17 @@ class PagoController {
 	def pagoService
 
     def index(Integer max) { 
-    	params.max = Math.min(max ?: 40, 100)
-    	params.sort?:'lastUpdated'
-    	params.order?:'desc'
+    	params.max = Math.min(max ?: 20, 100)
+        params.sort=params.sort?:'dateCreated'
+        params.order='desc'
+
+        //def periodo=session.periodo
         //def list=Pago.executeQuery("from Pago p where (p.importe-p.aplicado)>0")
-        def list=Pago.executeQuery("from Pago p order by lastUpdated desc")
-    	[pagoInstanceList:list,pagoInstanceCount:list.size()]
+        // def list=Pago.executeQuery(
+        //     "from Pago p  where date(p.fecha) between ? and ? order  by lastUpdated desc"
+        //     ,[periodo.fechaInicial,periodo.fechaFinal])
+    	
+        [pagoInstanceList:Pago.list(params),pagoInstanceCount:Pago.count()]
     }
 
     def create(){
@@ -123,33 +128,22 @@ class PagoController {
     }
     
 
-    /*
+    
     def search(SearchPagoCommand command){
     	command.nombre=command.nombre?:'%'
-        command.folio=command.folio?:'%'
-		command.fechaInicial=command.fechaInicial?:new Date()-10
-		command.fechaFinal=command.fechaFinal?:new Date()
-		
-		
-		params.max = command.max ?: 50
-		params.sort=params.sort?:'dateCreated'
-		params.order='desc'
-		
-		def args=[command.emisor
-			,command.referencia
-			,command.folio
-			,command.fechaInicial
-			,command.fechaFinal]
-		def hql="from Pago p where lower(p.cliente.nombre) like ?  and c.folio like ? "+ 
-			" and date(c.fecha) between ? and ? "
-		if(command.total>0.0){
-			args.add(command.total)
-			hql+=" and c.total=?"
-		}
-		def list=Cfdi.findAll(hql,args,params)
-		render view:'index',model:[cfdiInstanceList:list,cfdiInstanceCount:list.size()]
+        command.fechaInicial=command.fechaInicial
+        command.fechaFinal=command.fechaFinal
+        params.max = 50
+        params.sort=params.sort?:'dateCreated'
+        params.order='desc'
+        
+        
+        def hql="from Pago p where lower(p.cliente.nombre) like ?  and date(p.fecha) between ? and ? "
+        
+        def list=Pago.findAll(hql,[command.nombre.toLowerCase(),command.fechaInicial,command.fechaFinal],params)
+        render view:'index',model:[pagoInstanceList:list,pagoInstanceCount:list.size()]
     }
-    */
+    
 }
 
 

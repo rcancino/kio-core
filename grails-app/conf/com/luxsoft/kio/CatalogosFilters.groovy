@@ -8,6 +8,9 @@ class CatalogosFilters {
                 if(!session.periodo){
                     session.periodo=Periodo.getCurrentMonthToday()
                 }
+                if(!session.searchPeriodo){
+                    session.searchPeriodo=Periodo.getCurrentMonthToday()
+                }
             }
             after = { Map model ->
 
