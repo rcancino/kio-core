@@ -4,7 +4,7 @@
 	
 	<div class="row">
 		<div class="col-md-6">
-			<g:hiddenField id="clienteId" name="cliente.id" value="${socioInstance?.cliente?.id}"/>
+			%{-- <g:hiddenField id="clienteId" name="cliente.id" value="${socioInstance?.cliente?.id}"/> --}%
 			%{-- <f:field property="cliente.id" 
 				input-class="form-control"
 				input-disabled="disabled" 

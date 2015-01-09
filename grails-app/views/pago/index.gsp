@@ -47,6 +47,7 @@
 				<th>Importe</th>
 				<th>F.P</th>
 				<th>Disponible</th>
+				<th>A</th>
 				<th>Usuario</th>
 				%{-- <th>Modificado</th> --}%
 			</tr>
@@ -70,8 +71,18 @@
 					</td>
 					<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
 					<td><g:formatNumber number="${row.importe}" type="currency"/></td>
-					<td>${row.formaDePago}</td>
+					<td>
+						<abbr title="${row.formaDePago}">
+							${org.apache.commons.lang.StringUtils.substring(row.formaDePago.toString(),0,10)}
+						</abbr>
+						
+					</td>
 					<td><g:formatNumber number="${row.disponible}" type="currency"/></td>
+					<td>
+						<g:if test="${row.anticipo}">
+							<i class="fa fa-check-square"></i>
+						</g:if>
+					</td>
 					<td>${org.apache.commons.lang.StringUtils.substring(row.usuario,0,10)}</td>
 					%{-- <td><g:formatDate date="${row.lastUpdated}" format="dd/MM/yy HH:mm"/></td> --}%
 				</tr>

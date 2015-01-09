@@ -78,6 +78,15 @@
 							      </p>
 							    </div>
 							</div>
+							<div class="form-group">
+								<label for="fecha" class="col-sm-4 control-label">Anticipo</label>
+								<div class="col-sm-8">
+									<g:if test="${pagoInstance.anticipo}">
+										<i class="fa fa-check-square"></i>
+									</g:if>
+								</div>
+							</div>
+							
 						</div>
 						
 						<div class="col-sm-5">
@@ -85,6 +94,7 @@
 								property="formaDePago" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-4"/>
 							<f:field property="referenciaBancaria" 
 								input-class="form-control" cols="col-sm-8" colsLabel="col-sm-4" label="Referencia"/>	
+							
 							<div class="form-group">
 								<label class="col-sm-4 control-label">Disponible</label>
 							    <div class="col-sm-8">

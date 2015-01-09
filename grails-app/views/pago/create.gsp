@@ -67,6 +67,7 @@
 						<f:field property="banco" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-2"/>
 						<f:field property="importe" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-2"
 							input-type="text"/>
+						<f:field property="anticipo" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-2"/>
 						<f:field property="comentario" input-class="form-control" cols="col-sm-8" colsLabel="col-sm-2"/>
 					</f:with>
 					<div class="form-group">

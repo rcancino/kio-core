@@ -30,6 +30,8 @@ class Pago {
 	String comentario
 
 	String usuario
+
+	Boolean anticipo=false
 	
 	Date dateCreated
 	Date lastUpdated
@@ -41,6 +43,7 @@ class Pago {
     	referenciaBancaria nullable:true,maxSize:20
     	banco nullable:true,maxSize:30
     	usuario nullable:true
+    	anticipo nullable:true
     }
 
     static mapping = {

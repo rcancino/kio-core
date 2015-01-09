@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$(".empleadoField").autocomplete({
+	$(".clienteField").autocomplete({
 			source:'<g:createLink controller="cliente" action="getClientesJSON"/>',
 			minLength:3,
 			select:function(e,ui){
