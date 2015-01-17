@@ -29,7 +29,6 @@
 
 	<style 
 		name="Title"
-		isDefault="false"
 		fontName="Arial"
 		fontSize="26"
 		isBold="true"
@@ -38,7 +37,6 @@
 	</style>
 	<style 
 		name="SubTitle"
-		isDefault="false"
 		forecolor="#666666"
 		fontName="Arial"
 		fontSize="18"
@@ -46,7 +44,6 @@
 	</style>
 	<style 
 		name="Column header"
-		isDefault="false"
 		forecolor="#666666"
 		fontName="Arial"
 		fontSize="12"
@@ -55,7 +52,6 @@
 	</style>
 	<style 
 		name="Detail"
-		isDefault="false"
 		fontName="Arial"
 		fontSize="12"
 	>
@@ -107,10 +103,12 @@
      cliente.`rfc` AS cliente_rfc,
      cliente.`tipo_id` AS cliente_tipo_id
 ,cfdi.folio as folio
+,venta.sub_total as subtotal
+,venta.impuesto as impuesto
 FROM
      `cliente` cliente INNER JOIN `venta` venta ON cliente.`id` = venta.`cliente_id`
 left join cfdi cfdi on (cfdi.id=venta.cfdi_id)
-where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('VENTA','FACTURADA','PAGADA')]]></queryString>
+where venta.fecha between $P{FECHA_INI} AND $P{FECHA_FIN}]]></queryString>
 
 	<field name="venta_id" class="java.lang.Long"/>
 	<field name="venta_fecha" class="java.sql.Timestamp"/>
@@ -118,6 +116,8 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 	<field name="cliente_nombre" class="java.lang.String"/>
 	<field name="venta_total" class="java.math.BigDecimal"/>
 	<field name="folio" class="java.lang.Long"/>
+	<field name="subtotal" class="java.math.BigDecimal"/>
+	<field name="impuesto" class="java.math.BigDecimal"/>
 
 	<variable name="TOTAL" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
 		<variableExpression><![CDATA[$F{venta_total}]]></variableExpression>
@@ -197,7 +197,7 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 						key="image"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.io.File"><![CDATA[$P{EMPRESA_LOGO}]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA[$P{EMPRESA_LOGO}]]></imageExpression>
 				</image>
 			</band>
 		</title>
@@ -238,7 +238,7 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 						style="Column header"
 						x="123"
 						y="19"
-						width="61"
+						width="46"
 						height="15"
 						key="staticText"/>
 					<box></box>
@@ -250,9 +250,9 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 				<staticText>
 					<reportElement
 						style="Column header"
-						x="184"
-						y="19"
-						width="65"
+						x="169"
+						y="18"
+						width="37"
 						height="15"
 						key="staticText"/>
 					<box></box>
@@ -264,9 +264,9 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 				<staticText>
 					<reportElement
 						style="Column header"
-						x="249"
-						y="19"
-						width="236"
+						x="206"
+						y="18"
+						width="171"
 						height="15"
 						key="staticText"/>
 					<box></box>
@@ -278,9 +278,9 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 				<staticText>
 					<reportElement
 						style="Column header"
-						x="485"
+						x="496"
 						y="19"
-						width="70"
+						width="56"
 						height="15"
 						key="staticText"/>
 					<box></box>
@@ -302,6 +302,34 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 						<font pdfFontName="Helvetica-Bold" size="10"/>
 					</textElement>
 				<text><![CDATA[FAC]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="Column header"
+						x="377"
+						y="19"
+						width="56"
+						height="15"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" size="10"/>
+					</textElement>
+				<text><![CDATA[Importe]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="Column header"
+						x="435"
+						y="19"
+						width="56"
+						height="15"
+						key="staticText-3"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" size="10"/>
+					</textElement>
+				<text><![CDATA[Impuesto]]></text>
 				</staticText>
 			</band>
 		</columnHeader>
@@ -338,7 +366,7 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 						style="Detail"
 						x="123"
 						y="0"
-						width="61"
+						width="46"
 						height="10"
 						key="textField"/>
 					<box></box>
@@ -350,9 +378,9 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						style="Detail"
-						x="184"
+						x="169"
 						y="0"
-						width="65"
+						width="37"
 						height="10"
 						key="textField"/>
 					<box></box>
@@ -364,9 +392,9 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						style="Detail"
-						x="249"
+						x="206"
 						y="0"
-						width="236"
+						width="171"
 						height="10"
 						key="textField"/>
 					<box></box>
@@ -378,9 +406,9 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						style="Detail"
-						x="485"
+						x="496"
 						y="0"
-						width="70"
+						width="56"
 						height="10"
 						key="textField"/>
 					<box></box>
@@ -402,6 +430,34 @@ where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} and status in ('
 						<font size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{folio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="Detail"
+						x="377"
+						y="1"
+						width="56"
+						height="10"
+						key="textField-2"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{subtotal}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="Detail"
+						x="435"
+						y="1"
+						width="56"
+						height="10"
+						key="textField-3"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{impuesto}]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>

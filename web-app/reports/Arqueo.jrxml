@@ -130,7 +130,7 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 			</band>
 			</groupHeader>
 			<groupFooter>
-			<band height="65"  isSplitAllowed="true" >
+			<band height="24"  isSplitAllowed="true" >
 				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="328"
@@ -189,38 +189,10 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 					</textElement>
 				<text><![CDATA[DEPOSITO CAJERO :]]></text>
 				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="49"
-						width="127"
-						height="14"
-						key="staticText-113"/>
-					<box>					<topPen lineWidth="0.5"/>
-</box>
-					<textElement textAlignment="Center">
-						<font size="8"/>
-					</textElement>
-				<text><![CDATA[REVISO]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="413"
-						y="48"
-						width="127"
-						height="14"
-						key="staticText-114"/>
-					<box>					<topPen lineWidth="0.5"/>
-</box>
-					<textElement textAlignment="Center">
-						<font size="8"/>
-					</textElement>
-				<text><![CDATA[CAJERO]]></text>
-				</staticText>
 				<line direction="TopDown">
 					<reportElement
 						x="0"
-						y="64"
+						y="23"
 						width="582"
 						height="0"
 						forecolor="#CCCCCC"
@@ -308,7 +280,6 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
 					<imageExpression class="java.io.File"><![CDATA[$P{EMPRESA_LOGO}]]></imageExpression>
-					
 				</image>
 				<staticText>
 					<reportElement
@@ -773,7 +744,7 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 			</band>
 		</lastPageFooter>
 		<summary>
-			<band height="111"  isSplitAllowed="true" >
+			<band height="179"  isSplitAllowed="true" >
 				<staticText>
 					<reportElement
 						x="202"
@@ -1021,6 +992,34 @@ order by cajero,forma_de_pago,date_created]]></queryString>
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
 				<text><![CDATA[RESUMEN COBRANZA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="110"
+						y="156"
+						width="127"
+						height="14"
+						key="staticText-125"/>
+					<box>					<topPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[REVISO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="337"
+						y="155"
+						width="127"
+						height="14"
+						key="staticText-126"/>
+					<box>					<topPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[CAJERO]]></text>
 				</staticText>
 			</band>
 		</summary>
