@@ -102,6 +102,14 @@
 					class="form-control text-right" disabled/>
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label class="col-sm-offset-2 col-sm-4 control-label">Saldo</label>
+				<div class=" col-sm-6 ">
+					<input value="${formatNumber(number:ventaInstance.saldo,type:'currency')}" 
+					class="form-control text-right" disabled/>
+				</div>
+			</div>
 		</form>
 
 		
