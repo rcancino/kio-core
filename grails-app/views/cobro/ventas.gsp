@@ -81,24 +81,27 @@
 							<td><g:formatNumber number="${row.saldo}" type="currency"/></td>
 							<td>
 								
-									<g:if test="${row.cfdi}">
-										<abbr title="${row.cfdi.uuid}">
-										<g:link controller="cfdi" action="show" id="${row?.cfdi?.id}">
-											%{-- ${org.apache.commons.lang.StringUtils.substringAfterLast(row?.cfdi?.uuid,'-')} --}%
-											${row.cfdi.folio}
-										</g:link>
-										</abbr>
-									</g:if>
+								<g:if test="${row.cfdi}">
+									<abbr title="${row.cfdi.uuid}">
+									<g:link controller="cfdi" action="show" id="${row?.cfdi?.id}">
+										%{-- ${org.apache.commons.lang.StringUtils.substringAfterLast(row?.cfdi?.uuid,'-')} --}%
+										${row.cfdi.folio}
+									</g:link>
+									</abbr>
+								</g:if>
 								
 							</td>
 						</tr>
 					</g:each>
 				</tbody>
 			</table>
-			
+			<div class="pagination">
+				<g:paginate total="${ventaInstanceListTotal ?: 0}"/>
+			</div>
 		</div>
-		<g:render template="search"/>
+		
 	</div>
+	<g:render template="search"/>
 </content>
 <content tag="javascript">
 	<script type="text/javascript">

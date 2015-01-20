@@ -16,12 +16,11 @@
 </content>
 
 <content tag="operaciones">
-	%{-- <li>
-	    <g:link action="create" >
-	        <i class="fa fa-plus"></i> Nuevo
-	    </g:link>
-	    
-	</li> --}%
+	<li>
+		<a href="#searchDialog" data-toggle="modal">
+			<i class="fa fa-search"></i> Busqueda avanzada
+		</a>
+	</li>
 </content>
 
 <content tag="reportes">
@@ -40,6 +39,7 @@
 					
 					<th>Cliente</th>
 					<th>Venta</th>
+					<th>Factura</th>
 					<th>Fecha</th>
 					<th>Importe</th>
 				</tr>
@@ -58,6 +58,7 @@
 								${fieldValue(bean:row,field:"cliente.nombre")}
 							</g:link>
 						</td>
+						<td>${fieldValue(bean:row,field:"venta.id")}</td>
 						<td>${fieldValue(bean:row,field:"venta.cfdi.folio")}</td>
 						<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
 						<td><g:formatNumber number="${row.importe}" type="currency"/></td>
@@ -69,6 +70,7 @@
 			<g:paginate total="${cobroInstanceCount ?: 0}"/>
 		</div>
 		<g:render template="cobranzaDialog"/>
+		<g:render template="searchCobros"/>
 	</div>
 </content>
 <content tag="javascript">

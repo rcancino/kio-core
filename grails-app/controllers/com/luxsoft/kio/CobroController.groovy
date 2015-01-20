@@ -15,7 +15,7 @@ class CobroController {
         params.max = Math.min(max ?: 50, 100)
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
-        [cobroInstanceList:Cobro.list(params),cobroInstanceListTotal:Cobro.count()]
+        [cobroInstanceList:Cobro.list(params),cobroInstanceCount:Cobro.count()]
     }
 
     def pendientes(Long max){
@@ -108,14 +108,23 @@ class CobroController {
     }
 
     def ventas(){ 
-        params.max = 100
-        params.sort=params.sort?:'dateCreated'
+        params.max = 20
+        params.sort=params.sort?:'fecha'
         params.order='desc'
+        /*
         def now=new Date()
-        def list=Venta.executeQuery("from Venta v where date(v.fecha) between ? and ? and v.status in ('VENTA','PAGADA','FACTURADA','CANCELADA')"
+        def list=Venta.executeQuery(
+            "from Venta v where date(v.fecha) between ? and ? and v.status in ('VENTA','PAGADA','FACTURADA','CANCELADA')"
             ,[now-2,now])
+        */
+        /*
+        def list=Venta.executeQuery(
+            "from Venta v where  v.status in ('VENTA','PAGADA','FACTURADA','CANCELADA')"
+            ,[],params)
         log.info 'Ventas registradas: '+list.size()
-        [ventaInstanceList:list,ventaInstanceListTotal:list.size()]
+        */
+        [ventaInstanceList:Venta.findAllByStatusNotEqual('PEDIDO',params)
+            ,ventaInstanceListTotal:Venta.countByStatusNotEqual('PEDIDO')]
     }
 
     def facturar(Venta venta){
@@ -147,6 +156,30 @@ class CobroController {
         render view:'ventas',model:[ventaInstanceList:list,ventaInstanceCount:list.size()]
     }
 
+    def searchCobros(SearchCobroCommand command){
+        command.nombre=command.nombre?:'%'
+        command.venta=command.venta?:'%'
+        command.fechaInicial=command.fechaInicial?:new Date()-30
+        command.fechaFinal=command.fechaFinal?:new Date()
+        params.max = 50
+        params.sort=params.sort?:'dateCreated'
+        params.order='desc'
+        println 'Buscando por: '+params
+        
+        //def hql="from Cobro c where lower(c.cliente.nombre) like ?  and date(c.fecha) between ? and ?  and c.venta.id like ?"
+        def hql="from Cobro c where c.fecha between ? and ?"
+        
+        def list=Cobro.findAll(hql,[
+            //command.nombre.toLowerCase()
+            command.fechaInicial
+            ,command.fechaFinal
+            //,command.venta
+            ]
+            ,params)
+        render view:'index',model:[cobroInstanceList:list,cobroInstanceCount:list.size()]
+
+    }
+
     
 }
 
@@ -166,5 +199,27 @@ class SearchVentaCommand{
         fechaInicial nullable:true
         fechaFinal nullable:true
         nombre nullable:true
+    }
+}
+
+
+@Validateable
+class SearchCobroCommand{
+    
+    String nombre
+    Long venta
+
+    @BindingFormat('dd/MM/yyyy')
+    Date fechaInicial=new Date()-30
+    
+    @BindingFormat('dd/MM/yyyy')
+    Date fechaFinal=new Date()
+    
+
+    static constraints={
+        fechaInicial nullable:true
+        fechaFinal nullable:true
+        nombre nullable:true
+        venta nullable:true
     }
 }
