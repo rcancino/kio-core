@@ -27,17 +27,20 @@
 	<parameter name="EMPRESA_LOGO" isForPrompting="false" class="java.lang.Object"/>
 	<parameter name="EMPRESA_LOGO_1" isForPrompting="false" class="java.lang.Object"/>
 	<queryString><![CDATA[SELECT  c.nombre,v.id,ifnull(concat(d.folio,' ',d.serie),'') as folio_cfdi,v.total as total_fac,a.importe as cobrado,p.forma_de_pago
+,(case when p.anticipo is true THEN 'ANT' ELSE '' END) AS ANTI
 ,a.fecha,v.fecha as fecha_fac
-,(case when p.forma_de_pago ='EFECTIVO' THEN a.importe ELSE 0 END) AS 'EFECTIVO'
-,(case when p.forma_de_pago ='CHEQUE' THEN a.importe ELSE 0 END) AS 'CHEQUE'
-,(case when p.forma_de_pago ='TARJETA_DE_CREDITO' THEN a.importe ELSE 0 END) AS 'TARJETA_DE_CREDITO'
-,(case when p.forma_de_pago ='TARJETA_DE_DEBITO' THEN a.importe ELSE 0 END) AS 'TARJETA_DE_DEBITO'
-,(case when p.forma_de_pago ='CARGO_RECURRENTE' THEN a.importe ELSE 0 END) AS 'CARGO_RECURRENTE'
-,(case when p.forma_de_pago ='AMERICAN_EXPRESS' THEN a.importe ELSE 0 END) AS 'AMERICAN_EXPRESS'
-,(case when p.forma_de_pago ='DEPOSITO' THEN a.importe ELSE 0 END) AS 'DEPOSITO'
-,(case when p.forma_de_pago ='TRANSFERENCIA' THEN a.importe ELSE 0 END) AS 'TRANSFERENCIA'
+,(case when p.anticipo is true THEN a.importe ELSE 0 END) AS 'ANTICIPO'
+,(case when p.forma_de_pago ='EFECTIVO' AND ANTICIPO IS FALSE THEN a.importe ELSE 0 END) AS 'EFECTIVO'
+,(case when p.forma_de_pago ='CHEQUE' AND ANTICIPO IS FALSE THEN a.importe ELSE 0 END) AS 'CHEQUE'
+,(case when p.forma_de_pago ='TARJETA_DE_CREDITO' AND ANTICIPO IS FALSE THEN a.importe ELSE 0 END) AS 'TARJETA_DE_CREDITO'
+,(case when p.forma_de_pago ='TARJETA_DE_DEBITO' AND ANTICIPO IS FALSE THEN a.importe ELSE 0 END) AS 'TARJETA_DE_DEBITO'
+,(case when p.forma_de_pago ='CARGO_RECURRENTE' AND ANTICIPO IS FALSE THEN a.importe ELSE 0 END) AS 'CARGO_RECURRENTE'
+,(case when p.forma_de_pago ='AMERICAN_EXPRESS' AND ANTICIPO IS FALSE THEN a.importe ELSE 0 END) AS 'AMERICAN_EXPRESS'
+,(case when p.forma_de_pago ='DEPOSITO' AND ANTICIPO IS FALSE THEN a.importe ELSE 0 END) AS 'DEPOSITO'
+,(case when p.forma_de_pago ='TRANSFERENCIA' AND ANTICIPO IS FALSE THEN a.importe ELSE 0 END) AS 'TRANSFERENCIA'
 FROM aplicacion_de_pago a join pago p on (p.id=a.pago_id) join venta v on (v.id=a.venta_id) join cliente c on (c.id=v.cliente_id) left join cfdi d on (d.origen=v.id)
-where a.fecha=$P{FECHA}
+left join cancelacion_de_cfdi o on (d.id=o.cfdi_id)
+where a.fecha=$P{FECHA} and o.id is null
 order by v.id]]></queryString>
 
 	<field name="nombre" class="java.lang.String"/>
@@ -46,8 +49,10 @@ order by v.id]]></queryString>
 	<field name="total_fac" class="java.math.BigDecimal"/>
 	<field name="cobrado" class="java.math.BigDecimal"/>
 	<field name="forma_de_pago" class="java.lang.String"/>
+	<field name="ANTI" class="java.lang.String"/>
 	<field name="fecha" class="java.sql.Date"/>
 	<field name="fecha_fac" class="java.sql.Timestamp"/>
+	<field name="ANTICIPO" class="java.math.BigDecimal"/>
 	<field name="EFECTIVO" class="java.math.BigDecimal"/>
 	<field name="CHEQUE" class="java.math.BigDecimal"/>
 	<field name="TARJETA_DE_CREDITO" class="java.math.BigDecimal"/>
@@ -83,6 +88,9 @@ order by v.id]]></queryString>
 	</variable>
 	<variable name="TOTAL_RECURRENTE" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
 		<variableExpression><![CDATA[$F{CARGO_RECURRENTE}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_ANTICIPO" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{ANTICIPO}]]></variableExpression>
 	</variable>
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -189,7 +197,7 @@ order by v.id]]></queryString>
 				<staticText>
 					<reportElement
 						mode="Opaque"
-						x="106"
+						x="93"
 						y="7"
 						width="52"
 						height="15"
@@ -208,9 +216,9 @@ order by v.id]]></queryString>
 				<staticText>
 					<reportElement
 						mode="Opaque"
-						x="163"
+						x="145"
 						y="7"
-						width="215"
+						width="184"
 						height="15"
 						key="staticText-86"/>
 					<box>					<pen lineWidth="0.0" lineStyle="Solid" lineColor="#CCCCCC"/>
@@ -227,7 +235,7 @@ order by v.id]]></queryString>
 				<staticText>
 					<reportElement
 						mode="Opaque"
-						x="442"
+						x="385"
 						y="7"
 						width="55"
 						height="15"
@@ -246,9 +254,9 @@ order by v.id]]></queryString>
 				<staticText>
 					<reportElement
 						mode="Opaque"
-						x="508"
+						x="445"
 						y="7"
-						width="70"
+						width="94"
 						height="15"
 						key="staticText-106"/>
 					<box>					<pen lineWidth="0.0" lineStyle="Solid" lineColor="#CCCCCC"/>
@@ -265,7 +273,7 @@ order by v.id]]></queryString>
 				<staticText>
 					<reportElement
 						mode="Opaque"
-						x="384"
+						x="331"
 						y="7"
 						width="55"
 						height="15"
@@ -286,7 +294,7 @@ order by v.id]]></queryString>
 						mode="Opaque"
 						x="0"
 						y="7"
-						width="51"
+						width="41"
 						height="15"
 						key="staticText-113"/>
 					<box>					<pen lineWidth="0.0" lineStyle="Solid" lineColor="#CCCCCC"/>
@@ -303,7 +311,7 @@ order by v.id]]></queryString>
 				<staticText>
 					<reportElement
 						mode="Opaque"
-						x="54"
+						x="40"
 						y="7"
 						width="52"
 						height="15"
@@ -319,15 +327,34 @@ order by v.id]]></queryString>
 					</textElement>
 				<text><![CDATA[FACTURA]]></text>
 				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="539"
+						y="7"
+						width="37"
+						height="15"
+						key="staticText-125"/>
+					<box>					<pen lineWidth="0.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+						<font fontName="Arial" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
+					</textElement>
+				<text><![CDATA[ANT]]></text>
+				</staticText>
 			</band>
 		</columnHeader>
 		<detail>
 			<band height="28"  isSplitAllowed="true" >
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="502"
+						x="445"
 						y="6"
-						width="76"
+						width="94"
 						height="11"
 						key="textField"/>
 					<box></box>
@@ -338,7 +365,7 @@ order by v.id]]></queryString>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="12"
+						x="2"
 						y="6"
 						width="39"
 						height="11"
@@ -351,7 +378,7 @@ order by v.id]]></queryString>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="54"
+						x="40"
 						y="6"
 						width="51"
 						height="11"
@@ -364,7 +391,7 @@ order by v.id]]></queryString>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="106"
+						x="93"
 						y="6"
 						width="51"
 						height="11"
@@ -377,7 +404,7 @@ order by v.id]]></queryString>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="384"
+						x="331"
 						y="6"
 						width="51"
 						height="11"
@@ -390,9 +417,9 @@ order by v.id]]></queryString>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="163"
+						x="145"
 						y="6"
-						width="215"
+						width="184"
 						height="11"
 						key="textField"/>
 					<box></box>
@@ -403,7 +430,7 @@ order by v.id]]></queryString>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="442"
+						x="385"
 						y="6"
 						width="51"
 						height="11"
@@ -413,6 +440,19 @@ order by v.id]]></queryString>
 						<font size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{cobrado}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="539"
+						y="6"
+						width="37"
+						height="11"
+						key="textField-94"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ANTI}]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>
@@ -769,7 +809,7 @@ order by v.id]]></queryString>
 				<staticText>
 					<reportElement
 						x="298"
-						y="95"
+						y="108"
 						width="115"
 						height="11"
 						key="staticText-120"/>
@@ -782,7 +822,7 @@ order by v.id]]></queryString>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="418"
-						y="95"
+						y="108"
 						width="66"
 						height="11"
 						key="textField-89"/>
@@ -870,6 +910,32 @@ order by v.id]]></queryString>
 						<font size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_AMEX}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="298"
+						y="94"
+						width="115"
+						height="11"
+						key="staticText-124"/>
+					<box></box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[ANTICIPO:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="418"
+						y="94"
+						width="66"
+						height="11"
+						key="textField-93"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL_ANTICIPO}]]></textFieldExpression>
 				</textField>
 			</band>
 		</summary>
