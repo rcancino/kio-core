@@ -167,7 +167,7 @@ class CobroController {
         println 'Buscando por: '+params
         
         //def hql="from Cobro c where lower(c.cliente.nombre) like ?  and date(c.fecha) between ? and ?  and c.venta.id like ?"
-        def hql="from Cobro c where c.fecha between ? and ?"
+        def hql="from Cobro c where date(c.fecha) between ? and ?"
         
         def list=Cobro.findAll(hql,[
             //command.nombre.toLowerCase()

@@ -14,7 +14,7 @@
 				
 				<div class="modal-body">
 
-					<div class="form-group">
+					%{-- <div class="form-group">
 						<label for="nombre" class="col-sm-2 control-label">Cliente</label>
 						<div class="col-sm-10">
 							<g:field id="nombre" type="text" placeholder="Cliente" 
@@ -30,7 +30,7 @@
 								name="venta" class="form-control"  />
 							<span class="help-block">${"Puede usuari el comodín %"}</span>
 						</div>
-					</div>
+					</div> --}%
 
 					<div class="form-group">
 						<label for="fechaInicial" class="col-sm-2 control-label">Fecha Inicial</label>

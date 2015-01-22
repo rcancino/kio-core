@@ -87,6 +87,12 @@ class PagoService {
 
     	def ventas=pago.aplicaciones.collect{it.venta}
         cancelarPagoDeMembresias(pago)
+        def cobro=Cobro.findByPago(pago)
+        if(cobro){
+            println 'Eliminando cobro: '+cobro.id
+            cobro.pago=null
+            cobro.delete flush:true
+        }
     	pago.delete flush:true
 
     	ventas.each{ venta->
@@ -98,6 +104,8 @@ class PagoService {
     		venta.save()
     		log.info "Saldo actuaizado ${venta.saldo}  (Pagos: ${venta.pagos}) "
     	}
+        
+
     }
 
     def actualizarMembresias(Long pagoId){

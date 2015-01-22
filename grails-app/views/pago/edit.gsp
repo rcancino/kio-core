@@ -45,6 +45,13 @@
 					<g:link class="list-group-item" action='cancelarPagoDeMembresias' id="${pagoInstance.id}">
 						<i class="fa fa-lock"></i>&nbsp; Cancelar pago de membresias
 					</g:link>
+					<g:if test="${!pagoInstance.aplicaciones}">
+						<g:link class="list-group-item list-group-item-danger" 
+							onclick="return confirm('Eliminar pago?');"
+							action='delete' id="${pagoInstance.id}"> 
+							<i class="fa fa-trash"></i>&nbsp; Eliminar pago
+						</g:link>
+					</g:if>
 					
 				</div>
 			</div>
