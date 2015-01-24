@@ -126,7 +126,7 @@
 								</td>
 								<td>
 									<g:if test="${row.cfdi}">
-										<g:link action="show" id="${row.cfdi.id}">
+										<g:link controller="cfdi" action="show" id="${row.cfdi.id}">
 											${row.cfdi.folio}
 										</g:link>
 									</g:if>

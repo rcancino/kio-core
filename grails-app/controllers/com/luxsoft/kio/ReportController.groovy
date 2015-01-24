@@ -61,7 +61,7 @@ class ReportController {
 		repParams['reportName']=command.reportName
 		ByteArrayOutputStream  pdfStream=runReport(repParams)
 		render(file: pdfStream.toByteArray(), contentType: 'application/pdf'
-			,fileName:repParams.reportName)
+			,fileName:"$repParams.reportName"+".pdf")
 	}
 
 	def catalogoDeSocios(){
