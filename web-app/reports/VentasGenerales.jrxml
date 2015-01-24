@@ -29,6 +29,7 @@
 
 	<style 
 		name="Title"
+		isDefault="false"
 		fontName="Arial"
 		fontSize="26"
 		isBold="true"
@@ -37,6 +38,7 @@
 	</style>
 	<style 
 		name="SubTitle"
+		isDefault="false"
 		forecolor="#666666"
 		fontName="Arial"
 		fontSize="18"
@@ -44,6 +46,7 @@
 	</style>
 	<style 
 		name="Column header"
+		isDefault="false"
 		forecolor="#666666"
 		fontName="Arial"
 		fontSize="12"
@@ -52,6 +55,7 @@
 	</style>
 	<style 
 		name="Detail"
+		isDefault="false"
 		fontName="Arial"
 		fontSize="12"
 	>
@@ -108,7 +112,7 @@
 FROM
      `cliente` cliente INNER JOIN `venta` venta ON cliente.`id` = venta.`cliente_id`
 left join cfdi cfdi on (cfdi.id=venta.cfdi_id)
-where venta.fecha between $P{FECHA_INI} AND $P{FECHA_FIN}]]></queryString>
+where date(venta.fecha) between $P{FECHA_INI} AND $P{FECHA_FIN} AND venta.status<>'PEDIDO']]></queryString>
 
 	<field name="venta_id" class="java.lang.Long"/>
 	<field name="venta_fecha" class="java.sql.Timestamp"/>
@@ -119,8 +123,16 @@ where venta.fecha between $P{FECHA_INI} AND $P{FECHA_FIN}]]></queryString>
 	<field name="subtotal" class="java.math.BigDecimal"/>
 	<field name="impuesto" class="java.math.BigDecimal"/>
 
+	<sortField name="folio" />
+
 	<variable name="TOTAL" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
 		<variableExpression><![CDATA[$F{venta_total}]]></variableExpression>
+	</variable>
+	<variable name="IMPORTE" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{subtotal}]]></variableExpression>
+	</variable>
+	<variable name="IMPUESTO" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{impuesto}]]></variableExpression>
 	</variable>
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -527,16 +539,42 @@ where venta.fecha between $P{FECHA_INI} AND $P{FECHA_FIN}]]></queryString>
 			<band height="50"  isSplitAllowed="true" >
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="448"
+						x="496"
 						y="2"
-						width="107"
-						height="19"
+						width="59"
+						height="11"
 						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{TOTAL}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="377"
+						y="2"
+						width="59"
+						height="11"
+						key="textField-4"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{IMPORTE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="437"
+						y="2"
+						width="59"
+						height="11"
+						key="textField-5"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{IMPUESTO}]]></textFieldExpression>
 				</textField>
 			</band>
 		</summary>
