@@ -26,7 +26,7 @@
   					<div class="panel-footer">
   						<div class="btn-group">
   						
-  							<g:link class="btn btn-default btn-sm" action="imprimir" resource="${cfdiInstance}">
+  							<g:link class="btn btn-default btn-sm" action="imprimirCfdi" id="${cfdiInstance.id}">
 								<span class="glyphicon glyphicon-print"> Imprimir</span>
 							</g:link>
   						
