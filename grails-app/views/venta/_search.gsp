@@ -10,7 +10,7 @@
 				
 			</div>
 
-			<g:form class="form-horizontal" action="searchVentas" >
+			<g:form class="form-horizontal" action="searchTodas" >
 				
 				<div class="modal-body">
 
@@ -27,16 +27,17 @@
 						<label for="fechaInicial" class="col-sm-2 control-label">Fecha Inicial</label>
 						<div class="col-sm-10">
 							<g:field  type="text" name="fechaInicial" class="form-control dateField"  
-							value="${(new Date()-10).format('dd/MM/yyyy')}"/>
+							value="${session.searchPeriodo.fechaInicial.format('dd/MM/yyyy')}"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="fechaFinal" class="col-sm-2 control-label">Fecha Final</label>
 						<div class="col-sm-10">
 							<g:field  type="text" name="fechaFinal" class="form-control dateField"  
-							value="${(new Date()).format('dd/MM/yyyy')}"/>
+							value="${session.searchPeriodo.fechaFinal.format('dd/MM/yyyy')}"/>
 						</div>
 					</div>
+
 					<div class="form-group">
 						<label for="venta" class="col-sm-2 control-label">Venta</label>
 						<div class="col-sm-10">
@@ -50,7 +51,6 @@
 							<g:field  type="text" name="factura" class="form-control"/>
 						</div>
 					</div>
-					
 					
 				</div>	
 				<div class="modal-footer">

@@ -11,7 +11,7 @@ class LimpiarAccessLogJob {
 
     static triggers = {
       //simple name:'simpleTrigger', startDelay:60000, repeatInterval: 60000, repeatCount: 10
-      cron cronExpression: "0 20 4,5 ? * MON-SUN"
+      cron cronExpression: "0 0 5,23 ? * MON-SUN"
     }
 
     def socioService
@@ -21,7 +21,14 @@ class LimpiarAccessLogJob {
     
     def execute() {
         def fecha=new Date()-1
-    	def res=socioService.limpiarBitacora(fecha,true)
-        log.info 'Limpiando AccessLog anterior a: '+fecha.format('HH:mm:ss')+ " Eliminados: $res"
+        try {
+            def res=socioService.limpiarBitacora(fecha,true)
+            log.info 'Limpiando AccessLog anterior a: '+fecha.format('HH:mm:ss')+ " Eliminados: $res"
+        }
+        catch(Exception e) {
+            log.error e
+        }
+    	
+        
     }
 }

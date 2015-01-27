@@ -42,7 +42,7 @@ class SocioService {
                 folio=new CfdiFolio(serie:'SOCIOS',folio:60000)
                 folio.save flush:true
             }
-            socio.numeroDeSocio=StringUtils.leftPad(folio.next().toString(),6,'0')
+            socio.numeroDeSocio=StringUtils.leftPad(folio.next().toString(),5,'0')
         }
         
     	socio=socio.save failOnError:true
@@ -211,7 +211,7 @@ class SocioService {
             } 
             row++
             socio.save flush:true
-            log.info "Procesado $socio ($row de ${socios.size()})"
+            log.debug "Procesado $socio ($row de ${socios.size()})"
         }
         res.suspendidos=suspendidos
         res.activados=activados

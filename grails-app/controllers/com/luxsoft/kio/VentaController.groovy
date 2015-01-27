@@ -26,6 +26,27 @@ class VentaController {
         [ventaInstanceList:list,ventaInstanceListTotal:list.size()]
     }
 
+    def searchTodas(SearchVentaCommand command){
+        command.nombre=command.nombre?:'%'
+        command.fechaInicial=command.fechaInicial?:new Date()-30
+        command.fechaFinal=command.fechaFinal?:new Date()
+        params.max = 50
+        params.sort=params.sort?:'dateCreated'
+        params.order='desc'
+        
+        def hql="from Venta v where lower(v.cliente.nombre) like ?  and date(v.fecha) between ? and ? "
+        
+        def list=[]
+        if(command.venta){
+            list=Venta.findAllById(command.venta)
+        }else if(command.factura){
+            list=Venta.findAll("from Venta v where v.cfdi.folio=?",[command.factura])
+        }else{
+            list=Venta.findAll(hql,[command.nombre.toLowerCase(),command.fechaInicial,command.fechaFinal],params)
+        }
+        render view:'todas',model:[ventaInstanceList:list,ventaInstanceCount:list.size()]
+    }
+
     
     def create(){
         
@@ -176,3 +197,5 @@ class VentaPorSocioCmd {
     	return v
     }
 }
+
+

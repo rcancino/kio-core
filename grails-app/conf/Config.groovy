@@ -139,6 +139,7 @@ log4j.main = {
         info 'grails.app.services.com.luxsoft.kyo'
         info 'grails.app.services.com.luxsoft.kio'
 			  info 'grails.app.services.com.luxsoft.cfdi'
+        debug 'grails.app.services.com.luxsoft.kyo.SocioService'
         info 'grails.app.controllers.com.luxsoft.kio'
 			  info 'com.luxsoft.cfdi'
         info 'grails.app.jobs'

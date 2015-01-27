@@ -3,6 +3,8 @@
 <meta charset="UTF-8">
 <meta name="layout" content="reportes"/>
 <title>Calificación Para Incentivo</title>
+<asset:stylesheet src="jquery-ui.css"/>
+	<asset:javascript src="jquery-ui/autocomplete.js"/>
 </head>
 <body>
 
@@ -23,10 +25,30 @@
 			<fieldset>
 				<legend> Parámetros</legend>
 				<f:with bean="${reportCommand}">
-					<f:field property="fechaInicial" 
+
+					<div class="form-group">
+						<label for="fechaInicial" class="col-sm-4 control-label ">Fecha Inicial</label>
+						<div class="col-sm-6">
+							<input  id="fechaInicial" name="fechaInicial" type="text" class="form-control dateField" 
+							type="text"
+							autocomplete="off"
+							value="${reportCommand?.fechaInicial?.format('dd/MM/yyyy')}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="fechaFinal" class="col-sm-4 control-label">Fecha Final</label>
+						<div class="col-sm-6">
+							<input  id="fechaFinal" name="fechaFinal" type="text" class="form-control dateField" type="text"
+							  autocomplete="off"
+							  value="${reportCommand?.fechaFinal?.format('dd/MM/yyyy')}">
+						</div>
+					</div>
+
+					%{-- <f:field property="fechaInicial" 
 						input-class="form-control" 
-						cols="col-sm-9" colsLabel="col-sm-3"/>
-					<f:field property="fechaFinal" input-class="form-control" cols="col-sm-9" colsLabel="col-sm-3"/>
+						cols="col-sm-9" colsLabel="col-sm-3"/> --}%
+					%{-- <f:field property="fechaFinal" input-class="form-control dateField" cols="col-sm-9" colsLabel="col-sm-3"/> --}%
 				</f:with>
 			</fieldset>
 			<div class="form-group">
@@ -42,6 +64,12 @@
 
 	<content tag="javascript">
 		<script type="text/javascript">
+				$(document).ready(function(){
+					//$("#importe").autoNumeric({wEmpty:'zero',mRound:'B',aSign: '$'});
+					$(".dateField").datepicker({
+			     
+			 		});
+			 	});
 			// $('form[name=reportForm]').submit(function(e){
 	  //   		$(this).children('input[type=submit]').attr('disabled', 'disabled');
 	  //   		console.log("Desablidatndo submit button....");

@@ -151,8 +151,15 @@ class CobroController {
         //println 'Nomibr: '+command.nombre
         
         def hql="from Venta v where lower(v.cliente.nombre) like ?  and date(v.fecha) between ? and ? "
-        
-        def list=Venta.findAll(hql,[command.nombre.toLowerCase(),command.fechaInicial,command.fechaFinal],params)
+        def list=[]
+        if(command.venta){
+            list=Venta.findAllById(command.venta)
+        }else if(command.factura){
+            list=Venta.findAll("from Venta v where v.cfdi.folio=?",[command.factura])
+        }else{
+            list=Venta.findAll(hql,[command.nombre.toLowerCase(),command.fechaInicial,command.fechaFinal],params)
+        }
+        //list=Venta.findAll(hql,[command.nombre.toLowerCase(),command.fechaInicial,command.fechaFinal],params)
         render view:'ventas',model:[ventaInstanceList:list,ventaInstanceCount:list.size()]
     }
 
@@ -187,6 +194,8 @@ class CobroController {
 class SearchVentaCommand{
     
     String nombre
+    Long venta
+    String factura
 
     @BindingFormat('dd/MM/yyyy')
     Date fechaInicial=new Date()-30
@@ -199,6 +208,8 @@ class SearchVentaCommand{
         fechaInicial nullable:true
         fechaFinal nullable:true
         nombre nullable:true
+        venta nullable:true
+        factura nullable:true
     }
 }
 

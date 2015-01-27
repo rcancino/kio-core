@@ -59,9 +59,10 @@ class ReportController {
 		repParams['FECHA_INI']=command.fechaInicial
 		repParams['FECHA_FIN']=command.fechaFinal
 		repParams['reportName']=command.reportName
+		def ts=new Date().format('_dd_MM_yyyy_hhmm_')
 		ByteArrayOutputStream  pdfStream=runReport(repParams)
 		render(file: pdfStream.toByteArray(), contentType: 'application/pdf'
-			,fileName:"$repParams.reportName"+".pdf")
+			,fileName:"$repParams.reportName"+ts+".pdf")
 	}
 
 	def catalogoDeSocios(){

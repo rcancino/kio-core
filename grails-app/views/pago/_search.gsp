@@ -37,6 +37,20 @@
 							value="${session.searchPeriodo.fechaFinal.format('dd/MM/yyyy')}"/>
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label for="factura" class="col-sm-2 control-label">Factura</label>
+						<div class="col-sm-10">
+							<g:field  type="text" name="factura" class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="venta" class="col-sm-2 control-label">Venta</label>
+						<div class="col-sm-10">
+							<g:field  type="text" name="venta" class="form-control" />
+						</div>
+					</div>
 					
 					
 				</div>	

@@ -173,6 +173,7 @@
 		</div>
 	
 		<g:render template="/_common/periodoDialog"/>
+		<g:render template="search"/>
 	</div>
 	
 </body>
