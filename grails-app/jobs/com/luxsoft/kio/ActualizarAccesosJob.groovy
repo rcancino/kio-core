@@ -12,7 +12,7 @@ class ActualizarAccesosJob {
 
     static triggers = {
       //simple name:'simpleTrigger', startDelay:10000, repeatInterval: 60000, repeatCount: 1
-      cron cronExpression: "0 17 4,5,11,20,21 * * ?"
+      cron cronExpression: "0 0 4,14,23 * * ?"
     }
 
     def execute() {
