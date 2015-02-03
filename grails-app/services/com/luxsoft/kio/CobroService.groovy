@@ -34,6 +34,19 @@ class CobroService {
 		cobro.delete flush:true
 		pagoService.delete(pago)
 	}
+
+	def actualizarVenta(Cobro cobro){
+		def pago=cobro.pago
+		def ap=pago.aplicaciones.find{it.total==cobro.importe}
+		if(ap){
+			cobro.venta=ap.venta
+			return cobro
+		}else{
+			throw new RuntimeException("No existe aplicacion para el cobro")
+		}
+
+
+	}
 	
 	
 }

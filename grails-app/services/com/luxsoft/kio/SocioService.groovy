@@ -159,7 +159,7 @@ class SocioService {
     @NotTransactional
     def limpiarBitacora(Date fecha,boolean replicados){
         if(replicados){
-            def res=AccessLog.executeUpdate("delete from AccessLog a where date(a.dateCreated)<? and replicado is not null"
+            def res=AccessLog.executeUpdate("delete from AccessLog a where date(a.dateCreated)<? and (lectora1 is not null or lectora2 is not null or lectora3 is not null)"
                 ,[fecha])
             return res
         }else{

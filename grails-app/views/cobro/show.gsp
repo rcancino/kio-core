@@ -47,7 +47,11 @@
         					id="${cobroInstance.venta.id}">
         					<i class="fa fa-file-pdf-o fa-fw fa-2x"></i>&nbsp;  Facturar
         				</g:link>
+
+        				
         			</g:if>
+
+
         			
         		</div>
 			</div>
@@ -237,6 +241,7 @@
 				<table id="grid" class="table table-striped table-bordered table-condensed">
 					<thead>
 						<tr>
+							<th>Pago</th>
 							<th>Folio</th>
 							<th>Venta</th>
 							<th>Fecha</th>
@@ -247,7 +252,8 @@
 					<tbody>
 						<g:each in="${cobroInstance.pago.aplicaciones}" var="row">
 							<tr id="${row.id}">
-								<td >
+								<td>${row.pago.id}</td>
+								<td>
 									${row.id}
 								</td>
 								<td>

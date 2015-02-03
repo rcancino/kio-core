@@ -22,7 +22,7 @@ class LimpiarAccessLogJob {
     def execute() {
         def fecha=new Date()-1
         try {
-            def res=socioService.limpiarBitacora(fecha,true)
+            def res=socioService.limpiarBitacora(fecha,false)
             log.info 'Limpiando AccessLog anterior a: '+fecha.format('HH:mm:ss')+ " Eliminados: $res"
         }
         catch(Exception e) {

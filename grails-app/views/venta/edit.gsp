@@ -47,13 +47,18 @@
 
 			</div>
 
+			
 			<div class="form-group">
 				<label for="fecha" class="col-sm-2 control-label">Fecha</label>
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 					%{-- <input id="fecha" name="fecha" type="text"  
 						value="${g.formatDate(date:ventaInstance.fecha,format:'dd/MM/yyyy') }"
 						class="form-control" autocomplete="off"> --}%
 					<p class="form-control-static">${g.formatDate(date:ventaInstance.fecha,format:'dd/MM/yyyy') }</p>
+				</div>
+				<label for="tipo" class="col-sm-2 control-label">Status</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">${ventaInstance.status}</p>
 				</div>
 			</div>
 			<div class="form-group">

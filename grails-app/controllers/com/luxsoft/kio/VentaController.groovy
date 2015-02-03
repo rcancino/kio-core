@@ -102,7 +102,13 @@ class VentaController {
     }
 
     def show(Venta ventaInstance){
-        [ventaInstance:ventaInstance]
+        def aplicacion=AplicacionDePago.findByVenta(ventaInstance)
+        def membresiaLog=null
+        if(aplicacion){
+            membresiaLog=PagoDeMembresiaLog.findByAplicacion(aplicacion)
+
+        }
+        [ventaInstance:ventaInstance,membresiaLog:membresiaLog]
     }
 
     def update(Venta ventaInstance){
@@ -164,6 +170,30 @@ class VentaController {
         ventaService.eliminar(venta)
         flash.message="Venta eliminada ${venta.id}"
         redirect action:'index'
+    }
+
+    def buscarPago(Venta venta){
+        def aplicacion=AplicacionDePago.findByVenta(venta)
+        if(aplicacion){
+            redirect controller:'pago',action:'edit', params:[id:aplicacion.pago.id]
+            return
+        }else{
+            flash.message="Venta sin pago registrado"
+            redirect action:'show',params:[id:venta.id]
+        }
+    }
+
+    def buscarCobro(Venta venta){
+        def cobro=Cobro.findByVenta(venta)
+        if(cobro){
+            redirect controller:'cobro', action:'show',params:[id:cobro.id]
+            return
+
+        }else{
+            flash.message="Venta sin pago registrado"
+            redirect action:'show',params:[id:venta.id]
+        }
+
     }
 
     

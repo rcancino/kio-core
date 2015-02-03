@@ -66,7 +66,7 @@
 					<g:formatNumber number="${row.importeNeto}" type="currency"/>
 				</td>
 				<td>
-					<g:if test="${!row.venta.cfdi}">
+					<g:if test="${!row.venta.cfdi && row.venta.pagos<=0}">
 						<g:link controller="ventaDet" action="delete" id="${row.id}" 
 							onclick="return confirm('Eliminar producto');">
 							<span class="glyphicon glyphicon-trash"></span>

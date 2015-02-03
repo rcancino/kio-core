@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Pedido ${ventaInstance.id}</title>
+	<title>${ventaInstance.status=='PEDIDO'?'Pedido':'Venta'} ${ventaInstance.id}</title>
 	%{-- <asset:stylesheet src="datatables/dataTables.css"/>
 	<asset:javascript src="datatables/dataTables.js"/> 
 	<asset:stylesheet src="jquery-ui.css"/>
@@ -70,13 +70,32 @@
 
 			<div class="form-group">
 				<label for="fecha" class="col-sm-2 control-label">Fecha</label>
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 					%{-- <input id="fecha" name="fecha" type="text"  
 						value="${g.formatDate(date:ventaInstance.fecha,format:'dd/MM/yyyy') }"
 						class="form-control" autocomplete="off"> --}%
 					<p class="form-control-static">${g.formatDate(date:ventaInstance.fecha,format:'dd/MM/yyyy') }</p>
 				</div>
+				<label for="tipo" class="col-sm-2 control-label">Status</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">${ventaInstance.status}</p>
+				</div>
+
 			</div>
+			<g:if test="${membresiaLog}">
+				<div class="form-group">
+					<label for="fecha" class="col-sm-2 control-label">Membresia actualizada</label>
+					<div class="col-sm-3">
+						<p class="form-control-static">${membresiaLog?.id}</p>
+					</div>
+					
+					<label for="proximoPago" class="col-sm-2 control-label">Proximo Pago</label>
+					<div class="col-sm-3">
+						<p class="form-control-static">${g.formatDate(date:membresiaLog?.proximoPago,format:'dd/MM/yyyy') }</p>
+					</div>
+					
+				</div>
+			</g:if>
 		</g:form>
 	</div>		
 	<div class=" col-md-4">
@@ -134,10 +153,22 @@
 			<i class="fa fa-check-square-o"></i> Nueva venta 
 		</g:link>
 
-		<sec:link controller="myController" class="btn btn-danger btn-sm"
-			action="cancelar" expression="hasRole('ADMINISTRACION')">
-			<i class="fa fa-minus-circle"></i> Cancelar
-		</sec:link>
+		<g:if test="${ventaInstance.pagos>0}">
+		
+			<sec:link controller="venta" class="btn btn-warning btn-sm"
+				action="buscarCobro" 
+				expression="hasRole('ADMINISTRACION')"
+				id="${ventaInstance.id}">
+				<i class="fa fa-usd"></i> Ir a cobro
+			</sec:link>
+
+			<sec:link controller="venta" class="btn btn-success btn-sm"
+				action="buscarPago" 
+				expression="hasRole('ADMINISTRACION')"
+				id="${ventaInstance.id}">
+				<i class="fa fa-money"></i> Ir a pago
+			</sec:link>
+		</g:if>
 		
 
   	</div>

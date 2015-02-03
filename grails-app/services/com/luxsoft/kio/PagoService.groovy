@@ -78,7 +78,7 @@ class PagoService {
             log.info "Saldo actuaizado ${venta.saldo}  (Pagos: ${venta.pagos}) "
         }
         actualizarDisponible(pago)
-        
+        eliminarCobro(pago)
         log.info 'Aplicacion eliminada '+aplicacion.id
         return pago
     }
@@ -187,6 +187,13 @@ class PagoService {
         }
     }
 
+    def eliminarCobro(Pago pago){
+        def cobro=Cobro.findByPago(pago)
+        if(cobro){
+            cobro.pago=null
+            cobro.delete()
+        }
+    }
 
 
     def PagoDeMembresiaLog buscarUltimoPago(SocioMembresia m){

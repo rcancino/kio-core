@@ -148,7 +148,7 @@ class CobroController {
         params.max = 50
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
-        //println 'Nomibr: '+command.nombre
+        
         
         def hql="from Venta v where lower(v.cliente.nombre) like ?  and date(v.fecha) between ? and ? "
         def list=[]
@@ -165,27 +165,34 @@ class CobroController {
 
     def searchCobros(SearchCobroCommand command){
         command.nombre=command.nombre?:'%'
-        command.venta=command.venta?:'%'
         command.fechaInicial=command.fechaInicial?:new Date()-30
         command.fechaFinal=command.fechaFinal?:new Date()
         params.max = 50
         params.sort=params.sort?:'dateCreated'
         params.order='desc'
-        println 'Buscando por: '+params
+        
         
         //def hql="from Cobro c where lower(c.cliente.nombre) like ?  and date(c.fecha) between ? and ?  and c.venta.id like ?"
-        def hql="from Cobro c where date(c.fecha) between ? and ?"
-        
-        def list=Cobro.findAll(hql,[
-            //command.nombre.toLowerCase()
-            command.fechaInicial
-            ,command.fechaFinal
-            //,command.venta
-            ]
-            ,params)
+        def list=[]
+        if(command.venta){
+            println 'Buscando por venta'
+            list=Cobro.findAll("from Cobro c where c.venta.id=?",[command.venta])
+        }else{
+            def hql="from Cobro c where date(c.fecha) between ? and ?"
+            list=Cobro.findAll(hql,[
+                //command.nombre.toLowerCase()
+                command.fechaInicial
+                ,command.fechaFinal
+                ,command.venta
+                ]
+                ,params)
+        }
+
         render view:'index',model:[cobroInstanceList:list,cobroInstanceCount:list.size()]
 
     }
+
+    
 
     
 }
