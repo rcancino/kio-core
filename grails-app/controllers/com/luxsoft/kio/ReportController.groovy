@@ -81,18 +81,20 @@ class ReportController {
 		repParams['FECHA']=command.fecha
 		repParams['CAJERO']=command.fecha
 		repParams['reportName']='Arqueo'
+		def ts=new Date().format('_dd_MM_yyyy_hhmm_')
 		ByteArrayOutputStream  pdfStream=runReport(repParams)
 		render(file: pdfStream.toByteArray(), contentType: 'application/pdf'
-			,fileName:repParams.reportName)
+			,fileName:"$repParams.reportName"+ts+".pdf")
 	}
 
 	def cobranza(FechaCommand command){
 		def repParams=[:]
 		repParams['FECHA']=command.fecha
 		repParams['reportName']=command.reportName
+		def ts=new Date().format('_dd_MM_yyyy_hhmm_')
 		ByteArrayOutputStream  pdfStream=runReport(repParams)
 		render(file: pdfStream.toByteArray(), contentType: 'application/pdf'
-			,fileName:repParams.reportName)
+			,fileName:"$repParams.reportName"+ts+".pdf")
 	}
 
 	private runReport(Map repParams){
