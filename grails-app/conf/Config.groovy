@@ -146,7 +146,7 @@ log4j.main = {
         info luxorFileAppender: 'grails.apps.jobs'
       }
         
-      produccion{
+      production{
         error 'grails.app.services'
         error 'grails.app.controllers'
         error 'grails.app.services.com.luxsoft.kyo'

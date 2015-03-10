@@ -122,7 +122,7 @@ class CfdiService {
 			c.setDescripcion(desc)
 			if(rfc=="XEXX010101000" || rfc=="XAXX010101000"){
 				c.setValorUnitario(det.precio)
-				c.setImporte(det.importeNeto)
+				c.setImporte(det.importeBruto)
 			} else{
 				c.setValorUnitario(MonedaUtils.calcularImporteDelTotal(det.precio))
 				//c.setImporte(det.importeNetoSinIva)
