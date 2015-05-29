@@ -6,7 +6,7 @@ import groovy.transform.EqualsAndHashCode
 import org.grails.databinding.BindingFormat
 
 @ToString(includeNames=true,includePackage=false)
-@EqualsAndHashCode(includes='documento,importe')
+@EqualsAndHashCode(includes='venta,importe,comentario')
 class AplicacionDeNota {
 
 	Venta venta 

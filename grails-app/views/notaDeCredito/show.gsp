@@ -32,9 +32,7 @@
 						<i class="fa fa-bars"></i>&nbsp;Notas
 					</g:link>
 					<g:if test="${!notaDeCreditoInstance.cfdi}">
-						<g:link class="list-group-item" action='edit' id="${notaDeCreditoInstance.id}"> 
-							<i class="fa fa-bars"></i>&nbsp;Editar
-						</g:link>
+						
 						<g:link class="list-group-item" 
 							action="mandarTimbrar" id="${notaDeCreditoInstance.id}" 
 							onclick="return confirm('Timbrar nota?');">
@@ -42,6 +40,9 @@
 						</g:link>
 	
 					</g:if>
+					<g:link class="list-group-item" action='edit' id="${notaDeCreditoInstance.id}"> 
+							<i class="fa fa-bars"></i>&nbsp;Editar
+						</g:link>
 
 				</div>
 			</div>
@@ -91,6 +92,16 @@
 							<tr>
 								<td>Total</td>
 								<td>${notaDeCreditoInstance.total}</td>
+							</tr>
+
+							<tr>
+								<td>Aplicado</td>
+								<td>${notaDeCreditoInstance.aplicaciones.sum(0.0,{it.importe}) }</td>
+							</tr>
+
+							<tr>
+								<td>Disponible</td>
+								<td>${notaDeCreditoInstance.disponible}</td>
 							</tr>
 							
 						</tbody>

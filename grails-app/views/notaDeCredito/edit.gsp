@@ -26,32 +26,62 @@
 		
 		<div class="row">
 			
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="list-group">
 					<g:link class="list-group-item" action='index'> 
 						<i class="fa fa-bars"></i>&nbsp;Notas</g:link>
-					<g:link class="list-group-item" action='agregarConcepto' 
-						controller="notaDeCreditoDet" id="${notaDeCreditoInstance.id}"> 
-						<i class="fa fa-plus"></i>&nbsp;Agregar concepto</g:link>
+					
 					<g:if test="${!notaDeCreditoInstance.cfdi}">
+						<g:link class="list-group-item" action='agregarConcepto' 
+							controller="notaDeCreditoDet" id="${notaDeCreditoInstance.id}"> 
+							<i class="fa fa-plus"></i>&nbsp;Agregar concepto</g:link>
 						<g:link class="list-group-item" 
 							action="mandarTimbrar" id="${notaDeCreditoInstance.id}" 
 							onclick="return confirm('Timbrar nota?');">
 							Timbarar
 						</g:link>
-					
+						<g:if test="${!notaDeCreditoInstance.aplicaciones}">
+							<g:link class="list-group-item list-group-item-danger" 
+								onclick="return confirm('Eliminar nota?');"
+								action='delete' id="${notaDeCreditoInstance.id}"> 
+								<i class="fa fa-trash"></i>&nbsp; Eliminar nota
+							</g:link>
+						</g:if>
 					</g:if>
+					<g:else>
+						<g:if test="${notaDeCreditoInstance.disponible && notaDeCreditoInstance.cfdi}">
+							<g:link class="list-group-item" 
+								action='agregarAplicacion' 
+								id="${notaDeCreditoInstance.id}"> 
+								<i class="fa fa-plus"></i>&nbsp; Agregar aplicacion
+							</g:link>
+
+							<g:link class="list-group-item" 
+								controller="cfdi" action="show" id="${notaDeCreditoInstance.cfdi.id}">
+								Nota:  ${notaDeCreditoInstance?.cfdi?.folio} <br>
+								<h6>
+									<small>${notaDeCreditoInstance.cfdi.uuid}</small>
+								</h6>
+								
+							</g:link>
+
+						</g:if>
+						
+
+					</g:else>
+
+
 				</div>
 			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<g:hasErrors bean="${notaDeCreditoInstance}">
 					<div class="alert alert-danger">
 						<g:renderErrors bean="${notaDeCreditoInstance}" as="list" />
 					</div>
 				</g:hasErrors>
 				<g:form class="form-horizontal " action="update" name="notaForm" method="PUT">
-					
+					<fieldset ${notaDeCreditoInstance.cfdi?'disabled':''}>
 					<div class="form-group">
 						<label for="fecha" class="col-sm-2 control-label">Fecha</label>
 						<div class="col-sm-10">
@@ -65,11 +95,14 @@
 						<f:field property="tipo" input-class="form-control" />
 						<f:field property="comentario" input-class="form-control" />
 					</f:with>
-					<div class="form-group">
-						<div class="buttons  col-md-offset-2  col-md-3">
-							<g:submitButton name="Generar" class="btn btn-primary  btn-block" value="Salvar"/>
+					<g:if test="${!notaDeCreditoInstance.cfdi}">
+						<div class="form-group">
+							<div class="buttons  col-md-offset-2  col-md-3">
+								<g:submitButton name="Generar" class="btn btn-primary  btn-block" value="Salvar"/>
+							</div>
 						</div>
-					</div>
+					</g:if>
+					</fieldset>
 				</g:form>
 			</div><!-- end .col-md-6 -->
 
@@ -92,6 +125,10 @@
 							<tr>
 								<td>Total</td>
 								<td>${notaDeCreditoInstance.total}</td>
+							</tr>
+							<tr>
+								<td>Disponible</td>
+								<td>${notaDeCreditoInstance.disponible}</td>
 							</tr>
 							
 						</tbody>
@@ -140,6 +177,49 @@
 					</table>
 					
 				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 grid-panel">
+				<legend>Aplicaciones</legend>
+				<table id="grid" class="table table-striped table-bordered table-condensed">
+					<thead>
+						<tr>
+							<th>Folio</th>
+							<th>Venta</th>
+							<th>Fecha</th>
+							<th>Importe</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<g:each in="${notaDeCreditoInstance.aplicaciones}" var="row">
+							<tr id="${row.id}">
+								<td >
+									<g:link  action="show" id="${row.id}">
+										${fieldValue(bean:row,field:"id")}
+									</g:link>
+								</td>
+								<td>
+									${fieldValue(bean:row,field:"venta.id")}
+								</td>
+								<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
+								<td><g:formatNumber number="${row.importe}" type="currency"/></td>
+								<td>
+									<sec:link action="eliminarAplicacion" 
+										expression="hasRole('ADMINISTRACION')"
+										onclick="return confirm('Eliminar aplicación ');"
+										id="${row.id}">
+										<i class="fa fa-trash"></i> 
+									</sec:link>
+
+									
+								</td>
+							</tr>
+						</g:each>
+					</tbody>
+				</table>
 			</div>
 		</div>
 

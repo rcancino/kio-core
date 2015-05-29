@@ -19,8 +19,8 @@ class NotaDeCredito  {
 	BigDecimal impuesto=0
 	BigDecimal total=0
 	
-	BigDecimal aplicado=0
-	BigDecimal disponible=0
+	BigDecimal aplicado
+	
 	
 	String comentario
 
@@ -49,7 +49,7 @@ class NotaDeCredito  {
     	cfdi nullable:true
     }
 
-    static transients = ['estatus','springSecurityService']
+    static transients = ['estatus','springSecurityService','aplicado']
 
     def getEstatus(){
     	return cfdi?'TIMBRADA':'PENDIENTE'
@@ -59,5 +59,24 @@ class NotaDeCredito  {
 		usuario=springSecurityService.getCurrentUser().username
 	}
 	
+
+	def getAplicado(){
+		if(!aplicado){
+			aplicado=aplicaciones.sum 0.0,{it.importe}
+		}
+		return aplicado
+	}
+
+	def getDisponible(){
+		return total-getAplicado()
+	}
+
+	/*
+	drop table nota_de_credito_nota_de_credito
+	drop table aplicacion_de_nota;
+	drop table nota_de_credito_det;
+	drop table nota_de_credito;
+
+	*/
 	
 }
