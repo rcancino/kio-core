@@ -38,6 +38,8 @@ class NotaDeCreditoController {
             return
         }
         def notaDeCreditoInstance =command.generarNota()
+        def user=getAuthenticatedUser().username
+        notaDeCreditoInstance.usuario=user
         notaDeCreditoInstance.save failOnError:true
         flash.message="Nota generada: $notaDeCreditoInstance.id"
         redirect action:'edit',params:[id:notaDeCreditoInstance.id]
@@ -53,6 +55,10 @@ class NotaDeCreditoController {
     }
 
     def edit(NotaDeCredito notaDeCreditoInstance) {
+        if(notaDeCreditoInstance.cfdi){
+            redirect action:'show',params:[id:notaDeCreditoInstance.id]
+            return
+        }
         respond notaDeCreditoInstance
     }
 
@@ -87,6 +93,20 @@ class NotaDeCreditoController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def cfdiService
+
+    @Transactional
+    def mandarTimbrar(NotaDeCredito notaDeCreditoInstance){
+        if(notaDeCreditoInstance.cfdi){
+            flash.message="Nota ya timbrada"
+            redirect acion:'show',params:[id:notaDeCreditoInstance.id]
+            return
+        }
+        def cfdi=cfdiService.generar(notaDeCreditoInstance)
+        redirect controller:'cfdi',action:'show',params:[id:cfdi.id]
+        
     }
 }
 

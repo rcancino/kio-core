@@ -179,6 +179,7 @@ grails.gorm.default.mapping = {
 
 
 luxsoft.cfdi.serie.venta='FACTURA'
+luxsoft.cfdi.serie.notas='NOTAS'
 
 grails.databinding.dateFormats = ['dd/MM/yyyy','MMddyyyy', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss'Z'"]
 jodatime.format.html5 = false

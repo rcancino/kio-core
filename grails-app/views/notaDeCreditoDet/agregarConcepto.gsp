@@ -46,7 +46,14 @@
 						<f:field property="descripcion" input-class="form-control" />
 						<f:field property="unidad" input-class="form-control" />
 						<f:field property="cantidad" input-class="form-control" input-type="text" />
-						<f:field property="importe" input-class="form-control" input-type="text" />
+						<f:field property="valorUnitario" 
+							input-class="form-control" 
+							input-type="text" />
+						
+						%{-- <f:field property="importe" 
+							input-class="form-control" 
+							input-type="text" /> --}%
+							
 					</f:with>
 					<div class="form-group">
 						<div class="buttons  col-md-offset-2  col-md-3">
@@ -62,7 +69,7 @@
 						<tbody>
 							<tr>
 								<td>Importe</td>
-								<td>${notaDeCreditoInstance.importe}</td>
+								<td>${notaDeCreditoInstance.subTotal}</td>
 							</tr>
 							<tr>
 								<td>Imupesto (tasa)</td>
@@ -70,7 +77,7 @@
 							</tr>
 							<tr>
 								<td>Impuesto</td>
-								<td>${notaDeCreditoInstance.impuestos}</td>
+								<td>${notaDeCreditoInstance.impuesto}</td>
 							</tr>
 							<tr>
 								<td>Total</td>

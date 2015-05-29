@@ -14,7 +14,7 @@ class SocioController {
 	def index(Long max){
 		
 		params.max = Math.min(max ?: 20, 100)
-		params.sort=params.sort?:'lastUpdated'
+		params.sort='lastUpdated'
 		params.order='desc'
 		
 		[socioInstanceList:Socio.list(params),socioInstanceCount:Socio.count()]

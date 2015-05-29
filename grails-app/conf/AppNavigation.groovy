@@ -61,6 +61,7 @@ navigation={
 		reportes(controller:'report',action:'index'){
 			ventas(controller:'report'){
 				ventasGenerales(controller:'report')
+				ventasPorProducto(controller:'report')
 			}
 			socios(controller:'report'){
 				catalogo(controller:'report',action:'catalogoDeSocios')

@@ -9,10 +9,19 @@ import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import org.apache.commons.lang.WordUtils
 import org.grails.databinding.BindingFormat
 
+import groovy.sql.Sql
+
+
+// import pl.touk.excel.export.XlsxExporter
+// import pl.touk.excel.export.getters.LongToDatePropertyGetter
+// import pl.touk.excel.export.getters.MessageFromPropertyGetter
+
 @Secured(["hasAnyRole('ADMINISTRACION','CAJERO','MOSTRADOR')"])
 class ReportController {
 
 	def jasperService
+
+	def dataSource
 
 	static defaultAction = "index"
 
@@ -97,6 +106,52 @@ class ReportController {
 			,fileName:"$repParams.reportName"+ts+".pdf")
 	}
 
+	def ventasPorProducto(PeriodoCommand command){
+		if(request.method=='GET'){
+			return [reportCommand:new PeriodoCommand()]
+		}
+		command.validate()
+		if(command.hasErrors()){
+			flash.message= 'Errores de validacion al ejecurar reporte'
+			//render view:params.action,model:
+			return [reportCommand:command]
+		}
+
+		def repParams=[:]
+		repParams['FECHA_INI']=command.fechaInicial
+		repParams['FECHA_FIN']=command.fechaFinal
+		repParams['reportName']=command.reportName
+		repParams['formato']=params.formato
+		def ext='pdf'
+		def type='application/pdf'
+		def ts=new Date().format('_dd_MM_yyyy_hhmm')
+		if(repParams.formato=='XLS'){
+			// type="application/vnd.ms-excel"
+			def sql=new Sql(dataSource)
+			def writer=new StringWriter()
+			def pwriter=new PrintWriter(writer)
+			def rows=sql.rows(VENTAS_POR_PRODUCTO_SQL,[command.fechaInicial,command.fechaFinal])
+			def cols
+			rows.each{
+				if(!cols){
+					cols=it.keySet().join(';')
+					pwriter.println(cols)
+				}
+				//pwriter<<it.values().join(',')
+				pwriter.println(it.values().join(';'))
+			}
+			//ByteArrayOutputStream os=new ByteArrayOutputStream(writer.toString().getBytes())
+			render(file: writer.toString().getBytes(), contentType: 'text/csv'
+				,fileName:"$repParams.reportName"+ts+".csv")
+
+		}else{
+			ByteArrayOutputStream  pdfStream=runReport(repParams)
+			render(file: pdfStream.toByteArray(), contentType: type
+				,fileName:"$repParams.reportName"+ts+"."+ext)
+		}
+		
+	}
+
 	private runReport(Map repParams){
 		File logoFile = grailsApplication.mainContext.getResource("images/kyo_logo.png").file
 
@@ -106,15 +161,32 @@ class ReportController {
 		}
 		def nombre=WordUtils.capitalize(repParams.reportName)
 		log.info "Ejectuando reporte $nombre params:"+repParams
+		def formato=JasperExportFormat.PDF_FORMAT
+		if(repParams.formato=='XLS'){
+			formato=JasperExportFormat.XLS_FORMAT
+		}
+		if(repParams.formato=='CSV'){
+			formato=JasperExportFormat.CSV_FORMAT
+		}
 		def reportDef=new JasperReportDef(
 			name:nombre
-			,fileFormat:JasperExportFormat.PDF_FORMAT
+			,fileFormat:formato
 			,parameters:repParams
 			)
 		ByteArrayOutputStream  pdfStream=jasperService.generateReport(reportDef)
 		return pdfStream
-		
 	}
+
+
+	static VENTAS_POR_PRODUCTO_SQL="""
+		select v.id,date(v.fecha) as fecha ,c.folio as factura,v.status as status ,p.clave,p.descripcion,d.cantidad,d.precio,d.importe_bruto,d.descuento ,d.importe_neto from venta_det d 
+		join venta v on d.venta_id=v.id
+		left join cfdi c on v.cfdi_id=c.id
+		join producto p on d.producto_id=p.id
+		where v.status<>'PEDIDO' 
+		and date(v.fecha) between ? and ?
+		order by fecha desc
+	"""
 	
 	
 }

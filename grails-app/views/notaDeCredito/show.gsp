@@ -29,18 +29,20 @@
 			<div class="col-md-2">
 				<div class="list-group">
 					<g:link class="list-group-item" action='index'> 
-						<i class="fa fa-bars"></i>&nbsp;Notas</g:link>
-					<g:link class="list-group-item" action='agregarConcepto' 
-						controller="notaDeCreditoDet" id="${notaDeCreditoInstance.id}"> 
-						<i class="fa fa-plus"></i>&nbsp;Agregar concepto</g:link>
+						<i class="fa fa-bars"></i>&nbsp;Notas
+					</g:link>
 					<g:if test="${!notaDeCreditoInstance.cfdi}">
+						<g:link class="list-group-item" action='edit' id="${notaDeCreditoInstance.id}"> 
+							<i class="fa fa-bars"></i>&nbsp;Editar
+						</g:link>
 						<g:link class="list-group-item" 
 							action="mandarTimbrar" id="${notaDeCreditoInstance.id}" 
 							onclick="return confirm('Timbrar nota?');">
 							Timbarar
 						</g:link>
-					
+	
 					</g:if>
+
 				</div>
 			</div>
 
@@ -50,8 +52,8 @@
 						<g:renderErrors bean="${notaDeCreditoInstance}" as="list" />
 					</div>
 				</g:hasErrors>
-				<g:form class="form-horizontal " action="update" name="notaForm" method="PUT">
-					
+				<g:form class="form-horizontal " >
+					<fieldset disabled>
 					<div class="form-group">
 						<label for="fecha" class="col-sm-2 control-label">Fecha</label>
 						<div class="col-sm-10">
@@ -65,11 +67,8 @@
 						<f:field property="tipo" input-class="form-control" />
 						<f:field property="comentario" input-class="form-control" />
 					</f:with>
-					<div class="form-group">
-						<div class="buttons  col-md-offset-2  col-md-3">
-							<g:submitButton name="Generar" class="btn btn-primary  btn-block" value="Salvar"/>
-						</div>
-					</div>
+					
+					</fieldset>
 				</g:form>
 			</div><!-- end .col-md-6 -->
 
@@ -103,7 +102,7 @@
 
 		<div class="row">
 			<div class="col-md-12">
-
+					
 				<div class="table-panel">
 					<legend>Conceptos</legend>
 					<table class="table table-striped table-bordered table-condensed">
@@ -114,7 +113,6 @@
 								<th>Cantidad</th>
 								<th>Valor u</th>
 								<th>Importe</th>
-								<th>Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -125,61 +123,19 @@
 									<td>${formatNumber(number:row.cantidad, format:'###.##')}</td>
 									<td>${formatNumber(number:row.valorUnitario, format:'###.##')}</td>
 									<td>${formatNumber(number:row.importe, format:'###.##')}</td>
-									<td>
-										<g:if test="${!notaDeCreditoInstance.cfdi}">
-											<g:link controller="notaDeCreditoDet" action="eliminar"
-												onclick="return confirm('Eliminar partida?');"
-												id="${row.id}">
-												<span class="glyphicon glyphicon-trash"></span>
-											</g:link>
-										</g:if>
-									</td>
 								</tr>
 							</g:each>
 						</tbody>
 					</table>
 					
 				</div>
+				
 			</div>
 		</div>
 
 	</div>
 
-	<script type="text/javascript">
-		$(document).ready(function(){
-			//$("#importe").autoNumeric({wEmpty:'zero',mRound:'B',aSign: '$'});
-			$("#fecha").datepicker({
-	     
-	 		});
-
-			$('form[name=notaForm]').submit(function(e){
-	    		$(this).children('input[type=submit]').attr('disabled', 'disabled');
-	    		console.log("Desablidatndo submit button....");
-	    		//$("#Cobrar").attr('disabled','disabled');
-	    		var button=$("#Generar");
-	    		button.attr('disabled','disabled').attr('value','Procesando...');
-	    		// this is just for demonstration
-	    		//e.preventDefault(); 
-	    		return true;
-			});
-
-			$("#cliente").autocomplete({
-				source:'<g:createLink controller="cliente" action="getClientesJSON"/>',
-				minLength:3,
-				select:function(e,ui){
-					console.log('Cliente seleccionado: '+ui.item.value);
-					$("#clienteId").val(ui.item.id);
-					$("#cliente").val(ui.item.cliente.nombre);
-					$("#socioId").val(null);
-					$("#socio").val(null);
-					
-				}
-			});
-
-			
-
-		});
-	</script>	
+	
 	
 </body>
 </html>

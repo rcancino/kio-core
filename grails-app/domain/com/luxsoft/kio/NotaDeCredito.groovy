@@ -34,7 +34,7 @@ class NotaDeCredito  {
 
 	String usuario
     
-    static hasMany = [conceptos: NotaDeCredito,aplicaciones:AplicacionDeNota]
+    static hasMany = [conceptos: NotaDeCreditoDet,aplicaciones:AplicacionDeNota]
 
     
 	

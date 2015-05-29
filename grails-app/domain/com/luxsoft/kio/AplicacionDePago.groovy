@@ -5,8 +5,8 @@ import groovy.transform.ToString
 import groovy.transform.EqualsAndHashCode
 import org.grails.databinding.BindingFormat
 
-@ToString(includeNames=true,includePackage=false)
-@EqualsAndHashCode(includes='documento,importe')
+@ToString(includeNames=true, includes="venta,fecha,importe", includePackage=false)
+@EqualsAndHashCode(includes='venta,comentario')
 class AplicacionDePago {
 
 	Venta venta 

@@ -14,7 +14,7 @@ grails.project.fork = [
     // configure settings for the test-app JVM, uses the daemon by default
     test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
     // configure settings for the run-app JVM
-    run: [maxMemory: 1024, minMemory: 64, debug: false, maxPerm: 256],
+    run: [maxMemory: 1024, minMemory: 64, debug: false, maxPerm: 1024],
     // configure settings for the run-war JVM
     war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
     // configure settings for the Console UI JVM
@@ -116,6 +116,8 @@ grails.project.dependency.resolution = {
         
         
         compile ":quartz:1.0.2"
+
+        
         
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"

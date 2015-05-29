@@ -119,6 +119,21 @@
 							<a href="#cambioDeFolioFactura" data-toggle="modal" class="btn btn-default"> Cambiar</a>
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label for="fecha" class="col-sm-2 control-label">Folio de notas</label>
+						<div class="col-sm-2">
+							<p class="form-control-static">
+								<strong>
+									${com.luxsoft.cfdi.CfdiFolio.findBySerie('NOTAS')?.folio}
+								</strong>
+							</p>
+						</div>
+						<div class="col-sm-2">
+							<a href="#cambioDeFolioNotas" data-toggle="modal" class="btn btn-default"> Cambiar</a>
+						</div>
+					</div>
+
 					<div class="form-group">
 						<label for="fecha" class="col-sm-2 control-label">Folio de socio</label>
 						<div class="col-sm-2">

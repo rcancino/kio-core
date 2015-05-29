@@ -61,7 +61,7 @@
 						</g:link>
 					</td>
 					<td><g:formatDate date="${row.fecha}" format="dd/MM/yyyy"/></td>
-					<td><g:formatNumber number="${row.importe}" type="currency"/></td>
+					<td><g:formatNumber number="${row.total}" type="currency"/></td>
 					<td>${row.tipo}</td>
 					<td>${row.estatus}</td>
 					<td>${row?.cfdi?.uuid}</td>

@@ -1,6 +1,7 @@
 package com.luxsoft.cfdi
 
 import com.luxsoft.kio.Venta
+import com.luxsoft.kio.NotaDeCredito
 import grails.transaction.Transactional
 
 import mx.gob.sat.cfd.x3.ComprobanteDocument
@@ -166,7 +167,118 @@ class CfdiService {
 		return cfdi
 		
     }
-	
+
+        def Cfdi generar(NotaDeCredito nota) {
+
+    		assert !nota.cfdi,"La nota ya esta timbrada"
+    		
+    		if(empresa==null){
+    			empresa=Empresa.first();
+    			assert empresa,"La empresa debe estar definida"
+    		}
+    		def serie=grailsApplication.config.luxsoft.cfdi.serie.notas
+    		assert serie,"Debe registrar la serie para cfdi para notas de credito 'luxsoft.cfdi.serie.notas'"
+    		def cfdiFolio=CfdiFolio.findBySerie(serie)
+    		assert cfdiFolio,"Debe exister folios para la serie: "+serie
+    		              
+    		def folio=cfdiFolio.next()
+    		
+    		log.info "Generando CFDI folio:$folio  Serie:$serie y rfc:$empresa.rfc  Para nota $nota.id"
+    		
+    		ComprobanteDocument document=ComprobanteDocument.Factory.newInstance()
+    		Comprobante comprobante=document.addNewComprobante()
+    		comprobante.serie=serie
+    		comprobante.folio=folio
+    		CfdiUtils.depurar(document)
+    		def fecha=new Date()
+    		
+    		comprobante.setVersion("3.2")
+    		comprobante.setFecha(CfdiUtils.toXmlDate(fecha).getCalendarValue())
+    		comprobante.setFormaDePago("PAGO EN UNA SOLA EXHIBICION")
+    		comprobante.setMetodoDePago('NO APLICA')
+    		comprobante.setMoneda(MonedaUtils.PESOS.getCurrencyCode())
+    		comprobante.setTipoCambio("1.0")
+    		comprobante.setTipoDeComprobante(TipoDeComprobante.EGRESO)
+    		comprobante.setLugarExpedicion(empresa.direccion.municipio)
+    		comprobante.setNoCertificado(empresa.numeroDeCertificado)
+    		
+    		Emisor emisor=CfdiUtils.registrarEmisor(comprobante, empresa)
+    		Receptor receptor=CfdiUtils.registrarReceptor(comprobante, nota.cliente)
+    		
+    		comprobante.setSubTotal(nota.subTotal)
+    		comprobante.setDescuento(0.0)
+    		comprobante.setTotal(nota.total)
+    		
+    		Impuestos impuestos=comprobante.addNewImpuestos()
+    		String rfc=comprobante.getReceptor().getRfc()
+    		
+    		//Facturacion a clientes extranjero
+    		if(rfc=="XEXX010101000"){
+    			comprobante.setSubTotal(venta.total)
+    			comprobante.setDescuento(venta.descuento)
+    			comprobante.setTotal(venta.total)
+    		}else if(rfc=="XAXX010101000"){
+    			comprobante.setSubTotal(nota.total)
+    			comprobante.setDescuento(0.0)
+    			//comprobante.setDescuento(venta.descuento)
+    			comprobante.setTotal(nota.total)
+    		}else{
+    			impuestos.setTotalImpuestosTrasladados(nota.impuesto)
+    			Traslados traslados=impuestos.addNewTraslados()
+    			Traslado traslado=traslados.addNewTraslado()
+    			traslado.setImpuesto(Traslado.Impuesto.IVA)
+    			traslado.setImporte(nota.impuesto)
+    			traslado.setTasa(nota.impuestoTasa)
+    		}
+    		
+    		Conceptos conceptos=comprobante.addNewConceptos()
+    		
+    		nota.conceptos.each {det->
+    			
+    			Concepto c=conceptos.addNewConcepto()
+    			c.setCantidad(det.cantidad)
+    			//c.setUnidad(det.producto.unidad)
+    			c.setUnidad('NO APLICA')
+    			c.setNoIdentificacion(det.concepto)
+    			c.setDescripcion(det.descripcion)
+    			c.setValorUnitario(det.valorUnitario)
+    			c.setImporte(det.importe)
+    		}
+    		
+    		byte[] encodedCert=Base64.encode(empresa.getCertificado().getEncoded())
+    		comprobante.setCertificado(new String(encodedCert))
+    		comprobante.setSello(cfdiSellador.sellar(empresa.privateKey,document))
+    		
+    		XmlOptions options = new XmlOptions()
+    		options.setCharacterEncoding("UTF-8")
+    		options.put( XmlOptions.SAVE_INNER )
+    		options.put( XmlOptions.SAVE_PRETTY_PRINT )
+    		options.put( XmlOptions.SAVE_AGGRESSIVE_NAMESPACES )
+    		options.put( XmlOptions.SAVE_USE_DEFAULT_NAMESPACE )
+    		options.put(XmlOptions.SAVE_NAMESPACES_FIRST)
+    		ByteArrayOutputStream os=new ByteArrayOutputStream()
+    		document.save(os, options)
+    		
+    		
+    		validarDocumento(document)
+    		log.debug 'ComprobanteDocument generado y validado: '+document
+    		
+    		def cfdi=new Cfdi(comprobante)
+    		cfdi.tipo="NOTA_CREDITO"
+    		cfdi.origen=nota.id.toString()
+    		cfdi.xml=os.toByteArray()
+    		cfdi.setXmlName("$cfdi.receptorRfc-$cfdi.serie-$cfdi.folio"+".xml")
+    		//cfdi.cadenaOriginal
+    		
+    		log.debug 'ComprobanteDocument generado y validado: '+document
+    		cfdi.save(failOnError:true)
+    		cfdi=cfdiTimbrador.timbrar(cfdi,empresa)
+    		nota.cfdi=cfdi
+    		log.debug 'Documento timbrado: '+cfdi
+    		return cfdi
+    		
+        }
+
 	void validarDocumento(ComprobanteDocument document) {
 		List<XmlValidationError> errores=findErrors(document);
 		if(errores.size()>0){

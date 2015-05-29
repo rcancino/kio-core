@@ -54,7 +54,7 @@
 					 		<g:render template="datosGeneralesForm" model="['socioInstance':socioInstance]"/>
 					 	</div>
 					 	<div class="tab-pane" id="facturacion">
-					 		<g:render template="datosDeFacturacionForm" />
+					 		<g:render template="datosDeFacturacionEditForm" />
 					 	</div>
 					 	<div class="tab-pane" id="perfil">
 					 		<g:render template="perfilForm" />

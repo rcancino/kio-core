@@ -42,6 +42,13 @@ class BootStrap {
 			cfdiFolio.save()
 		}
 
+		def serieNotas=grailsApplication.config.luxsoft.cfdi.serie.notas
+		def cfdiFolioNotas=CfdiFolio.findBySerie(serieNotas)
+		if(!cfdiFolioNotas){
+			cfdiFolioNotas=new CfdiFolio(serie:serieNotas,folio:0)
+			cfdiFolioNotas.save()
+		}
+
 		def empresa=Empresa.findWhere(clave:'GASOC')
 		if(!empresa){
 			
