@@ -10,7 +10,7 @@ class VentaDetController {
     def ventaService
 	
 	def create(Venta ventaInstance){
-        def socios=Socio.findAll([max:10],{cliente==ventaInstance.cliente})
+        def socios=Socio.findAll([max:40],{cliente==ventaInstance.cliente})
 		[ventaInstance:ventaInstance,ventaDetInstance:new VentaDet(cantidad:1),socios:socios]
 	}
 
