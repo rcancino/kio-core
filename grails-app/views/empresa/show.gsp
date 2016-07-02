@@ -55,7 +55,7 @@
 							</f:with>
 							
 						</div>
-						<div class="col-sm-6">
+						%{-- <div class="col-sm-6">
 							<div class="form-group">
 								<label for="certificadoDigitalFile" class="col-sm-4 control-lable">Certificado</label>
 								<div class="col-sm-8">
@@ -74,7 +74,7 @@
 									<a href="#cambiarCertificadoPfx" class="btn btn-default">Cambiar</a>
 								</div>
 							</div>
-						</div>
+						</div> --}%
 					</div>
 					
 					
@@ -148,6 +148,100 @@
 						</div>
 					</div>
 				</form>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<legend>Criptografía  </legend>
+
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+						  	<div class="panel panel-default">
+						    	<div class="panel-heading" role="tab" id="headingOne">
+						      		<h4 class="panel-title">
+						        		<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						         		Llave privada
+						        		</a>
+						      		</h4>
+						    	</div>
+						    <div id="collapseOne" class="panel-collapse collapse " aria-labelledby="headingOne">
+						      	<div class="panel-body">
+									<div class="form-group">
+										<textarea name="llavePrivada" rows="8" cols="50" class="form-control" disabled>
+											${empresaInstance.getPrivateKey()}
+
+										</textarea>
+									</div>
+							        <g:uploadForm class="form-inline" action="registrarLlavePrivada" id="${empresaInstance.id}">
+							        	<div class="form-group">
+							        	    <label for="inputFile">Actualizar archivo</label>
+							        	    <input type="file" name="file" autocomplete="off" class="form-control ">
+							        	 </div> 
+							        	<g:submitButton class="btn btn-primary" name="aceptar"value="Aceptar" />
+							        </g:uploadForm>
+						  		</div>
+						      </div>
+						    </div>
+						  
+						  
+							<div class="panel panel-default">
+						    	<div class="panel-heading" role="tab" id="headingTwo">
+						      		<h4 class="panel-title">
+						        		<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						          			Certificado digital
+						        		</a>
+						      		</h4>
+						    	</div>
+						    	<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+						      		<div class="panel-body">
+						      			<div class="form-group">
+						      				<label for="inputFile">Número de certificado</label>
+						      				<input type="text" name="text" autocomplete="off" class="form-control " disabled 
+						      					value="${empresaInstance.numeroDeCertificado}">
+						      			</div>
+						        		<div class="form-group">
+						        			<textarea name="certificadoDigital" rows="8" cols="50" class="form-control" disabled>
+						        				${empresaInstance.getCertificado()}
+						        			</textarea>
+						        		</div>
+						                <g:uploadForm class="form-inline" action="registrarCertificado" id="${empresaInstance.id}">
+						                	<div class="form-group">
+						                	    <label for="inputFile">Actualizar archivo</label>
+						                	    <input type="file" name="file" autocomplete="off" class="form-control ">
+						                	 </div> 
+						                	<g:submitButton class="btn btn-primary" name="aceptar"value="Aceptar" />
+						                </g:uploadForm>
+						      		</div>
+						    	</div>
+						  	</div>
+
+						  	<div class="panel panel-default">
+						    	<div class="panel-heading" role="tab" id="headingTwo">
+						      		<h4 class="panel-title">
+						        		<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+						          			Certificado PFX
+						        		</a>
+						      		</h4>
+						    	</div>
+						    	<div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+						      		<div class="panel-body">
+						        		<div class="form-group">
+						        			<textarea name="certificadoPfx" rows="8" cols="50" class="form-control" disabled>
+						        				${empresaInstance.getCertificadoPfx()}
+						        			</textarea>
+						        		</div>
+						                <g:uploadForm class="form-inline" action="registrarCertificadoPfx" id="${empresaInstance.id}">
+						                	<div class="form-group">
+						                	    <label for="inputFile">Actualizar archivo</label>
+						                	    <input type="file" name="file" autocomplete="off" class="form-control ">
+						                	 </div> 
+						                	<g:submitButton class="btn btn-primary" name="aceptar"value="Aceptar" />
+						                </g:uploadForm>
+						      		</div>
+						    	</div>
+						  	</div>
+						  
+						</div>
 			</div>
 		</div>
 

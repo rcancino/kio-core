@@ -101,4 +101,12 @@ class Empresa {
 	String toString(){
 		return "$nombre ($rfc)"
 	}
+	
+	def getCertificadoPfx(){
+		
+		if(certificadoDigitalPfx){
+			return certificadoDigitalPfx.encodeBase64().toString()
+		}
+		return "ND";
+	}
 }

@@ -45,10 +45,10 @@ class CfdiService {
 
 		assert (venta.status=='VENTA' || venta.status=='PAGADA'),"La venta debe tener status VENTA o PAGADA status actual: $venta.status"
 		
-		if(empresa==null){
-			empresa=Empresa.first();
-			assert empresa,"La empresa debe estar definida"
-		}
+		//if(empresa==null){
+		empresa=Empresa.first();
+		assert empresa,"La empresa debe estar definida"
+		//}
 		def serie=grailsApplication.config.luxsoft.cfdi.serie.venta
 		assert serie,"Debe registrar la serie para cfdi de ventas 'luxsoft.cfdi.serie.venta'"
 		def cfdiFolio=CfdiFolio.findBySerie(serie)
