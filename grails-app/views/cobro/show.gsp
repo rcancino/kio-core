@@ -91,18 +91,21 @@
 								</strong>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-4 control-label">CFDI </label>
-							<div class="col-sm-8">
-								<strong>
-									<p class="form-control-static ">
-										<g:link controller="cfdi" action="show">
-											${cobroInstance.venta?.cfdi?.uuid}
-										</g:link>
-									</p>
-								</strong>
+						<g:if test="${cobroInstance.venta?.cfdi}">
+							<div class="form-group">
+								<label class="col-sm-4 control-label">CFDI </label>
+								<div class="col-sm-8">
+									<strong>
+										<p class="form-control-static ">
+											<g:link controller="cfdi" action="show" id ="${cobroInstance.venta.cfdi.id}">
+												${cobroInstance.venta.cfdi?.uuid}
+											</g:link>
+										</p>
+									</strong>
+								</div>
 							</div>
-						</div>
+						</g:if>
+						
 					</f:with>
 				</g:form>
 				</fieldset>

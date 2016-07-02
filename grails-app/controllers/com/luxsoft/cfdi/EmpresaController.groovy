@@ -101,16 +101,14 @@ class EmpresaController {
             '*'{ render status: NOT_FOUND }
         }
     }
-    
+
     @Transactional
     def registrarCertificado(Empresa empresaInstance) {
         if (empresaInstance == null) {
             notFound()
             return
         }
-        println 'Actualizando certificado digital '+params
         def file=request.getFile('file')
-        
         empresaInstance.numeroDeCertificado=file.getOriginalFilename()-'.cer'
         empresaInstance.certificadoDigital=file.getBytes()
         empresaInstance.save flush:true
