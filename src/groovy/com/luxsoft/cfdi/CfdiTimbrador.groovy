@@ -17,6 +17,8 @@ class CfdiTimbrador {
 	SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 	
 	private static final log=LogFactory.getLog(this)
+
+	boolean timbradoDePrueba = true
 	
 	Cfdi timbrar(Cfdi cfdi,Empresa empresa){
 		assert empresa.usuarioPac,"Debe registrar un usuario para el servicio del PAC "
@@ -32,7 +34,7 @@ class CfdiTimbrador {
 			byte[] zipFile=zipUtils.comprimeArchivo(nombre, xml)
 			//byte[] res=cfdiClient.getCfdiTest(user, password, zipFile)
 			byte[] res
-			if(empresa.timbradoDePrueba){
+			if(timbradoDePrueba){
 				log.info 'Timbrando de prueba: '+cfdi
 				res=cfdiClient.getCfdiTest(user, password, zipFile)
 			}else{

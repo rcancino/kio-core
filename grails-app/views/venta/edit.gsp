@@ -40,11 +40,17 @@
 
 			<div class="form-group">
 				<label for="tipo" class="col-sm-2 control-label">Tipo</label>
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 					%{-- <f:input bean="${ventaInstance}" property="tipo" class="form-control"/> --}%
 					<p class="form-control-static">${ventaInstance.tipo}</p>
 				</div>
-
+				<label for="fecha" class="col-sm-2 control-label">F de Pago</label>
+				<div class="col-sm-4">
+					<g:select class="form-control"  
+						name="formaDePago" 
+						value="${ventaInstance.formaDePago}"
+						from="${com.luxsoft.kio.MetodoDePago.values()}" />
+				</div>
 			</div>
 
 			

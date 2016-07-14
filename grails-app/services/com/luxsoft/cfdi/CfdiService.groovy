@@ -28,6 +28,7 @@ import com.luxsoft.kio.MonedaUtils
 import com.edicom.ediwinws.cfdi.client.CfdiClient
 import org.bouncycastle.util.encoders.Base64
 import com.edicom.ediwinws.service.cfdi.CancelaResponse
+import com.luxsoft.kio.MetodoDePago
 
 @Transactional
 class CfdiService {
@@ -68,7 +69,7 @@ class CfdiService {
 		comprobante.setVersion("3.2")
 		comprobante.setFecha(CfdiUtils.toXmlDate(fecha).getCalendarValue())
 		comprobante.setFormaDePago("PAGO EN UNA SOLA EXHIBICION")
-		comprobante.setMetodoDePago('NO APLICA')
+		comprobante.setMetodoDePago(MetodoDePago.fromValue(venta.formaDePago).clave)
 		comprobante.setMoneda(venta.moneda.getCurrencyCode())
 		comprobante.setTipoCambio("1.0")
 		
@@ -195,7 +196,7 @@ class CfdiService {
     		comprobante.setVersion("3.2")
     		comprobante.setFecha(CfdiUtils.toXmlDate(fecha).getCalendarValue())
     		comprobante.setFormaDePago("PAGO EN UNA SOLA EXHIBICION")
-    		comprobante.setMetodoDePago('NO APLICA')
+    		comprobante.setMetodoDePago('99')
     		comprobante.setMoneda(MonedaUtils.PESOS.getCurrencyCode())
     		comprobante.setTipoCambio("1.0")
     		comprobante.setTipoDeComprobante(TipoDeComprobante.EGRESO)

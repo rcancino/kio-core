@@ -15,9 +15,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="alert alert-success">
-					<h2> 
-						<i class="fa fa-shopping-cart  fa-2x"></i> Venta ${ventaInstance.id} - ${ventaInstance.cliente}
-					</h2>
+					<h3> 
+						<i class="fa fa-shopping-cart  fa-2x"></i> 
+						Venta ${ventaInstance.id} - ${ventaInstance.cliente} 
+					</h3>
+					<h4>F. Pago: ${ventaInstance.formaDePago}</h4>
 					<g:if test="${flash.message}">
 						<span class="label label-warning">${flash.message}</span>
 					</g:if> 
@@ -47,52 +49,43 @@
         				onclick="return confirm('Eliminar la venta');">
         				<i class="fa fa-tasks fa-trash fa-2x"></i>&nbsp;  Eliminar
         			</g:link>
-        			
-        		  
-        		  %{-- <a class="list-group-item" href="#"><i class="fa fa-book fa-fw fa-2x"></i>&nbsp; Library</a>
-        		  <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw fa-2x"></i>&nbsp; Applications</a>
-        		  <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw fa-2x"></i>&nbsp; Settings</a> --}%
         		</div>
 			</div>
 			
 			<div class="col-md-6 ">
-				<g:form class="form-horizontal pull-left center-block" action="cobrar" name="pagoForm">
+				
+				<g:form class="form-horizontal " action="cobrar" name="pagoForm">
 					<g:hiddenField name="ventaId" value="${ventaInstance.id}"/>
 
 					<div class="form-group">
-						<label class="col-sm-6 control-label">Fecha venta</label>
-					    <div class="col-sm-6">
+						<label class="col-sm-3 control-label">Fecha venta</label>
+					    <div class="col-sm-9">
 					      <p class="form-control-static"><g:formatDate date="${ventaInstance?.fecha}" format="dd/MM/yyyy"/></p>
 					    </div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-6 control-label">Tipo</label>
-					    <div class="col-sm-6">
+						<label class="col-sm-3 control-label">Tipo</label>
+					    <div class="col-sm-9">
 					      <p class="form-control-static">${ventaInstance.tipo}</p>
 					    </div>
 					</div>
 					<f:with bean="${cobroInstance}">
 						<f:field property="formaDePago" value="${cobroInstance.formaDePago}"
-							input-class="form-control" cols="col-sm-6" colsLabel="col-sm-6" />
+							input-class="form-control" cols="col-sm-9" colsLabel="col-sm-3" />
 						<f:field property="referencia" 
-							input-class="form-control" cols="col-sm-6" colsLabel="col-sm-6" input-disabled="disabled"/>
-						<f:field property="importe" input-type="text" input-class="form-control" cols="col-sm-6" colsLabel="col-sm-6" />
-						%{-- <div class="form-group">
-							<label class="col-sm-4 control-label">Fecha</label>
-							<div class="col-sm-8">
-								<input id="fecha" name="fecha" type="text"  
-								value="${g.formatDate(date:ventaInstance?.fecha,format:'dd/MM/yyyy') }"
-								class="form-control" autocomplete="off">
-							</div>
-						</div> --}%
+							input-class="form-control" cols="col-sm-9" colsLabel="col-sm-3" input-disabled="disabled"/>
+						<f:field property="importe" input-type="text" 
+							input-class="form-control" cols="col-sm-9" colsLabel="col-sm-3" />
+						
 					</f:with>
 					<div class="form-group">
-						<div class="buttons  col-md-offset-4  col-md-8">
+						<div class="buttons  col-md-offset-9  col-md-3">
 							<g:submitButton name="Cobrar" class="btn btn-primary btn-lg btn-block" value="Cobrar"/>
 							%{-- <button id="cobrarBtn" class="btn btn-primary btn-lg btn-block">Cobrar</button>	 --}%
 						</div>
 					</div>
 				</g:form>
+				
 			</div>
 
 			<div class="col-md-3 well">
@@ -162,16 +155,7 @@
 
 		</div><!-- end .row2 -->
 		
-		<div class="row">
-			<div class="col-md-12">
-				<div class="form-group">
-					<div class="buttons  col-md-offset-5  col-md-4">
-						%{-- <g:submitButton name="Cobrar" class="btn btn-primary btn-lg btn-block" value="Cobrar"/> --}%
-						%{-- <button id="cobrarBtn" class="btn btn-primary btn-lg btn-block">Cobrar</button>	 --}%
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		
 
 	</div>

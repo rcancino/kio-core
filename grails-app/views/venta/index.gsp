@@ -96,7 +96,7 @@
 							<th>Total</th>
 							<th>Atendió</th>
 							<th>Comentario</th>
-							%{-- <th>Estatus</th> --}%
+							<th>F. Pago</th>
 							<th>Cobrar</th>
 							
 							
@@ -122,7 +122,7 @@
 								<td><g:formatNumber number="${row.total}" type="currency"/></td>
 								<td>${fieldValue(bean:row,field:"modificadoPor")}</td>
 								<td>${fieldValue(bean:row,field:"comentario")}</td>
-								%{-- <td>${fieldValue(bean:row,field:"status")}</td> --}%
+								<td>${fieldValue(bean:row,field:"formaDePago")}</td>
 								<td>
 									<g:if test="${row.saldo>0}">
 										<g:link action="mandarFacturar" id="${row.id}">

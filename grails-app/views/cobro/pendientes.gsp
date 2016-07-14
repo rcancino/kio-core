@@ -43,6 +43,7 @@
 						<th>Total</th>
 						<th>Pagos</th>
 						<th>Saldo</th>
+						<th>F.Pago</th>
 						<th>Can</th>
 
 					</tr>
@@ -66,6 +67,7 @@
 							<td><g:formatNumber number="${row.total}" type="currency"/></td>
 							<td><g:formatNumber number="${row.pagos}" type="currency"/></td>
 							<td><g:formatNumber number="${row.saldo}" type="currency"/></td>
+							<td>${fieldValue(bean:row,field:"formaDePago")}</td>
 							
 							<td><g:if test="${row.cancelada}">
 									<i class="fa fa-times"></i>

@@ -11,8 +11,16 @@ import grails.util.Environment
 
 beans = {
 	
+	
+	
+	cfdiCadenaBuilder(CfdiCadenaBuilder){}
+
+	cfdiSellador(CfdiSellador){
+		cadenaBuilder=ref("cfdiCadenaBuilder")
+	}
+
 	switch(Environment.current){
-		/*
+		
 		case Environment.PRODUCTION:
 			cfdiTimbrador(CfdiTimbrador){
 				timbradoDePrueba=false
@@ -25,19 +33,11 @@ beans = {
 			break
 		case Environment.TEST:
 			cfdiTimbrador(CfdiTimbrador){
-			timbradoDePrueba=true
-		}
-		*/
-	}
-	
-	cfdiCadenaBuilder(CfdiCadenaBuilder){
+				timbradoDePrueba=true
+			}
 		
 	}
-
-	cfdiSellador(CfdiSellador){
-		cadenaBuilder=ref("cfdiCadenaBuilder")
-	}
-	cfdiTimbrador(CfdiTimbrador){}
+	//cfdiTimbrador(CfdiTimbrador){}
 	
 	localeResolver(FixedLocaleResolver,Locale.US)
 

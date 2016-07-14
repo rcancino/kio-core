@@ -32,7 +32,7 @@ class CobroController {
             response.sendError(404)
 
         }else{
-            def cobroInstance=new Cobro(fecha:new Date(),cliente:venta.cliente,importe:venta.saldo,formaDePago:'EFECTIVO')
+            def cobroInstance=new Cobro(fecha:new Date(),cliente:venta.cliente,importe:venta.saldo,formaDePago:MetodoDePago.fromValue(venta.formaDePago).toFormaDePago())
             [ventaInstance:venta,cobroInstance:cobroInstance]
         }
     }

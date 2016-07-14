@@ -22,7 +22,7 @@ class Venta {
 
 	Currency moneda //=MonedaUtils.PESOS
 	
-	String formaDePago='NO DEFINIDO'
+	String formaDePago='OTROS'
 
 	String status
 
