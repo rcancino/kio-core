@@ -73,7 +73,7 @@
 						<f:field property="formaDePago" value="${cobroInstance.formaDePago}"
 							input-class="form-control" cols="col-sm-9" colsLabel="col-sm-3" />
 						<f:field property="referencia" 
-							input-class="form-control" cols="col-sm-9" colsLabel="col-sm-3" input-disabled="disabled"/>
+							input-class="form-control" cols="col-sm-9" colsLabel="col-sm-3" />
 						<f:field property="importe" input-type="text" 
 							input-class="form-control" cols="col-sm-9" colsLabel="col-sm-3" />
 						
