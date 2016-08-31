@@ -310,8 +310,8 @@ class CfdiService {
 		
 
 		def empresa=Empresa.first()
-		//byte[] pfxData=empresa.certificadoDigitalPfx
-		byte[] pfxData=grailsApplication.mainContext.getResource("/WEB-INF/sat/gasoc.pfx").file.readBytes()
+		byte[] pfxData=empresa.certificadoDigitalPfx
+		//byte[] pfxData=grailsApplication.mainContext.getResource("/WEB-INF/sat/gasoc.pfx").file.readBytes()
 		String[] uuids=[cfdi.uuid]
 		def client=new CfdiClient()
 		CancelaResponse res=client.cancelCfdi(
@@ -320,7 +320,7 @@ class CfdiService {
 				, empresa.getRfc()
 				, uuids
 				, pfxData
-				, "pfxfilegasoc");
+				, empresa.passwordPfx);
 		String msg=res.getText()
 		println 'Message: '+ new String(msg)
 		//cancel.message=Base64.decode(msg)
