@@ -20,6 +20,8 @@ class Producto {
 	Integer duracion
 
     Boolean suspendido=false
+
+    BigDecimal tasaIva = 16
 	
 
 	Date dateCreated

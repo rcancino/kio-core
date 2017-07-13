@@ -27,6 +27,8 @@ class VentaDet {
 
     BigDecimal importeBrutoSinIva=0.0
 
+    BigDecimal tasaIva = 16.0
+
 	String comentario
 
 	Date dateCreated

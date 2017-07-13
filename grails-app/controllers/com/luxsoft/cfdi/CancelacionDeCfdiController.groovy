@@ -9,11 +9,11 @@ class CancelacionDeCfdiController {
 
 
     def descargarAcuseXml(long id){
-		Cfdi cfdi=Cfdi.findById(id)
-		CancelacionDeCfdi c=CancelacionDeCfdi.get(id)
+		def c=CancelacionDeCfdi.get(id)
+		def cfdi = c.cfdi
 		response.setContentType("application/octet-stream")
 		response.setHeader("Content-disposition", "attachment; filename=\"Cancelacion_$cfdi.xmlName\"")
-		response.outputStream << cfdi.getComprobanteDocument().newInputStream()
+		response.outputStream << new ByteArrayInputStream(c.aka)
 		
 	}
 

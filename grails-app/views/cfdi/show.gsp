@@ -47,7 +47,7 @@
 									</span> Acuse
 								</g:link>
 								<g:link  action="descargarAcuseXml" controller="cancelacionDeCfdi"
-									id="${cfdiInstance.cancelacion.id}"
+									id="${cfdiInstance.id}"
 									class="btn btn-default btn-sm" >
 									</span> Descargar acuse
 								</g:link>
