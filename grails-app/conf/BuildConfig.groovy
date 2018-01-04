@@ -44,9 +44,9 @@ grails.project.dependency.resolution = {
 
         mavenRepo 'http://repo.spring.io/milestone'
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "http://dl.bintray.com/rcancino/econta" 
+        mavenRepo "http://dl.bintray.com/rcancino/maven" 
+        mavenRepo "http://dl.bintray.com/rcancino/cfdi"
     }
 
     dependencies {
@@ -64,6 +64,11 @@ grails.project.dependency.resolution = {
         //compile 'cfdi:cfdi:3.2'
         //compile 'com.edicom.ediwinws:cfdiClient:1.0'
         //compile 'nomina:nomina:1.0'
+        
+        // Nueva implementacion de CFDI
+        compile 'lx.cfdi:v32:1.0.1'
+        compile 'lx.cfdi:v33:1.0.5'
+
         build('org.grails:grails-docs:2.4.3') {
             excludes 'itext'
         }
