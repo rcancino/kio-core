@@ -15,6 +15,7 @@
 			<f:field property="periodicidad" input-class="form-control"/>
 			<f:field property="duracion" input-class="form-control" input-type="text"/>
 			<f:field property="suspendido" input-class="form-control" />
+			<f:field property="claveProdServ" input-class="form-control" input-type="text"/>
 		</div>
 	</div>
 
@@ -22,7 +23,11 @@
 		<div class="panel-header"><h3>Precio / Descuento</h3></div>
 		<f:field property="precioBruto" input-class="form-control" input-type="text"/>
 		<f:field property="descuento" input-class="form-control" input-type="text"/>
+		%{-- <f:field property="descuento" input-class="form-control" input-type="text"/>
 		<f:field property="precioNeto" input-class="form-control" input-type="text"/>
+		<div class="panel-header"><h3>Claves SAT</h3></div>
+		<f:field property="claveProdServ" widget-class="form-control" widget-type="text"/>
+		<f:field property="claveUnidadSat" widget-class="form-control" widget-type="text"/> --}%
 	</div>
 
 	<div class="form-group">

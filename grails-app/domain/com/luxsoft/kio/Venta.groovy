@@ -59,6 +59,10 @@ class Venta {
 
 	Boolean cancelada=false
 
+  String usoCfdi = 'G03'
+  
+  String metodoDePago = 'PPD'
+
 	static hasMany = [partidas: VentaDet]
 
     static constraints = {

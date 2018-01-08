@@ -27,6 +27,9 @@ class Producto {
 	Date dateCreated
 	Date lastUpdated
 
+    String claveProdServ
+    String claveUnidadSat
+
 
     static constraints = {
     	clave unique:true,maxSize:40
@@ -40,6 +43,8 @@ class Producto {
 		precioNeto()
         periodicidad nullable:true, inList:['MENSUAL','TRIMESTRAL','SEMESTRAL','ANUAL','ESPECIAL']
 		duracion nullable:true
+        claveProdServ nullable:true
+        claveUnidadSat nullable:true
     }
 
     String toString(){
