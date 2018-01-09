@@ -78,5 +78,18 @@
 			</div>
 		</div>
 
+		<div class="form-group">
+			<label class="col-sm-4 control-label">Producto SAT</label>
+			<div class="col-sm-8">
+				<p class="form-control-static">${productoInstance.claveProdServ}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-4 control-label">Unidad SAT</label>
+			<div class="col-sm-8">
+				<p class="form-control-static">${productoInstance.claveUnidadSat}</p>
+			</div>
+		</div>
+
 	</form>	
 </div>

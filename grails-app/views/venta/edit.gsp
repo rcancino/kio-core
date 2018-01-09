@@ -51,6 +51,7 @@
 						value="${ventaInstance.formaDePago}"
 						from="${com.luxsoft.kio.MetodoDePago.values()}" />
 				</div>
+
 			</div>
 
 			
@@ -74,6 +75,13 @@
 						value="${ventaInstance.comentario}"
 						class="form-control">
 					
+				</div>
+				<label for="fecha" class="col-sm-2 control-label">Uso de CFDI</label>
+				<div class="col-sm-6">
+					<g:select class="form-control"  
+						name="usoCfdi" 
+						value="${ventaInstance.usoCfdi}"
+						from="${com.luxsoft.kio.UsoDeCfdi.values()}" />
 				</div>
 			</div>
 		</g:form>
